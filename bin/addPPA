@@ -1,0 +1,5 @@
+#!/bin/bash
+
+PPA=$1
+
+sudo add-apt-repository $1 && sudo apt-get update

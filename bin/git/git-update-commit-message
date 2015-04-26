@@ -1,0 +1,14 @@
+#!/bin/bash
+
+hash=$1
+
+if [ -z "$hash" ]; then
+	hash=`git rev-parse HEAD`
+fi
+
+git checkout $hash
+git commit --amend
+git checkout -b "tmp"
+git checkout master
+git merge tmp
+git branch -d tmp

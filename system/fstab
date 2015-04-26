@@ -1,0 +1,32 @@
+# <file system> <mount point>   <type>  <options>       <dump>  <pass>
+# / was on /dev/sdb1 during installation
+UUID=90737575-0d4c-40ec-94d2-95e49c86127a /               ext4    nodiratime,noatime,discard,errors=remount-ro,commit=60 0 1       1
+
+#
+# [No need swap] swap was on /dev/sda5 during installation
+#
+UUID=0f1dd48d-46ea-4b48-9287-a48a84369920 none            swap    sw              0       0
+
+#
+# Move apt and other caches to the memory
+#
+tmpfs /var/cache/apt/archives tmpfs defaults 0 0
+tmpfs /tmp tmpfs defaults 0 0
+tmpfs /var/tmp tmpfs defaults 0 0
+#tmpfs /var/lock tmpfs defaults 0 0
+tmpfs /var/spool/postfix tmpfs defaults 0 0
+tmpfs /var/log  tmpfs defaults,noatime,mode=0755 0 0
+tmpfs /dev/shm  tmpfs defaults,size=20% 0 0
+tmpfs /var/spool tmpfs defaults,noatime,mode=1777 0 0
+tmpfs /home/alex/work/xray_web/log tmpfs defaults,noatime,mode=1777 0 0
+
+#
+# 
+#
+proc /proc proc nodev,noexec,nosuid 0 0
+
+
+#
+# Mount Old disk
+#
+/dev/sda1 /home/alex/olddisk ext4 defaults,noatime 0 1

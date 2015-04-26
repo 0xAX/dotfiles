@@ -1,0 +1,19 @@
+;; -*- mode: emacs-lisp; coding: emacs-mule; -*-
+;; --------------------------------------------------------------------------
+;; Desktop File for Emacs
+;; --------------------------------------------------------------------------
+;; Created Sun Apr 26 12:53:08 2015
+;; Desktop file format version 206
+;; Emacs version 24.4.1
+
+;; Global section:
+(setq desktop-saved-frameset [frameset 1 (21820 35668 962151 933000) (desktop . "206") "alex@localhost" nil nil ((((font-backend xft x) (font . "-unknown-DejaVu Sans Mono-normal-normal-normal-*-20-*-*-*-m-0-iso10646-1") (font-parameter . "DejaVu Sans Mono") (border-width . 0) (internal-border-width . 0) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars) (foreground-color . "#F8F8F2") (background-color . "#272822") (mouse-color . "black") (border-color . "black") (screen-gamma) (line-spacing) (left-fringe . 12) (right-fringe . 12) (scroll-bar-foreground) (scroll-bar-background) (menu-bar-lines . 0) (tool-bar-lines . 0) (title) (wait-for-wm . t) (fullscreen . maximized) (tool-bar-position . top) (icon-type . t) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 0) (alpha) (horizontal-scroll-bars . t) (display-type . color) (background-mode . dark) (cursor-color . "#ffffff") (sticky) (environment) (frameset--id . "8AA3-00DA-0460-8B7E") (frameset--mini t . t) (modeline . t) (minibuffer . t) (unsplittable) (icon-name) (display . ":0") (explicit-name) (visibility . t) (height . 44) (width . 158) (left . 0) (top . 24)) ((min-height . 4) (min-width . 10) (min-height-ignore . 4) (min-width-ignore . 4) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 96) (min-pixel-width . 120) (min-pixel-height-ignore . 96) (min-pixel-width-ignore . 48) (min-pixel-height-safe . 24) (min-pixel-width-safe . 24)) leaf (pixel-width . 1920) (pixel-height . 1032) (total-width . 213) (total-height . 43) (normal-height . 1.0) (normal-width . 1.0) (buffer "*scratch*" (selected . t) (hscroll . 0) (fringes 12 12 nil) (margins nil) (scroll-bars 0 0 t nil) (vscroll . 0) (dedicated) (point . 1) (start . 1))))])
+(setq desktop-missing-file-warning nil)
+(setq tags-file-name nil)
+(setq tags-table-list nil)
+(setq search-ring '("mu" "cur" "se" "awk" "sed" "insert-da" "mail" "rss" "C-x u" "brow" "url" "e" "cr" "cl" "clrf" "pas"))
+(setq regexp-search-ring '("F" "__init" "badr" "keypad" "lx" "__PAGE_OF" "git-ad" "models" "WAKE" "STACK_S" "le" "_start" "fffff"))
+(setq register-alist '((48 . "(global-set-key [f7]  'neo-node-do-change-root)\n")))
+(setq file-name-history '("/home/alex/.emacscore/keybindings.el" "/home/alex/dev/my-dotfiles/mail/.mutt/account.personal" "/home/alex/dev/my-dotfiles/mail/.mutt/account.linux" "/home/alex/.emacscore/utils.el" "/home/alex/test.html"))
+
+;; Buffer section -- buffers listed in same order as in buffer list:

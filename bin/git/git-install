@@ -1,0 +1,6 @@
+#!/bin/bash
+
+git clone git@github.com:0xAX/git.git /home/alex/dev/git &&
+cd /home/alex/dev/git                                    &&
+make prefix=/usr/local -j4                               &&
+sudo make prefix=/usr/local install

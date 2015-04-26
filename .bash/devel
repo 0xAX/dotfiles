@@ -1,0 +1,4 @@
+# patch
+alias patchFile="patch < "
+alias patchDir="patch -p1 < "
+alias patchUndo="patch -p1 -R < "

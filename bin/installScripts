@@ -1,0 +1,10 @@
+#!/bin/bash
+
+echo "Copying scripts to /usr/bin"
+sudo chmod +x *
+sudo chown alex:alex *
+
+shopt -s extglob
+sudo cp !(install) /usr/bin/
+shopt -u extglob
+echo "Done"

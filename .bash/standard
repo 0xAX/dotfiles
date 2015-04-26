@@ -1,0 +1,119 @@
+# search alias
+alias aliases='alias | grep '
+
+# copy
+alias cp='cp -r '
+
+# navigation
+alias work='cd /home/alex/work'
+alias dev='cd /home/alex/dev'
+alias home='cd ~/'
+alias downloads="cd ~/Downloads"
+
+# navigation by configs
+alias bashrc="cd ~ && nano .bashrc"
+alias gitconfig="cd ~ && nano .gitconfig"
+alias sshconfig="cd ~ && nano .ssh/config"
+
+# open applications
+alias books="nautilus /home/alex/olddisk/home/alex/books"
+
+# open web resource
+alias trello="firefox -new-tab trello.com"
+alias twitter="firefox -new-tab twitter.com"
+alias github="firefox -new-tab github.com"
+alias google="firefox -new-tab google.com"
+alias gmail="firefox -new-tab gmail.com"
+alias prismatic="firefox -new-tab prismatic"
+alias reddit="firefox -new-tab reddit.com"
+alias kproxy="firefox -new-tab kproxy"
+
+# reload ~/.bashrc
+alias reloadBash="source ~/.bashrc"
+
+# mkdir
+alias mkdir="mkdir -p"
+
+# chmod
+alias myfile="chmod 777 "
+
+# mount and umount
+alias m="mount -t "
+alias um="umount -t "
+
+# dpkg
+alias packageInstall="dpkg -i "
+alias packageList="dpkg -l"
+alias packageCheck="dpkg -s"
+alias packageLocate="dpkg -L "
+
+# df
+alias df="df -h"
+
+# df
+alias dirsize="du -sh -b ."
+alias filesize="du -s -b  "
+
+# find
+alias findr="sudo find / -name "
+alias findrt="sudo find / -type "
+alias findh="find . -name "
+alias findht="find . -type "
+
+# copy/paste
+alias pbcopy='xclip -selection clipboard'
+alias pbpaste='xclip -selection clipboard -o'
+
+# apt and aptitude
+alias apt-install="sudo apt-get install "
+alias apt-remove="sudo apt-get purge "
+alias apt-update="sudo apt-get update "
+alias apt-upgrade="sudo apt-get upgrade "
+alias apt-urls="sudo nano /etc/apt/sources.list "
+alias apt-packages="sudo apt-cache pkgnames "
+alias apt-search="sudo apt-cache search "
+alias apt-info="sudo apt-cache show "
+alias apt-clean="sudo apt-get clean"
+alias apt-check="sudo apt-get check"
+alias apt-auto-clean="sudo apt-get autoclean"
+alias apt-auto-remove="sudo apt-get autoremove"
+alias apt-pkg-version="sudo aptitude versions "
+
+# wc
+alias lines="wc -l "
+alias words="wc -w "
+alias bytes="wc -c "
+alias chars="wc -m "
+
+# rm
+alias rm="rm -rf -i"
+alias rmi="rm -rf --interactive"
+
+# awk
+alias awk="gawk --optimize"
+
+# make
+#alias mk="make"
+
+# ls
+alias ls='ls --color'
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+alias lsd="ls -lF"
+
+# date
+alias week='date +%V'
+alias day='date +%A'
+alias monthNum='date +%d'
+alias dayNum='date +%e'
+alias month="date +%B"
+
+# clear
+alias cl='clear'
+
+# tmux
+alias tmux-new='tmux new -s '
+alias tmux-list='tmux ls'
+alias tmux-old-session='tmux attach -t '
+alias tmux-kill='tmux kill-session -t '

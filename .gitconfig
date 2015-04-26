@@ -1,0 +1,94 @@
+[apply]
+	whitespace = fix
+
+[credential]
+	helper = cache
+
+[color]
+	ui = always
+	interactive = always
+    grep = always
+	showbranch = always
+
+[color "branch"]
+	current = green bold
+	local   = yellow bold
+	remote  = magenta bold
+
+[color "diff"]
+	meta = white bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+
+[color "status"]
+	added = green bold
+	changed = yellow bold
+	untracked = red bold
+    unmerged = magenta bold
+
+[core]
+	editor = emacs
+	filemode = false
+	trustctime = false
+	excludesfile = ~/.gitignore_global
+	checkstat = default
+	quotepath = false
+	eol = native
+
+[diff]
+	renames = true
+
+[gc]
+	auto = 5000
+
+[grep]
+	lineNumber = true
+	patternType = extended
+	extendedRegexp = true
+
+[help]
+	format = man
+	autocorrect = 1
+
+[log]
+	date = rfc
+
+[man]
+	viewer = man
+
+[push]
+	default = current
+
+[rebase]
+	stat = true
+
+[reset]
+	confirmHardReset = true
+
+[sendemail]
+	from = Alexander Kuleshov <kuleshovmail@gmail.com>
+	smtpencryption = tls
+	smtpserver = smtp.gmail.com
+	smtpuser = kuleshovmail@gmail.com
+	smtpserverport = 587
+	multiedit = true
+	confirm = always
+
+[sequence]
+	editor = emacs
+
+[status]
+	branch = true
+	displayCommentPrefix = true
+	relativePaths = false
+	showUntrackedFiles = all
+	submodulesummary = true
+
+[user]
+	name = Alexander Kuleshov
+	email = kuleshovmail@gmail.com
+
+[web]
+	browser = firefox

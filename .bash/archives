@@ -1,0 +1,22 @@
+# tar
+alias tarCreate="tar -cfv "
+alias tarCreateGZ="tar cvzf "
+alias tarCreateBZ2="tar cvjf "
+alias tarList="tar -tvf "
+alias tarExtract="tar -xvf "
+alias tarGzExtract="tar -zxvf "
+alias tarBzExtract="tar -jxvf "
+alias tarAppend="tar -A "
+alias tarDelete="tar --delete "
+
+# zip
+alias zip="zip -r -9 "
+
+# unzip
+alias unzip="unzip "
+
+# rar
+alias rar="rar -md5 -v1024 "
+
+# unrar
+alias unrar="unrar x "

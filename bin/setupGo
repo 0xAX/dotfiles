@@ -1,0 +1,87 @@
+#!/bin/bash
+
+#
+# Bash script for fast setting up Golang environment
+#
+# Usage:
+#
+# sudo chmod +x gostartup && ./gostartup
+#
+
+red="\e[31m"
+green="\e[32m"
+nocolor="\e[0m"
+
+bashrc="/home/"$USER"/.bashrc"
+
+echo -e "Where do you want to store golang projects [default: /home/$USER/go] \c:"
+read gopath
+
+if [[ $gopath == "" ]]
+then
+  gopath="/home/$USER/go/"
+fi
+
+if [[ "${gopath: -1}" != '/' ]];
+then
+  gopath=$gopath"/"
+fi
+
+gobin=$gopath"go"
+projects=$gopath"go-projects"
+struct=$gopath"go-projects/src/github.com"$github_user
+
+echo -e "What's you Github username: \c'"
+read github_user
+
+if [[ $github_user == "" ]]
+then
+  echo -e $red"[Error]: Github username can't be empty"$nocolor
+  exit 0
+fi
+
+echo -e "Do you want to get last golang compiler [y/n]: \c"
+read getgo
+
+if [ ! -d "$gopath" ]; then
+  mkdir $gopath
+fi
+
+if [ ! -d "$gobin" ]; then
+  mkdir $gopath"go"
+fi
+
+if [ ! -d "$projects" ]; then
+  mkdir $gopath"go-projects"
+fi
+
+if [ ! -d "$struct" ]; then
+  mkdir -p $gopath"go-projects/src/github.com/"$github_user
+fi
+
+if [[ "$getgo" == "y" ]];
+then
+  if which hg >/dev/null; then
+    hg clone -u release "https://code.google.com/p/go" $gopath"go" &&
+    exec $gopath"go/src/all.bash"
+  else
+      echo "Error: You need to install mercurial."
+      exit 1
+  fi
+fi
+
+echo "Where to write $GOPATH, in $bashrc? (y/n)"
+read standard_bashrc
+
+if [[ $standard_bashrc == "y" ]]; then
+    echo "export GOPATH="$gopath"go-projects" >> $bashrc
+    echo "export PATH=$PATH:$GOPATH/"$gopath"go/bin" >> $bashrc
+else
+    read custom_bashrc_path
+    echo "export GOPATH="$gopath"go-projects" >> $custom_bashrc_path
+    echo "export PATH=$PATH:$GOPATH/"$gopath"go/bin" >> $custom_bashrc_path
+fi
+
+echo -e $green"done" $nocolor
+
+exit 0

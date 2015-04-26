@@ -1,0 +1,14 @@
+set realname = ""
+set smtp_url = ""
+set smtp_pass = ""
+set edit_headers=yes
+set from = ""
+
+set folder    = "imaps://imap.gmail.com:993"
+set spoolfile = "+INBOX"
+set postponed = "+[Google Mail]/Drafts"
+set trash     = "+[Google Mail]/Trash"
+set imap_user = ""
+set imap_pass = ""
+set ssl_starttls = yes
+set ssl_force_tls = yes

@@ -1,0 +1,84 @@
+#
+# elixir
+#
+export PATH="$PATH:$WORK/elixir/bin"
+
+#
+# phabricator, tetrapak and rebar
+#
+export PATH="$PATH:$WORK/util/arcanist/bin/"
+export PATH="$PATH:$WORK/tetrapak/bin/"
+export PATH="$PATH:$WORK/rebar/"
+
+#
+# LD
+#
+export LD_LIBRARY_PATH=""
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/home/alex/olddisk/usr/local/pgsql/lib/"
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib/"
+
+#
+# Kernel and C dev
+#
+export PATH=$PATH:/home/alex/dev/linux/tools/perf/
+
+#
+# Databases
+#
+export PATH=$PATH:~/olddisk/usr/local/pgsql/bin/
+
+#
+# erlang
+#
+export ERL_LIBS="$ERL_LIBS:$WORK/ChicagoBoss/deps/"
+export ERL_LIBS="$ERL_LIBS:$WORK/ChicagoBoss/"
+export ERL_LIBS="$ERL_LIBS:$WORK/sockjs-erlang/"
+export ERL_LIBS="$ERL_LIBS:$WORK/regine/"
+export ERL_LIBS="$ERL_LIBS:$WORK/couchbeam/"
+export ERL_LIBS="$ERL_LIBS:$WORK/ejson/"
+export ERL_LIBS="$ERL_LIBS:$WORK/couchapp-erlang/"
+export ERL_LIBS="$ERL_LIBS:$WORK/quickrand/"
+export ERL_LIBS="$ERL_LIBS:$WORK/redbug/"
+export ERL_LIBS="$ERL_LIBS:$WORK/yang/"
+export ERL_LIBS="$ERL_LIBS:$WORK/hello2/"
+export ERL_LIBS="$ERL_LIBS:$WORK/parse_trans/"
+export ERL_LIBS="$ERL_LIBS:$WORK/lager/"
+export ERL_LIBS="$ERL_LIBS:$WORK/goldrush/"
+export ERL_LIBS="$ERL_LIBS:$WORK/xray_ldr/"
+export ERL_LIBS="$ERL_LIBS:$WORK/xray_tposs_api_subscriber/"
+export ERL_LIBS="$ERL_LIBS:$WORK/xray_tposs_api_session/"
+export ERL_LIBS="$ERL_LIBS:$WORK/xray_web/"
+export ERL_LIBS="$ERL_LIBS:$WORK/xray_core/"
+export ERL_LIBS="$ERL_LIBS:$WORK/tposs_collector/"
+export ERL_LIBS="$ERL_LIBS:$WORK/xray_web_frontend/"
+export ERL_LIBS="$ERL_LIBS:$WORK/tetrapak_yang/"
+export ERL_LIBS="$ERL_LIBS:$WORK/tetrapak_elixir/"
+export ERL_LIBS="$ERL_LIBS:$WORK/xc-node/"
+export ERL_LIBS="$ERL_LIBS:$WORK/xc-server/"
+export ERL_LIBS="$ERL_LIBS:$WORK/errd/"
+export ERL_LIBS="$ERL_LIBS:$WORK/folsom/"
+export ERL_LIBS="$ERL_LIBS:$WORK/folsom/deps/"
+export ERL_LIBS="$ERL_LIBS:$WORK/monads/"
+export ERL_LIBS="$ERL_LIBS:$WORK/xray_udr/"
+export ERL_LIBS="$ERL_LIBS:$WORK/xray_charging/"
+export ERL_LIBS="$ERL_LIBS:$WORK/xray_ldr/"
+export ERL_LIBS="$ERL_LIBS:$WORK/xray_tposs_api_cdr/"
+export ERL_LIBS="$ERL_LIBS:$WORK/xray_tposs_api_location/"
+export ERL_LIBS="$ERL_LIBS:$WORK/xray_tposs_api_location_status/"
+export ERL_LIBS="$ERL_LIBS:$WORK/xray_tposs_api_subscriber/"
+export ERL_LIBS="$ERL_LIBS:$WORK/xray_tposs_api_session/"
+export ERL_LIBS="$ERL_LIBS:$WORK/xray_session/"
+export ERL_LIBS="$ERL_LIBS:$WORK/tposs_support/"
+export ERL_LIBS="$ERL_LIBS:$WORK/erlando/"
+export ERL_LIBS="$ERL_LIBS:$WORK/ranch/"
+export ERL_LIBS="$ERL_LIBS:$WORK/uuid/"
+export ERL_LIBS="$ERL_LIBS:$WORK/ibrowse/"
+export ERL_LIBS="$ERL_LIBS:$WORK/ex_uri/"
+export ERL_LIBS="$ERL_LIBS:$WORK/ex_uri/deps/"
+export ERL_LIBS="$ERL_LIBS:$WORK/hello/"
+export ERL_LIBS="$ERL_LIBS:$WORK/erlzmq2/"
+export ERL_LIBS="$ERL_LIBS:$WORK/eradius/"
+export ERL_LIBS="$ERL_LIBS:$WORK/tetrapak_boss/"
+export ERL_LIBS="$ERL_LIBS:$WORK/tposs_support/"
+export ERL_LIBS="$ERL_LIBS:$WORK/abnfc/"
+export ERL_LIBS="$ERL_LIBS:$WORK/elixir/lib/"

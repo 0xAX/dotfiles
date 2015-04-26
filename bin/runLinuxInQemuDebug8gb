@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo "Running kernel in qemu..."
+
+sudo qemu-system-x86_64 -s -snapshot -m 8GB -serial stdio -kernel ~/dev/linux/arch/x86_64/boot/bzImage -initrd ~/dev/initrd.img-19-rc2 -hda /dev/sda -append "root=/dev/sda earlyprintk=ttyS0 debug rdinit=/sbin/init root=/dev/ram console=ttyS0"

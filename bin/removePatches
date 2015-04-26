@@ -1,0 +1,4 @@
+#!/bin/bash
+
+rm -rf 000*
+rm -rf *.patch

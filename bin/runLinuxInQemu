@@ -1,0 +1,11 @@
+#!/bin/bash
+
+echo "Running kernel in qemu..."
+
+qemu-system-x86_64 -snapshot -m 8GB -serial stdio -kernel ~/dev/linux/arch/x86_64/boot/bzImage -initrd ~/dev/initrd.img-19-rc2 -append "root=/dev/sdb earlyprintk=ttyS0 loglevel=7 debug rdinit=/sbin/init root=/dev/ram memblock=debug"
+
+# acpi=off
+
+#sudo qemu-system-x86_64 -snapshot -m 1GB -serial stdio -kernel ~/dev/linux/arch/x86_64/boot/bzImage -initrd ~/dev/initrd.img-19-rc2 -hda /dev/sda -append "root=/dev/sda earlyprintk=ttyS0 debug rdinit=/sbin/init root=/dev/ram vga=ask console=ttyS0"
+
+# -serial stdio

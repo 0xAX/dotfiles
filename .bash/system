@@ -1,0 +1,14 @@
+# kernel helpers
+alias modules="lsmod"
+alias usb="lsusb"
+
+# proc
+alias devices="cat /proc/devices"
+alias interrupts="cat /proc/interrupts"
+alias fs="cat /proc/filesystems"
+
+# pidof
+alias pid="pidof "
+
+# valgrind
+alias vg="valgrind --leak-check=full "
