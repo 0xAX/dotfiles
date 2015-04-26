@@ -1,0 +1,107 @@
+From 49b5527b92bce2b57ef5c7f66f3f6ef49630e617 Mon Sep 17 00:00:00 2001
+Date: Wed, 8 Apr 2015 14:34:41 +0600
+Subject: [PATCH 1/2 v2] x86/setup: update boot_command_line with builtin_cmdline
+ in separate function
+
+This patch introduces setup_cmdline function which appends/overrides
+boot_command_linew with builtin_cmdline if CONFIG_CMDLINE_BOOL is set.
+Previously this functional was in the setup_arch, but we need to move
+it for getting actual command line as early as possible in the
+arch/x86/kernel/head{32,64}.c
+
+Signed-off-by: Alexander Kuleshov <kuleshovmail@gmail.com>
+---
+ arch/x86/kernel/head32.c |  1 +
+ arch/x86/kernel/head64.c |  1 +
+ arch/x86/kernel/setup.c  | 31 ++++++++++++++++++-------------
+ include/linux/init.h     |  6 +++++-
+ 4 files changed, 25 insertions(+), 14 deletions(-)
+
+diff --git a/arch/x86/kernel/head32.c b/arch/x86/kernel/head32.c
+index 2911ef3..7ad0ad0 100644
+--- a/arch/x86/kernel/head32.c
++++ b/arch/x86/kernel/head32.c
+@@ -31,6 +31,7 @@ static void __init i386_default_early_setup(void)
+ 
+ asmlinkage __visible void __init i386_start_kernel(void)
+ {
++	setup_cmdline();
+ 	cr4_init_shadow();
+ 	sanitize_boot_params(&boot_params);
+ 
+diff --git a/arch/x86/kernel/head64.c b/arch/x86/kernel/head64.c
+index c4f8d46..6eea2de 100644
+--- a/arch/x86/kernel/head64.c
++++ b/arch/x86/kernel/head64.c
+@@ -171,6 +171,7 @@ asmlinkage __visible void __init x86_64_start_kernel(char * real_mode_data)
+ 	load_idt((const struct desc_ptr *)&idt_descr);
+ 
+ 	copy_bootdata(__va(real_mode_data));
++	setup_cmdline();
+ 
+ 	/*
+ 	 * Load microcode early on BSP.
+diff --git a/arch/x86/kernel/setup.c b/arch/x86/kernel/setup.c
+index 0a2421c..d578f37 100644
+--- a/arch/x86/kernel/setup.c
++++ b/arch/x86/kernel/setup.c
+@@ -841,6 +841,24 @@ dump_kernel_offset(struct notifier_block *self, unsigned long v, void *p)
+ }
+ 
+ /*
++ * Append/Override boot command line with builtin command line if need
++ */
++void __init setup_cmdline(void) {
++#ifdef CONFIG_CMDLINE_BOOL
++#ifdef CONFIG_CMDLINE_OVERRIDE
++	strlcpy(boot_command_line, builtin_cmdline, COMMAND_LINE_SIZE);
++#else
++	if (builtin_cmdline[0]) {
++		/* append boot loader cmdline to builtin */
++		strlcat(builtin_cmdline, " ", COMMAND_LINE_SIZE);
++		strlcat(builtin_cmdline, boot_command_line, COMMAND_LINE_SIZE);
++		strlcpy(boot_command_line, builtin_cmdline, COMMAND_LINE_SIZE);
++	}
++#endif
++#endif
++}
++
++/*
+  * Determine if we were loaded by an EFI loader.  If so, then we have also been
+  * passed the efi memmap, systab, etc., so we should use these data structures
+  * for initialization.  Note, the efi init code path is determined by the
+@@ -968,19 +986,6 @@ void __init setup_arch(char **cmdline_p)
+ 	bss_resource.start = __pa_symbol(__bss_start);
+ 	bss_resource.end = __pa_symbol(__bss_stop)-1;
+ 
+-#ifdef CONFIG_CMDLINE_BOOL
+-#ifdef CONFIG_CMDLINE_OVERRIDE
+-	strlcpy(boot_command_line, builtin_cmdline, COMMAND_LINE_SIZE);
+-#else
+-	if (builtin_cmdline[0]) {
+-		/* append boot loader cmdline to builtin */
+-		strlcat(builtin_cmdline, " ", COMMAND_LINE_SIZE);
+-		strlcat(builtin_cmdline, boot_command_line, COMMAND_LINE_SIZE);
+-		strlcpy(boot_command_line, builtin_cmdline, COMMAND_LINE_SIZE);
+-	}
+-#endif
+-#endif
+-
+ 	strlcpy(command_line, boot_command_line, COMMAND_LINE_SIZE);
+ 	*cmdline_p = command_line;
+ 
+diff --git a/include/linux/init.h b/include/linux/init.h
+index 2df8e8d..af8f2ec 100644
+--- a/include/linux/init.h
++++ b/include/linux/init.h
+@@ -152,7 +152,11 @@ void setup_arch(char **);
+ void prepare_namespace(void);
+ void __init load_default_modules(void);
+ int __init init_rootfs(void);
++void __init setup_cmdline(void);
+ extern void (*late_time_init)(void);
+ 
+ extern bool initcall_debug;
+-- 
+2.3.3.611.g09038fc.dirty
+

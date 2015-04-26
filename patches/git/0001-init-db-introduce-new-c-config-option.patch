@@ -1,0 +1,152 @@
+From 7ab6a28202bb7c1c3c1754b6fcb49667506f3423 Mon Sep 17 00:00:00 2001
+From: 0xAX <kuleshovmail@gmail.com>
+Date: Thu, 26 Mar 2015 00:12:57 +0600
+Subject: [PATCH] init-db: introduce new -c/--config option
+
+For now we can clone repository with the `git clone` command and pass
+-c/--config with configuration option to it and these configuration
+options will be set in the clonned repository config.
+
+This patch provides the same functional, but for the `git init` command.
+It allows to pass -c/--config option to the `git init` command and
+given configuration option will be added to the newly created repository,
+after it will be created.
+
+This option can be used multiply times. If given configuration option
+is the same that in the default config, given option will overwrite.
+
+Main purpose of this option is to get rid of the manual editing of
+the config.
+
+Signed-off-by: Alexander Kuleshov <kuleshovmail@gmail.com>
+---
+ Documentation/git-init.txt | 11 ++++++++++-
+ builtin/init-db.c          | 33 +++++++++++++++++++++++++++++++--
+ t/t0001-init.sh            | 16 ++++++++++++++++
+ 3 files changed, 57 insertions(+), 3 deletions(-)
+
+diff --git a/Documentation/git-init.txt b/Documentation/git-init.txt
+index 8174d27..3ecbf2a 100644
+--- a/Documentation/git-init.txt
++++ b/Documentation/git-init.txt
+@@ -10,7 +10,7 @@ SYNOPSIS
+ --------
+ [verse]
+ 'git init' [-q | --quiet] [--bare] [--template=<template_directory>]
+-	  [--separate-git-dir <git dir>]
++	  [--separate-git-dir <git dir>] [--config <key>=<value>]
+ 	  [--shared[=<permissions>]] [directory]
+ 
+ 
+@@ -111,6 +111,15 @@ into it.
+ If you provide a 'directory', the command is run inside it. If this directory
+ does not exist, it will be created.
+ 
++--config <key>=<value>::
++-c <key>=<value>::
++Set a new configuration option in the new repository. The <key> expected in
++the same format as linkgit:git-config[1] (e.g., `core.eol=true`). If
++This option can be used multiply times. If multiply options are given with
++the same keys, each value will be written to the config. If given key is
++the same that used in the default configuration file, previous value
++will be overwritten.
++
+ --
+ 
+ TEMPLATE DIRECTORY
+diff --git a/builtin/init-db.c b/builtin/init-db.c
+index 280454a..184de40 100644
+--- a/builtin/init-db.c
++++ b/builtin/init-db.c
+@@ -471,6 +471,26 @@ static const char *const init_db_usage[] = {
+ 	NULL
+ };
+ 
++static int write_one_config(const char *key, const char *value, void *data) {
++	char *v = NULL;
++	git_config_get_string(key, &v);
++	if (v) {
++		git_config_set(key, value);
++		return 1
++	} else
++		return git_config_set_multivar(key, value ? value : "true", "^$", 0);
++}
++
++static void write_config(struct string_list *config){
++	int i;
++
++	for (i = 0; i < config->nr; i++) {
++		if (git_config_parse_parameter(config->items[i].string,
++					       write_one_config, NULL) < 0)
++			die("unable to write parameters to config file");
++	}
++}
++
+ /*
+  * If you want to, you can share the DB area with any number of branches.
+  * That has advantages: you can save space by sharing all the SHA1 objects.
+@@ -479,11 +499,13 @@ static const char *const init_db_usage[] = {
+  */
+ int cmd_init_db(int argc, const char **argv, const char *prefix)
+ {
++	int ret;
+ 	const char *git_dir;
+ 	const char *real_git_dir = NULL;
+ 	const char *work_tree;
+ 	const char *template_dir = NULL;
+ 	unsigned int flags = 0;
++	static struct string_list option_config;
+ 	const struct option init_db_options[] = {
+ 		OPT_STRING(0, "template", &template_dir, N_("template-directory"),
+ 				N_("directory from which templates will be used")),
+@@ -496,6 +518,8 @@ int cmd_init_db(int argc, const char **argv, const char *prefix)
+ 		OPT_BIT('q', "quiet", &flags, N_("be quiet"), INIT_DB_QUIET),
+ 		OPT_STRING(0, "separate-git-dir", &real_git_dir, N_("gitdir"),
+ 			   N_("separate git dir from working tree")),
++		OPT_STRING_LIST('c', "config", &option_config, N_("key=value"),
++			   N_("set config inside the new repository")),
+ 		OPT_END()
+ 	};
+ 
+@@ -592,6 +616,11 @@ int cmd_init_db(int argc, const char **argv, const char *prefix)
+ 	}
+ 
+ 	set_git_dir_init(git_dir, real_git_dir, 1);
+-
+-	return init_db(template_dir, flags);
++	ret = init_db(template_dir, flags);
++	/*
++	 * new repository already created, so we can update .git/config if
++	 * -c/--config passed
++	 */
++	write_config(&option_config);
++	return ret;
+ }
+diff --git a/t/t0001-init.sh b/t/t0001-init.sh
+index 7de8d85..8ce3537 100755
+--- a/t/t0001-init.sh
++++ b/t/t0001-init.sh
+@@ -339,4 +339,20 @@ test_expect_success SYMLINKS 're-init to move gitdir symlink' '
+ 	test_path_is_dir realgitdir/refs
+ '
+ 
++test_expect_success 'git init -c key=value' '
++	rm -rf newdir realgitdir &&
++	git init -c core.foo=bar newdir &&
++	echo bar >expect &&
++	git --git-dir=newdir/.git config core.foo >actual &&
++	test_cmp expect actual
++'
++
++test_expect_success 'git init -c key=value override default value' '
++	rm -rf newdir &&
++	git init -c core.filemode=false newdir &&
++	echo false >expect &&
++	git --git-dir=newdir/.git config core.filemode >actual &&
++	test_cmp expect actual
++'
++
+ test_done
+-- 
+2.3.3.539.g6eb1401
+
