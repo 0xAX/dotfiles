@@ -229,6 +229,7 @@
 (setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
 (ido-mode t)
+(setq ido-save-directory-list-file "/var/log/ido")
 
 ;;
 ;; CUA mode
@@ -339,6 +340,11 @@
                         (substring (buffer-name)
                                    (- (length (buffer-name)) 6)
                                    (length (buffer-name)))) "git")
+         ((string-equal ".org"
+                        (substring (buffer-name)
+                                   (- (length (buffer-name)) 4)
+                                   (length (buffer-name)))) "org")
+
          ((string-equal "*"
                         (substring (buffer-name) 0 1))
           "emacs")

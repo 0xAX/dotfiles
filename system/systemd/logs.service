@@ -1,0 +1,9 @@
+[Unit]
+Description=Create different tmp files for the software
+
+[Service]
+Type=oneshot
+ExecStart=/usr/lib/systemd/scripts/startupFiles
+
+[Install]
+WantedBy=multi-user.target

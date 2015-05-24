@@ -29,7 +29,6 @@
 ;; Some utils
 ;;
 (require 'init-benchmarking)
-(require 'discover-my-major)
 
 ;;
 ;; Load emacs in fullscreen
