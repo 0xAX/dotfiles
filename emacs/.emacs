@@ -105,8 +105,10 @@
 ;;
 (load "~/.emacscore/utils.el")
 (load "~/.emacscore/ui.el")
+
 (load "~/.emacscore/keybindings.el")
 (load "~/.emacscore/markups.el")
+(load "~/.emacscore/org/orgmode.el")
 (load "~/.emacscore/dev/web.el")
 (load "~/.emacscore/dev/golang.el")
 (load "~/.emacscore/dev/erlang.el")
@@ -122,9 +124,6 @@
 (load "~/.emacscore/term.el")
 (load "~/.emacs.d/lisp/rfc.el")
 (require 'irfc)
-
-;; org-mode for .org files
-(add-to-list 'auto-mode-alist '("\\.org'" . org-mode))
 
 (put 'scroll-left 'disabled nil)
 (put 'narrow-to-region 'disabled nil)

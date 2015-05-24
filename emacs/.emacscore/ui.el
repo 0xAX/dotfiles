@@ -231,6 +231,8 @@
 (ido-mode t)
 (setq ido-save-directory-list-file "/var/log/ido")
 
+(setq ac-comphist-file  "/var/log/ac-comphist.dat")
+
 ;;
 ;; CUA mode
 ;;
