@@ -20,7 +20,7 @@ export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib/"
 #
 # Kernel and C dev
 #
-export PATH=$PATH:/home/alex/dev/linux/tools/perf/
+export PATH=$PATH:$KERNEL_DEV/tools/perf/
 
 #
 # Databases

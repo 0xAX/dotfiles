@@ -1,14 +1,15 @@
-# search alias
-alias aliases='alias | grep '
+# reload ~/.bashrc
+alias reloadBash="source ~/.bashrc"
 
 # copy
 alias cp='cp -r '
 
 # navigation
-alias work='cd /home/alex/work'
-alias dev='cd /home/alex/dev'
+alias work='cd $WORK'
+alias dev='cd  $DEV'
 alias home='cd ~/'
-alias downloads="cd ~/Downloads"
+alias oldhome='cd $OLDHOME'
+alias downloads="cd $OLDHOME/Downloads"
 
 # navigation by configs
 alias bashrc="cd ~ && nano .bashrc"
@@ -16,20 +17,15 @@ alias gitconfig="cd ~ && nano .gitconfig"
 alias sshconfig="cd ~ && nano .ssh/config"
 
 # open applications
-alias books="nautilus /home/alex/olddisk/home/alex/books"
+alias books="nautilus $OLDHOME/books"
 
 # open web resource
-alias trello="firefox -new-tab trello.com"
 alias twitter="firefox -new-tab twitter.com"
 alias github="firefox -new-tab github.com"
 alias google="firefox -new-tab google.com"
 alias gmail="firefox -new-tab gmail.com"
-alias prismatic="firefox -new-tab prismatic"
 alias reddit="firefox -new-tab reddit.com"
 alias kproxy="firefox -new-tab kproxy"
-
-# reload ~/.bashrc
-alias reloadBash="source ~/.bashrc"
 
 # mkdir
 alias mkdir="mkdir -p"
@@ -55,10 +51,10 @@ alias dirsize="du -sh -b ."
 alias filesize="du -s -b  "
 
 # find
-alias findr="sudo find / -name "
-alias findrt="sudo find / -type "
-alias findh="find . -name "
-alias findht="find . -type "
+alias find_everywhere_name="sudo find / -name "
+alias find_everywhere_type="sudo find / -type "
+alias find_here_name="find . -name "
+alias find_here_type="find . -type "
 
 # copy/paste
 alias pbcopy='xclip -selection clipboard'

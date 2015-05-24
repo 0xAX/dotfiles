@@ -5,8 +5,6 @@
 (require 'web-mode)
 
 (add-to-list 'auto-mode-alist '("\\.html$" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.tpl.html$" . web-mode))
-
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.tpl\\.html\\'" . web-mode))
@@ -15,7 +13,7 @@
 (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.tpl.html\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tpl\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 
 (setq web-mode-enable-auto-pairing t)
@@ -53,29 +51,4 @@
 (add-hook 'js2-mode-hook 'ac-js2-mode)
 
 (setq js2-highlight-level 3)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; zen codding
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(add-to-list 'load-path "~/emacs.d/emmet-mode")
-(load "~/.emacs.d/emmet-mode/emmet-mode.el")
-(require 'emmet-mode)
-
-(add-hook 'sgml-mode-hook 'emmet-mode)
-(add-hook 'css-mode-hook 'emmet-mode)
-
-(add-to-list 'auto-mode-alist '("\\.tpl.html\\'" . emmet-mode))
-(add-to-list 'auto-mode-alist '("\\.html\\'" . emmet-mode))
-(add-to-list 'auto-mode-alist '("\\.css\\'" . emmet-mode))
-
-(add-hook 'emmet-mode-hook (lambda () (setq emmet-indent-after-insert nil)))
-
-;;
-;; coffeescript mode
-;;
-;; automatically clean up bad whitespace
-(setq whitespace-action '(auto-cleanup))
-;; only show bad whitespace
-(setq whitespace-style '(trailing space-before-tab indentation empty space-after-tab))
-;; This gives you a tab of 2 spaces
-(custom-set-variables '(coffee-tab-width 2))
+(setq js2-basic-offset 2)

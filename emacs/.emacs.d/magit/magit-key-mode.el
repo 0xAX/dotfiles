@@ -1,6 +1,6 @@
 ;;; magit-key-mode.el --- interactively tune git invocation
 
-;; Copyright (C) 2010-2014  The Magit Project Developers
+;; Copyright (C) 2010-2015  The Magit Project Developers
 ;;
 ;; For a full list of contributors, see the AUTHORS.md file
 ;; at the top-level directory of this distribution and at
@@ -99,7 +99,7 @@
       ("y" "Cherry"          magit-cherry)
       ("z" "Stashing"        magit-key-mode-popup-stashing)
       ("!" "Running"         magit-key-mode-popup-running)
-      ("$" "Show Process"    magit-display-process)))
+      ("$" "Show Process"    magit-process)))
 
     (logging
      (man-page "git-log")

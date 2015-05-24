@@ -24,8 +24,7 @@
    (set-frame-height  5)
    (erlang-shell))
 
-; Set to 2 in order to get 4
- (setq erlang-indent-level 2)
+(setq erlang-indent-level 4)
 
 (custom-set-variables
  '(indent-tabs-mode nil)

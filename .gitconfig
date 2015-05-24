@@ -7,7 +7,7 @@
 [color]
 	ui = always
 	interactive = always
-    grep = always
+        grep = always
 	showbranch = always
 
 [color "branch"]
@@ -19,14 +19,14 @@
 	meta = white bold
 	frag = magenta bold
 	old = red bold
-	new = green bold
+	new = green bold	
 	whitespace = red reverse
 
 [color "status"]
 	added = green bold
 	changed = yellow bold
 	untracked = red bold
-    unmerged = magenta bold
+        unmerged = magenta bold
 
 [core]
 	editor = emacs

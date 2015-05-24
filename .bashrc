@@ -1,20 +1,23 @@
-export SHELL=/bin/bash
-
 #
 # Global environment
 #
-MYHOME="/home/alex"
-DEV="$MYHOME/dev"
-WORK="$MYHOME/work"
+HOME="/home/alex"
+OLDHOME="/home/alex/olddisk$HOME"
+
+DEV="$HOME/dev"
+WORK="$HOME/work"
+
 GIT_DEV="$DEV/git"
 KERNEL_DEV="$DEV/linux"
 
+export SHELL=/bin/bash
 export EDITOR="emacs"
 export BROWSER="firefox"
 export CC=gcc
 export AS=as
 export AR=AR
 export CXX=g++
+export LD=ld
 
 #
 # bash

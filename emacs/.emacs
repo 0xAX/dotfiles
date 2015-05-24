@@ -23,18 +23,12 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;        Standard settings
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 (add-to-list 'load-path "~/.emacs.d/lisp")
 
 ;;
-;; Measure startup time
+;; Some utils
 ;;
 (require 'init-benchmarking)
-
-;;
-;; discover major mode help
-;;
-(load "~/.emacs.d/lisp/discover-major.el")
 (require 'discover-my-major)
 
 ;;
@@ -62,11 +56,6 @@
 (set-keyboard-coding-system 'utf-8)
 (set-selection-coding-system 'utf-8)
 (setq current-language-environment "UTF-8")
-
-;;
-;; bash is a standard shell
-;;
-(setq explicit-shell-file-name "/bin/bash")
 
 ;;
 ;; Prevent creation of backup files
@@ -99,25 +88,14 @@
 ;;
 (defvar visual-bell t)
 
-;;
-;; Save last emacs session
-;;
-(require 'desktop)
-(desktop-save-mode 1)
-(setq history-length 5)
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;        Package manager
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(when (>= emacs-major-version 25)
-  (require 'package)
-  (package-initialize)
-    (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
-    (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-    (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
-)
-
+(require 'package)
+(package-initialize)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;        Load extensions
@@ -127,25 +105,9 @@
 ;; ui
 ;;
 (load "~/.emacscore/utils.el")
-(load "~/.emacscore/uimodes.el")
 (load "~/.emacscore/ui.el")
-
-
-
-
-
-
-;; load keybindings
 (load "~/.emacscore/keybindings.el")
-
-;;
-;; markups
-;;
 (load "~/.emacscore/markups.el")
-
-;;
-;; load development modes
-;;
 (load "~/.emacscore/dev/web.el")
 (load "~/.emacscore/dev/golang.el")
 (load "~/.emacscore/dev/erlang.el")
@@ -153,35 +115,24 @@
 (load "~/.emacscore/dev/c.el")
 (load "~/.emacscore/dev/sed.el")
 (load "~/.emacscore/dev/elixir.el")
-
-;; load build modes
+(load "~/.emacscore/dev/shell.el")
 (load "~/.emacscore/build/make.el")
-
-;; git
 (load "~/.emacscore/vcs/git.el")
-
-;; rfc mode
+(load "~/.emacscore/vcs/hg.el")
+(load "~/.emacscore/vcs/svn.el")
+(load "~/.emacscore/term.el")
 (load "~/.emacs.d/lisp/rfc.el")
 (require 'irfc)
 
-;;
-;; some utils
-;;
-(defadvice ansi-term (after advise-ansi-term-coding-system activate)
-  (set-buffer-process-coding-system 'utf-8-unix 'utf-8-unix))
+;; org-mode for .org files
+(add-to-list 'auto-mode-alist '("\\.org'" . org-mode))
 
-;(add-hook 'before-save-hook 'delete-trailing-whitespace)
-
-;; close the terminal buffer automatically on exit
-(defadvice term-sentinel (around my-advice-term-sentinel (proc msg) activate)
-  (if (memq (process-status proc) '(signal exit))
-	  (let ((buffer (process-buffer proc)))
-		ad-do-it
-		(kill-buffer buffer))
-	ad-do-it))
-
-;; Ok it's done
-(message "All done, %s%s" (user-login-name) ".")
-(message "Don't forget to check mail and rss-feed")
 (put 'scroll-left 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
+
+(custom-set-variables
+  '(coffee-tab-width 2)
+  '(indent-tabs-mode nil)
+  '(js2-basic-offset 2))
+
+(message "All done, %s%s" (user-login-name) ".")

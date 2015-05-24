@@ -1,6 +1,7 @@
 # kernel helpers
 alias modules="lsmod"
 alias usb="lsusb"
+alias pci="lspci"
 
 # proc
 alias devices="cat /proc/devices"

@@ -1,4 +1,4 @@
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;        Key bindings
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -8,6 +8,7 @@
 (global-set-key [f4]  'eval-buffer)
 (global-set-key [f5]  'open-terminal)
 (global-set-key [f6]  'rename-file-and-buffer)
+(global-set-key [f7]  'delete-file)
 (global-set-key [f8]  'rgrep)
 (global-set-key [f9]  'discover-my-major)
 (global-set-key [f10] 'magit-status)
@@ -25,6 +26,7 @@
 (global-set-key (kbd "C-x b")   'browse-url)
 (global-set-key (kbd "C-x p")   'ping)
 (global-set-key (kbd "C-x l")   'list-colors-display)
+(global-set-key (kbd "C-x m")   'mu4e)
 
 ;;
 ;; Text manipulation

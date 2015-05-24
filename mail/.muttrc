@@ -1,9 +1,9 @@
-source ~/.mutt/account.linux
 source ~/.mutt/account.personal
+source ~/.mutt/account.linux
+source ~/.mutt/mutt-ui
 
-macro index <f1> '<sync-mailbox>'
-macro index <f2> '<sync-mailbox><enter-command>source ~/.mutt/account.linux<enter><change-folder>!<enter>'
 macro index <f3> '<sync-mailbox><enter-command>source ~/.mutt/account.personal<enter><change-folder>!<enter>'
+macro index <f2> '<sync-mailbox><enter-command>source ~/.mutt/account.linux<enter><change-folder>!<enter>'
 
 #
 # Mail box
@@ -45,14 +45,19 @@ auto_view application/RTF
 auto_view text/html
 auto_view text/x-vcard
 auto_view image/tiff
+alternative_order text/enriched text/plain text
+
+#
+# Timeouts
+#
+set connect_timeout=30
+set imap_keepalive=30
+set timeout=600
 
 #
 # misc
 #
 set delete
-set quit
-set help
-set include
 set reply_to
 set reverse_name
 set sort=threads
@@ -60,21 +65,25 @@ set fast_reply
 set forward_quote=yes
 set followup_to=yes
 set menu_scroll=yes
+set nomark_old
+set include=yes
+set edit_hdrs
+set quit
+set help
+set mail_check = 120
+set pager_index_lines=6
+set pgp_verify_sig=no
+set use_from=yes
+set editor="emacs"
+set attribution="On %d, %n wrote:"
+set charset="utf8"
 
 unset move
 unset imap_passive
 
-set mail_check = 120
-set pager_index_lines=6
-set pgp_verify_sig=no
-set use_from = yes
-set editor   = "emacs"
+ignore *
+unhdr_order *
+unignore  Date: From: Reply-To: Mail-Followup-To: To: Cc: Subject:
+hdr_order From: Reply-To: To: Cc: Subject: Date:
 
-#
-# Timeouts
-#
-set connect_timeout=30
-set imap_keepalive=30
-set timeout=300
-
-source ~/.mutt/mutt-ui
+set metoo=yes
