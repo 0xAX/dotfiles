@@ -12,6 +12,10 @@
           '(lambda ()
              (define-key org-mode-map [(control a)] nil)))
 
+(add-hook 'org-mode-hook
+          '(lambda ()
+             (define-key org-mode-map [(control k)] nil)))
+
 (custom-set-variables
  '(org-directory "~/dev/learning/todo"))
 
@@ -26,5 +30,6 @@
 
 (defun todo()
   (interactive)
-  (find-file "~/dev/learning/todo/to_learn_and_configure.org")
+  (dired "~/dev/learning/todo/")
 )
+

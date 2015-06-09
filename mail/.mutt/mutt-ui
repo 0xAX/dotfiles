@@ -11,7 +11,7 @@ color message    white         default
 color search     brightwhite   magenta
 
 # deleted message
-color index red white "~D"
+color index red black "~D"
 
 set status_format = "──────────%>─(%P)───"
 
