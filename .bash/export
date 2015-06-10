@@ -82,3 +82,5 @@ export ERL_LIBS="$ERL_LIBS:$WORK/tetrapak_boss/"
 export ERL_LIBS="$ERL_LIBS:$WORK/tposs_support/"
 export ERL_LIBS="$ERL_LIBS:$WORK/abnfc/"
 export ERL_LIBS="$ERL_LIBS:$WORK/elixir/lib/"
+
+export ERL_LIBS="$ERL_LIBS:$WORK/tposs_charging/_build/dev/lib/tposs_ccs/"
