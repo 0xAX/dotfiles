@@ -84,3 +84,9 @@ export ERL_LIBS="$ERL_LIBS:$WORK/abnfc/"
 export ERL_LIBS="$ERL_LIBS:$WORK/elixir/lib/"
 
 export ERL_LIBS="$ERL_LIBS:$WORK/tposs_charging/_build/dev/lib/tposs_ccs/"
+
+# golang
+export GOROOT=$HOME/dev/golang/go
+export GOPATH=$HOME/dev/golang
+export PATH=$PATH:$GOROOT/bin
+export PATH=$PATH:$GOPATH/bin
