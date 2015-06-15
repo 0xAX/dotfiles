@@ -2,7 +2,7 @@
 # Global environment
 #
 HOME="/home/alex"
-OLDHOME="/home/alex/olddisk$HOME"
+HOME_HDD="/home/alex/olddisk$HOME"
 
 DEV="$HOME/dev"
 WORK="$HOME/work"

@@ -8,8 +8,8 @@ alias cp='cp -r '
 alias work='cd $WORK'
 alias dev='cd  $DEV'
 alias home='cd ~/'
-alias oldhome='cd $OLDHOME'
-alias downloads="cd $OLDHOME/Downloads"
+alias oldhome='cd $HOME_HDD'
+alias downloads="cd $HOME_HDD/Downloads"
 
 # navigation by configs
 alias bashrc="cd ~ && nano .bashrc"
@@ -17,7 +17,8 @@ alias gitconfig="cd ~ && nano .gitconfig"
 alias sshconfig="cd ~ && nano .ssh/config"
 
 # open applications
-alias books="nautilus $OLDHOME/books"
+alias books="nautilus $HOME_HDD/books"
+alias downloads="nautilus $HOME_HDD/Downloads"
 
 # open web resource
 alias twitter="firefox -new-tab twitter.com"
