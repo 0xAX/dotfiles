@@ -24,6 +24,7 @@ done
 SYSTEMD_SCRIPTS=`find . -type f -print -exec chmod 777 {} + | sed -e '/^.\/.git.*/d' | grep 'systemd-scripts'`
 echo $SYSTEMD_SCRIPTS | while read line
 do
+    sudo mkdir -p /usr/lib/systemd/scripts/
     sudo cp -rv $SYSTEMD_SCRIPTS /usr/lib/systemd/scripts/
 done
 
