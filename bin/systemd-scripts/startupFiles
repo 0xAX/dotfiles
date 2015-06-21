@@ -10,3 +10,7 @@ chown alex:alex /var/log/ac-comphist.dat
 
 # emacs daemon
 emacs --daemon
+
+# for mysql
+mkdir -p /var/log/mysql/
+touch /var/log/mysql/error.log
