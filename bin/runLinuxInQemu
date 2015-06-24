@@ -2,7 +2,7 @@
 
 echo "Running kernel in qemu..."
 
-qemu-system-x86_64 -snapshot -m 8GB -serial stdio -kernel ~/dev/linux/arch/x86_64/boot/bzImage -initrd ~/dev/initrd.img-19-rc2 -append "root=/dev/sda1 debug ignore_loglevel log_buf_len=16M earlyprintk=ttyS0,115200 console=ttyS0,115200 console=tty0"
+qemu-system-x86_64 -snapshot -m 8GB -serial stdio -kernel ~/dev/linux/arch/x86_64/boot/bzImage -initrd ~/dev/initrd.img-4.1.0+ -append "root=/dev/sda1 debug ignore_loglevel log_buf_len=16M earlyprintk=ttyS0,115200 console=ttyS0,115200 console=tty0"
 
 # ,
 # Borislav cmd:

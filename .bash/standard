@@ -114,3 +114,6 @@ alias tmux-new='tmux new -s '
 alias tmux-list='tmux ls'
 alias tmux-old-session='tmux attach -t '
 alias tmux-kill='tmux kill-session -t '
+
+# mail
+alias mutt-help="firefox http://sheet.shiar.nl/mutt"

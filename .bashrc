@@ -3,6 +3,7 @@
 #
 HOME="/home/alex"
 HOME_HDD="/home/alex/olddisk$HOME"
+PATCHES="/home/alex/patches"
 
 DEV="$HOME/dev"
 WORK="$HOME/work"
