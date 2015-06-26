@@ -76,6 +76,9 @@
 [sequence]
 	editor = emacs
 
+[commit]
+	signoff = true
+
 [status]
 	branch = true
 	displayCommentPrefix = true
