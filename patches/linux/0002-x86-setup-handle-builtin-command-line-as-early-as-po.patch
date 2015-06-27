@@ -1,0 +1,56 @@
+From fe55c8b8d605e4cb9720d03a1ea5ea0fb1150ba9 Mon Sep 17 00:00:00 2001
+From: Alexander Kuleshov <kuleshovmail@gmail.com>
+Date: Sat, 27 Jun 2015 19:26:25 +0600
+Subject: [PATCH 2/4 v13] x86/setup: handle builtin command line as early as
+ possible
+
+This patch adds the call of the setup_builtin_cmdline to
+handle builtin command line before we will setup earlyprintk.
+
+Signed-off-by: Alexander Kuleshov <kuleshovmail@gmail.com>
+---
+ arch/x86/kernel/head32.c | 1 +
+ arch/x86/kernel/head64.c | 1 +
+ arch/x86/kernel/setup.c  | 2 --
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/arch/x86/kernel/head32.c b/arch/x86/kernel/head32.c
+index 2911ef3..92e8b5f 100644
+--- a/arch/x86/kernel/head32.c
++++ b/arch/x86/kernel/head32.c
+@@ -31,6 +31,7 @@ static void __init i386_default_early_setup(void)
+ 
+ asmlinkage __visible void __init i386_start_kernel(void)
+ {
++	setup_builtin_cmdline();
+ 	cr4_init_shadow();
+ 	sanitize_boot_params(&boot_params);
+ 
+diff --git a/arch/x86/kernel/head64.c b/arch/x86/kernel/head64.c
+index 5a46681..d255430 100644
+--- a/arch/x86/kernel/head64.c
++++ b/arch/x86/kernel/head64.c
+@@ -172,6 +172,7 @@ asmlinkage __visible void __init x86_64_start_kernel(char * real_mode_data)
+ 
+ 	copy_bootdata(__va(real_mode_data));
+ 
++	setup_builtin_cmdline();
+ 	/*
+ 	 * Load microcode early on BSP.
+ 	 */
+diff --git a/arch/x86/kernel/setup.c b/arch/x86/kernel/setup.c
+index e528f12..fc381ec 100644
+--- a/arch/x86/kernel/setup.c
++++ b/arch/x86/kernel/setup.c
+@@ -991,2 +991,2 @@ void __init setup_arch(char **cmdline_p)
+ 	bss_resource.start = __pa_symbol(__bss_start);
+ 	bss_resource.end = __pa_symbol(__bss_stop)-1;
+
+-	setup_builtin_cmdline();
+-
+ 	strlcpy(command_line, boot_command_line, COMMAND_LINE_SIZE);
+ 	*cmdline_p = command_line;
+ 
+--
+2.4.4.410.gc71d752
+

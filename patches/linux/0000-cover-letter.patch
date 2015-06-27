@@ -1,0 +1,111 @@
+From 1e971c8d3150f8057c12a99361a3ac6ec1b8ae37 Mon Sep 17 00:00:00 2001
+From: Alexander Kuleshov <kuleshovmail@gmail.com>
+Date: Sat, 27 Jun 2015 19:38:19 +0600
+Subject: [PATCH v13 0/4] x86/earlyprintk: setup serial earlyprintk as early as possible
+
+The early_printk function is usable only after the setup_early_printk will
+be executed. We pass 'earlyprintk' through the kernel command line. So, it
+means that earlyprintk will be usable only after the 'parse_early_param'
+will be executed or in another words earlyprintk is usable only during early
+boot, kernel decompression and after call of the parse_early_param. But
+there are many stuff after the kernel decompression and before the
+parse_early_param will be called as memblock usage, early cpu initialization,
+early ioremap initialization and etc... So earlyprintk allows us to see
+what's going on there.
+
+Changelog:
+
+v13:
+  * do not setup pciserial from the arch/x86/kernel/head{32,64}.c, because
+it uses ioremap and we can't do it really early;
+  * style fixes;
+  * patch for testing.
+
+v12:
+  * all changes from the v11 are reverted
+  * setup_early_serial_console renamed to the setup_earlyprintk_console and
+refactored. Now it checks 'earlyprintk=' in the kernel command line, set
+earlyprintk_late variable to false. This variable allows to know, do we
+can setup early console for the certain device.
+
+v11:
+  * setup_log_buf moved to the arch/x86/kernel/head{32,64.c} from
+the arch/x86/kernel/setup.c to setup early log_buf for the earlyprintl
+  * Update log_buf in the early_printk function
+  * Added additional patch for testing earlyprintk
+
+v10:
+  * Removed style issues which are not related to the patchset.
+
+v9:
+  * Add call of the lockdep_init to the arch/x86/kernel/head{32,64}.c
+before the serial console initialization to prevent:
+
+[ 0.000000] WARNING: lockdep init error! lock-(console_sem).lock was acquiredbefore lockdep_init
+[ 0.000000] Call stack leading to lockdep invocation was:
+[ 0.000000] [] save_stack_trace+0x2f/0x50
+[ 0.000000] [] __lock_acquire+0xa2c/0xf00
+[ 0.000000] [] lock_acquire+0xdb/0x2b0
+[ 0.000000] [] _raw_spin_lock_irqsave+0x53/0x90
+[ 0.000000] [] down+0x16/0x50
+[ 0.000000] [] console_lock+0x19/0x60
+[ 0.000000] [] register_console+0x116/0x350
+[ 0.000000] [] setup_early_printk+0x165/0x467
+[ 0.000000] [] setup_early_serial_console+0x56/0x58
+[ 0.000000] [] x86_64_start_kernel+0xce/0x110
+[ 0.000000] [] 0xffffffffffffffff
+[ 0.000000] ------------------------
+
+during early serial console initialization.
+
+  * Add additional check to the earlyprintk initialization to protect double initialization
+of the early_serial_console.
+  * Fixed comment.
+
+v8:
+  * Fixed warning with the definition of the setup_early_serial_console in the
+arch/x86/include/asm/setup.h
+
+v7:
+  * Move setup_early_serial_console to the the arch/x86/include/setup.h
+  * Add ifdefs to prevent setup_serial_console if CONFIG_EARLY_PRINTK is not set.
+
+v6:
+  * Style fixes.
+  * Call of the suetp_builtin_cmdline moved to the separate patch.
+
+v5:
+  * Call setup_builtin_cmdline instead of setup_cmdline
+
+v4:
+  * Move setup_early_serial_console from the include/linux/printk.h to the
+arch/x86/include/asm/serial.h, because this function is only for x86 now.
+
+v3:
+  * Call setup_cmdline before setup_early_printk;
+  * setup_early_printk call wrapped with the setup_early_serial_console which
+checks that 'serial' given to the earlyprintk command line option. This prevents
+call of the setup_early_printk with the given pciserial/dbgp/efi, because they
+are using early_ioremap.
+
+v2:
+  * Comment added before the setup_early_printk call;
+  * Added information about testing to the commit message.
+
+Alexander Kuleshov (4):
+  x86/setup: introduce setup_bultin_cmdline
+  x86/setup: handle builtin command line as early as possible
+  x86/earlyprintk: setup earlyprintk as early as possible
+  x86/earlyprintk: add some early_printk for tests
+
+ arch/x86/include/asm/setup.h   |  8 +++++++-
+ arch/x86/kernel/early_printk.c | 42 +++++++++++++++++++++++++++++++++++-------
+ arch/x86/kernel/head32.c       |  9 +++++++++
+ arch/x86/kernel/head64.c       |  8 ++++++++
+ arch/x86/kernel/setup.c        | 30 +++++++++++++++++-------------
+ init/main.c                    |  2 ++
+ 6 files changed, 78 insertions(+), 21 deletions(-)
+
+--
+2.4.4.410.gc71d752
+

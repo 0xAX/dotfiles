@@ -1,0 +1,218 @@
+From 1dbf3c6dae2f4c057eb1f800be1fc999c808bd93 Mon Sep 17 00:00:00 2001
+From: Alexander Kuleshov <kuleshovmail@gmail.com>
+Date: Sat, 27 Jun 2015 19:34:42 +0600
+Subject: [PATCH 3/4 v13] x86/earlyprintk: setup earlyprintk as early as possible
+
+The earlyprintk is usable only after the setup_early_printk will
+be executed. We pass 'earlyprintk' through the kernel command line, so it
+will be usable only after the 'parse_early_param' will be executed. This means
+that we have usable earlyprintk only during early boot, kernel decompression
+and after call of the 'parse_early_param', but sometimes it is very useful to
+know what occurs between. The earlyprintk can allow us to know what occurs after
+kernel decompression and before parse_early_param will be called.
+
+This patch provides following stuff:
+
+1. Thi patch introduces the setup_earlyprintk_console function,
+which called arch/x86/kernel/hhead{32,64}.c, parses kernel command line,
+tries to find 'earlyprintk' option and calls setup_early_printk depending
+on the result.
+
+2. As setup_earlyprintk_console setups earlyprintk very early, we can't
+use all console devices for now, but only serial and vga. There is
+earlyprintk_late variable which determines ability to setup earlyprintk
+for the certain device.
+
+3. Call of the lockdep_init added to the arch/x86/kernel/head{32,64}.c
+to prevent call of the register_console before the initialization of lockdep.
+In other way there we will get:
+
+[ 0.000000] WARNING: lockdep init error! lock-(console_sem).lock was acquiredbefore lockdep_init
+[ 0.000000] Call stack leading to lockdep invocation was:
+[ 0.000000] [] save_stack_trace+0x2f/0x50
+[ 0.000000] [] __lock_acquire+0xa2c/0xf00
+[ 0.000000] [] lock_acquire+0xdb/0x2b0
+[ 0.000000] [] _raw_spin_lock_irqsave+0x53/0x90
+[ 0.000000] [] down+0x16/0x50
+[ 0.000000] [] console_lock+0x19/0x60
+[ 0.000000] [] register_console+0x116/0x350
+[ 0.000000] [] setup_early_printk+0x165/0x467
+[ 0.000000] [] setup_early_serial_console+0x56/0x58
+[ 0.000000] [] x86_64_start_kernel+0xce/0x110
+[ 0.000000] [] 0xffffffffffffffff
+[ 0.000000] ------------------------
+
+This patch adds lockdep_init to the arch/x86/kernel/head{32,64}.c, but
+not removed it from the init/main.c, because there is a couple of architectures
+which have support of the lockdep, but do not call lockdep_init in their
+architecture-dependent code.
+
+4. As setup_earlyprintk_console can be called twice: from the
+setup_earlyprintk_console and parse_early_param, additional
+check added to the really early consoles.
+
+Tested it with qemu, so early_printk() is usable and prints to serial
+console right after setup_early_printk function called.
+
+We will not see earlyprintk messages in the dmesg buffer, because
+it is too early to initialized log_buf.
+
+Signed-off-by: Alexander Kuleshov <kuleshovmail@gmail.com>
+---
+ arch/x86/include/asm/setup.h   |  6 ++++++
+ arch/x86/kernel/early_printk.c | 42 +++++++++++++++++++++++++++++++++++-------
+ arch/x86/kernel/head32.c       |  8 ++++++++
+ arch/x86/kernel/head64.c       |  7 +++++++
+ 4 files changed, 56 insertions(+), 7 deletions(-)
+
+diff --git a/arch/x86/include/asm/setup.h b/arch/x86/include/asm/setup.h
+index 70dfa61..695f251 100644
+--- a/arch/x86/include/asm/setup.h
++++ b/arch/x86/include/asm/setup.h
+@@ -126,0 +126,0 @@ asmlinkage void __init x86_64_start_kernel(char *real_mode);
+asmlinkage void __init x86_64_start_reservations(char *real_mode_data);
+ #endif /* __i386__ */
+ void __init setup_builtin_cmdline(void);
++#ifdef CONFIG_EARLY_PRINTK
++/* used by arch/x86/kernel/head{32,64}.c */
++extern int __init setup_earlyprintk_console(void);
++#else
++static inline int __init setup_earlyprintk_console(void) { return 0; }
++#endif /* CONFIG_EARLY_PRINTK */
+ #endif /* _SETUP */
+ #else
+ #define RESERVE_BRK(name,sz)				\
+diff --git a/arch/x86/kernel/early_printk.c b/arch/x86/kernel/early_printk.c
+index 89427d8..cc47bce 100644
+--- a/arch/x86/kernel/early_printk.c
++++ b/arch/x86/kernel/early_printk.c
+@@ -329,6 +329,15 @@ static inline void early_console_register(struct console *con, int keep_early)
+ 	register_console(early_console);
+ }
+ 
++/*
++ * Setup of earlyprintk is probably too early now. The setup_early_printk
++ * can be called from two places: from setup_earlyprintk_console and
++ * parse_early_param. In first case it is too early to setup earlyprintk
++ * for some devices as efi, pciserial and etc., but it can be set for
++ * vga and serial.
++ */
++static bool earlyprintk_late = 1;
++
+ static int __init setup_early_printk(char *buf)
+ {
+ 	int keep;
+@@ -342,47 +351,66 @@ static int __init setup_early_printk(char *buf)
+ 	keep = (strstr(buf, "keep") != NULL);
+ 
+ 	while (*buf != '\0') {
+-		if (!strncmp(buf, "serial", 6)) {
++		if (!strncmp(buf, "serial", 6) &&
++		    early_serial_console.index == -1) {
+ 			buf += 6;
+ 			early_serial_init(buf);
+ 			early_console_register(&early_serial_console, keep);
+ 			if (!strncmp(buf, ",ttyS", 5))
+ 				buf += 5;
+ 		}
+-		if (!strncmp(buf, "ttyS", 4)) {
++		if (!strncmp(buf, "ttyS", 4) &&
++		    early_serial_console.index == -1) {
+ 			early_serial_init(buf + 4);
+ 			early_console_register(&early_serial_console, keep);
+ 		}
+ #ifdef CONFIG_PCI
+-		if (!strncmp(buf, "pciserial", 9)) {
++		if (!strncmp(buf, "pciserial", 9) && earlyprintk_late) {
+ 			early_pci_serial_init(buf + 9);
+ 			early_console_register(&early_serial_console, keep);
+ 			buf += 9; /* Keep from match the above "serial" */
+ 		}
+ #endif
+ 		if (!strncmp(buf, "vga", 3) &&
+-		    boot_params.screen_info.orig_video_isVGA == 1) {
++		    boot_params.screen_info.orig_video_isVGA == 1 &&
++		    early_vga_console.index == -1) {
+ 			max_xpos = boot_params.screen_info.orig_video_cols;
+ 			max_ypos = boot_params.screen_info.orig_video_lines;
+ 			current_ypos = boot_params.screen_info.orig_y;
+ 			early_console_register(&early_vga_console, keep);
+ 		}
+ #ifdef CONFIG_EARLY_PRINTK_DBGP
+-		if (!strncmp(buf, "dbgp", 4) && !early_dbgp_init(buf + 4))
++		if (!strncmp(buf, "dbgp", 4) && !early_dbgp_init(buf + 4) &&
++		    earlyprintk_late)
+ 			early_console_register(&early_dbgp_console, keep);
+ #endif
+ #ifdef CONFIG_HVC_XEN
+-		if (!strncmp(buf, "xen", 3))
++		if (!strncmp(buf, "xen", 3) && earlyprintk_late)
+ 			early_console_register(&xenboot_console, keep);
+ #endif
+ #ifdef CONFIG_EARLY_PRINTK_EFI
+-		if (!strncmp(buf, "efi", 3))
++		if (!strncmp(buf, "efi", 3) && earlyprintk_late)
+ 			early_console_register(&early_efi_console, keep);
+ #endif
+ 
+ 		buf++;
+ 	}
++
++	earlyprintk_late = 1;
+ 	return 0;
+ }
+ 
+ early_param("earlyprintk", setup_early_printk);
++
++int __init setup_earlyprintk_console(void)
++{
++	char *arg;
++
++	arg = strstr(boot_command_line, "earlyprintk=");
++	if (!arg)
++		return -1;
++
++	earlyprintk_late = 0;
++
++	return setup_early_printk(arg);
++}
+diff --git a/arch/x86/kernel/head32.c b/arch/x86/kernel/head32.c
+index 92e8b5f..d9189b1 100644
+--- a/arch/x86/kernel/head32.c
++++ b/arch/x86/kernel/head32.c
+@@ -32,0 +32,0 @@ static void __init i386_default_early_setup(void)
+asmlinkage __visible void __init i386_start_kernel(void)
+ {
+ 	setup_builtin_cmdline();
++
++	setup_builtin_cmdline();
++
++	lockdep_init();
++
++	setup_earlyprintk_console();
++	early_printk("Early printk is initialized\n");
++
+ 	cr4_init_shadow();
+ 	sanitize_boot_params(&boot_params);
+ 
+diff --git a/arch/x86/kernel/head64.c b/arch/x86/kernel/head64.c
+index d255430..5386b3a 100644
+--- a/arch/x86/kernel/head64.c
++++ b/arch/x86/kernel/head64.c
+@@ -173,0 +173,0 @@ asmlinkage __visible void __init x86_64_start_kernel(char * real_mode_data)
+	copy_bootdata(__va(real_mode_data));
+ 
+ 	setup_builtin_cmdline();
++
++	lockdep_init();
++
++	setup_earlyprintk_console();
++
++	early_printk("Early printk is initialized\n");
++
+ 	/*
+ 	 * Load microcode early on BSP.
+ 	 */
+--
+2.4.4.410.gc71d752
+
