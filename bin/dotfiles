@@ -31,7 +31,6 @@ case $1 in
     sudo cp -r /etc/systemd/system/fstrim.timer $SYSTEM/systemd/
     sudo cp -r /etc/systemd/system/logs.service $SYSTEM/systemd/
 
-    cp -r ~/dev/linux/.config $DIR
     cp -r ~/.gdbinit $DIR
     cp -r ~/.gitconfig $DIR
     cp -r ~/.gitignore_global $DIR

@@ -1,0 +1,17 @@
+#!/bin/bash
+
+UTIL_LINUX_DIR=$1
+DEFAULT_DIR=~/dev/util-linux
+
+if [ -z $UTIL_LINUX_DIR ]
+then
+	UTIL_LINUX_DIR=$DEFAULT_DIR
+fi
+
+echo "Getting util-linux..."
+rm -rf $UTIL_LINUX_DIR
+mkdir -p $UTIL_LINUX_DIR
+git clone git@github.com:karelzak/util-linux.git $UTIL_LINUX_DIR
+echo "DONE..."
+
+bash build-util-linux
