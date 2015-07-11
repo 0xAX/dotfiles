@@ -1,0 +1,60 @@
+#
+# headers order
+#
+ignore *
+unhdr_order *
+unignore  Date: From: Reply-To: Mail-Followup-To: To: Cc: Subject:
+hdr_order From: Reply-To: To: Cc: Subject: Date:
+
+#
+# header colors
+#
+color header yellow default "^(From|To|Reply-to|Cc):"
+color header green default "^(Subject):"
+color header blue default "^(Date):"
+
+#
+# Default color definitions
+#
+color normal     white         default
+color quoted     white         default
+color quoted1    yellow        default
+color quoted2    red           default
+color indicator  yellow        default
+color error      brightred     default
+color status	 brightblue    black
+color tree	 blue          default
+color tilde	 blue          default
+color markers	 brightred     default
+color message    white         default
+color search     brightwhite   magenta
+
+# deleted message
+color index red default "~D"
+
+#set status_format="-%r-Mutt: [Msgs:%?M?%M/?%m%?n? New:%n?%?d? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p? Post:%p?%?b? Inc:%b?]---(%s)-%>-(%P)---
+set status_chars  = " *%A"
+set status_format = "───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───"
+#
+# Urls
+#
+color body green default "(http|ftp|news|telnet|finger)://[^ \"\t\r\n]*"
+color body green default "mailto:[-a-z_0-9.]+@[-a-z_0-9.]+"
+color body green default "[-a-z_0-9.%$]+@[-a-z_0-9.]+\\.[-a-z][-a-z]+"
+mono body bold "(http|https|ftp|news|telnet|finger)://[^ \"\t\r\n]*"
+mono body bold "mailto:[-a-z_0-9.]+@[-a-z_0-9.]+"
+
+# PGP messages
+color  body            brightyellow    default "^gpg: Good signature .*"
+color  body            white           default "^gpg: "
+color  body            brightwhite     red     "^gpg: BAD signature from.*"
+mono   body            bold                    "^gpg: Good signature"
+mono   body            bold                    "^gpg: BAD signature from.*"
+
+#
+# index colors
+#
+set date_format="%m/%d"
+set index_format="%2C |%Z| %d %-30.30F %s"
+
+set quote_regexp="^( {0,4}[>|:#]| {0,4}[a-z0-9]+[>|]+)+"

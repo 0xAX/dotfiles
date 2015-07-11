@@ -11,7 +11,7 @@ fi
 shopt -s extglob
 sudo mkdir -p /usr/lib/systemd/scripts/
 echo "/usr/lib/systemd/scripts/ created."
-sudo cp -r systemd_scripts/* /usr/lib/systemd/scripts/
+sudo cp -r systemd-scripts/* /usr/lib/systemd/scripts/
 echo "scripts are copied to the /usr/lib/systemd/scripts/"
 sudo cp -r $CUSTOM_UNITS_DIR/* /etc/systemd/system/
 echo "custom units are copied to the /etc/systemd/system/"

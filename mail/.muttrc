@@ -2,6 +2,20 @@ source ~/.mutt/account.personal
 source ~/.mutt/account.linux
 source ~/.mutt/mutt-ui
 
+mailboxes !
+mailboxes "\n"
+mailboxes "-- Kernel --------------"
+mailboxes +INBOX         \
+	  +Interesting   \
+	  +Releases      \
+	  +entry_x86_64  \
+	  +x86_64        \
+	  +mm            \
+
+mailboxes "\n\n"
+mailboxes "-- Personal ------------"
+mailboxes +kernel-dev
+
 #
 # keybindings for my accounts
 #
@@ -128,9 +142,19 @@ set metoo=yes
 # Linux
 my_hdr X-Operating-System: `uname`
 
-set alias_file=~/.mutt-alias
-
-source ~/.mutt-alias
+# aliases
+set alias_file=~/.mutt/.mutt-alias
+source ~/.mutt/.mutt-alias
 
 # ask about CC:
 set askcc = yes
+
+#
+# sidebar configuration
+#
+set sidebar_width=24
+set sidebar_visible=yes
+set sidebar_delim='|'
+bind index,pager \ew sidebar-prev
+bind index,pager \es sidebar-next
+bind index,pager \CO sidebar-open

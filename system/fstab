@@ -6,9 +6,9 @@
 #
 # <file system> <mount point>   <type>  <options>       <dump>  <pass>
 # / was on /dev/sdb1 during installation
-UUID=265e3ce5-fc78-4cf3-9219-0b60e0a626d3 /               ext4    errors=remount-ro 0       1
+UUID=47190482-3f26-4bf1-9e54-9a440b703fbc /               ext4    errors=remount-ro 0       1
 # swap was on /dev/sdb5 during installation
-UUID=9741a74c-1869-4c87-98be-d99db14ee632 none            swap    sw              0       0
+UUID=f37e5e96-198a-4bd3-a0cc-10ef429aca22 none            swap    sw              0       0
 
 /dev/sda1 /home/alex/olddisk ext4 defaults,noatime 0 1
 
@@ -21,3 +21,4 @@ tmpfs /var/log  tmpfs defaults,noatime,mode=0755 0 0
 tmpfs /dev/shm  tmpfs defaults,size=20% 0 0
 tmpfs /var/spool tmpfs defaults,noatime,mode=1777 0 0
 tmpfs /home/alex/work/xray_web/log tmpfs defaults,noatime,mode=1777 0 0
+

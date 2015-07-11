@@ -1,4 +1,0 @@
-#!/bin/bash
-
-cd $HOME/dev/git &&
-rm -rf /usr/bin/local/git && make -j6 NO_GETTEXT=1 BLK_SHA1=1 prefix=/usr/local && sudo make prefix=/usr/local install

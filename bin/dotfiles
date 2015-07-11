@@ -6,6 +6,7 @@ BIN="$DIR/bin/"
 EMACS="$DIR/emacs"
 LINUXDEV="$DIR/linux-dev"
 SYSTEM="$DIR/system"
+MAIL="$DIR/mail"
 
 function usage {
     echo "Usage:"
@@ -24,7 +25,10 @@ case $1 in
     cp -r ~/.bashrc $DIR
     cp -r ~/bin/* $BIN/
     cp -r ~/.emacs ~/.emacs.d ~/.emacscore $EMACS/
-    cp -r /home/alex/dev/linux/.config $LINUXDEV
+    cp -r /home/alex/dev/linux/.config $LINUXDEV/
+    cp -r ~/.muttrc $MAIL/
+    cp -r ~/.mutt/.mutt-alias $MAIL/
+    cp -r ~/.mutt/mutt-ui $MAIL/
 
     sudo cp -r /etc/fstab /etc/default/grub $SYSTEM
     sudo cp -r /etc/systemd/system/fstrim.service $SYSTEM/systemd/
