@@ -22,7 +22,7 @@ color quoted1    yellow        default
 color quoted2    red           default
 color indicator  yellow        default
 color error      brightred     default
-color status	 brightblue          black
+color status	 brightblue    black
 color tree	 blue          default
 color tilde	 blue          default
 color markers	 brightred     default

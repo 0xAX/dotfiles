@@ -281,6 +281,10 @@
                         (substring (buffer-name)
                                    (- (length (buffer-name)) 8)
                                    (length (buffer-name)))) "system")
+	 ((string-equal ".mk"
+                        (substring (buffer-name)
+                                   (- (length (buffer-name)) 3)
+                                   (length (buffer-name)))) "system")
          ((string-equal "Kbuild"
                         (substring (buffer-name)
                                    (- (length (buffer-name)) 6)

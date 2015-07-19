@@ -16,6 +16,7 @@ export PATH="$PATH:$WORK/rebar/"
 export LD_LIBRARY_PATH=""
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$HOME_HDD/usr/local/pgsql/lib/"
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib/"
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib"
 
 #
 # Kernel and C dev
@@ -84,8 +85,13 @@ export ERL_LIBS="$ERL_LIBS:$WORK/abnfc/"
 export ERL_LIBS="$ERL_LIBS:$WORK/elixir/lib/"
 
 export ERL_LIBS="$ERL_LIBS:$WORK/tposs_charging/_build/dev/lib/tposs_ccs/"
-export ERL_LIBS="$ERL_LIBS:$WORK/conform/_build/dev/lib/conform/"
+#export ERL_LIBS="$ERL_LIBS:$WORK/conform/_build/dev/lib/conform/"
+# exrm | remove then
 #export ERL_LIBS="$ERL_LIBS:$WORK/exrm/_build/dev/lib/exrm/"
+#export ERL_LIBS="$ERL_LIBS:$WORK/exrm/_build/dev/lib/relx/"
+#export ERL_LIBS="$ERL_LIBS:$WORK/exrm/_build/dev/lib/erlware_commons/"
+#export ERL_LIBS="$ERL_LIBS:$WORK/exrm/_build/dev/lib/providers/"
+#export ERL_LIBS="$ERL_LIBS:$WORK/exrm/_build/dev/lib/bbmustache/"
 
 # golang
 export GOROOT=$HOME/dev/golang/go

@@ -45,14 +45,6 @@ export LC_ALL="en_US.UTF-8"
 PKG_CONFIG_PATH=$PKG_CONFIG_PATH:~/usr/lib/pkgconfig
 export PKG_CONFIG_PATH
 
-# Add custom compiled libraries to library search path.
-LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/usr/lib
-export LD_LIBRARY_PATH
-
-# Add custom compiled libraries to library run path.
-LD_RUN_PATH=$LD_RUN_PATH:~/usr/lib
-export LD_RUN_PATH
-
 #
 # includes
 #

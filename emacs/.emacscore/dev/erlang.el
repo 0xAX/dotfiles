@@ -1,4 +1,4 @@
-(setq load-path (cons "/usr/lib/erlang/lib/tools-2.6.15/emacs"
+(setq load-path (cons "/usr/local/lib/erlang/lib/tools-2.8/emacs"
       load-path))
 
 (setq exec-path (cons "/usr/local/lib/erlang/bin" exec-path))

@@ -1,24 +1,6 @@
 #!/bin/bash
 
-BUILD_FLAGS=" NO_GETTEXT=1 BLK_SHA1=1 "
-CONFIGURE_PREFIX="AR ar "
-INSTALL_PREFIX="/usr/local/ "
-CONFIGURE_OPTS=
-
-rm -rf /usr/bin/local/git                                &&
 git clone git@github.com:0xAX/git.git /home/alex/dev/git &&
 cd /home/alex/dev/git                                    &&
-
-if [[ "$OS" == "Linux" ]]; then
-  BUILD=make
-else
-  BUILD=gmake
-  CONFIGURE_OPTS=" --enable-pthreads=-pthread ac_cv_header_libcharset_h=no "
-fi
-
-make configure
-$CONFIGURE_PREFIX ./configure $CONFIGURE_OPTS --prefix=INSTALL_PREFIX
-$BUILD -j6 $BUILD_FLAGS prefix=INSTALL_PREFIX && sudo $BUILD prefix=INSTALL_PREFIX install
-
-
-
+make prefix=/usr/local -j4                               &&
+sudo make prefix=/usr/local install

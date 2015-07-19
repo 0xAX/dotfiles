@@ -10,6 +10,7 @@ alias dev='cd  $DEV'
 alias home='cd ~/'
 alias oldhome='cd $HOME_HDD'
 alias downloads="cd $HOME_HDD/Downloads"
+alias golang="cd ~/dev/golang/src/github.com/0xAX"
 
 # navigation by configs
 alias bashrc="cd ~ && nano .bashrc"

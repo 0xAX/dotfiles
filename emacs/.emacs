@@ -105,6 +105,7 @@
 ;;
 (load "~/.emacscore/utils.el")
 (load "~/.emacscore/ui.el")
+
 (load "~/.emacscore/keybindings.el")
 (load "~/.emacscore/markups.el")
 (load "~/.emacscore/org/orgmode.el")
@@ -130,6 +131,7 @@
 (load "~/.emacscore/dev/sed.el")
 (load "~/.emacscore/dev/elixir.el")
 (load "~/.emacscore/dev/shell.el")
+(load "~/.emacscore/dev/rust.el")
 
 (require 'irfc)
 

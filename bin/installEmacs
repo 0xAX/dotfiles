@@ -1,0 +1,42 @@
+#!/bin/bash
+
+cd ~/dev/emacs
+
+sudo apt-get install libmagickcore-dev libmagick++-dev librsvg2-dev libgpm-dev libacl1-dev libxft-dev libotf-dev libxpm-dev libjpeg-dev libtiff-dev libgif-dev -libpng-dev
+
+AR=ar ./configure --enable-link-time-optimization --with-hesiod --with-mail-unlink --with-file-notification=inotify --enable-acl --with-cairo --with-imagemagick --without-xaw3d --without-hesiod
+
+read -p "Do you want to continue to build emacs?: (y/n)" answer
+
+case "$answer" in
+"n" )
+    exit 0
+    ;;
+esac
+
+make -j5 && sudo make install
+
+  Does Emacs use -lXpm?                                   yes
+  Does Emacs use -ljpeg?                                  yes
+  Does Emacs use -ltiff?                                  yes
+  Does Emacs use a gif library?                           yes -lgif
+  Does Emacs use a png library?                           yes -lpng12
+  Does Emacs use -lrsvg-2?                                yes
+  Does Emacs use cairo?                                   yes
+  Does Emacs use imagemagick?                             yes
+  Does Emacs support sound?                               yes
+  Does Emacs use -lgpm?                                   yes
+  Does Emacs use -ldbus?                                  yes
+  Does Emacs use -lgconf?                                 yes
+  Does Emacs use GSettings?                               yes
+  Does Emacs use a file notification library?             yes -lglibc (inotify)
+  Does Emacs use access control lists?                    yes -lacl
+  Does Emacs use -lselinux?                               yes
+  Does Emacs use -lgnutls?                                yes
+  Does Emacs use -lxml2?                                  yes
+  Does Emacs use -lfreetype?                              yes
+  Does Emacs use -lm17n-flt?                              yes
+  Does Emacs use -lotf?                                   yes
+  Does Emacs use -lxft?                                   yes
+  Does Emacs directly use zlib?                           yes
+  Does Emacs use toolkit scroll bars?                     yes

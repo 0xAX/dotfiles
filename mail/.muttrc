@@ -143,8 +143,8 @@ set metoo=yes
 my_hdr X-Operating-System: `uname`
 
 # aliases
-set alias_file=~/.mutt/.mutt-alias
-source ~/.mutt/.mutt-alias
+set alias_file=~/.mutt/mutt-alias
+source ~/.mutt/mutt-alias
 
 # ask about CC:
 set askcc = yes

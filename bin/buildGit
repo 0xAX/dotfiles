@@ -1,0 +1,7 @@
+#!/bin/bash
+
+cd $HOME/dev/git &&
+sudo rm -rf /usr/bin/local/git &&
+sudo rm -rf /usr/local/bin/git &&
+sudo rm -rf /usr/local/libexec/git-core &&
+make -j6  NO_GETTEXT=1 BLK_SHA1=1 prefix=/usr/local && sudo make prefix=/usr/local install
