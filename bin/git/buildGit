@@ -1,6 +1,5 @@
 #!/bin/bash
 
-PRE
 MAKE=
 BUILD_FLAGS=
 
