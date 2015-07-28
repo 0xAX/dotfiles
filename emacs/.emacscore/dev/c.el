@@ -1,12 +1,19 @@
 (require 'cc-mode)
 
+;;
+;; Indentation for C code
+;;
 (setq c-basic-offset 8)
-(setq standard-indent 8)
-(setq-default c-basic-offset 8 c-default-style "linux")
-(define-key c-mode-base-map (kbd "RET") 'newline-and-indent)
+(setq c-default-style      '((java-mode . "java")
+			     (awk-mode . "awk")
+			     (other . "linux")))
+(setq-default c-basic-offset 8)
 (setq-default tab-width 8 indent-tabs-mode t)
+(define-key c-mode-base-map (kbd "RET") 'newline-and-indent)
 
-
+;;
+;; For linux kernel
+;;
 (defun c-lineup-arglist-tabs-only (ignored)
   "Line up argument lists by tabs, not spaces"
   (let* ((anchor (c-langelem-pos c-syntactic-element))
@@ -18,7 +25,6 @@
 
 (add-hook 'c-mode-common-hook
           (lambda ()
-            ;; Add kernel style
             (c-add-style
              "linux-tabs-only"
              '("linux" (c-offsets-alist
@@ -29,7 +35,6 @@
 (add-hook 'c-mode-hook
           (lambda ()
            (let ((filename (buffer-file-name)))
-              ;; Enable kernel mode for the appropriate files
               (when (and filename
                          (string-match (expand-file-name "~/dev/linux")
                                        filename))

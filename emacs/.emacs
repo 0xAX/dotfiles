@@ -41,6 +41,8 @@
 
 (fullscreen)
 
+(desktop-save-mode 0)
+
 ;;
 ;; Delete text in selection mode when typing
 ;;
@@ -92,9 +94,12 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (require 'package)
+;(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.org/packages/"))
+;(add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/"))
+;;(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-initialize)
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
-(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;        Load extensions
@@ -104,21 +109,20 @@
 ;; ui
 ;;
 (load "~/.emacscore/utils.el")
+(load "~/.emacscore/text-utils.el")
+
+(load "~/.emacscore/mode-line.el")
+(load "~/.emacscore/tabbar-style.el")
 (load "~/.emacscore/ui.el")
 
 (load "~/.emacscore/keybindings.el")
 (load "~/.emacscore/markups.el")
 (load "~/.emacscore/org/orgmode.el")
 (load "~/.emacscore/build/make.el")
+(load "~/.emacscore/irc/irc.el")
+
 (load "~/.emacscore/term.el")
 (load "~/.emacs.d/lisp/rfc.el")
-
-;;
-;; vcs
-;;
-(load "~/.emacscore/vcs/git.el")
-(load "~/.emacscore/vcs/hg.el")
-(load "~/.emacscore/vcs/svn.el")
 
 ;;
 ;; Development
@@ -134,8 +138,7 @@
 (load "~/.emacscore/dev/rust.el")
 
 (require 'irfc)
-
 (put 'scroll-left 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
-
 (message "All done, %s%s" (user-login-name) ".")
+(put 'dired-find-alternate-file 'disabled nil)

@@ -2,7 +2,8 @@
 ;;;;        Key bindings
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(global-set-key [f1]  'dired)
+;; The F10, F10, F11, F12 are free
+(global-set-key [f1]  'dired-other-window)
 (global-set-key [f2]  'sudo-find-file)
 (global-set-key [f3]  'todo)
 (global-set-key [f4]  'eval-buffer)
@@ -10,9 +11,8 @@
 (global-set-key [f6]  'rename-file-and-buffer)
 (global-set-key [f7]  'delete-file)
 (global-set-key [f8]  'rgrep)
-(global-set-key [f9]  'discover-my-major)
-(global-set-key [f10] 'magit-status)
-(global-set-key [f11] 'ibuffer)
+(global-set-key [f9]  'ibuffer)
+(global-set-key [f9]  'start-irc)
 
 ;;
 ;; Org-mode keybinding
@@ -24,7 +24,6 @@
 ;;
 ;; external applications
 ;;
-(global-set-key (kbd "C-x w")   'elfeed)
 (global-set-key (kbd "C-x f")   'ftp)
 (global-set-key (kbd "C-x t")   'telnet)
 (global-set-key (kbd "C-x g")   'gdb)
@@ -33,34 +32,32 @@
 (global-set-key (kbd "C-x b")   'browse-url)
 (global-set-key (kbd "C-x p")   'ping)
 (global-set-key (kbd "C-x l")   'list-colors-display)
-(global-set-key (kbd "C-x m")   'mu4e)
 
 ;;
 ;; Text manipulation
 ;;
-(global-set-key "\C-s" 'isearch-forward)
 (global-set-key "\C-g" 'goto-line)
 (global-set-key "\C-a" 'mark-page)
 (global-set-key "\M-s" 'untabify)
 (global-set-key "\M-r" 'replace-all)
 (global-set-key "\M-s" 'mark-curr-line)
 (global-set-key "\M-k" 'kill-full-line)
-(global-set-key "\M-w" 'web-mode)
-(global-set-key (kbd "C-c c") 'emacs-config)
+(global-set-key "\C-s" 'isearch-forward)
 
 ;;
-;; Buffer navigation
+;; buffers manipulations
 ;;
+(global-unset-key "\C-f")
+
+(global-set-key "\C-k" 'kill-this-buffer)
+(global-set-key "\M-d" 'delete-this-buffer-and-file)
+(global-set-key "\C-f" 'file-name)
+
 (global-set-key (kbd "M-<left>")  'beginning-of-line)
 (global-set-key (kbd "M-<right>") 'end-of-line)
 (global-set-key (kbd "M-<up>")  'beginning-of-buffer)
 (global-set-key (kbd "M-<down>") 'end-of-buffer)
-
-;;
-;; edit buffer
-;;
-(global-set-key "\C-k" 'kill-this-buffer)
-(global-set-key "\M-d" 'delete-this-buffer-and-file)
+(global-set-key (kbd "C-c c") 'emacs-config)
 
 ;;
 ;; tabbar keybindings
@@ -90,6 +87,7 @@
 ;; Help
 ;;
 (global-set-key "\M-h" 'helpers)
+(global-set-key (kbd "C-h") 'discover-my-major)
 
 ;;
 ;; Window size manipulation
@@ -106,18 +104,16 @@
 (global-set-key (kbd "C-p l") 'package-list-packages)
 (global-set-key (kbd "C-p i") 'package-install)
 
-
-;;
-;; Modes dependend key bindings
-;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Modes dependend key bindings ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;
 ;; dired
 ;;
 (define-key dired-mode-map (kbd "<return>") 'dired-find-alternate-file)
-(define-key dired-mode-map (kbd "^") (lambda () (interactive) (find-alternate-file "..")))
+(define-key dired-mode-map (kbd "C-<up>") (lambda () (interactive) (find-alternate-file "..")))
 
-;;
 ;; markdown
 ;;
 (add-hook 'markdown-mode-hook (lambda () (local-set-key (kbd "C-p") #'markdown-preview)))

@@ -18,3 +18,18 @@
 
 ;; we need to scroll
 (setq term-buffer-maximum-size 0) 
+
+;;
+;; Open new terminal with name
+;;
+(setq explicit-shell-file-name "/bin/bash")
+(setq shell-file-name "bash")
+(setenv "SHELL" shell-file-name)
+(setenv "ESHELL" shell-file-name)
+
+(defun open-terminal (terminal-name)
+  "Open terminal with custom buffer name"
+  (interactive
+   (list
+	(read-string "Buffer name: ")))
+    (ansi-term (getenv "SHELL") (concat "term: " terminal-name)))

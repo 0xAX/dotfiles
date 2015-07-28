@@ -2,18 +2,24 @@
 ;; Automatically generated file!!! DO NOT EDIT!!!
 
 (setq url-cookie-storage
- '((".stackoverflow.com"
-  [url-cookie "HttpOnly" nil "01-Jan-2055 00:00:00.00 GMT" "/" ".stackoverflow.com" nil]
-  [url-cookie "prov" "5c5be89b-a188-49f3-974e-c071a320c270" "01-Jan-2055 00:00:00.00 GMT" "/" ".stackoverflow.com" nil])
+ '((".reddit.com"
+  [url-cookie "__cfduid" "d706e30af81189a4d282155e91b3a59241417778550" "05 Dec 15 11:22:30 [GMT]" "/" ".reddit.com" nil]
+  [url-cookie "HttpOnly" nil "05 Dec 15 11:22:30 [GMT]" "/" ".reddit.com" nil])
  (".codemonkey.org.uk"
-  [url-cookie "__cfduid" "d8a0ea15f1ce5955bb9f99a128dd8c6391422429139" "28 Jan 16 07:12:19 [GMT]" "/" ".codemonkey.org.uk" nil]
-  [url-cookie "HttpOnly" nil "28 Jan 16 07:12:19 [GMT]" "/" ".codemonkey.org.uk" nil])
- (".reddit.com"
-  [url-cookie "HttpOnly" nil "05 Dec 15 11:22:30 [GMT]" "/" ".reddit.com" nil]
-  [url-cookie "__cfduid" "d706e30af81189a4d282155e91b3a59241417778550" "05 Dec 15 11:22:30 [GMT]" "/" ".reddit.com" nil]))
+  [url-cookie "HttpOnly" nil "28 Jan 16 07:12:19 [GMT]" "/" ".codemonkey.org.uk" nil]
+  [url-cookie "__cfduid" "d8a0ea15f1ce5955bb9f99a128dd8c6391422429139" "28 Jan 16 07:12:19 [GMT]" "/" ".codemonkey.org.uk" nil])
+ (".twitter.com"
+  [url-cookie "guest_id" "v1%3A143808243489107308" "27-Jul-2017 11:20:34.00 UTC" "/" ".twitter.com" nil]
+  [url-cookie "remember_checked_on" "1" "Fri, 25 Jul 2025 11:21:19 GMT" "/" ".twitter.com" nil])
+ (".stackoverflow.com"
+  [url-cookie "prov" "5c5be89b-a188-49f3-974e-c071a320c270" "01-Jan-2055 00:00:00.00 GMT" "/" ".stackoverflow.com" nil]
+  [url-cookie "HttpOnly" nil "01-Jan-2055 00:00:00.00 GMT" "/" ".stackoverflow.com" nil]))
 )
 (setq url-cookie-secure-storage
- 'nil)
+ '((".twitter.com"
+  [url-cookie "HTTPOnly" nil "Fri, 25 Jul 2025 11:21:19 GMT" "/" ".twitter.com" t]
+  [url-cookie "auth_token" "b218a81fa7c59100f3a38290a4a5bf0619731362" "Fri, 25 Jul 2025 11:21:19 GMT" "/" ".twitter.com" t]))
+)
 
 ;; Local Variables:
 ;; version-control: never
