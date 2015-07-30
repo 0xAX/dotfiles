@@ -3,4 +3,9 @@ alias alancox Alan Cox <alan@linux.intel.com>
 alias me Alexander Kuleshov <kuleshovmail@gmail.com>
 alias torvalds Linus Torvalds <torvalds@linux-foundation.org>
 alias bp Borislav Petkov <bp@alien8.de>
-alias bitwalker \"Mel Gorman (bitwalker)\" <paulschoenfelder@gmail.com>
+alias bitwalker Mel Gorman (bitwalker) <paulschoenfelder@gmail.com>
+alias debian-announce <debian-announce@lists.debian.org>
+alias git-dev Git <git@vger.kernel.org>
+alias kernel-dev open list <linux-kernel@vger.kernel.org> 
+alias junio Junio C Hamano <gitster@pobox.com>
+alias greg  Greg KH <gregkh@linuxfoundation.org>
