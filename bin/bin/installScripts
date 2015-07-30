@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# TODO create scripts dir in .bash
+#      copy systemd scripts to the dotfiles
+#      private scripts (for work and just private)
+
+echo "Copying scripts to /usr/bin"
+
+shopt -s extglob
+
+#
+# copy standard scripts
+#
+SCRIPTS=`find . -type f -print -exec chmod 777 {} + | sed -e '/^.\/.git.*/d' | grep -v 'systemd-scripts'`
+
+echo $SCRIPTS | while read line
+do
+    sudo cp -rv $line /usr/bin
+done
+
+#
+# copy systemd scripts
+#
+SYSTEMD_SCRIPTS=`find . -type f -print -exec chmod 777 {} + | sed -e '/^.\/.git.*/d' | grep 'systemd-scripts'`
+echo $SYSTEMD_SCRIPTS | while read line
+do
+    sudo mkdir -p /usr/lib/systemd/scripts/
+    sudo cp -rv $SYSTEMD_SCRIPTS /usr/lib/systemd/scripts/
+done
+
+shopt -u extglob
+echo "Done."

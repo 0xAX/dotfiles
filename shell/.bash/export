@@ -17,6 +17,7 @@ export LD_LIBRARY_PATH=""
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$HOME_HDD/usr/local/pgsql/lib/"
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib/"
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib"
+export LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LIBRARY_PATH
 
 #
 # Kernel and C dev
@@ -84,6 +85,17 @@ export ERL_LIBS="$ERL_LIBS:$WORK/tposs_support/"
 export ERL_LIBS="$ERL_LIBS:$WORK/abnfc/"
 export ERL_LIBS="$ERL_LIBS:$WORK/elixir/lib/"
 
+export ERL_LIBS="$ERL_LIBS:$WORK/eradius/deps/edown/"
+export ERL_LIBS="$ERL_LIBS:$WORK/eradius/deps/bear/"
+export ERL_LIBS="$ERL_LIBS:$WORK/eradius/deps/exometer_core/"
+export ERL_LIBS="$ERL_LIBS:$WORK/eradius/deps/exometer/"
+export ERL_LIBS="$ERL_LIBS:$WORK/eradius/deps/folsom/"
+export ERL_LIBS="$ERL_LIBS:$WORK/eradius/deps/goldbrush/"
+export ERL_LIBS="$ERL_LIBS:$WORK/eradius/deps/lager/"
+export ERL_LIBS="$ERL_LIBS:$WORK/eradius/deps/meck/"
+export ERL_LIBS="$ERL_LIBS:$WORK/eradius/deps/setup/"
+export ERL_LIBS="$ERL_LIBS:$WORK/eradius/deps/parse_trans/"
+
 export ERL_LIBS="$ERL_LIBS:$WORK/tposs_charging/_build/dev/lib/tposs_ccs/"
 #export ERL_LIBS="$ERL_LIBS:$WORK/conform/_build/dev/lib/conform/"
 # exrm | remove then
@@ -98,3 +110,6 @@ export GOROOT=$HOME/dev/golang/go
 export GOPATH=$HOME/dev/golang
 export PATH=$PATH:$GOROOT/bin
 export PATH=$PATH:$GOPATH/bin
+
+# less
+export LESSHISTFILE="/dev/null"

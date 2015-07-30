@@ -118,3 +118,6 @@ alias tmux-kill='tmux kill-session -t '
 
 # mail
 alias mutt-help="firefox http://sheet.shiar.nl/mutt"
+
+# nano
+alias nano=vim

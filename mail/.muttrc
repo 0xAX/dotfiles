@@ -148,13 +148,3 @@ source ~/.mutt/mutt-alias
 
 # ask about CC:
 set askcc = yes
-
-#
-# sidebar configuration
-#
-set sidebar_width=24
-set sidebar_visible=yes
-set sidebar_delim='|'
-bind index,pager \ew sidebar-prev
-bind index,pager \es sidebar-next
-bind index,pager \CO sidebar-open

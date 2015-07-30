@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# emacs ido log
+touch /var/log/ido
+chown alex:alex /var/log/ido
+
+# emacs autocomplete log
+touch /var/log/ac-comphist.dat
+chown alex:alex /var/log/ac-comphist.dat
+
+# emacs daemon
+emacs --daemon
+
+# for mysql
+mkdir -p /var/log/mysql/
+touch /var/log/mysql/error.log

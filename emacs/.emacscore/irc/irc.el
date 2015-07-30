@@ -9,7 +9,7 @@
 (setq erc-autojoin-channels-alist '(("freenode.net"
                                      "#emacs" "#c" "#bash" "#linux"
                                      "#erlang" "#go-nuts" "#linux-kernel"
-                                     "#elixir-lang" "#osdev")))
+                                     "#elixir-lang" "#osdev" "#mutt")))
 
 (setq erc-interpret-mirc-color t)
 

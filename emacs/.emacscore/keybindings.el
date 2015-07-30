@@ -12,7 +12,7 @@
 (global-set-key [f7]  'delete-file)
 (global-set-key [f8]  'rgrep)
 (global-set-key [f9]  'ibuffer)
-(global-set-key [f9]  'start-irc)
+(global-set-key [f10] 'start-irc)
 
 ;;
 ;; Org-mode keybinding

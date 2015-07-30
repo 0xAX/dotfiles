@@ -1,0 +1,43 @@
+#!/bin/bash
+
+#
+# Bash script for fast setting up Golang environment
+#
+# Usage:
+#
+# $ ./setupGo
+#
+
+red="\e[31m"
+green="\e[32m"
+nocolor="\e[0m"
+
+downloadGo=
+tempGoPagePath=~/.gotmp
+golangDownloadUrl="https://golang.org/dl/"
+
+function usage() {
+    echo "Usage"
+}
+
+function start_to_download_go() {
+    echo "Start to download golang from the $golangDownloadUrl"
+    wget -P $tempGoPagePath https://golang.org/dl/
+}
+
+/home/alex/.gotmp/twitter
+
+echo -n "Do you want to download and install last golang? (y/n):"
+read downloadGo
+
+case $downloadGo in
+"y")
+    start_to_download_go
+    ;;
+"n")
+    ;;
+* )
+    echo "Error: you can respond only y or n symbol on this question."
+    exit -1
+    ;;
+esac

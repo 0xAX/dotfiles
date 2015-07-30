@@ -1,4 +1,0 @@
-#!/bin/bash
-
-MIX_LOCK=$(cat mix.lock | sed -e "s/\"neotoma.*"//g | sed -e "/^  $/d")
-echo $MIX_LOCK > mix.lock

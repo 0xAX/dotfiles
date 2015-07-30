@@ -1,0 +1,16 @@
+#!/bin/bash
+
+#
+# update git from master
+#
+cd $GIT_DEV_DIR &&
+git checkout master &&
+git pull &&
+make prefix=/usr/local all -j4 &&
+sudo make prefix=/usr/local install -j4
+
+#
+# copy git contrib
+#
+sudo cp /home/alex/dev/git/contrib/completion/git-completion.bash /etc/git-completion.bash
+sudo cp /home/alex/dev/git/contrib/contacts/git-contacts          /usr/bin
