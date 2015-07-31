@@ -1,3 +1,0 @@
-#!/bin/bash
-
-git shortlog -s -n | awk '{printf "%d\t%s\n", NR, $0}' | less
