@@ -1,0 +1,5 @@
+#
+# my custom headers
+#
+my_hdr X-Operating-System: `uname`
+my_hdr X-Date: `date`

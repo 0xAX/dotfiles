@@ -1,35 +1,18 @@
-source ~/.mutt/account.personal
-source ~/.mutt/account.linux
-source ~/.mutt/mutt-ui
-
-mailboxes !
-mailboxes "\n"
-mailboxes "-- Kernel --------------"
-mailboxes +INBOX         \
-	  +Interesting   \
-	  +Releases      \
-	  +entry_x86_64  \
-	  +x86_64        \
-	  +mm            \
-
-mailboxes "\n\n"
-mailboxes "-- Personal ------------"
-mailboxes +kernel-dev
-
 #
-# keybindings for my accounts
+# Include some source files
 #
-macro index <f3> '<sync-mailbox><enter-command>source ~/.mutt/account.personal<enter><change-folder>!<enter>'
-macro index <f2> '<sync-mailbox><enter-command>source ~/.mutt/account.linux<enter><change-folder>!<enter>'
-
-# follow link by C-u
-macro pager \cu <pipe-entry>'urlview'<enter> 'Follow links with urlview'
+source ~/.mutt/.mutt-ui
+source ~/.mutt/.mutt-alias
+source ~/.mutt/.keysrc
+source ~/.mutt/.hdrs
+source ~/.mutt/.mutt.pgprc
+source ~/.mutt/.account.personal
 
 #
 # Mail box
 #
 set mbox_type=Maildir
-set folder="/home/alex/olddisk/home/alex/Maildir"
+set folder=/home/alex/olddisk/home/alex/Maildir
 set mbox="/home/alex/olddisk/home/alex/Maildir"
 set tmpdir = "/home/alex/olddisk/home/alex/Maildir"
 
@@ -41,12 +24,62 @@ set message_cachedir    = /home/alex/olddisk/home/alex/.mutt/cache/bodies
 set certificate_file    = /home/alex/olddisk/home/alex/.mutt/certificates
 
 #
-# Key bindings
+# Timeouts
 #
-bind generic <up>     previous-entry
-bind generic <down>   next-entry
-bind pager   <up>     previous-line
-bind pager   <down>   next-line
+set connect_timeout=30
+set imap_keepalive=30
+set timeout=600
+set imap_idle=yes
+
+#
+# misc
+#
+# delete messages
+set delete =  yes
+# set reply to: if exists
+set reply_to =  yes
+# use my name
+set reverse_name =  yes
+# sort messages by threads
+set sort = threads
+# skip prompt, just open editor
+set fast_reply = yes
+# include forwaded messages in the body
+set forward_quote = yes
+# scroll menu
+set menu_scroll = yes
+# no need to mark old messages
+#set nomark_old = yes
+# include message to the answer
+set include=yes
+# sometimes i need in headers in the editor
+set edit_hdrs = yes
+# fast quit
+set quit = yes
+# show help
+set help = yes
+# check new mail often
+set mail_check = 240
+# slow pager
+set pager_index_lines=5
+# use from field
+set use_from=yes
+# mail prefix
+set attribution="On %d, %n wrote:"
+# All like unicode
+set charset="utf8"
+# include me in the new message
+set metoo=yes
+# aliases
+set alias_file=~/.mutt/.mutt-alias
+# sort aliases in alpha order by alias name
+set sort_alias=alias
+# ask about CC:
+set askcc = yes
+
+# open new imap connection everytime
+unset imap_passive
+unset suspend
 
 #
 # Tell mutt which MIME types to auto-view
@@ -66,85 +99,3 @@ auto_view text/html
 auto_view text/x-vcard
 auto_view image/tiff
 alternative_order text/enriched text/plain text
-
-#
-# Timeouts
-#
-set connect_timeout=30
-set imap_keepalive=30
-set timeout=600
-set imap_idle=yes
-
-#
-# misc
-#
-
-# delete messages
-set delete         =  yes
-
-# set reply to: if exists
-set reply_to       =  yes
-
-# use my name
-set reverse_name   =  yes
-
-# sort messages by threads
-set sort=threads
-
-# skip prompt, just open editor
-set fast_reply
-
-# include forwaded messages in the body
-set forward_quote=yes
-
-# scroll menu
-set menu_scroll=yes
-
-# no need to mark old messages
-set nomark_old
-
-# include message to the answer
-set include=yes
-
-# sometimes i need in headers in the editor
-set edit_hdrs = yes
-
-# fast quit
-set quit = yes
-
-# show help
-set help = yes
-
-# check new mail often
-set mail_check = 120
-
-# slow pager
-set pager_index_lines=6
-
-# no need to verify pgp signature
-set pgp_verify_sig=no
-
-# use from field
-set use_from=yes
-
-# mail prefix
-set attribution="On %d, %n wrote:"
-
-# All like unicode :)
-set charset="utf8"
-
-# open new imap connection everytime
-unset imap_passive
-
-# include me in the new message
-set metoo=yes
-
-# Linux
-my_hdr X-Operating-System: `uname`
-
-# aliases
-set alias_file=~/.mutt/mutt-alias
-source ~/.mutt/mutt-alias
-
-# ask about CC:
-set askcc = yes

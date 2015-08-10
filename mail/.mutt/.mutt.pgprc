@@ -1,0 +1,9 @@
+# PGP messages
+color  body            brightyellow    default "^gpg: Good signature .*"
+color  body            white           default "^gpg: "
+color  body            brightwhite     red     "^gpg: BAD signature from.*"
+mono   body            bold                    "^gpg: Good signature"
+mono   body            bold                    "^gpg: BAD signature from.*"
+
+# no need to verify pgp signature
+set pgp_verify_sig=no

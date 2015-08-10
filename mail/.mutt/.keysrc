@@ -1,0 +1,27 @@
+#
+# Switch between accounts
+#
+macro index <f2> '<sync-mailbox><enter-command>source ~/.mutt/account.personal<enter><change-folder>!<enter>'
+
+#
+# Open url
+#
+macro pager \cb <pipe-entry>'urlview'<enter> 'Follow links with urlview'
+
+#
+# Sidebar navigation
+#
+bind generic <up>     previous-entry
+bind generic <down>   next-entry
+bind pager   <up>     previous-line
+bind pager   <down>   next-line
+bind index,pager o sidebar-open
+
+#
+# Navigation
+#
+bind pager       gg      top
+bind pager       G       bottom
+bind index       gg      first-entry
+bind index       G       last-entry
+bind index,pager R       group-reply

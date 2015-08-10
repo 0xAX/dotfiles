@@ -9,3 +9,10 @@ alias git-dev Git <git@vger.kernel.org>
 alias kernel-dev open list <linux-kernel@vger.kernel.org> 
 alias junio Junio C Hamano <gitster@pobox.com>
 alias greg  Greg KH <gregkh@linuxfoundation.org>
+alias dragonfly-bsd-kernel dragonfly-bsd <kernel@dragonflybsd.org>
+alias freebsd-announce freebsd-announce <freebsd-announce@freebsd.org>
+alias freebsd-amd64 freebsd-amd64 <freebsd-amd64@freebsd.org>
+alias systemd-devel systemd-devel <systemd-devel@lists.freedesktop.org>
+alias grub-devel grub-devel <grub-devel@gnu.org>
+alias junio Junio C Hamano gitster@pobox.com
+alias jeff Jeff King <peff@peff.net>

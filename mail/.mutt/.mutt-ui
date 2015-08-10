@@ -1,0 +1,77 @@
+#
+# headers order
+#
+ignore *
+unhdr_order *
+unignore  Date: From: Reply-To: Mail-Followup-To: To: Cc: Subject:
+hdr_order From: To: Cc: Subject: Date: Reply-To:
+
+#
+# header colors
+#
+color header yellow default "^(From|To|Reply-to|Cc|Subject|Date):"
+
+#
+# Default color definitions
+#
+color normal     white         default
+color quoted     white         default
+color quoted1    color214      default
+color quoted2    color215      default
+color quoted3    color216      default
+color quoted4    color217      default
+color indicator  yellow        default
+color error      brightred     default
+color status	 brightblue    default
+color tree	 blue          default
+color tilde	 blue          default
+color markers	 brightred     default
+color message    white         default
+color search     brightwhite   magenta
+
+# deleted message
+color index red default "~D"
+# related to me
+color index green default "~F"
+
+# status line
+set status_format="-%r-Mutt: [Msgs:%?M?%M/?%m%?n? New:%n?%?d? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p? Inc:%b?]---[%s]-%>------------------[%h]-
+
+#
+# Urls
+#
+color body green default "(http|ftp|news|telnet|finger)://[^ \"\t\r\n]*"
+color body green default "mailto:[-a-z_0-9.]+@[-a-z_0-9.]+"
+color body green default "[-a-z_0-9.%$]+@[-a-z_0-9.]+\\.[-a-z][-a-z]+"
+mono body bold "(http|https|ftp|news|telnet|finger)://[^ \"\t\r\n]*"
+mono body bold "mailto:[-a-z_0-9.]+@[-a-z_0-9.]+"
+
+#
+# patch
+#
+color body color39 default "^diff --git.*"
+color body color39 default "^index [a-f0-9].*"
+color body color242 default "^\-\-\- .*"
+color body color242 default "^[\+]{3} .*"
+color body brightblue default "^@@.*"
+color body color40 default "^[\+][^\+]+.*"
+color body red  default "^\-[^\-]+.*"
+
+#
+# index colors
+#
+set date_format="%m-%d-%y"
+set index_format="%2C |%Z| %d %-30.30F %s"
+
+set quote_regexp="^( {0,4}[>|:#]| {0,4}[a-z0-9]+[>|]+)+"
+
+#
+# sidebar
+#
+set sidebar_width=25
+color sidebar green default
+bind index <left> sidebar-prev
+bind index <right> sidebar-next
+bind index <space> sidebar-open
+bind index <Esc>S sidebar-toggle
+set sort_sidebar=unsorted
