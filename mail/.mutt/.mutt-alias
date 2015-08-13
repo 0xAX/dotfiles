@@ -16,3 +16,4 @@ alias systemd-devel systemd-devel <systemd-devel@lists.freedesktop.org>
 alias grub-devel grub-devel <grub-devel@gnu.org>
 alias junio Junio C Hamano gitster@pobox.com
 alias jeff Jeff King <peff@peff.net>
+alias initramfs initramfs initramfs@vger.kernel.org
