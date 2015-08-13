@@ -14,4 +14,3 @@ sudo systemctl disable lvm2-lvmetad.service
 sudo systemctl disable lvm2-monitor.service
 sudo systemctl disable auditd.service
 echo "Done"
-exit 0
