@@ -115,12 +115,12 @@
 (load "~/.emacscore/tabbar-style.el")
 (load "~/.emacscore/ui.el")
 
+
 (load "~/.emacscore/keybindings.el")
 (load "~/.emacscore/markups.el")
 (load "~/.emacscore/org/orgmode.el")
 (load "~/.emacscore/build/make.el")
 (load "~/.emacscore/irc/irc.el")
-
 (load "~/.emacscore/term.el")
 (load "~/.emacs.d/lisp/rfc.el")
 

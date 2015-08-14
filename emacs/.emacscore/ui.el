@@ -7,10 +7,6 @@
 ;; indent
 (align-newline-and-indent)
 
-
-
-
-
  
 ;; Highlight current line
 (global-hl-line-mode 1)
@@ -117,15 +113,15 @@
  '(ido-max-work-directory-list 0)
  '(ido-max-work-file-list 0))
 
-(require 'ido-vertical-mode)
+;;(require 'ido-vertical-mode)
 (require 'ido)
 (setq ido-save-directory-list-file nil)
 (setq ido-enable-flex-matching t)
-(setq ido-vertical-define-keys 'C-n-and-C-p-only)
+;;(setq ido-vertical-define-keys 'C-n-and-C-p-only)
 
 (ido-mode 1)
 (ido-everywhere 1)
-(ido-vertical-mode 1)
+;;(ido-vertical-mode 1)
 
 ;;
 ;; CUA mode

@@ -20,6 +20,7 @@
 (global-unset-key "\C-o")
 (global-set-key (kbd "C-o t")   'todo)
 (global-set-key (kbd "C-o i")   'important_todo)
+;(global-set-key (kbd "\C-m")   'mutt-mode)
 
 ;;
 ;; external applications

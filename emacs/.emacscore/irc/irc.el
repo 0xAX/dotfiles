@@ -7,9 +7,9 @@
 (require 'erc-autoaway)
 
 (setq erc-autojoin-channels-alist '(("freenode.net"
-                                     "#emacs" "#c" "#bash" "#linux"
+                                     "#emacs" "#bash" "#mutt"
                                      "#erlang" "#go-nuts" "#linux-kernel"
-                                     "#elixir-lang" "#osdev" "#mutt")))
+                                     "#elixir-lang" "#osdev" "#systemd" "#dracut")))
 
 (setq erc-interpret-mirc-color t)
 

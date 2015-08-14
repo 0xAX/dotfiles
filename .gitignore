@@ -1,4 +1,8 @@
 !*.patch
 emacs/.emacs.d/ac-comphist.dat
 emacs/.emacs.d/ido.last
+emacs/.emacs.d/tramp
 emacs/.emacs.d/session.*
+emacs/.emacs.d/url/cache/*
+emacs/.emacs.d/url/cookies
+
