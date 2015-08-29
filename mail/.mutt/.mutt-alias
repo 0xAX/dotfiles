@@ -17,3 +17,4 @@ alias grub-devel grub-devel <grub-devel@gnu.org>
 alias junio Junio C Hamano gitster@pobox.com
 alias jeff Jeff King <peff@peff.net>
 alias initramfs initramfs initramfs@vger.kernel.org
+alias akpm Andrew Morton <akpm@linux-foundation.org>

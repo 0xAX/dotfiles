@@ -1,0 +1,9 @@
+#!/bin/bash
+
+echo "We are starting!"
+
+# emacs daemon
+emacs --daemon
+
+# epmd
+epmd &

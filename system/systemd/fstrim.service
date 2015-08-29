@@ -1,9 +1,0 @@
-[Unit]
-Description=Discard unused blocks
-
-[Service]
-Type=oneshot
-ExecStart=/sbin/fstrim -a
-
-[Install]
-WantedBy=multi-user.target

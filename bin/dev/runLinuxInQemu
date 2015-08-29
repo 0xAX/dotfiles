@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo "Running x86_64 kernel in qemu..."
+
+qemu-system-x86_64 -snapshot -m 8GB -serial stdio -kernel ~/dev/linux/arch/x86_64/boot/bzImage -initrd ~/dev/initrd_x86_64.cpio.gz -append "root=/dev/sda1 ignore_loglevel log_buf_len=16M earlyprintk=ttyS0,115200 console=tty acpi=off debug"

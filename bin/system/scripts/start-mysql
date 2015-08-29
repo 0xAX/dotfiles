@@ -1,0 +1,9 @@
+#!/bin/bash
+
+echo "Create mariadb logdir"
+sudo mkdir -p /var/log/mariadb
+sudo touch /var/log/mariadb/mariadb.log
+sudo chown -R mysql:mysql /var/log/mariadb/mariadb.log
+sudo systemctl start mariadb.service
+sudo systemctl status mariadb.service
+echo "Done"

@@ -17,12 +17,15 @@ export LD_LIBRARY_PATH=""
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$HOME_HDD/usr/local/pgsql/lib/"
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib/"
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib"
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:deps/dnssd/priv"
+
 export LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LIBRARY_PATH
 
 #
-# Kernel and C dev
+# Kernel and C dev, systemd
 #
 export PATH=$PATH:$KERNEL_DEV/tools/perf/
+export PATH=$PATH:/usr/lib/systemd/
 
 #
 # Databases

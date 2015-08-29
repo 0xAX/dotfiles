@@ -1,2 +1,2 @@
-. /etc/bash_completion
+. /usr/share/bash-completion/bash_completion
 . $DEV/git/contrib/completion/git-completion.bash
