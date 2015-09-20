@@ -1,0 +1,27 @@
+#!/bin/bash
+
+SOURCE_CODE=$1
+
+if [[ "$SOURCE_CODE" == "" ]]
+then
+    echo "git-send-email scripts waits for path to the linux kernel source code."
+    exit 1
+fi
+
+if [[ -d $SOURCE_CODE ]]; then
+    echo "$SOURCE_CODE is a directory"
+elif [[ -f $SOURCE_CODE ]]; then
+    echo "$SOURCE_CODE is a file"
+else
+    echo "$SOURCE_CODE is not valid"
+    exit 1
+fi
+
+function foo() {
+    MAINTAINERS=$(sed -ne s/\(.*\)//gp)
+    while read -r line; do
+	echo "$line"
+    done <<< "$MAINTAINERS"
+}
+
+~/dev/linux/scripts/get_maintainer.pl -f $SOURCE_CODE | foo

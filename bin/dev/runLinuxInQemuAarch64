@@ -2,4 +2,4 @@
 
 echo "Running aarch64 kernel in qemu..."
 
-sudo qemu-system-aarch64 -snapshot -cpu cortex-a57  -kernel arch/arm64/boot/Image -initrd /home/alex/olddisk/home/alex/Downloads/initrd\(1\).gz -serial stdio --append "root=/dev/sda1 ignore_loglevel console=ttyAMA0,38400 keep log_buf_len=16M init=/bin/sh" -no-reboot -machine virt -net user
+sudo qemu-system-aarch64 -snapshot -cpu cortex-a57  -kernel ~/dev/linux/arch/arm64/boot/Image -initrd ~/dev/my-dotfiles/initrds/aarch64/initrd_aarch64.gz -serial stdio --append "root=/dev/sda1 ignore_loglevel console=ttyAMA0,38400 keep log_buf_len=16M init=/bin/sh" -no-reboot -machine virt

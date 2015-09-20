@@ -4,6 +4,6 @@ elif infocmp xterm-256color >/dev/null 2>&1; then
 	export TERM='xterm-256color';
 fi;
 
-source $GIT_DEV/contrib/completion/git-prompt.sh
-
+source ~/bin/git-prompt/.git-prompt.sh
 PS1='\w$(__git_ps1 " \[\e[1;34m\](%s) ")\[\e[0m\]\$ '
+
