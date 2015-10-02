@@ -2,8 +2,59 @@
 
 echo "Start to build util linux..."
 
-./autogen.sh &&
-CC=gcc AR=ar ./configure --disable-nls --enable-libmount-force-mountinfo --enable-tunelp --enable-line --enable-reset --enable-vipw --enable-newgrp --enable-login-chown-vcs --enable-login-stat-mail --enable-write --with-gnu-ld --with-systemd --with-ncurses --with-slang --with-systemdsystemunitdir=/etc/systemd/ --with-python=2 && make && sudo make install
+export ADJTIME_PATH="/etc/adjtime"
+
+BIN=" --bindir=/usr/bin "
+SBIN=" --sbindir=/usr/sbin "
+LIBEXEC=" --libexecdir=/usr/local/libexec "
+MAN=" --mandir=/usr/share/man "
+
+NLS=" --disable-nls "
+GTK_DOCK=" --disable-gtk-doc "
+LARGE_FILE=" --enable-largefile "
+ASSERTS=" --enable-assert "
+LINE=" --enable-line "
+RESET=" --enable-reset "
+TLS=" --enable-tls "
+VIPW=" --enable-vipw"
+NEWGRP=" --enable-newgrp "
+LIB_UUID=" --enable-libuuid "
+LIB_BLKID=" --enable-libblkid "
+LIB_MOUNT=" --enable-libmount "
+LIB_SMARTCOLS=" --enable-libsmartcols "
+LIBFDISK=" --enable-libfdisk "
+MOUNT=" --enable-mount "
+LOSETUP=" --enable-losetup "
+FSCK=" --enable-fsck "
+TUNELP=" --enable-tunelp "
+BFS=" --disable-bfs "
+CRAMFS=" --disable-cramfs "
+MINIX=" --disable-minix "
+LOGIN_VCS=" --enable-login-chown-vcs "
+LOGINSTAT_MAIL=" --enable-login-stat-mail "
+WRITE=" --enable-write "
+BASH_COMPLETION=" --enable-bash-completion --with-bashcompletiondir=/etc/bash_completion.d"
+PYLIB_MOUNT=" --disable-pylibmount "
+USRDIR_PATH="--enable-usrdir-path"
+GOOD_FOR_SYSTEMD=" --enable-libmount-force-mountinfo --with-systemd --with-systemdsystemunitdir=/usr/lib/systemd"
+
+GNU_LD=" --with-gnu-ld "
+SELINUX=" --with-selinux "
+AUDIT=" --with-audit "
+NCURSES=" --with-ncurses "
+SLANG=" --with-slang "
+READLINE=" --with-readline "
+UTEMPTER=" --with-utempter "
+SMACK=" --with-smack "
+PYTHON=" --with-python "
+
+./autogen.sh && CC=gcc AR=ar ./configure $NLS $GOOD_FOR_SYSTEMD $TUNELP $LINE $RESET $VIPW $NEWGRP          \
+  $LOGIN_VCS $LOGINSTAT_MAIL $WRITE $GNU_LD $NCURSES $SLANG $PYTHON $SMACK $UTEMPTER $READLINE    \
+  $AUDIT $SELINUX $USRDIR_PATH $PYLIB_MOUNT $BASH_COMPLETION $CHFN_LISTED $CHFN $MINIX $CRAMFS   \
+  $BFS $FSCK $LOSETUP $LIBFDISK $MOUNT $LIB_MOUNT $LIB_BLKID $LIB_UUID $GTK_DOCK $MAN $BIN $SBIN \
+  $LIBEXEC
+
+&& make && sudo make install
 
 if [ $? -eq 0 ]
 then
