@@ -13,12 +13,6 @@ UBUNTU_DIR="$SCRIPTS_DIR/ubuntu/*"
 GIT_DIR="$SCRIPTS_DIR/git/*"
 SYSTEM_DIR="$SCRIPTS_DIR/system/scripts/*"
 
-#echo $SCRIPTS_DIR
-#echo $BUILD_DIR
-#cd $SCRIPTS_DIR
-
-#echo $BUILD_DIR
-
 #
 # systemd paths
 #
@@ -28,11 +22,9 @@ SYSTEMD_SCRIPTS_DIR="$SCRIPTS_DIR/system/systemd-scripts/*"
 SYSTEMD_SCRIPTS_PATH="/usr/lib/systemd/scripts/"
 SYSTEMD_SERVICES="/usr/lib/systemd/system/"
 
-STANDARD_SCRIPTS=$(ls -p $SCRIPTS_DIR | grep -v /)
-
-echo $STANDARD_SCRIPTS
 echo "Copying standard scripts to the $SCRIPTS_DEST"
-sudo cp -r -v $STANDARD_SCRIPTS $SCRIPTS_DEST
+sudo cp -r -v $SCRIPTS_DIR/installScripts $SCRIPTS_DEST
+sudo cp -r -v $SCRIPTS_DIR/dotfiles $SCRIPTS_DEST
 echo "Done."
 
 echo "Copying scripts to $SCRIPTS_DEST"

@@ -1,4 +1,4 @@
-;; -*- emacs-lisp -*- <15/08/16 00:27:18 /home/alex/.emacs.d/tramp>
+;; -*- emacs-lisp -*- <15/10/03 20:34:19 /home/alex/.emacs.d/tramp>
 ;; Tramp connection history.  Don't change this file.
 ;; You can delete it, forcing Tramp to reapply the checks.
 
@@ -38,7 +38,7 @@
   ("perl" "\\perl"))
  (["sudo" "root" "localhost" nil nil]
   ("locale" "LC_ALL=en_US.utf8")
-  ("uname" "Linux 4.2.0-rc6")
+  ("uname" "Linux 4.3.0-rc3")
   ("test" "test")
   ("remote-path"
    ("/usr/bin" "/bin" "/sbin" "/usr/sbin" "/usr/local/bin" "/usr/local/sbin"))
@@ -53,7 +53,4 @@
   ("perl-file-spec" t)
   ("perl-cwd-realpath" t)
   ("perl" "\\perl")
-  ("git" "\\git")
-  ("~root" "/root"))
- (["scp" nil "sudo" nil nil]
-  nil))
+  ("git" "\\git")))
