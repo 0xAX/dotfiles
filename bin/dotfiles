@@ -16,7 +16,8 @@ BASH="$DIR/shell/"
 BIN="$DIR/bin/"
 EMACS="$DIR/emacs"
 LINUXDEV="$DIR/linux-dev/x86_64_conf"
-SYSTEM="$DIR/bin/system"
+SYSTEM="$DIR/system"
+SYSTEMD="$SYSTEM/systemd"
 MAIL="$DIR/mail"
 PRIVATE="$DIR/private"
 
@@ -73,12 +74,15 @@ case $1 in
     #
     # copy system stuff
     #
-    sudo cp -r /etc/fstab /etc/default/grub $SYSTEM
+    sudo cp -r /etc/fstab $SYSTEM
+    sudo cp -r /etc/default/grub $SYSTEM
     sudo cp -r /etc/dnf/dnf.conf $SYSTEM
-    sudo cp -r /usr/lib/systemd/system/fstrim.service $SYSTEM/systemd/
-    sudo cp -r /usr/lib/systemd/system/fstrim.timer $SYSTEM/systemd/
-    sudo cp -r /usr/lib/systemd/system/logs.service $SYSTEM/systemd/
+    sudo cp -r /etc/bash_completion.d $SYSTEM
 
+    sudo cp -r /usr/lib/systemd/system/fstrim.service $SYSTEMD
+    sudo cp -r /usr/lib/systemd/system/fstrim.timer $SYSTEMD
+    sudo cp -r /usr/lib/systemd/system/logs.service $SYSTEMD
+    sudo cp -r /etc/sysctl.conf $SYSTEM
     #
     # copy other dotfiles
     #
@@ -93,26 +97,44 @@ case $1 in
     # copy private stuf
     #
     rm -rf $PRIVATE/.ercpass.gpg
-    cp -r .ercpass $PRIVATE/
+    cp -r ~/.ercpass $PRIVATE/
     echo "Write pass for .ercpass"
     gpg -c $PRIVATE/.ercpass
     rm -rf $PRIVATE/.ercpass
 
-    rm -rf $PRIVATE/todo.tgz
+    rm -rf $PRIVATE/todo.tgz.gpg
     cp -r ~/dev/learning/todo $PRIVATE
     tar -cvzf $PRIVATE/todo.tgz $PRIVATE/todo
     echo "Write pass for todo"
     gpg -c $PRIVATE/todo.tgz
     rm -rf $PRIVATE/todo.tgz
+    rm -rf $PRIVATE/todo
     ;;
 --restore)
-    cd ~/dev/my-dotfiles
+    cd $DIR
+    #
+    # Copy standard dtofiles
+    #
     cp -r .tmux.conf .gdbinit .nanorc .hgignore .gitignore_global .gitconfig $HOME/
     cp -r emacs/.emacs emacs/.emacs.d emacs/.emacscore $HOME/
 
+    #
+    # Copy scripts to $HOME directory
+    #
     cp -r bin $HOME
+    
+    #
+    # Copy mail scripts
+    #
     cp -r mail/.mutt .muttrc .urlview $HOME/
+
+    #
+    # copy .bash
+    #
     cp -r shell/.bash_logout shell/.bash_profile shell/.bashrc shell/.bash shell/.profile $HOME/
+    cd -
+
+    echo "NOTE: private and system scripts are not installed, do it manually!"
     ;;
 *)
     usage

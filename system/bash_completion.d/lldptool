@@ -1,0 +1,74 @@
+# bash completion for lldptool
+#
+## lldptool --help
+# lldptool v0.9.41
+# Copyright (c) 2007-2010, Intel Corporation
+#
+# Substantially modified from:  hostapd_cli v 0.5.7
+# Copyright (c) 2004-2007, Jouni Malinen <j@w1.fi> and contributors
+#
+# Usage:
+#   lldptool <command> [options] [arg]   general command line usage format
+#   lldptool                             go into interactive mode
+#            <command> [options] [arg]   general interactive command format
+#
+# Options:
+#   -i [ifname]                          network interface
+#   -V [tlvid]                           TLV identifier
+#                                        may be numeric or keyword (see below)
+#   -n                                   "neighbor" option for command
+#   -a                                   "add" option for command
+#   -d                                   "remove" option for command
+#   -r                                   show raw message
+#   -R                                   show only raw messages
+#
+# Commands:
+#   license                              show license information
+#   -h|help                              show command usage information
+#   -v|version                           show version
+#   -q|quit                              exit lldptool (interactive mode)
+#   -S|stats                             get LLDP statistics for ifname
+#   -t|get-tlv                           get TLVs from ifname
+#   -T|set-tlv                           set arg for tlvid to value
+#   -l|get-lldp                          get the LLDP parameters for ifname
+#   -L|set-lldp                          set the LLDP parameter for ifname
+
+# This file must be updated with any changes to, or additions to the options.
+
+# Could not get numeric value to work for the --stats interval
+# Considered parsing output of --help to complete options
+
+have lldptool && _lldptool_options()
+{
+    local cur prev opts cmds opts_and_cmds
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    prev="${COMP_WORDS[COMP_CWORD-1]}"
+    cmds="license -h help -v version -q quit -s stats -t get-tlv -T set-tlv -l get-lldp -L set-lldp"
+    opts="-i -V -n -a -d -r -R"
+    opts_and_cmds="$opts $cmds"
+
+    case "${cur}" in
+        *)
+            COMPREPLY=( $(compgen -W "${opts_and_cmds}" -- ${cur}) )
+	    ;;
+    esac
+
+    case "${prev}" in
+        -i)
+	    _available_interfaces
+	    return 0
+	    ;;
+    esac
+
+    return 0
+}
+complete -F _lldptool_options lldptool
+
+# Local variables:
+# mode: shell-script
+# sh-basic-offset: 4
+# sh-indent-comment: t
+# indent-tabs-mode: nil
+# End:
+# ex: ts=4 sw=4 et filetype=sh

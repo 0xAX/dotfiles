@@ -1,0 +1,50 @@
+# bash completion for lldpad
+#
+## lldpad --help
+# usage: lldpad [-hdksv] [-f configfile]
+# options:
+#   -h  show this usage
+#   -f  use configfile instead of default
+#   -d  run daemon in the background
+#   -k  terminate current running lldpad
+#   -s  remove lldpad state records
+#   -v  show version
+#   -V  set syslog level
+
+# This file must be updated with any changes to, or additions to the options.
+
+# Could not get numeric value to work for the --stats interval
+# Considered parsing output of --help to complete options
+
+have lldpad && _lldpad_options()
+{
+    local cur prev opts
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    prev="${COMP_WORDS[COMP_CWORD-1]}"
+    opts="-h -f -d -k -s -v -V"
+
+    case "${cur}" in
+        *)
+            COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+	    ;;
+    esac
+
+    case "${prev}" in
+        -f)
+	    _filedir
+	    return 0
+	    ;;
+    esac
+
+    return 0
+}
+complete -F _lldpad_options lldpad
+
+# Local variables:
+# mode: shell-script
+# sh-basic-offset: 4
+# sh-indent-comment: t
+# indent-tabs-mode: nil
+# End:
+# ex: ts=4 sw=4 et filetype=sh
