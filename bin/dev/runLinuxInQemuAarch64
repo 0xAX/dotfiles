@@ -2,4 +2,9 @@
 
 echo "Running aarch64 kernel in qemu..."
 
-sudo qemu-system-aarch64 -snapshot -cpu cortex-a57  -kernel ~/dev/linux/arch/arm64/boot/Image -initrd ~/dev/my-dotfiles/initrds/aarch64/initrd_aarch64.gz -serial stdio --append "root=/dev/sda1 ignore_loglevel console=ttyAMA0,38400 keep log_buf_len=16M init=/bin/sh" -no-reboot -machine virt
+KERNEL="/home/alex/dev/linux/arch/arm64/boot/Image"
+QEMU_OPTIONS="-snapshot -cpu cortex-a57 -serial stdio -no-reboot -machine virt"
+INTRD="/home/alex/dev/my-dotfiles/initrds/aarch64/initrd_aarch64.gz"
+KERNEL_OPTIONS="root=/dev/sda1 ignore_loglevel console=ttyAMA0,38400 keep log_buf_len=16M init=/bin/sh"
+
+sudo qemu-system-aarch64 $QEMU_OPTIONS -kernel $KERNEL -initrd $INITRD  -append "$KERNEL_OPTIONS"

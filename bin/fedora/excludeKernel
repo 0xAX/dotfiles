@@ -2,14 +2,14 @@
 
 DNF_CONF=/etc/dnf/dnf.conf
 
-IS_EXCLUDED=`grep ^exclude=kernel\* $DNF_CONF`
+IS_EXCLUDED=`grep ^exclude=libreoffice\* $DNF_CONF`
 if [[ $? -eq 0 ]] ;
 then
-    NEW_DNF_CONF=`sed "s/^exclude=kernel\*/#&/" $DNF_CONF`
+    NEW_DNF_CONF=`sed "s/^exclude=libreoffice\*/#&/" $DNF_CONF`
     echo "$NEW_DNF_CONF" > $DNF_CONF
     echo "Exclude in $DNF_CONF is commented."
 else
-    NEW_DNF_CONF=`sed '/^#exclude\=kernel/ {
+    NEW_DNF_CONF=`sed '/^#exclude\=libreoffice/ {
         s/^.//g
     }' $DNF_CONF`
     echo "$NEW_DNF_CONF" > $DNF_CONF

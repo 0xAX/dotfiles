@@ -9,18 +9,13 @@ SCRIPTS_DEST="/usr/bin"
 BUILD_DIR="$SCRIPTS_DIR/build/*"
 DEV_DIR="$SCRIPTS_DIR/dev/*"
 FEDORA_DIR="$SCRIPTS_DIR/fedora/*"
-UBUNTU_DIR="$SCRIPTS_DIR/ubuntu/*"
 GIT_DIR="$SCRIPTS_DIR/git/*"
+UBUNTU_DIR="$SCRIPTS_DIR/ubuntu/*"
 SYSTEM_DIR="$SCRIPTS_DIR/system/scripts/*"
-
-#
-# systemd paths
-#
-SYSTEMD_DIR="$SCRIPTS_DIR/system/systemd/*"
 SYSTEMD_SCRIPTS_DIR="$SCRIPTS_DIR/system/systemd-scripts/*"
 
-SYSTEMD_SCRIPTS_PATH="/usr/lib/systemd/scripts/"
-SYSTEMD_SERVICES="/usr/lib/systemd/system/"
+# destination for scripts that will be executed by systemd
+SYSTEMD_SCRIPTS_PATH="/usr/lib/systemd/scripts"
 
 echo "Copying standard scripts to the $SCRIPTS_DEST"
 sudo cp -r -v $SCRIPTS_DIR/installScripts $SCRIPTS_DEST
@@ -31,15 +26,9 @@ echo "Copying scripts to $SCRIPTS_DEST"
 sudo cp -r -v $BUILD_DIR $DEV_DIR $FEDIRA_DIR $UBUNTU_DIR $GIT_DIR $SYSTEM_DIR $SCRIPTS_DEST
 echo "Done."
 
-echo "Copying systemd services to "
-sudo cp -r -v $SYSTEMD_DIR $SYSTEMD_SERVICES
-echo "Done."
-
 echo "Copying systemd-scripts to $SYSTEMD_SCRIPTS_PATH"
 sudo mkdir -p -v $SYSTEMD_SCRIPTS_PATH
 sudo cp -r -v $SYSTEMD_SCRIPTS_DIR $SYSTEMD_SCRIPTS_PATH
 echo "Done."
 
-shopt -u extglob
-
-exit 0;
+echo -e "\e[32mDone.\e[39m"

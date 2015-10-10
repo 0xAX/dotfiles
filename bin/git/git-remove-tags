@@ -1,13 +1,11 @@
 #!/bin/bash
 
-#!/bin/bash
-
 tagname=$1
 origin=$2
 
 if [ -z "$origin" ]; then
     origin="origin"
-    fi
+fi
     
 git tag -d $tagname
 git tag $origin :refs/tags/$tagname

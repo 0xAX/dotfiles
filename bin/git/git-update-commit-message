@@ -3,7 +3,7 @@
 hash=$1
 
 if [ -z "$hash" ]; then
-	hash=`git rev-parse HEAD`
+    hash=`git rev-parse HEAD`
 fi
 
 git checkout $hash

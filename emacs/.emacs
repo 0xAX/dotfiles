@@ -44,6 +44,11 @@
 (desktop-save-mode 0)
 
 ;;
+;; delete trailing whitespaces
+;;
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+;;
 ;; Delete text in selection mode when typing
 ;;
 (delete-selection-mode 1)
@@ -114,6 +119,7 @@
 (load "~/.emacscore/mode-line.el")
 (load "~/.emacscore/tabbar-style.el")
 (load "~/.emacscore/ui.el")
+
 
 
 (load "~/.emacscore/keybindings.el")

@@ -6,7 +6,7 @@ function usage {
     echo "dotfiles --restore /home/user/path/to/git/dotfiles/dir"
 }
 
-if [[ ! $# -eq 2 ]]; then
+if [[ $# -ne 2 ]]; then
     usage
     exit -1
 fi
@@ -64,7 +64,7 @@ case $1 in
     echo "Write pass for .account-personal"
     gpg -c $MAIL/.mutt/.account.personal
     rm -rf $MAIL/.mutt/.account.personal
- 
+
     cp -r ~/.mutt/.hdrs $MAIL/.mutt
     cp -r ~/.mutt/.hdrs $MAIL/.mutt
     cp -r ~/.mutt/.keysrc $MAIL/.mutt
@@ -92,6 +92,8 @@ case $1 in
     cp -r ~/.hgignore $DIR
     cp -r ~/.nanorc $DIR
     cp -r ~/.tmux.conf $DIR
+    cp -r ~/.vimrc $DIR
+    cp -r ~/.inputrc $DIR
 
     #
     # copy private stuf
@@ -115,14 +117,14 @@ case $1 in
     #
     # Copy standard dtofiles
     #
-    cp -r .tmux.conf .gdbinit .nanorc .hgignore .gitignore_global .gitconfig $HOME/
+    cp -r .tmux.conf .gdbinit .inputrc .nanorc .hgignore .gitignore_global .gitconfig $HOME/
     cp -r emacs/.emacs emacs/.emacs.d emacs/.emacscore $HOME/
 
     #
     # Copy scripts to $HOME directory
     #
     cp -r bin $HOME
-    
+
     #
     # Copy mail scripts
     #
@@ -132,6 +134,8 @@ case $1 in
     # copy .bash
     #
     cp -r shell/.bash_logout shell/.bash_profile shell/.bashrc shell/.bash shell/.profile $HOME/
+
+    # ok, go back
     cd -
 
     echo "NOTE: private and system scripts are not installed, do it manually!"
@@ -141,4 +145,4 @@ case $1 in
     ;;
 esac
 
-echo "Done."
+echo -e "\e[32mDone.\e[39m"

@@ -3,10 +3,14 @@
 echo "Running x86_64 kernel in qemu..."
 
 DEBUG=""
+KERNEL="/home/alex/dev/linux/arch/x86_64/boot/bzImage"
+INITRD="/home/alex/dev/initrd_x86_64.cpio.gz"
+KERNEL_OPTIONS="root=/dev/sda1 ignore_loglevel log_buf_len=16M earlyprintk=ttyS0,115200 console=tty debug"
+QEMU_OPTIONS="-snapshot -m 8GB -serial stdio"
 
 if [[ "$1" == "--debug" ]]
 then
     DEBUG="-s"
 fi
 
-qemu-system-x86_64 $DEBUG -snapshot -m 8GB -serial stdio -kernel ~/dev/linux/arch/x86_64/boot/bzImage -initrd ~/dev/initrd_x86_64.cpio.gz -append "root=/dev/sda1 ignore_loglevel log_buf_len=16M earlyprintk=ttyS0,115200 console=tty debug"
+qemu-system-x86_64 $DEBUG $QERMU_OPTIONS -kernel $KERNEL -initrd $INITRD -append "$KERNEL_OPTIONS"

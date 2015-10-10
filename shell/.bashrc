@@ -50,7 +50,8 @@ export PKG_CONFIG_PATH
 #
 source ~/.bash/export
 source ~/.bash/devel
-source ~/.bash/promt
+source ~/.bash/prompt
+
 source ~/.bash/system
 source ~/.bash/network
 source ~/.bash/archives

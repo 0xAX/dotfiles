@@ -1,0 +1,5 @@
+#!/bin/bash
+
+DNF_CONF=/etc/dnf/dnf.conf
+CURRENT_EXCLUDE_STR="exclude=libreoffice* kernel*"
+sudo sed -i '$s/$/\n'"$CURRENT_EXCLUDE_STR"'/' $DNF_CONF
