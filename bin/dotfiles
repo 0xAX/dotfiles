@@ -20,6 +20,7 @@ SYSTEM="$DIR/system"
 SYSTEMD="$SYSTEM/systemd"
 MAIL="$DIR/mail"
 PRIVATE="$DIR/private"
+GPG="$DIR/GPG/"
 
 case $1 in
 --store)
@@ -94,6 +95,8 @@ case $1 in
     cp -r ~/.tmux.conf $DIR
     cp -r ~/.vimrc $DIR
     cp -r ~/.inputrc $DIR
+    cp -r ~/.gpg-public-key $DIR
+    cp -r ~/.gnupg/gpg.conf $GPG
 
     #
     # copy private stuf
