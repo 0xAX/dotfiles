@@ -1,6 +1,8 @@
 export GNUPGHOME="$HOME/.gnupg"
 export MY_GPG_KEY="25982F73"
 
+export GIT_SEQUENCE_EDITOR="emacs -nw"
+
 #
 # elixir
 #

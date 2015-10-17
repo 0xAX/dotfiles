@@ -16,8 +16,7 @@
 (defun emacs-config ()
   "Open ~/.emacs in new buffer"
   (interactive)
-  (find-file "~/.emacs")
-)
+  (find-file "~/.emacs"))
 
 ;;
 ;; Rename file and buffer helper

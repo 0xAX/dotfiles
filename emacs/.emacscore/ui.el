@@ -1,13 +1,20 @@
 ;;
 ;; Monokai theme
 ;;
-(load "~/.emacs.d/themes/monokai.el")
-(enable-theme 'monokai)
+
+(if (display-graphic-p)   ;; Return non-nil if emacs is running in a graphic display.
+    (load "~/.emacs.d/themes/monokai.el")
+  (load "~/.emacs.d/themes/smyx.el"))
+
+(if (display-graphic-p)   ;; Return non-nil if emacs is running in a graphic display.
+    (enable-theme 'monokai)
+  (enable-theme 'smyx))
+
 
 ;; indent
 (align-newline-and-indent)
 
- 
+
 ;; Highlight current line
 (global-hl-line-mode 1)
 

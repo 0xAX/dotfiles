@@ -83,7 +83,7 @@ that can occur between two notifications.  The default is
 (setq erc-autoaway-use-emacs-idle t)
 
 (load "~/.ercpass")
-(setq erc-nick "my-id")  
+(setq erc-nick "my-id")
 (setq erc-password "my-pw")
 
 (setq erc-server-coding-system '(utf-8 . utf-8))

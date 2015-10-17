@@ -27,10 +27,33 @@
 # on completion.
 #
 
-_notmuch_user_emails()
+# $1: current input of the form prefix:partialinput, where prefix is
+# to or from.
+_notmuch_email()
 {
-    notmuch config get user.primary_email
-    notmuch config get user.other_email
+    local output prefix cur
+
+    prefix="${1%%:*}"
+    cur="${1#*:}"
+
+    # Cut the input to be completed at punctuation because
+    # (apparently) Xapian does not support the trailing wildcard '*'
+    # operator for input with punctuation. We let compgen handle the
+    # extra filtering required.
+    cur="${cur%%[^a-zA-Z0-9]*}"
+
+    case "$prefix" in
+	# Note: It would be more accurate and less surprising to have
+	# output=recipients here for to: addresses, but as gathering
+	# the recipient addresses requires disk access for each
+	# matching message, this becomes prohibitively slow.
+	to|from) output=sender;;
+	*) return;;
+    esac
+
+    # Only emit plain, lower case, unique addresses.
+    notmuch address --output=$output $prefix:"${cur}*" | \
+	sed 's/[^<]*<\([^>]*\)>/\1/' | tr "[:upper:]" "[:lower:]" | sort -u
 }
 
 _notmuch_search_terms()
@@ -44,10 +67,10 @@ _notmuch_search_terms()
 	    COMPREPLY=( $(compgen -P "tag:" -W "`notmuch search --output=tags \*`" -- ${cur##tag:}) )
 	    ;;
 	to:*)
-	    COMPREPLY=( $(compgen -P "to:" -W "`_notmuch_user_emails`" -- ${cur##to:}) )
+	    COMPREPLY=( $(compgen -P "to:" -W "`_notmuch_email ${cur}`" -- ${cur##to:}) )
 	    ;;
 	from:*)
-	    COMPREPLY=( $(compgen -P "from:" -W "`_notmuch_user_emails`" -- ${cur##from:}) )
+	    COMPREPLY=( $(compgen -P "from:" -W "`_notmuch_email ${cur}`" -- ${cur##from:}) )
 	    ;;
 	path:*)
 	    local path=`notmuch config get database.path`
@@ -61,7 +84,7 @@ _notmuch_search_terms()
 		sed "s|^$path/||" | grep -v "\(^\|/\)\(cur\|new\|tmp\)$" ) )
 	    ;;
 	*)
-	    local search_terms="from: to: subject: attachment: tag: id: thread: folder: path: date:"
+	    local search_terms="from: to: subject: attachment: mimetype: tag: id: thread: folder: path: date:"
 	    compopt -o nospace
 	    COMPREPLY=( $(compgen -W "${search_terms}" -- ${cur}) )
 	    ;;
@@ -169,7 +192,7 @@ _notmuch_dump()
     ! $split &&
     case "${cur}" in
 	-*)
-	    local options="--format= --output="
+	    local options="--gzip --format= --output="
 	    compopt -o nospace
 	    COMPREPLY=( $(compgen -W "$options" -- ${cur}) )
 	    ;;
@@ -188,7 +211,10 @@ _notmuch_insert()
     $split &&
     case "${prev}" in
 	--folder)
-	    _filedir
+	    local path=`notmuch config get database.path`
+	    compopt -o nospace
+	    COMPREPLY=( $(compgen -d "$path/${cur}" | \
+		sed "s|^$path/||" | grep -v "\(^\|/\)\(cur\|new\|tmp\)$" ) )
 	    return
 	    ;;
     esac
@@ -196,7 +222,7 @@ _notmuch_insert()
     ! $split &&
     case "${cur}" in
 	--*)
-	    local options="--create-folder --folder="
+	    local options="--create-folder --folder= --keep --no-hooks"
 	    compopt -o nospace
 	    COMPREPLY=( $(compgen -W "$options" -- ${cur}) )
 	    return

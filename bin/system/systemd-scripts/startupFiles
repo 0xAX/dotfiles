@@ -6,4 +6,6 @@ echo "We are starting!"
 emacs --daemon
 
 # epmd
-epmd &
+epmd -daemon
+
+start-mysql

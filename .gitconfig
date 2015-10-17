@@ -16,7 +16,7 @@
 	meta = white bold
 	frag = magenta bold
 	old = red bold
-	new = green bold	
+	new = green bold
 	whitespace = red reverse
 
 [color "status"]
@@ -26,7 +26,7 @@
         unmerged = magenta bold
 
 [core]
-	editor = emacs
+	editor = "emacs -nw"
 	filemode = false
 	trustctime = false
 	excludesfile = ~/.gitignore_global

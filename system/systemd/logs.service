@@ -2,7 +2,7 @@
 Description=Create different tmp files for the software
 
 [Service]
-Type=oneshot
+Type=forking
 ExecStart=/usr/lib/systemd/scripts/startupFiles
 
 [Install]
