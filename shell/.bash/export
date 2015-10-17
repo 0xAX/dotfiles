@@ -9,6 +9,11 @@ export GIT_SEQUENCE_EDITOR="emacs -nw"
 export PATH="$PATH:$WORK/elixir/bin"
 
 #
+# docker
+#
+export PATH="$PATH:$DEV/docker/bundles/latest/binary"
+
+#
 # phabricator, tetrapak and rebar
 #
 export PATH="$PATH:$WORK/util/arcanist/bin/"
