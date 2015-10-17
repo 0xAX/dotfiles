@@ -121,3 +121,9 @@ alias mutt-help="firefox http://sheet.shiar.nl/mutt"
 
 # nano
 alias nano=vim
+
+# sudo
+alias sudo="sudo env "PATH=$PATH" "
+
+# docker
+alias docker-busybox="sudo docker run -it --rm busybox"
