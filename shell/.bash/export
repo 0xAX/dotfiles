@@ -2,6 +2,7 @@ export GNUPGHOME="$HOME/.gnupg"
 export MY_GPG_KEY="25982F73"
 
 export GIT_SEQUENCE_EDITOR="emacs -nw"
+export PATH="$PATH:$WORK/rebar3"
 
 #
 # elixir
@@ -108,6 +109,8 @@ export ERL_LIBS="$ERL_LIBS:$WORK/eradius/deps/lager/"
 export ERL_LIBS="$ERL_LIBS:$WORK/eradius/deps/meck/"
 export ERL_LIBS="$ERL_LIBS:$WORK/eradius/deps/setup/"
 export ERL_LIBS="$ERL_LIBS:$WORK/eradius/deps/parse_trans/"
+
+export ERL_LIBS="$ERL_LIBS:$WORK/tposs_udr/deps/mariaex/"
 
 # golang
 export GOROOT=$HOME/dev/golang/go
