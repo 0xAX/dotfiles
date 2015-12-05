@@ -94,11 +94,16 @@ alias awk="gawk --optimize"
 #alias mk="make"
 
 # ls
-alias ls='ls --color'
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-alias lsd="ls -lF"
+OS=`uname`
+if [[ "$OS" == "Linux" ]]
+then
+
+	alias ls='ls --color'
+	alias ll='ls -alF'
+	alias la='ls -A'
+	alias l='ls -CF'
+	alias lsd="ls -lF"
+fi
 
 # date
 alias week='date +%V'
