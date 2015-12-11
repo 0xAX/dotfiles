@@ -42,14 +42,12 @@
 (when (display-graphic-p)   ;; Return non-nil if emacs is running in a graphic display.
     (fullscreen))
 
-;;(fullscreen)
-
 (desktop-save-mode 0)
 
 ;;
 ;; delete trailing whitespaces
 ;;
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
+;;(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;;
 ;; Delete text in selection mode when typing
@@ -102,11 +100,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (require 'package)
-;(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.org/packages/"))
-;(add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/"))
-;;(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 (package-initialize)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -123,13 +117,10 @@
 (load "~/.emacscore/tabbar-style.el")
 (load "~/.emacscore/ui.el")
 
-
-
 (load "~/.emacscore/keybindings.el")
 (load "~/.emacscore/markups.el")
 (load "~/.emacscore/org/orgmode.el")
 (load "~/.emacscore/build/make.el")
-(load "~/.emacscore/irc/irc.el")
 (load "~/.emacscore/term.el")
 (load "~/.emacs.d/lisp/rfc.el")
 
