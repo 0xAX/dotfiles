@@ -1,0 +1,23 @@
+[global_config]
+  title_transmit_bg_color = "#999999"
+  inactive_color_offset = 1.0
+  focus = system
+  title_transmit_fg_color = "#000000"
+[keybindings]
+[profiles]
+  [[default]]
+    background_image = None
+    scrollback_lines = 1000
+    use_system_font = False
+    icon_bell = False
+    font = DejaVu Sans Mono 14
+    cursor_blink = False
+[layouts]
+  [[default]]
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+    [[[window0]]]
+      type = Window
+      parent = ""
+[plugins]
