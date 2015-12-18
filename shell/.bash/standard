@@ -132,3 +132,6 @@ alias sudo="sudo env "PATH=$PATH" "
 
 # docker
 alias docker-busybox="sudo docker run -it --rm busybox"
+
+# objdump
+alias objdump-16-bit="objdump -D -b binary -mi386 -Maddr16,data16 "
