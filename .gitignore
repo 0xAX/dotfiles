@@ -1,3 +1,4 @@
+*.autosave
 !*.patch
 emacs/.emacs.d/ac-comphist.dat
 emacs/.emacs.d/ido.last

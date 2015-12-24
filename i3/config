@@ -31,13 +31,15 @@ floating_modifier $mod
 bindsym $mod+Return exec i3-sensible-terminal
 # start emacs
 bindsym $mod+e exec terminator -x emacs -nw /usr/src/UPDATING
+# start irc
+bindsym $mod+c exec xchat
 # start mutt
 bindsym $mod+m exec terminator -e "TERM=xterm-256color ~/dev/muttx/mutt"
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+p exec dmenu_run -b
+bindsym $mod+d exec dmenu_run -b
 
 # change focus
 bindsym $mod+j focus left
@@ -92,5 +94,5 @@ bar {
     }
     # position
     position top
-    status_command i3status -c ~/.config/i3/i3status.conf
+    status_command i3status -c ~/.i3/i3status.conf
 }

@@ -4,14 +4,17 @@
 HOME="/home/alex"
 HOME_HDD="/home/alex/olddisk$HOME"
 PATCHES="/home/alex/patches"
-
 DEV="$HOME/dev"
 WORK="$HOME/work"
-
 GIT_DEV="$DEV/git"
 KERNEL_DEV="$DEV/linux"
+OS=`uname`
 
-export SHELL=/bin/bash
+if [ "$OS" == "FreeBSD" ] || [ "$OS" == "DragonFly" ]; then
+    export SHELL="/usr/local/bin/bash"
+else
+    export SHELL="/bin/bash"
+fi
 export EDITOR="emacs"
 export BROWSER="firefox"
 export CC=gcc
