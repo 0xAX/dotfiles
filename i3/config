@@ -35,6 +35,8 @@ bindsym $mod+e exec terminator -x emacs -nw /usr/src/UPDATING
 bindsym $mod+c exec xchat
 # start mutt
 bindsym $mod+m exec terminator -e "TERM=xterm-256color ~/dev/muttx/mutt"
+# start browser
+bindsym $mod+b exec firefox
 # kill focused window
 bindsym $mod+Shift+q kill
 
