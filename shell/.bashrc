@@ -26,8 +26,6 @@ export LD=ld
 #
 # bash
 #
-set menu-complete-display-prefix=on
-
 shopt -s nocaseglob;
 shopt -s cdspell
 shopt -s histappend
