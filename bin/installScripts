@@ -31,4 +31,4 @@ sudo mkdir -p -v $SYSTEMD_SCRIPTS_PATH
 sudo cp -r -v $SYSTEMD_SCRIPTS_DIR $SYSTEMD_SCRIPTS_PATH
 echo "Done."
 
-echo -e "Done."
+echo -e "\e[32mDone.\e[39m"

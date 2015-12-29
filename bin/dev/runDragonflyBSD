@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# TODO icmp
+
+echo "Running x86_64 dragonflybsd in qemu..."
+
+# --full-screen
+qemu-system-x86_64 -cpu Broadwell -smp 8 -hda dfly-qcow2.img -vga std
+# I'm running it now
+qemu-system-x86_64 -enable-kvm -m 1024 -cpu host -hda /home/alex/olddisk/home/alex/dfly-qcow2.img
+
+# sparc64 freebsd
+qemu-system-sparc64 -eanbl-kvm -m 1024 -cdrom FreeBSD-10.2-RELEASE-sparc64-disc1.iso -hda /home/alex/olddisk/home/alex/sparc64.img
+
+# working
+#qemu-system-x86_64 -cdrom /home/alex/olddisk/home/alex/Downloads/dfly-x86_64-4.2.4_REL.iso -hda /home/alex/olddisk/home/alex/dfly-qcow2.img #-netdev user,id=network0 -device e1000,netdev=network0 -cpu Broadwell -smp 8 -vga std
