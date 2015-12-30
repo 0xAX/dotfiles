@@ -135,3 +135,12 @@ alias docker-busybox="sudo docker run -it --rm busybox"
 
 # objdump
 alias objdump-16-bit="objdump -D -b binary -mi386 -Maddr16,data16 "
+
+# i3 related aliases
+alias i3-restart="i3-msg restart"
+
+# pacman
+alias pac-update="sudo pacman -Suy"
+
+# terminator
+alias terminator="terminator --profile=alex "

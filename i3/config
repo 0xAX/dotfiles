@@ -4,42 +4,28 @@
 # Feel free to reuse and enjoy (0xAX)
 #
 
+client.focused          #8b3626 #8b3626 #ffffff #2e9ef4
+client.focused_inactive #333333 #5f676a #ffffff #484e50
+
 # Let's use Alt for mode key
 set $mod Mod1
-
-# Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below.
-#font pango:monospace 8
-#font pango:DejaVu Sans Mono 9
-font pango:Monospace 10
-
-# This font is widely installed, provides lots of unicode glyphs, right-to-left
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
-#font pango:DejaVu Sans Mono 8
-
-# Before i3 v4.8, we used to recommend this one as the default:
-# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-# The font above is very space-efficient, that is, it looks good, sharp and
-# clear in small sizes. However, its unicode glyph coverage is limited, the old
-# X core fonts rendering does not support right-to-left and this being a bitmap
-# font, it doesn’t scale on retina/hidpi displays.
-
+# default font
+font pango:DejaVu Sans Mono, FontAwesome 10
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec i3-sensible-terminal --profile=alex
 # start emacs
 bindsym $mod+e exec terminator -x emacs -nw /usr/src/UPDATING
-# start irc
-bindsym $mod+c exec xchat
 # start mutt
 bindsym $mod+m exec terminator -e "TERM=xterm-256color ~/dev/muttx/mutt"
 # start browser
 bindsym $mod+b exec firefox
 # kill focused window
 bindsym $mod+Shift+q kill
-
+# restart i3
+bindsym $mod+c exec i3-msg restart
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run -b
 
@@ -49,18 +35,31 @@ bindsym $mod+k focus down
 bindsym $mod+i focus up
 bindsym $mod+l focus right
 
+bindsym $mod+Left focus left
+bindsym $mod+Right focus right
+bindsym $mod+Up focus up
+bindsym $mod+Down focus down
+
+# layouts
+bindsym $mod+f fullscreen
+bindsym $mod+s layout stacking
+bindsym $mod+t layout tabbed
+bindsym $mod+v layout splitv
+bindsym $mod+h layout splith
+bindsym $mod+y layout default
+
 #
 # workspaces
 #
-set $tag1 "1: term"
-set $tag2 "2: emacs"
-set $tag3 "3: www"
-set $tag4 "4: chat"
-set $tag5 "5: mail"
-set $tag6 "6: man"
-set $tag7 "7: pdf"
-set $tag8 "8: skype"
-set $tag9 "9: etc..."
+set $tag1 "1:&#xf120;"
+set $tag2 "2:&#xf121;"
+set $tag3 "3:&#xf269;"
+set $tag4 "4:&#xf17e;"
+set $tag5 "5:&#xf0e0;"
+set $tag6 "6:&#xf1d7;"
+set $tag7 "7:&#xf1c1;"
+set $tag8 "8:&#xf02d;"
+set $tag9 "9:&#xf039;"
 
 bindsym $mod+1 workspace $tag1
 bindsym $mod+2 workspace $tag2
@@ -86,15 +85,38 @@ bar {
     colors {
            background #000000
            statusline #ffffff
-           separator  #666666
-
+           separator  #ffffff
            # Type              border  bg      fg
-           focused_workspace  #0088ff #007fff #ffffff
-           active_workspace   #333333 #5f676a #ffffff
+           focused_workspace  #00c5cd #00c5cd #ffffff 
+           active_workspace   #333333 #ff4500 #ffffff
            inactive_workspace #333333 #222222 #888888
            urgent_workspace   #aa0000 #990000 #ffffff
     }
-    # position
+    tray_output primary
     position top
     status_command i3status -c ~/.i3/i3status.conf
+    i3bar_command i3bar
 }
+
+# resizing
+bindsym $mod+r mode "resize"
+mode "resize" {
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
+    bindsym Up resize shrink height 10 px or 10 ppt
+    bindsym Down resize grow height 10 px or 10 ppt
+
+    bindsym Return mode "default"
+    bindsym Esc    mode "default"
+}
+
+# lock screen
+bindsym $mod+Control+l exec i3-msg workspace "10: tmp" && i3lock --tiling --dpms --color 000000
+
+# sound
+bindsym $mod+plus exec "amixer -q sset Master,0 1+ unmute"
+bindsym $mod+minus exec "amixer -q sset Master,0 1- unmute"
+bindsym $mod+u exec "amixer -q sset Master,0 toggle"
+
+# walpaper
+exec feh --bg-scale ~/Desktop/wallpaper-bird.jpg
