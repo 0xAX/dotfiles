@@ -4,7 +4,7 @@
 # Feel free to reuse and enjoy (0xAX)
 #
 
-client.focused          #8b3626 #8b3626 #ffffff #2e9ef4
+client.focused          #8b3626 #8b3626 #ffffff #8b3626
 client.focused_inactive #333333 #5f676a #ffffff #484e50
 
 # Let's use Alt for mode key

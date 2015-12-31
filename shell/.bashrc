@@ -12,20 +12,25 @@ OS=`uname`
 
 if [ "$OS" == "FreeBSD" ] || [ "$OS" == "DragonFly" ]; then
     export SHELL="/usr/local/bin/bash"
+    export MAKE="/usr/local/bin/gmake"
 else
     export SHELL="/bin/bash"
+    export MAKE="/usr/bin/make"
 fi
+
 export EDITOR="emacs"
 export BROWSER="firefox"
 export CC=gcc
 export AS=as
-export AR=AR
+export AR=Ar
 export CXX=g++
 export LD=ld
 
 #
 # bash
 #
+#set menu-complete-display-prefix=on
+
 shopt -s nocaseglob;
 shopt -s cdspell
 shopt -s histappend
