@@ -29,7 +29,7 @@
     copy_on_selection = True
     cursor_color = "#82cdb9"
     cursor_shape = ibeam
-    font = Droid Sans Mono 10
+    font = Droid Sans Mono 11
     foreground_color = "#ffffff"
     icon_bell = False
     palette = "#1b1d1e:#f92672:#f37259:#fd971f:#56c2d6:#8c54fe:#465457:#ccccc6:#505354:#ff5995:#00ff39:#feed6c:#f37259:#9e6ffe:#899ca1:#f8f8f2"
