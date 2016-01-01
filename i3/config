@@ -17,17 +17,23 @@ floating_modifier $mod
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal --profile=alex
 # start emacs
-bindsym $mod+e exec terminator -x emacs -nw /usr/src/UPDATING
+bindsym $mod+e exec terminator --profile=alex -x emacs -nw /usr/src/UPDATING
 # start mutt
-bindsym $mod+m exec terminator -e "TERM=xterm-256color ~/dev/muttx/mutt"
+bindsym $mod+w exec terminator --profile=alex -e "TERM=xterm-256color ~/dev/muttx/mutt"
 # start browser
 bindsym $mod+b exec firefox
 # kill focused window
 bindsym $mod+Shift+q kill
+# mc
+bindsym $mod+Shift+f exec terminator --profile=alex -x mc ~/
 # restart i3
 bindsym $mod+c exec i3-msg restart
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run -b
+# go to the next workspace
+bindsym $mod+Tab workspace next
+# go to the prevoious workspace
+bindsym $mod+BackSpace workspace prev
 
 # change focus
 bindsym $mod+j focus left
@@ -46,7 +52,6 @@ bindsym $mod+s layout stacking
 bindsym $mod+t layout tabbed
 bindsym $mod+v layout splitv
 bindsym $mod+h layout splith
-bindsym $mod+y layout default
 
 #
 # workspaces
@@ -56,7 +61,7 @@ set $tag2 "2:&#xf121;"
 set $tag3 "3:&#xf269;"
 set $tag4 "4:&#xf17e;"
 set $tag5 "5:&#xf0e0;"
-set $tag6 "6:&#xf1d7;"
+set $tag6 "6:&#xf15b;"
 set $tag7 "7:&#xf1c1;"
 set $tag8 "8:&#xf02d;"
 set $tag9 "9:&#xf039;"
