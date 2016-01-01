@@ -22,7 +22,7 @@ export EDITOR="emacs"
 export BROWSER="firefox"
 export CC=gcc
 export AS=as
-export AR=Ar
+export AR=ar
 export CXX=g++
 export LD=ld
 
