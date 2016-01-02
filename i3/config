@@ -19,7 +19,7 @@ bindsym $mod+Return exec i3-sensible-terminal --profile=alex
 # start emacs
 bindsym $mod+e exec terminator --profile=alex -x emacs -nw /usr/src/UPDATING
 # start mutt
-bindsym $mod+w exec terminator --profile=alex -e "TERM=xterm-256color ~/dev/muttx/mutt"
+bindsym $mod+m exec terminator --profile=alex -e "TERM=xterm-256color ~/dev/muttx/mutt"
 # start browser
 bindsym $mod+b exec firefox
 # kill focused window
