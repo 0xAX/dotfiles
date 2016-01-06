@@ -11,7 +11,7 @@
   title_use_system_font = False
   use_custom_url_handler = True
 [keybindings]
-  close_term = <Alt>x
+  close_term = <Alt>grave
   new_tab = <Primary>t
   next_tab = <Shift>Right
   prev_tab = <Shift>Left
@@ -36,7 +36,7 @@
     font = Droid Sans Mono 11
     foreground_color = "#ffffff"
     icon_bell = False
-    palette = "#1b1d1e:#f92672:#f37259:#fd971f:#56c2d6:#8c54fe:#465457:#ccccc6:#505354:#ff5995:#00ff39:#feed6c:#f37259:#9e6ffe:#899ca1:#f8f8f2"
+    palette = "#1b1d1e:#f92672:#f37259:#505354:#56c2d6:#8c54fe:#465457:#ccccc6:#505354:#ff5995:#00ff39:#feed6c:#f37259:#9e6ffe:#899ca1:#f8f8f2"
     scrollback_lines = 1000
     show_titlebar = False
     use_system_font = False
