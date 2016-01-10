@@ -1,7 +1,5 @@
 ;; package  --- .emacs
-
-;;; Commentary:
-
+;;
 ;;
 ;;        DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
 ;;                Version 2, December 2004
@@ -29,8 +27,6 @@
 ;; Some utils
 ;;
 (require 'init-benchmarking)
-
-;;(fullscreen)
 
 (desktop-save-mode 0)
 
@@ -68,6 +64,11 @@
 (global-undo-tree-mode 1)
 
 ;;
+;; Disable scroll
+;;
+(put 'scroll-left 'disabled nil)
+
+;;
 ;; Disable startup emacs window
 ;;
 (defvar inhibit-start-screen 1)
@@ -88,13 +89,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;        Package manager
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 (require 'package)
-;(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.org/packages/"))
-;(add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/"))
-;;(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-initialize)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -108,14 +105,13 @@
 (load "~/.emacscore/text-utils.el")
 (load "~/.emacscore/mode-line.el")
 (load "~/.emacscore/tabbar-style.el")
+(load "~/.emacscore/ui.el")
 (load "~/.emacscore/keybindings.el")
 (load "~/.emacscore/markups.el")
 (load "~/.emacscore/org/orgmode.el")
 (load "~/.emacscore/build/make.el")
-(load "~/.emacscore/irc/irc.el")
 (load "~/.emacscore/term.el")
 (load "~/.emacs.d/lisp/rfc.el")
-(load "~/.emacscore/ui.el")
 
 ;;
 ;; Development
@@ -130,8 +126,10 @@
 (load "~/.emacscore/dev/shell.el")
 (load "~/.emacscore/dev/rust.el")
 
+;;
+;; Enable rfc reader
+;;
 (require 'irfc)
-(put 'scroll-left 'disabled nil)
-(put 'narrow-to-region 'disabled nil)
+
+;; Finish :)
 (message "All done, %s%s" (user-login-name) ".")
-(put 'dired-find-alternate-file 'disabled nil)

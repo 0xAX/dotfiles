@@ -22,11 +22,6 @@
 ;;
 ;; Open new terminal with name
 ;;
-(setq explicit-shell-file-name "/bin/bash")
-(setq shell-file-name "bash")
-(setenv "SHELL" shell-file-name)
-(setenv "ESHELL" shell-file-name)
-
 (defun open-terminal (terminal-name)
   "Open terminal with custom buffer name"
   (interactive

@@ -72,9 +72,6 @@
 (when (member "DejaVu Sans Mono" (font-family-list))
   (set-face-attribute 'default nil :height 150 :font "DejaVu Sans Mono"))
 
-;; string line
-(set-face-background 'hl-line "gray25")
-
 ;; region color
 (set-face-attribute 'region nil :background "#2a3a3a")
 
@@ -167,6 +164,9 @@
 
 ;; Highlight current line
 (global-hl-line-mode 1)
+
+;; string line
+(set-face-background 'hl-line "gray25")
 
 ;; indent
 (align-newline-and-indent)
