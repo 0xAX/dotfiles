@@ -30,18 +30,6 @@
 ;;
 (require 'init-benchmarking)
 
-;;
-;; Load emacs in fullscreen
-;;
-(defun fullscreen ()
-       "Load Emacs in fullscreen mode at startup."
-       (interactive)
-       (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
-                 '(2 "_NET_WM_STATE_FULLSCREEN" 0)))
-
-(when (display-graphic-p)   ;; Return non-nil if emacs is running in a graphic display.
-    (fullscreen))
-
 ;;(fullscreen)
 
 (desktop-save-mode 0)
@@ -118,13 +106,8 @@
 ;;
 (load "~/.emacscore/utils.el")
 (load "~/.emacscore/text-utils.el")
-
 (load "~/.emacscore/mode-line.el")
 (load "~/.emacscore/tabbar-style.el")
-(load "~/.emacscore/ui.el")
-
-
-
 (load "~/.emacscore/keybindings.el")
 (load "~/.emacscore/markups.el")
 (load "~/.emacscore/org/orgmode.el")
@@ -132,6 +115,7 @@
 (load "~/.emacscore/irc/irc.el")
 (load "~/.emacscore/term.el")
 (load "~/.emacs.d/lisp/rfc.el")
+(load "~/.emacscore/ui.el")
 
 ;;
 ;; Development
