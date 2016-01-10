@@ -10,20 +10,20 @@ client.focused_inactive #333333 #5f676a #ffffff #484e50
 # Let's use Alt for mode key
 set $mod Mod1
 # default font
-font pango:DejaVu Sans Mono, FontAwesome 10
+font pango:DejaVu Sans Mono, FontAwesome 12
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal --profile=alex
 # start emacs
-bindsym $mod+e exec terminator --profile=alex -x emacs -nw /usr/src/UPDATING
+bindsym $mod+e exec terminator --profile=alex -x emacs
 # start mutt
 bindsym $mod+m exec terminator --profile=alex -e "TERM=xterm-256color ~/dev/muttx/mutt"
 # start browser
 bindsym $mod+b exec firefox
 # kill focused window
-bindsym $mod+Shift+q kill
+bindsym $mod+q kill
 # mc
 bindsym $mod+Shift+f exec terminator --profile=alex -x mc ~/
 # restart i3
@@ -64,7 +64,6 @@ set $tag5 "5:&#xf0e0;"
 set $tag6 "6:&#xf15b;"
 set $tag7 "7:&#xf1c1;"
 set $tag8 "8:&#xf02d;"
-set $tag9 "9:&#xf039;"
 
 bindsym $mod+1 workspace $tag1
 bindsym $mod+2 workspace $tag2
@@ -74,7 +73,6 @@ bindsym $mod+5 workspace $tag5
 bindsym $mod+6 workspace $tag6
 bindsym $mod+7 workspace $tag7
 bindsym $mod+8 workspace $tag8
-bindsym $mod+9 workspace $tag9
 
 bindsym $mod+Shift+1 move container to workspace $tag1
 bindsym $mod+Shift+2 move container to workspace $tag2
@@ -84,7 +82,6 @@ bindsym $mod+Shift+5 move container to workspace $tag5
 bindsym $mod+Shift+6 move container to workspace $tag6
 bindsym $mod+Shift+7 move container to workspace $tag7
 bindsym $mod+Shift+8 move container to workspace $tag8
-bindsym $mod+Shift+9 move container to workspace $tag9
 
 bar {
     colors {
@@ -119,9 +116,9 @@ mode "resize" {
 bindsym $mod+Control+l exec i3-msg workspace "10: tmp" && i3lock --tiling --dpms --color 000000
 
 # sound
-bindsym $mod+plus exec "amixer -q sset Master,0 1+ unmute"
-bindsym $mod+minus exec "amixer -q sset Master,0 1- unmute"
-bindsym $mod+u exec "amixer -q sset Master,0 toggle"
+bindsym $mod+0 exec "amixer set Master  -q 1%+"
+bindsym $mod+9 exec "amixer set Master -q 1%-"
+bindsym $mod+u exec "amixer -q sset Master toggle"
 
 # walpaper
 exec feh --bg-scale ~/Desktop/wallpaper-bird.jpg

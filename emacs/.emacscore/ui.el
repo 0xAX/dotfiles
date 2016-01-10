@@ -1,25 +1,13 @@
 ;;
 ;; Monokai theme
 ;;
-
-(if (display-graphic-p)   ;; Return non-nil if emacs is running in a graphic display.
+(if (display-graphic-p)
     (load "~/.emacs.d/themes/monokai.el")
   (load "~/.emacs.d/themes/smyx.el"))
 
-(if (display-graphic-p)   ;; Return non-nil if emacs is running in a graphic display.
+(if (display-graphic-p)
     (enable-theme 'monokai)
   (enable-theme 'smyx))
-
-
-;; indent
-(align-newline-and-indent)
-
-
-;; Highlight current line
-(when (display-graphic-p)
-  (global-hl-line-mode 1)
-  (set-face-background 'hl-line "gray25")
-)
 
 ;;
 ;; Hide all components which i don't use
@@ -83,6 +71,9 @@
 ;;
 (when (member "DejaVu Sans Mono" (font-family-list))
   (set-face-attribute 'default nil :height 150 :font "DejaVu Sans Mono"))
+
+;; string line
+(set-face-background 'hl-line "gray25")
 
 ;; region color
 (set-face-attribute 'region nil :background "#2a3a3a")
@@ -173,3 +164,9 @@
 ;;
 (add-to-list 'load-path "~/.emacs.d/discover-my-major")
 (require 'discover-my-major)
+
+;; Highlight current line
+(global-hl-line-mode 1)
+
+;; indent
+(align-newline-and-indent)

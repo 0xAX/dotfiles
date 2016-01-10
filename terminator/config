@@ -5,13 +5,13 @@
   hide_tabbar = True
   sticky = True
   suppress_multiple_term_dialog = True
-  title_font = Droid Sans 7
+  title_font = Eeyek Unicode 12
   title_hide_sizetext = True
   title_transmit_bg_color = "#585858"
   title_use_system_font = False
   use_custom_url_handler = True
 [keybindings]
-  close_term = <Alt>grave
+  close_term = <Alt>x
   new_tab = <Primary>t
   next_tab = <Shift>Right
   prev_tab = <Shift>Left
@@ -33,10 +33,10 @@
     copy_on_selection = True
     cursor_color = "#82cdb9"
     cursor_shape = ibeam
-    font = Droid Sans Mono 11
+    font = DejaVu Sans Mono 12
     foreground_color = "#ffffff"
     icon_bell = False
-    palette = "#1b1d1e:#f92672:#f37259:#505354:#56c2d6:#8c54fe:#465457:#ccccc6:#505354:#ff5995:#00ff39:#feed6c:#f37259:#9e6ffe:#899ca1:#f8f8f2"
+    palette = "#1b1d1e:#f92672:#f37259:#fd971f:#56c2d6:#8c54fe:#465457:#ccccc6:#505354:#ff5995:#00ff39:#feed6c:#f37259:#9e6ffe:#899ca1:#efefe0"
     scrollback_lines = 1000
     show_titlebar = False
     use_system_font = False
