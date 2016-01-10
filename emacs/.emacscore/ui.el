@@ -4,7 +4,6 @@
 (if (display-graphic-p)
     (load "~/.emacs.d/themes/monokai.el")
   (load "~/.emacs.d/themes/smyx.el"))
-
 (if (display-graphic-p)
     (enable-theme 'monokai)
   (enable-theme 'smyx))
@@ -25,30 +24,23 @@
 (blink-cursor-mode 0)
 (setq-default cursor-type '(bar . 1))
 (setq cursor-type 'bar)
-(set-cursor-color "#ffffff")
+(set-cursor-color "white")
 
 ;;
 ;; Set up line numbers
 ;;
 (require 'linum)
 (global-linum-mode 1)
-(setq linum-format " %d")
-(add-hook 'prog-mode-hook 'linum-mode)
-
-;;
-;; Tabs and spaces options
-;;
-(setq-default tab-width 4)
+(setq linum-format " %d ")
 
 ;;
 ;; highlight search
 ;;
 (setq search-highlight             t)
 (setq query-replace-highlight      t)
-(defvar mouse-sel-retain-highlight t)
 
 ;;
-;; Remove splash screen
+;; remove splash screen
 ;;
 (setq inhibit-splash-screen t)
 
@@ -73,8 +65,12 @@
   (set-face-attribute 'default nil :height 150 :font "DejaVu Sans Mono"))
 
 ;; region color
-(set-face-attribute 'region nil :background "#2a3a3a")
+;; previously it was #2a3a3a
+(set-face-attribute 'region nil :background "grey10")
 
+;;
+;; Set fonts
+;;
 (custom-set-faces
  '(show-paren-match ((t (:background "#116599" :foreground "white")))))
 
@@ -84,14 +80,9 @@
 (windmove-default-keybindings)
 
 ;;
-;; Change separator color
+;; Hide sparators
 ;;
-(custom-set-faces
- '(fringe ((t (:background "#272822")))))
-
-(set-face-attribute 'vertical-border
-                    nil
-                    :foreground "#393920")
+(fringe-mode '(0 . 0))
 
 ;;
 ;; auto complete mini buffer
@@ -101,22 +92,17 @@
 ;;
 ;; ido mode
 ;;
-(add-to-list 'load-path "~/.emacs.d/ido-vertical-mode.el/")
 (custom-set-variables
  '(ido-enable-last-directory-history nil)
  '(ido-record-commands nil)
  '(ido-max-work-directory-list 0)
  '(ido-max-work-file-list 0))
 
-;;(require 'ido-vertical-mode)
 (require 'ido)
 (setq ido-save-directory-list-file nil)
 (setq ido-enable-flex-matching t)
-;;(setq ido-vertical-define-keys 'C-n-and-C-p-only)
-
 (ido-mode 1)
 (ido-everywhere 1)
-;;(ido-vertical-mode 1)
 
 ;;
 ;; CUA mode
@@ -131,9 +117,8 @@
 ;;
 (require 'dired-x)
 (require 'dired)
-;(put 'dired-find-alternate-file 'disabled nil)
-(setq dired-listing-switches "-lapq --author --file-type --group-directories-first -h --human-readable
-                              --hide='*.o' ")
+(setq dired-listing-switches "-lapq --author --file-type --group-directories-first
+                              -h --human-readable --hide='*.o' ")
 
 ;;
 ;; auto complete
@@ -143,13 +128,6 @@
 (require 'auto-complete-config)
 (ac-config-default)
 (add-to-list 'ac-dictionary-directories "/.emacs.d/auto-complete")
-
-;;
-;; Enable rainbow mode
-;;
-(add-to-list 'load-path "~/.emacs.d/rainbow")
-(require 'rainbow-mode)
-(rainbow-mode 1)
 
 ;;
 ;; Enable pos-tip for auto-complete rendering
@@ -166,7 +144,7 @@
 (global-hl-line-mode 1)
 
 ;; string line
-(set-face-background 'hl-line "gray25")
+(set-face-background 'hl-line "gray30")
 
-;; indent
+;; indentation
 (align-newline-and-indent)

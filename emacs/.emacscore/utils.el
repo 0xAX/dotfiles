@@ -77,3 +77,20 @@
   (interactive)
   (message (concat emacs-tutorial emacs-keybindings emacs-function emacs-cur-buf-keys emacs-manual))
 )
+
+;;
+;; Load additional development modes
+;;
+(defun load-additional-dev-modes ()
+  "Load additional development modes (web, and etc....)"
+  (interactive)
+  (load "~/.emacscore/dev/web.el")
+  (load "~/.emacscore/dev/golang.el")
+  (load "~/.emacscore/dev/sed.el")
+  (load "~/.emacscore/org/orgmode.el")
+  ;;
+  ;; Enable rainbow mode
+  ;;
+  (add-to-list 'load-path "~/.emacs.d/rainbow")
+  (require 'rainbow-mode)
+  (rainbow-mode 1))

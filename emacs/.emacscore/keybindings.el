@@ -13,6 +13,7 @@
 (global-set-key [f8]  'rgrep)
 (global-set-key [f9]  'ibuffer)
 (global-set-key [f10] 'start-irc)
+(global-set-key [f12] 'load-additional-dev-modes)
 
 ;;
 ;; Org-mode keybinding
@@ -20,7 +21,6 @@
 (global-unset-key "\C-o")
 (global-set-key (kbd "C-o t")   'todo)
 (global-set-key (kbd "C-o i")   'important_todo)
-;(global-set-key (kbd "\C-m")   'mutt-mode)
 
 ;;
 ;; external applications
@@ -44,6 +44,7 @@
 (global-set-key "\M-s" 'mark-curr-line)
 (global-set-key "\M-k" 'kill-full-line)
 (global-set-key "\C-s" 'isearch-forward)
+(global-set-key (kbd "TAB") 'tab-to-tab-stop)
 
 ;;
 ;; buffers manipulations

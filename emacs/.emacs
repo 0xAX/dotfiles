@@ -108,7 +108,6 @@
 (load "~/.emacscore/ui.el")
 (load "~/.emacscore/keybindings.el")
 (load "~/.emacscore/markups.el")
-(load "~/.emacscore/org/orgmode.el")
 (load "~/.emacscore/build/make.el")
 (load "~/.emacscore/term.el")
 (load "~/.emacs.d/lisp/rfc.el")
@@ -116,15 +115,10 @@
 ;;
 ;; Development
 ;;
-(load "~/.emacscore/dev/web.el")
-(load "~/.emacscore/dev/golang.el")
-(load "~/.emacscore/dev/erlang.el")
-(load "~/.emacscore/dev/nasm.el")
 (load "~/.emacscore/dev/c.el")
-(load "~/.emacscore/dev/sed.el")
+(load "~/.emacscore/dev/erlang.el")
 (load "~/.emacscore/dev/elixir.el")
 (load "~/.emacscore/dev/shell.el")
-(load "~/.emacscore/dev/rust.el")
 
 ;;
 ;; Enable rfc reader
@@ -133,3 +127,4 @@
 
 ;; Finish :)
 (message "All done, %s%s" (user-login-name) ".")
+(put 'dired-find-alternate-file 'disabled nil)
