@@ -9,18 +9,11 @@
 (global-set-key [f4]  'eval-buffer)
 (global-set-key [f5]  'open-terminal)
 (global-set-key [f6]  'rename-file-and-buffer)
-(global-set-key [f7]  'delete-file)
+(global-set-key [f7]  'delete-this-buffer-and-file)
 (global-set-key [f8]  'rgrep)
 (global-set-key [f9]  'ibuffer)
 (global-set-key [f10] 'start-irc)
 (global-set-key [f12] 'load-additional-dev-modes)
-
-;;
-;; Org-mode keybinding
-;;
-(global-unset-key "\C-o")
-(global-set-key (kbd "C-o t")   'todo)
-(global-set-key (kbd "C-o i")   'important_todo)
 
 ;;
 ;; external applications
@@ -37,12 +30,12 @@
 ;;
 ;; Text manipulation
 ;;
-(global-set-key "\C-g" 'goto-line)
 (global-set-key "\C-a" 'mark-page)
-(global-set-key "\M-s" 'untabify)
+(global-set-key "\M-u" 'untabify)
 (global-set-key "\M-r" 'replace-all)
 (global-set-key "\M-s" 'mark-curr-line)
 (global-set-key "\M-k" 'kill-full-line)
+(global-set-key "\C-g" 'goto-line)
 (global-set-key "\C-s" 'isearch-forward)
 (global-set-key (kbd "TAB") 'tab-to-tab-stop)
 
@@ -52,9 +45,9 @@
 (global-unset-key "\C-f")
 
 (global-set-key "\C-k" 'kill-this-buffer)
-(global-set-key "\M-d" 'delete-this-buffer-and-file)
 (global-set-key "\C-f" 'file-name)
 (global-set-key "\M-w" 'save-buffers-kill-emacs)
+(global-set-key "\M-d" 'delete-this-buffer-and-file)
 
 (global-set-key (kbd "M-<left>")  'beginning-of-line)
 (global-set-key (kbd "M-<right>") 'end-of-line)
@@ -89,7 +82,6 @@
 ;;
 ;; Help
 ;;
-(global-set-key "\M-h" 'helpers)
 (global-set-key (kbd "C-h") 'discover-my-major)
 
 ;;

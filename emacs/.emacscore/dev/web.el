@@ -27,8 +27,8 @@
 ;;
 ;; hooks
 ;;
-(add-hook 'local-write-file-hooks
-		  (lambda () (delete-trailing-whitespace) nil))
+;;(add-hook 'local-write-file-hooks
+;;		  (lambda () (delete-trailing-whitespace) nil))
 
 (defun indentation-web-hook ()
   "Hooks for Web mode."

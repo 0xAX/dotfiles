@@ -33,7 +33,7 @@
 ;;
 ;; delete trailing whitespaces
 ;;
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
+;;(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;;
 ;; Delete text in selection mode when typing
@@ -106,6 +106,8 @@
 (load "~/.emacscore/mode-line.el")
 (load "~/.emacscore/tabbar-style.el")
 (load "~/.emacscore/ui.el")
+
+
 (load "~/.emacscore/keybindings.el")
 (load "~/.emacscore/markups.el")
 (load "~/.emacscore/build/make.el")

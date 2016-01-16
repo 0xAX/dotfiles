@@ -7,7 +7,7 @@ echo -e "Distributive: ${Green}${DISTRIBUTIVE}${Color_Off}"
 
 if [[ "$DISTRIBUTIVE" == "Fedora" ]] ;
 then
-    su -c 'grub2-mkconfig -o /boot/grub2/grub.cfg' 
+    su -c 'grub2-mkconfig -o /boot/grub2/grub.cfg'
 else
     sudo update-grub
 fi

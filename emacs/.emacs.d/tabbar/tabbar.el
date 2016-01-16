@@ -249,35 +249,6 @@ none.")
 The function is passed a button name should return a propertized
 string to display.")
 
-(defvar tabbar-home-function nil
-  "Function called when clicking on the tab bar home button.
-The function is passed the mouse event received.")
-
-(defvar tabbar-home-help-function nil
-  "Function to obtain a help string for the tab bar home button.
-The help string is displayed when the mouse is onto the button.
-The function is called with no arguments.")
-
-(defvar tabbar-scroll-left-function 'tabbar-scroll-left
-  "Function that scrolls tabs on left.
-The function is passed the mouse event received when clicking on the
-scroll left button.  It should scroll the current tab set.")
-
-(defvar tabbar-scroll-left-help-function 'tabbar-scroll-left-help
-  "Function to obtain a help string for the scroll left button.
-The help string is displayed when the mouse is onto the button.
-The function is called with no arguments.")
-
-(defvar tabbar-scroll-right-function 'tabbar-scroll-right
-  "Function that scrolls tabs on right.
-The function is passed the mouse event received when clicking on the
-scroll right button.  It should scroll the current tab set.")
-
-(defvar tabbar-scroll-right-help-function 'tabbar-scroll-right-help
-  "Function to obtain a help string for the scroll right button.
-The help string is displayed when the mouse is onto the button.
-The function is called with no arguments.")
-
 ;;; Misc.
 ;;
 (eval-and-compile
@@ -697,119 +668,6 @@ If IMAGE is non-nil, try to use that image, else use STRING.
 If only the ENABLED-BUTTON image is provided, a DISABLED-BUTTON image
 is derived from it.")
 
-;;; Home button
-;;
-(defvar tabbar-home-button-value nil
-  "Value of the home button.")
-
-(defconst tabbar-home-button-enabled-image
-  '((:type pbm :data "\
-P2 13 13 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255
-255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 0
-6 0 255 255 255 255 255 255 255 255 255 255 9 130 9 255 255 255 255
-255 255 255 255 255 255 26 130 26 255 255 255 255 255 255 255 0 9 26
-41 130 41 26 9 0 255 255 255 255 5 145 140 135 130 125 120 115 5 255
-255 255 255 0 9 26 41 130 41 26 9 0 255 255 255 255 255 255 255 26 130
-26 255 255 255 255 255 255 255 255 255 255 9 130 9 255 255 255 255 255
-255 255 255 255 255 0 6 0 255 255 255 255 255 255 255 255 255 255 255
-255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255
-255 255 255
-"))
-  "Default image for the enabled home button.")
-
-(defconst tabbar-home-button-disabled-image
-  '((:type pbm :data "\
-P2 13 13 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255
-255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255
-255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255
-255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255
-255 255 0 0 1 2 3 2 1 0 0 255 255 255 255 0 132 128 123 119 114 110
-106 0 255 255 255 255 0 0 1 2 3 2 1 0 0 255 255 255 255 255 255 255
-255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255
-255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255
-255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255
-255 255 255 255 255 255 255 255 255
-"))
-  "Default image for the disabled home button.")
-
-(defcustom tabbar-home-button
-  (cons (cons "[o]" tabbar-home-button-enabled-image)
-        (cons "[x]" tabbar-home-button-disabled-image))
-  "The home button.
-The variable `tabbar-button-widget' gives details on this widget."
-  :group 'tabbar
-  :type tabbar-button-widget
-  :set '(lambda (variable value)
-          (custom-set-default variable value)
-          ;; Schedule refresh of button value.
-          (setq tabbar-home-button-value nil)))
-
-;;; Scroll left button
-;;
-(defvar tabbar-scroll-left-button-value nil
-  "Value of the scroll left button.")
-
-(defconst tabbar-scroll-left-button-enabled-image
-  '((:type pbm :data "\
-P2 13 13 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255
-255 255 255 255 255 255 255 255 128 16 48 255 255 255 255 255 255 255
-255 144 28 86 128 0 255 255 255 255 255 255 160 44 92 159 135 113 0
-255 255 255 255 160 44 97 165 144 129 120 117 0 255 255 176 44 98 175
-174 146 127 126 127 128 0 255 255 0 160 184 156 143 136 134 135 137
-138 0 255 255 176 32 67 144 146 144 145 146 148 149 0 255 255 255 255
-160 42 75 140 154 158 159 160 0 255 255 255 255 255 255 160 40 74 154
-170 171 0 255 255 255 255 255 255 255 255 160 41 82 163 0 255 255 255
-255 255 255 255 255 255 255 160 32 48 255 255 255 255 255 255 255 255
-255 255 255 255 255 255
-"))
-  "Default image for the enabled scroll left button.
-A disabled button image will be automatically build from it.")
-
-(defcustom tabbar-scroll-left-button
-  (cons (cons " <" tabbar-scroll-left-button-enabled-image)
-        (cons " =" nil))
-  "The scroll left button.
-The variable `tabbar-button-widget' gives details on this widget."
-  :group 'tabbar
-  :type tabbar-button-widget
-  :set '(lambda (variable value)
-          (custom-set-default variable value)
-          ;; Schedule refresh of button value.
-          (setq tabbar-scroll-left-button-value nil)))
-
-;;; Scroll right button
-;;
-(defvar tabbar-scroll-right-button-value nil
-  "Value of the scroll right button.")
-
-(defconst tabbar-scroll-right-button-enabled-image
-  '((:type pbm :data "\
-P2 13 13 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255
-48 32 160 255 255 255 255 255 255 255 255 255 255 44 161 71 32 160 255
-255 255 255 255 255 255 255 36 157 163 145 62 32 160 255 255 255 255
-255 255 30 128 133 137 142 124 50 32 160 255 255 255 255 29 120 121
-124 126 126 124 105 42 32 176 255 255 31 126 127 128 128 128 128 126
-124 89 32 255 255 33 134 135 136 137 137 138 119 49 32 176 255 255 34
-143 144 145 146 128 54 32 160 255 255 255 255 36 152 153 134 57 32 160
-255 255 255 255 255 255 38 141 60 32 160 255 255 255 255 255 255 255
-255 48 32 160 255 255 255 255 255 255 255 255 255 255 255 255 255 255
-255 255 255 255 255 255 255 255
-"))
-  "Default image for the enabled scroll right button.
-A disabled button image will be automatically build from it.")
-
-(defcustom tabbar-scroll-right-button
-  (cons (cons " >" tabbar-scroll-right-button-enabled-image)
-        (cons " =" nil))
-  "The scroll right button.
-The variable `tabbar-button-widget' gives details on this widget."
-  :group 'tabbar
-  :type tabbar-button-widget
-  :set '(lambda (variable value)
-          (custom-set-default variable value)
-          ;; Schedule refresh of button value.
-          (setq tabbar-scroll-right-button-value nil)))
-
 ;;; Separator
 ;;
 (defconst tabbar-separator-widget
@@ -849,10 +707,7 @@ That is for buttons and separators."
   :set '(lambda (variable value)
           (custom-set-default variable value)
           ;; Schedule refresh of all buttons and separator values.
-          (setq tabbar-separator-value nil
-                tabbar-home-button-value nil
-                tabbar-scroll-left-button-value nil
-                tabbar-scroll-right-button-value nil)))
+          (setq tabbar-separator-value nil)))
 
 ;; the following cache only provides minor speed benefits
 ;; but it may be a workaround for the close-tab/undo.png display issue
@@ -971,23 +826,6 @@ Pass mouse click events on a button to `tabbar-click-on-button'."
 
 ;;; Button callbacks
 ;;
-(defun tabbar-scroll-left (event)
-  "On mouse EVENT, scroll current tab set on left."
-  (when (eq (event-basic-type event) 'mouse-1)
-    (tabbar-scroll (tabbar-current-tabset) -1)))
-
-(defun tabbar-scroll-left-help ()
-  "Help string shown when mouse is over the scroll left button."
-  "mouse-1: scroll tabs left.")
-
-(defun tabbar-scroll-right (event)
-  "On mouse EVENT, scroll current tab set on right."
-  (when (eq (event-basic-type event) 'mouse-1)
-    (tabbar-scroll (tabbar-current-tabset) 1)))
-
-(defun tabbar-scroll-right-help ()
-  "Help string shown when mouse is over the scroll right button."
-  "mouse-1: scroll tabs right.")
 
 ;;; Tabs
 ;;
@@ -1111,16 +949,6 @@ element."
   "Return a list of propertized strings for tab bar buttons.
 TABSET is the tab set used to choose the appropriate buttons."
   (list
-   (if tabbar-home-function
-       (car tabbar-home-button-value)
-     (cdr tabbar-home-button-value))
-   (if (> (tabbar-start tabset) 0)
-       (car tabbar-scroll-left-button-value)
-     (cdr tabbar-scroll-left-button-value))
-   (if (< (tabbar-start tabset)
-          (1- (length (tabbar-tabs tabset))))
-       (car tabbar-scroll-right-button-value)
-     (cdr tabbar-scroll-right-button-value))
    tabbar-separator-value))
 
 (defsubst tabbar-line-tab (tab)
@@ -1153,12 +981,6 @@ Call `tabbar-tab-label-function' to obtain a label for TAB."
     ;; Initialize buttons and separator values.
     (or tabbar-separator-value
         (tabbar-line-separator))
-    (or tabbar-home-button-value
-        (tabbar-line-button 'home))
-    (or tabbar-scroll-left-button-value
-        (tabbar-line-button 'scroll-left))
-    (or tabbar-scroll-right-button-value
-        (tabbar-line-button 'scroll-right))
     ;; Track the selected tab to ensure it is always visible.
     (when tabbar--track-selected
       (while (not (memq sel tabs))
@@ -1343,33 +1165,6 @@ Return mouse-1 otherwise."
         ((eq number 3) 'mouse-3)
         ('mouse-1)))
 
-;;;###autoload
-(defun tabbar-press-home (&optional arg)
-  "Press the tab bar home button.
-That is, simulate a mouse click on that button.
-A numeric prefix ARG value of 2, or 3, respectively simulates a
-mouse-2, or mouse-3 click.  The default is a mouse-1 click."
-  (interactive "p")
-  (tabbar-click-on-button 'home (tabbar--mouse arg)))
-
-;;;###autoload
-(defun tabbar-press-scroll-left (&optional arg)
-  "Press the tab bar scroll-left button.
-That is, simulate a mouse click on that button.
-A numeric prefix ARG value of 2, or 3, respectively simulates a
-mouse-2, or mouse-3 click.  The default is a mouse-1 click."
-  (interactive "p")
-  (tabbar-click-on-button 'scroll-left (tabbar--mouse arg)))
-
-;;;###autoload
-(defun tabbar-press-scroll-right (&optional arg)
-  "Press the tab bar scroll-right button.
-That is, simulate a mouse click on that button.
-A numeric prefix ARG value of 2, or 3, respectively simulates a
-mouse-2, or mouse-3 click.  The default is a mouse-1 click."
-  (interactive "p")
-  (tabbar-click-on-button 'scroll-right (tabbar--mouse arg)))
-
 ;;; Mouse-wheel support
 ;;
 (require 'mwheel)
@@ -1531,13 +1326,10 @@ hidden, it is shown again.  Signal an error if Tabbar mode is off."
 
 (defvar tabbar-prefix-map
   (let ((km (make-sparse-keymap)))
-    (define-key km [(control home)]  'tabbar-press-home)
     (define-key km [(control left)]  'tabbar-backward)
     (define-key km [(control right)] 'tabbar-forward)
     (define-key km [(control up)]    'tabbar-backward-group)
     (define-key km [(control down)]  'tabbar-forward-group)
-    (define-key km [(control prior)] 'tabbar-press-scroll-left)
-    (define-key km [(control next)]  'tabbar-press-scroll-right)
     (define-key km [(control f10)]   'tabbar-local-mode)
     km)
   "The key bindings provided in Tabbar mode.")
@@ -1641,21 +1433,6 @@ Returns non-nil if the new state is enabled.
 (defgroup tabbar-buffer nil
   "Display buffers in the tab bar."
   :group 'tabbar)
-
-(defcustom tabbar-buffer-home-button
-  (cons (cons "[+]" tabbar-home-button-enabled-image)
-        (cons "[-]" tabbar-home-button-disabled-image))
-  "The home button displayed when showing buffer tabs.
-The enabled button value is displayed when showing tabs for groups of
-buffers, and the disabled button value is displayed when showing
-buffer tabs.
-The variable `tabbar-button-widget' gives details on this widget."
-  :group 'tabbar-buffer
-  :type tabbar-button-widget
-  :set '(lambda (variable value)
-          (custom-set-default variable value)
-          ;; Schedule refresh of button value.
-          (setq tabbar-home-button-value nil)))
 
 (defvar tabbar-buffer-list-function 'tabbar-buffer-list
   "Function that returns the list of buffers to show in tabs.
@@ -1788,16 +1565,6 @@ Return the the first group where the current buffer is."
       (setq tabbar--buffers bl)))
   ;; Return the first group the current buffer belongs to.
   (car (nth 2 (assq (current-buffer) tabbar--buffers))))
-
-;;; Tab bar callbacks
-;;
-(defvar tabbar--buffer-show-groups nil)
-
-(defsubst tabbar-buffer-show-groups (flag)
-  "Set display of tabs for groups of buffers to FLAG."
-  (setq tabbar--buffer-show-groups flag
-        ;; Redisplay the home button.
-        tabbar-home-button-value nil))
 
 (defun tabbar-buffer-tabs ()
   "Return the buffers to display on the tab bar, in a tab set."
@@ -1808,33 +1575,6 @@ Return the the first group where the current buffer is."
       (tabbar-select-tab-value (current-buffer) tabset))
     tabset))
 
-(defun tabbar-buffer-button-label (name)
-  "Return a label for button NAME.
-That is a pair (ENABLED . DISABLED), where ENABLED and DISABLED are
-respectively the appearance of the button when enabled and disabled.
-They are propertized strings which could display images, as specified
-by the variable `tabbar-button-label'.
-When NAME is 'home, return a different ENABLED button if showing tabs
-or groups.  Call the function `tabbar-button-label' otherwise."
-  (let ((lab (tabbar-button-label name)))
-    (when (eq name 'home)
-      (let* ((btn tabbar-buffer-home-button)
-             (on  (tabbar-find-image (cdar btn)))
-             (off (tabbar-find-image (cddr btn))))
-        ;; When `tabbar-buffer-home-button' does not provide a value,
-        ;; default to the enabled value of `tabbar-home-button'.
-        (if on
-            (tabbar-normalize-image on 1)
-          (setq on (get-text-property 0 'display (car lab))))
-        (if off
-            (tabbar-normalize-image off 1)
-          (setq off (get-text-property 0 'display (car lab))))
-        (setcar lab
-                (if tabbar--buffer-show-groups
-                    (propertize (or (caar btn) (car lab)) 'display on)
-                  (propertize (or (cadr btn) (car lab)) 'display off)))
-        ))
-    lab))
 
 (defun tabbar-buffer-tab-label (tab)
   "Return a label for TAB.
@@ -1879,26 +1619,6 @@ mouse-2: pop to buffer, mouse-3: delete other windows"
     (tabbar-buffer-show-groups nil)
     ))
 
-(defun tabbar-buffer-click-on-home (event)
-  "Handle a mouse click EVENT on the tab bar home button.
-mouse-1, toggle the display of tabs for groups of buffers.
-mouse-3, close the current buffer."
-  (let ((mouse-button (event-basic-type event)))
-    (cond
-     ((eq mouse-button 'mouse-1)
-      (tabbar-buffer-show-groups (not tabbar--buffer-show-groups)))
-     ((eq mouse-button 'mouse-3)
-      (kill-buffer nil))
-     )))
-
-(defun tabbar-buffer-help-on-home ()
-  "Return the help string shown when mouse is onto the toggle button."
-  (concat
-   (if tabbar--buffer-show-groups
-       "mouse-1: show buffers in selected group"
-     "mouse-1: show groups of buffers")
-   ", mouse-3: close current buffer"))
-
 (defun tabbar-buffer-track-killed ()
   "Hook run just before actually killing a buffer.
 In Tabbar mode, try to switch to a buffer in the current tab bar,
@@ -1935,7 +1655,6 @@ Run as `tabbar-init-hook'."
         tabbar-select-tab-function 'tabbar-buffer-select-tab
         tabbar-help-on-tab-function 'tabbar-buffer-help-on-tab
         tabbar-button-label-function 'tabbar-buffer-button-label
-        tabbar-home-function 'tabbar-buffer-click-on-home
         tabbar-home-help-function 'tabbar-buffer-help-on-home
         )
   (add-hook 'kill-buffer-hook 'tabbar-buffer-track-killed))
@@ -1963,4 +1682,3 @@ Run as `tabbar-quit-hook'."
 (run-hooks 'tabbar-load-hook)
 
 ;;; tabbar.el ends here
-

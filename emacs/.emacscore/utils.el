@@ -59,25 +59,6 @@
   (let ((tramp-file-name (concat "/sudo::" (expand-file-name file-name))))
     (find-file tramp-file-name)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Help helpers
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;;
-;; Print helper keybindings
-;;
-(setq emacs-tutorial "C-h t help-with-tutorial ----> emacs tutorial\n")
-(setq emacs-keybindings "C-h k describe-key       ----> keybindings help\n")
-(setq emacs-function    "C-h f describer-function ----> emacs function\n")
-(setq emacs-cur-buf-keys "C-h m describe-mode      ----> qkeybindings for current buffer\n")
-(setq emacs-manual "C-h r help-with-tutorial ----> emacs manual\n")
-
-(defun helpers ()
-  "Print emacs help combinations to minibuffer"
-  (interactive)
-  (message (concat emacs-tutorial emacs-keybindings emacs-function emacs-cur-buf-keys emacs-manual))
-)
-
 ;;
 ;; Load additional development modes
 ;;
@@ -87,10 +68,22 @@
   (load "~/.emacscore/dev/web.el")
   (load "~/.emacscore/dev/golang.el")
   (load "~/.emacscore/dev/sed.el")
+  (load "~/.emacscore/dev/nasm.el")
+  (load "~/.emacscore/dev/shell.el")
   (load "~/.emacscore/org/orgmode.el")
   ;;
   ;; Enable rainbow mode
   ;;
   (add-to-list 'load-path "~/.emacs.d/rainbow")
   (require 'rainbow-mode)
-  (rainbow-mode 1))
+  (rainbow-mode 1)
+  ;;
+  ;; YAML mode
+  ;;
+  (add-to-list 'load-path "~/.emacs.d/yaml")
+  (require 'yaml-mode)
+  ;;
+  ;; restructuredTest mode
+  ;;
+  (load "~/.emacs.d/lisp/rst.el")
+  (require 'rst))

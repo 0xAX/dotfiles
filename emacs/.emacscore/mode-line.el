@@ -37,7 +37,7 @@
    "%] "
    (global-mode-string global-mode-string)
    ; nyan-mode uses nyan cat as an alternative to %p
-    "| "
+    " | "
    (:eval (list (nyan-create)))
    (:propertize "|" face mode-line-position-face)
    "-%-"
@@ -45,8 +45,6 @@
 
 
 (display-time-mode 1)
-
-(setq display-time-mail-string "")
 
 ;; Extra mode line faces
 (make-face 'mode-line-folder-face)

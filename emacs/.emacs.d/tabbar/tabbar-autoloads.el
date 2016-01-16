@@ -45,29 +45,6 @@ Select the next visible tab.
 
 \(fn)" t nil)
 
-(autoload 'tabbar-press-home "tabbar" "\
-Press the tab bar home button.
-That is, simulate a mouse click on that button.
-A numeric prefix ARG value of 2, or 3, respectively simulates a
-mouse-2, or mouse-3 click.  The default is a mouse-1 click.
-
-\(fn &optional ARG)" t nil)
-
-(autoload 'tabbar-press-scroll-left "tabbar" "\
-Press the tab bar scroll-left button.
-That is, simulate a mouse click on that button.
-A numeric prefix ARG value of 2, or 3, respectively simulates a
-mouse-2, or mouse-3 click.  The default is a mouse-1 click.
-
-\(fn &optional ARG)" t nil)
-
-(autoload 'tabbar-press-scroll-right "tabbar" "\
-Press the tab bar scroll-right button.
-That is, simulate a mouse click on that button.
-A numeric prefix ARG value of 2, or 3, respectively simulates a
-mouse-2, or mouse-3 click.  The default is a mouse-1 click.
-
-\(fn &optional ARG)" t nil)
 
 (autoload 'tabbar-mwheel-backward "tabbar" "\
 Select the previous available tab.

@@ -15,5 +15,8 @@ sudo systemctl disable lvm2-monitor.service
 sudo systemctl disable auditd.service
 sudo systemctl disable firewalld.service
 sudo systemctl disable iscsi.service
+sudo systemctl disable firewalld.service
+sudo systemctl disable iio-sensor-proxy.service
+sudo systemctl disable remote-fs.target
 echo "Done"
 exit 0

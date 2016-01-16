@@ -1,0 +1,14 @@
+#!/bin/bash
+
+NUM=$(echo "$1" |  tr "[:lower:]" "[:upper:]")
+
+case "$NUM" in
+        0X* )
+            NUM=$(echo $NUM | cut -c 3-)
+            echo $NUM
+            echo "ibase=16;obase=A;"$NUM"" | bc
+            ;;
+        * )
+            echo "ibase=16;obase=A;"$NUM"" | bc
+            ;;
+esac

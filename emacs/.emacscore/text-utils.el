@@ -15,8 +15,8 @@
   "Find&Replace all"
   (interactive
    (list
-	(read-string "Find: ")
-	(read-string "Replace with: ")))
+        (read-string "Find: ")
+        (read-string "Replace with: ")))
   (setq cursor-position (point))
   (beginning-of-buffer)
   (replace-string find replace)
@@ -32,4 +32,3 @@
   (beginning-of-line)
   (kill-line)
   (delete-backward-char 1))
-

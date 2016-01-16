@@ -29,7 +29,7 @@ bindsym $mod+Shift+f exec terminator --profile=alex -x mc ~/
 # restart i3
 bindsym $mod+c exec i3-msg restart
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run -b
+bindsym $mod+d exec dmenu_run -b -sb 'black' -nf 'white'  -nb 'sienna'
 # go to the next workspace
 bindsym $mod+Tab workspace next
 # go to the prevoious workspace
@@ -89,7 +89,7 @@ bar {
            statusline #ffffff
            separator  #ffffff
            # Type              border  bg      fg
-           focused_workspace  #00c5cd #00c5cd #ffffff 
+           focused_workspace  #00c5cd #00c5cd #ffffff
            active_workspace   #333333 #ff4500 #ffffff
            inactive_workspace #333333 #222222 #888888
            urgent_workspace   #aa0000 #990000 #ffffff
@@ -121,4 +121,4 @@ bindsym $mod+9 exec "amixer set Master -q 1%-"
 bindsym $mod+u exec "amixer -q sset Master toggle"
 
 # walpaper
-exec feh --bg-scale ~/Desktop/wallpaper-bird.jpg
+exec feh --bg-scale ~/Desktop/wallpaper-bird.jpg &

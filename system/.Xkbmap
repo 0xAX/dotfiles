@@ -1,0 +1,1 @@
+setxkbmap -layout us,ru -option grp:lwin_toggle

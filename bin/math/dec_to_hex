@@ -1,0 +1,3 @@
+#!/bin/bash
+
+echo "obase=16;"$1"" | bc | awk '{print "0x"$1}'

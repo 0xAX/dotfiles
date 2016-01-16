@@ -7,7 +7,6 @@
 ;;
 ;; All tabs in one group
 ;;
-
 (defun my-tabbar-buffer-groups ()
   (list (cond ((string-equal "*" (substring (buffer-name) 0 1)) "emacs")
               ((eq major-mode 'dired-mode) "emacs")
@@ -60,7 +59,7 @@
  :background "dim gray"
  :foreground "white"
  :family "Droid Sans Mono"
- :box '(:line-width 1 :color "gray60" :style nil))
+ :box '(:line-width 1 :color "gray30" :style nil))
 
 ;;
 ;; unselected tabbar
