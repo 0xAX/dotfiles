@@ -125,7 +125,7 @@ bindsym $mod+u exec "amixer -q sset Master toggle"
 mode "passthrough" {
     bindsym $mod+Tab mode "default"
 }
-bindsym Escape mode "passthrough"
+bindsym $mod+Escape mode "passthrough"
 
 # walpaper
 exec feh --bg-scale ~/Desktop/wallpaper-bird.jpg &
