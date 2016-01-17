@@ -88,11 +88,11 @@ bar {
            background #000000
            statusline #ffffff
            separator  #ffffff
-           # Type              border  bg      fg
-           focused_workspace  #00c5cd #00c5cd #ffffff
+           # Type              border   bg      fg
+           focused_workspace  #8b3626 #8b3626 #ffffff
            active_workspace   #333333 #ff4500 #ffffff
            inactive_workspace #333333 #222222 #888888
-           urgent_workspace   #aa0000 #990000 #ffffff
+           urgent_workspace   #8b3626 #8b3626 #ffffff
     }
     tray_output primary
     position top
@@ -107,7 +107,6 @@ mode "resize" {
     bindsym Right resize grow width 10 px or 10 ppt
     bindsym Up resize shrink height 10 px or 10 ppt
     bindsym Down resize grow height 10 px or 10 ppt
-
     bindsym Return mode "default"
     bindsym Esc    mode "default"
 }
@@ -119,6 +118,14 @@ bindsym $mod+Control+l exec i3-msg workspace "10: tmp" && i3lock --tiling --dpms
 bindsym $mod+0 exec "amixer set Master  -q 1%+"
 bindsym $mod+9 exec "amixer set Master -q 1%-"
 bindsym $mod+u exec "amixer -q sset Master toggle"
+
+#
+# I don't want to use i3 META key in emacs
+#
+mode "passthrough" {
+    bindsym Escape mode "default"
+}
+bindsym Escape mode "passthrough"
 
 # walpaper
 exec feh --bg-scale ~/Desktop/wallpaper-bird.jpg &

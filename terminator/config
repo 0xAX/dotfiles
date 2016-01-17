@@ -28,6 +28,7 @@
   [[default]]
     background_image = None
   [[alex]]
+    alternate_screen_scroll = False
     background_color = "#0f0e0f"
     background_image = None
     copy_on_selection = True
@@ -37,6 +38,8 @@
     foreground_color = "#ffffff"
     icon_bell = False
     palette = "#1b1d1e:#f92672:#f37259:#fd971f:#56c2d6:#8c54fe:#465457:#ccccc6:#505354:#ff5995:#00ff39:#feed6c:#f37259:#9e6ffe:#899ca1:#efefe0"
-    scrollback_lines = 1000
+    scroll_on_keystroke = False
+    scrollback_lines = 2000
+    scrollbar_position = hidden
     show_titlebar = False
     use_system_font = False
