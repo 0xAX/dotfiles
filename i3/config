@@ -123,7 +123,7 @@ bindsym $mod+u exec "amixer -q sset Master toggle"
 # I don't want to use i3 META key in emacs
 #
 mode "passthrough" {
-    bindsym Escape mode "default"
+    bindsym $mod+Tab mode "default"
 }
 bindsym Escape mode "passthrough"
 
