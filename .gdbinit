@@ -1,62 +1,21 @@
+#
+# Configuration file of GNU GDB based on https://github.com/gdbinit/Gdbinit
+#
 # INSTALL INSTRUCTIONS: save as ~/.gdbinit
 #
-# DESCRIPTION: A user-friendly gdb configuration file.
-#
-# REVISION : 7.4.4 (02/01/2012)
-#
-# CONTRIBUTORS: mammon_, elaine, pusillus, mong, zhang le, l0kit,
-#               truthix the cyberpunk, fG!, gln
-#
-# FEEDBACK: http://reverse.put.as - reverser@put.as
-#			https://www.reverse-engineering.net
-#           The Linux Area
-#           Topic: "+HCU's .gdbinit Version 7.1 -- humble announce"
-#
-# NOTES: 'help user' in gdb will list the commands/descriptions in this file
-#        'context on' now enables auto-display of context screen
-#
-# MAC OS X NOTES: If you are using this on Mac OS X, you must either attach gdb to a process
-#                 or launch gdb without any options and then load the binary file you want to analyse with "exec-file" option
-#                 If you load the binary from the command line, like $gdb binary-name, this will not work as it should
-#                 For more information, read it here http://reverse.put.as/2008/11/28/apples-gdb-bug/
-#
-#  UPDATE: This bug can be fixed in gdb source. Refer to http://reverse.put.as/2009/08/10/fix-for-apples-gdb-bug-or-why-apple-forks-are-bad/
-#          and http://reverse.put.as/2009/08/26/gdb-patches/ (if you want the fixed binary for i386)
-#
-#          An updated version of the patch and binary is available at http://reverse.put.as/2011/02/21/update-to-gdb-patches-fix-a-new-bug/
-#
-# CHANGELOG: (older changes at the end of the file)
-#
-#   Version 7.4.4 (02/01/2012)
-#     - Added the "skip" command. This will jump to the next instruction after EIP/RIP without executing the current one.
-#       Thanks to @bSr43 for the tip to retrieve the current instruction size.
-#
-#	Version 7.4.3 (04/11/2011)
-#	  - Modified "hexdump" command to support a variable number of lines (optional parameter)
-#	  - Removed restrictions on type of addresses in the "dd" command - Thanks to Plouj for the warning :-)
-#	   I don't know what was the original thinking behind those :-)
-#	  - Modified the assemble command to support 64bits - You will need to recompile nasm since the version shipped with OS X doesn't supports 64bits (www.nasm.us).
-#	   Assumes that the new binary is installed at /usr/local/bin - modify the variable at the top if you need so. 
-#	   It will assemble based on the target arch being debugged. If you want to use gdb for a quick asm just use the 32bits or 64bits commands to set your target.
-#      Thanks to snare for the warning and original patch :-)
-#	  - Added "asm" command - it's a shortcut to the "assemble" command.
-#	  - Added configuration variable for colorized prompt. Plouj reported some issues with Ubuntu's gdb 7.2 if prompt is colorized.
-#
-#   TODO:
-#
 
-# __________________gdb options_________________
+# TODO
+#  * create bash script which will check given executable and set $64BITS
+#    depends on it
+#  * CHECK SETCOLOUR1STLINE
 
-# set to 1 to enable 64bits target by default (32bits is the default)
-set $64BITS = 0
-# set to 0 if you have problems with the colorized prompt - reported by Plouj with Ubuntu gdb 7.2
-set $COLOUREDPROMPT = 1
-# Colour the first line of the disassembly - default is green, if you want to change it search for
-# SETCOLOUR1STLINE and modify it :-)
-set $SETCOLOUR1STLINE = 0
-# set to 0 to remove display of objectivec messages (default is 1)
+# set to 1 to enable 64bits target by default (64bits is the default)
+set $64BITS = 1
+#
+set $SETCOLOUR1STLINE = 1
+# set to 0 to remove display of objectivec messages
 set $SHOWOBJECTIVEC = 1
-# set to 0 to remove display of cpu registers (default is 1)
+# set to 0 to remove display of cpu registers
 set $SHOWCPUREGISTERS = 1
 # set to 1 to enable display of stack (default is 0)
 set $SHOWSTACK = 0
@@ -70,32 +29,24 @@ set $SKIPEXECUTE = 0
 # if $SKIPEXECUTE is 1 configure the type of execution
 # 1 = use stepo (do not get into calls), 0 = use stepi (step into calls)
 set $SKIPSTEP = 1
-
+# no need to confim exit
 set confirm off
+# no need to be verbose
 set verbose off
-
-if $COLOUREDPROMPT == 1
-	set prompt \033[31mgdb$ \033[0m
-end
-
+# set prompt
+set prompt \033[31m(gdb)$ \033[0m
+# https://sourceware.org/gdb/onlinedocs/gdb/Numbers.html
 set output-radix 0x10
 set input-radix 0x10
-
 # These make gdb never pause in its output
 set height 0
 set width 0
 
-# Display instructions in Intel format - change to "att" if you prefer AT&T format
-set disassembly-flavor intel
-
 set $SHOW_CONTEXT = 1
 set $SHOW_NEST_INSN = 0
-
 set $CONTEXTSIZE_STACK = 6
 set $CONTEXTSIZE_DATA  = 8
 set $CONTEXTSIZE_CODE  = 8
-
-# __________________end gdb options_________________
 
 # Initialize these variables else comparisons will fail for colouring
 # we must initialize all of them at once, 32 and 64 bits.
