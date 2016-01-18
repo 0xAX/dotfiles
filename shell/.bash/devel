@@ -1,4 +1,18 @@
-# patch
+#!/bin/bash
+
+#
+# some patch aliases
+#
 alias patchFile="patch < "
 alias patchDir="patch -p1 < "
 alias patchUndo="patch -p1 -R < "
+
+# objdump
+alias objdump-16-bit="objdump -D -b binary -mi386 -Maddr16,data16 "
+
+# gdb
+alias gdb="gdb -quiet "
+alias debug="gdb -quiet "
+
+# docker
+alias docker-busybox="sudo docker run -it --rm busybox"

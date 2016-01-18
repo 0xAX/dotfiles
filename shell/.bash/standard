@@ -1,25 +1,41 @@
+#!/bin/bash
+
+# awk
+alias awk="gawk --optimize"
+
 # reload ~/.bashrc
 alias reloadBash="source ~/.bashrc"
-
-# copy
+# always copy recursively
 alias cp='cp -r '
+# mkdir
+alias mkdir="mkdir -p"
+# rm
+alias rm="rm -rf -i"
+alias rmi="rm -rf --interactive"
 
 # navigation
 alias work='cd $WORK'
 alias dev='cd  $DEV'
-alias home='cd ~/'
-alias oldhome='cd $HOME_HDD'
-alias downloads="cd $HOME_HDD/Downloads"
-alias golang="cd ~/dev/golang/src/github.com/0xAX"
+alias home='cd $HOME'
+alias oldhome='cd $OLD_HDD'
+alias downloads="cd $OLD_HDD/Downloads"
+alias golang="cd $DEV/golang/src/github.com/0xAX"
+alias linux="cd $DEV/linux"
 
 # navigation by configs
-alias bashrc="cd ~ && nano .bashrc"
-alias gitconfig="cd ~ && nano .gitconfig"
-alias sshconfig="cd ~ && nano .ssh/config"
+alias bashrc="cd ~ && emacs -nw .bashrc"
+alias gitconfig="cd ~ && emacs -nw .gitconfig"
+alias gitignore_global="cd ~ && emacs -nw .global_gitignore"
+alias sshconfig="cd ~ && emacs -nw .ssh/config"
+alias i3config="cd ~ && emacs -nw .i3/config"
+alias mail_config="cd ~ && emacs -nw .muttrc"
 
 # open applications
-alias books="nautilus $HOME_HDD/books"
-alias downloads="nautilus $HOME_HDD/Downloads"
+alias books="nautilus $OLD_HDD/books"
+alias downloads="nautilus $OLD_HDD/Downloads"
+alias important="nautilus $OLD_HDD/important"
+alias menu="linux && make menuconfig"
+alias read_book="evince &"
 
 # open web resource
 alias twitter="firefox -new-tab twitter.com"
@@ -28,12 +44,6 @@ alias google="firefox -new-tab google.com"
 alias gmail="firefox -new-tab gmail.com"
 alias reddit="firefox -new-tab reddit.com"
 alias kproxy="firefox -new-tab kproxy"
-
-# mkdir
-alias mkdir="mkdir -p"
-
-# chmod
-alias myfile="chmod 777 "
 
 # mount and umount
 alias m="mount -t "
@@ -48,9 +58,9 @@ alias packageLocate="dpkg -L "
 # df
 alias df="df -h"
 
-# df
-alias dirsize="du -sh -b ."
-alias filesize="du -s -b  "
+# du
+alias dirsize="du -sh "
+alias filesize="du -s "
 
 # find
 alias find_everywhere_name="sudo find / -name "
@@ -83,28 +93,6 @@ alias words="wc -w "
 alias bytes="wc -c "
 alias chars="wc -m "
 
-# rm
-alias rm="rm -rf -i"
-alias rmi="rm -rf --interactive"
-
-# awk
-alias awk="gawk --optimize"
-
-# make
-#alias mk="make"
-
-# ls
-OS=`uname`
-if [[ "$OS" == "Linux" ]]
-then
-
-	alias ls='ls --color'
-	alias ll='ls -alF'
-	alias la='ls -A'
-	alias l='ls -CF'
-	alias lsd="ls -lF"
-fi
-
 # date
 alias week='date +%V'
 alias day='date +%A'
@@ -129,12 +117,6 @@ alias nano=vim
 
 # sudo
 alias sudo="sudo env "PATH=$PATH" "
-
-# docker
-alias docker-busybox="sudo docker run -it --rm busybox"
-
-# objdump
-alias objdump-16-bit="objdump -D -b binary -mi386 -Maddr16,data16 "
 
 # i3 related aliases
 alias i3-restart="i3-msg restart"

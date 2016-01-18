@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # kernel helpers
 alias modules="lsmod"
 alias usb="lsusb"

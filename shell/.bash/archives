@@ -1,22 +1,51 @@
+#
 # tar
-alias tarCreate="tar -cfv "
-alias tarCreateGZ="tar cvzf "
-alias tarCreateBZ2="tar cvjf "
-alias tarList="tar -tvf "
-alias tarExtract="tar -xvf "
-alias tarGzExtract="tar -zxvf "
-alias tarBzExtract="tar -jxvf "
-alias tarAppend="tar -A "
-alias tarDelete="tar --delete "
+#
+function tar_create {
+        tar -cvf "$1".tar "$*"
+}
 
-# zip
+
+function tar_gzip_create {
+        tar -cvzf "$1".tar.gz "$*"
+}
+
+function tar_bzip_create {
+        tar -cvjf "$1".tar.bzip2 "$*"
+}
+
+function tar_extract {
+        tar -xvf "$1"
+}
+
+function tar_gzip_extract {
+        tar -zxvf "$1"
+}
+
+function tar_bzip_extract {
+        tar -jxvf "$1"
+}
+
+function tar_list {
+        tar -tvf "$1"
+}
+
+export -f tar_list
+export -f tar_create
+export -f tar_gzip_create
+export -f tar_bzip_create
+export -f tar_extract
+export -f tar_gzip_extract
+export -f tar_bzip_extract
+
+#
+# zip/unzip
+#
 alias zip="zip -r -9 "
-
-# unzip
 alias unzip="unzip "
 
-# rar
+#
+# rar/unrar
+#
 alias rar="rar -md5 -v1024 "
-
-# unrar
 alias unrar="unrar x "

@@ -1,23 +1,41 @@
 #
 # Global environment
 #
-HOME="/home/alex"
-HOME_HDD="/home/alex/olddisk$HOME"
-PATCHES="/home/alex/patches"
 DEV="$HOME/dev"
 WORK="$HOME/work"
 GIT_DEV="$DEV/git"
 KERNEL_DEV="$DEV/linux"
-OS=`uname`
+PATCH_DIR="$HOME/patches"
+DOTFILES="$DEV/my-dotfiles"
+OLD_HDD="$HOME/olddisk$HOME"
+MUTT_PATH="$DEV/muttx"
+BASHRC="$HOME/.bashrc"
+BASHRC_DIR="$HOME/.bash"
+GNUPGHOME="$HOME/.gnupg"
 
+#
+# OS dependend
+#
+OS=$(uname)
 if [ "$OS" == "FreeBSD" ] || [ "$OS" == "DragonFly" ]; then
     export SHELL="/usr/local/bin/bash"
     export MAKE="/usr/local/bin/gmake"
+    source /usr/local/share/bash-completion/bash_completion
 else
     export SHELL="/bin/bash"
     export MAKE="/usr/bin/make"
+    source /usr/share/bash-completion/bash_completion
+
+    alias ls='ls --color'
+    alias ll='ls -alF'
+    alias la='ls -A'
+    alias l='ls -CF'
+    alias lsd="ls -lF"
 fi
 
+#
+# let's export some global env
+#
 export EDITOR="emacs"
 export BROWSER="firefox"
 export CC=gcc
@@ -25,21 +43,50 @@ export AS=as
 export AR=ar
 export CXX=g++
 export LD=ld
+export TAR=tar
 
 #
-# bash
+# terminal for i3
 #
-#set menu-complete-display-prefix=on
+export TERMINAL="terminator"
 
-shopt -s nocaseglob;
+#
+# bash options
+#
+# check error and if it is a minor error
+# cd to a given dir
 shopt -s cdspell
-shopt -s histappend
+# check a given command in hash at first
+shopt -s checkhash
+# check LINES and COLUMNS after every command
 shopt -s checkwinsize
+# an argument to the cd builtin command that is not
+# a directory is assumed to be the name of a variable
+shopt -s cdable_vars
+# command name that is the name of a directory is executed
+# as if it were the argument
 shopt -s autocd
+# save multiline output to the history
+shopt -s cmdhist
+# spell check for directories
+shopt -s dirspell
+# enable pattern matching
+shopt -s extglob
+# autocomple hostname
+shopt -s hostcomplete
+# case-sensetive pattern matching
+shopt -s nocaseglob
+# the same for case [[ ]]
+shopt -s nocasematch
 
-export HISTFILESIZE=
-export HISTSIZE=
+# inhibit trancation of histor
+export HISTFILESIZE=-1
+export HISTSIZE=-1
 export HISTTIMEFORMAT="[%F %T] "
+# disable line editing in emacs terminal
+export EMACS=1
+export FCEDIT=emacs
+export TMPDIR=/tmp
 
 #
 # locale
@@ -47,19 +94,16 @@ export HISTTIMEFORMAT="[%F %T] "
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 
-# pkg config
-PKG_CONFIG_PATH=$PKG_CONFIG_PATH:~/usr/lib/pkgconfig
-export PKG_CONFIG_PATH
-
 #
 # includes
 #
-source ~/.bash/export
-source ~/.bash/devel
-source ~/.bash/prompt
-
-source ~/.bash/system
-source ~/.bash/network
-source ~/.bash/archives
-source ~/.bash/standard
-source ~/.bash/completition
+source $BASHRC_DIR/term-colors
+source $BASHRC_DIR/archives
+source $BASHRC_DIR/network
+source $BASHRC_DIR/completition
+source $BASHRC_DIR/prompt
+source $BASHRC_DIR/devel
+source $BASHRC_DIR/network
+source $BASHRC_DIR/system
+source $BASHRC_DIR/standard
+source $BASHRC_DIR/export

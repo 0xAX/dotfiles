@@ -1,9 +1,6 @@
-OS=`uname`
+#
+# Additional bash completions
+#
 
-if [ "$OS" == "FreeBSD" ] || [ "$OS" == "DragonFly" ] ; then
-    . /usr/local/share/bash-completion/bash_completion
-else
-    . /usr/share/bash-completion/bash_completion
-fi
-
+# git completion
 . $DEV/git/contrib/completion/git-completion.bash

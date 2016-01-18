@@ -1,8 +1,4 @@
-export GNUPGHOME="$HOME/.gnupg"
-export MY_GPG_KEY="25982F73"
-
-export GIT_SEQUENCE_EDITOR="emacs -nw"
-export PATH="$PATH:$WORK/rebar3"
+#!/bin/bash
 
 #
 # elixir
@@ -43,80 +39,16 @@ export PATH=$PATH:/usr/lib/systemd/
 #
 export PATH=$PATH:$HOME_HDD/usr/local/pgsql/bin/
 
-#
-# erlang
-#
-export ERL_LIBS="$ERL_LIBS:$WORK/ChicagoBoss/deps/"
-export ERL_LIBS="$ERL_LIBS:$WORK/ChicagoBoss/"
-export ERL_LIBS="$ERL_LIBS:$WORK/sockjs-erlang/"
-export ERL_LIBS="$ERL_LIBS:$WORK/regine/"
-export ERL_LIBS="$ERL_LIBS:$WORK/couchbeam/"
-export ERL_LIBS="$ERL_LIBS:$WORK/ejson/"
-export ERL_LIBS="$ERL_LIBS:$WORK/couchapp-erlang/"
-export ERL_LIBS="$ERL_LIBS:$WORK/quickrand/"
-export ERL_LIBS="$ERL_LIBS:$WORK/redbug/"
-export ERL_LIBS="$ERL_LIBS:$WORK/yang/"
-export ERL_LIBS="$ERL_LIBS:$WORK/hello2/"
-export ERL_LIBS="$ERL_LIBS:$WORK/parse_trans/"
-export ERL_LIBS="$ERL_LIBS:$WORK/lager/"
-export ERL_LIBS="$ERL_LIBS:$WORK/goldrush/"
-export ERL_LIBS="$ERL_LIBS:$WORK/xray_ldr/"
-export ERL_LIBS="$ERL_LIBS:$WORK/xray_tposs_api_subscriber/"
-export ERL_LIBS="$ERL_LIBS:$WORK/xray_tposs_api_session/"
-export ERL_LIBS="$ERL_LIBS:$WORK/xray_web/"
-export ERL_LIBS="$ERL_LIBS:$WORK/xray_core/"
-export ERL_LIBS="$ERL_LIBS:$WORK/tposs_collector/"
-export ERL_LIBS="$ERL_LIBS:$WORK/xray_web_frontend/"
-export ERL_LIBS="$ERL_LIBS:$WORK/tetrapak_yang/"
-export ERL_LIBS="$ERL_LIBS:$WORK/tetrapak_elixir/"
-export ERL_LIBS="$ERL_LIBS:$WORK/xc-node/"
-export ERL_LIBS="$ERL_LIBS:$WORK/xc-server/"
-export ERL_LIBS="$ERL_LIBS:$WORK/errd/"
-export ERL_LIBS="$ERL_LIBS:$WORK/folsom/"
-export ERL_LIBS="$ERL_LIBS:$WORK/folsom/deps/"
-export ERL_LIBS="$ERL_LIBS:$WORK/monads/"
-export ERL_LIBS="$ERL_LIBS:$WORK/xray_udr/"
-export ERL_LIBS="$ERL_LIBS:$WORK/xray_charging/"
-export ERL_LIBS="$ERL_LIBS:$WORK/xray_ldr/"
-export ERL_LIBS="$ERL_LIBS:$WORK/xray_tposs_api_cdr/"
-export ERL_LIBS="$ERL_LIBS:$WORK/xray_tposs_api_location/"
-export ERL_LIBS="$ERL_LIBS:$WORK/xray_tposs_api_location_status/"
-export ERL_LIBS="$ERL_LIBS:$WORK/xray_tposs_api_subscriber/"
-export ERL_LIBS="$ERL_LIBS:$WORK/xray_tposs_api_session/"
-export ERL_LIBS="$ERL_LIBS:$WORK/xray_session/"
-export ERL_LIBS="$ERL_LIBS:$WORK/tposs_support/"
-export ERL_LIBS="$ERL_LIBS:$WORK/erlando/"
-export ERL_LIBS="$ERL_LIBS:$WORK/ranch/"
-export ERL_LIBS="$ERL_LIBS:$WORK/uuid/"
-export ERL_LIBS="$ERL_LIBS:$WORK/ibrowse/"
-export ERL_LIBS="$ERL_LIBS:$WORK/ex_uri/"
-export ERL_LIBS="$ERL_LIBS:$WORK/ex_uri/deps/"
-export ERL_LIBS="$ERL_LIBS:$WORK/hello/"
-export ERL_LIBS="$ERL_LIBS:$WORK/erlzmq2/"
-export ERL_LIBS="$ERL_LIBS:$WORK/eradius/"
-export ERL_LIBS="$ERL_LIBS:$WORK/tetrapak_boss/"
-export ERL_LIBS="$ERL_LIBS:$WORK/tposs_support/"
-export ERL_LIBS="$ERL_LIBS:$WORK/abnfc/"
-export ERL_LIBS="$ERL_LIBS:$WORK/elixir/lib/"
-
-export ERL_LIBS="$ERL_LIBS:$WORK/eradius/deps/edown/"
-export ERL_LIBS="$ERL_LIBS:$WORK/eradius/deps/bear/"
-export ERL_LIBS="$ERL_LIBS:$WORK/eradius/deps/exometer_core/"
-export ERL_LIBS="$ERL_LIBS:$WORK/eradius/deps/exometer/"
-export ERL_LIBS="$ERL_LIBS:$WORK/eradius/deps/folsom/"
-export ERL_LIBS="$ERL_LIBS:$WORK/eradius/deps/goldbrush/"
-export ERL_LIBS="$ERL_LIBS:$WORK/eradius/deps/lager/"
-export ERL_LIBS="$ERL_LIBS:$WORK/eradius/deps/meck/"
-export ERL_LIBS="$ERL_LIBS:$WORK/eradius/deps/setup/"
-export ERL_LIBS="$ERL_LIBS:$WORK/eradius/deps/parse_trans/"
-
-export ERL_LIBS="$ERL_LIBS:$WORK/tposs_udr/deps/mariaex/"
-
 # golang
-export GOROOT=$HOME/dev/golang/go
-export GOPATH=$HOME/dev/golang
+export GOROOT=$DEV/golang/go
+export GOPATH=$DEV/dev/golang
 export PATH=$PATH:$GOROOT/bin
 export PATH=$PATH:$GOPATH/bin
 
 # less
 export LESSHISTFILE="/dev/null"
+
+#
+# some additional paths
+#
+export PATH="$PATH:$WORK/rebar3"
