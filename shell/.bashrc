@@ -33,9 +33,6 @@ else
     alias lsd="ls -lF"
 fi
 
-# use vim for git interactive commands
-export GIT_SEQUENCE_EDITOR="vim"
-
 #
 # let's export some global env
 #
