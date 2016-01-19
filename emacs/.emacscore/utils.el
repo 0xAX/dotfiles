@@ -1,26 +1,28 @@
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Buffer helpers
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;;
-;; Prints file name of current buffer
-;;
 (defun file-name ()
   "Prints file name of buffer"
   (interactive)
   (message (buffer-file-name)))
 
-;;
-;; Open .emacs in new buffer
-;;
+(defun reload-file ()
+  "reload a file in the current buffer"
+  (interactive)
+  (find-alternate-file (file-name)))
+
+(defun insert-bash-she-bang ()
+  "Insert #!/bin/bash under cursor"
+  (interactive)
+  (insert "#!/bin/bash"))
+
 (defun emacs-config ()
   "Open ~/.emacs in new buffer"
   (interactive)
-  (find-file "~/.emacs"))
+  (find-file (file-name)))
 
-;;
-;; Rename file and buffer helper
-;;
+(defun reload-emacs-config ()
+  "Reload ~/.emacs"
+  (interactive)
+  (load "~/.emacs"))
+
 (defun rename-file-and-buffer ()
    "Rename the current buffer and file it is visiting."
   (interactive)
@@ -34,9 +36,6 @@
           (rename-file filename new-name t)
           (set-visited-file-name new-name t t)))))))
 
-;;
-;; Delete current buffer and file
-;;
 (defun delete-this-buffer-and-file ()
   "Remove file connected to current buffer and kill buffer."
   (interactive)
@@ -50,18 +49,12 @@
         (kill-buffer buffer)
         (message "File '%s' successfully removed" filename)))))
 
-;;
-;; Open file with sudo
-;;
 (defun sudo-find-file (file-name)
   "Like find file, but opens the file as root."
   (interactive "FSudo Find File: ")
   (let ((tramp-file-name (concat "/sudo::" (expand-file-name file-name))))
     (find-file tramp-file-name)))
 
-;;
-;; Load additional development modes
-;;
 (defun load-additional-dev-modes ()
   "Load additional development modes (web, and etc....)"
   (interactive)
@@ -86,4 +79,16 @@
   ;; restructuredTest mode
   ;;
   (load "~/.emacs.d/lisp/rst.el")
-  (require 'rst))
+  (require 'rst)
+  ;;
+  ;; some build/term and text extensions
+  ;;
+  (load "~/.emacscore/build/make.el")
+  (load "~/.emacscore/term.el")
+  (load "~/.emacs.d/lisp/rfc.el")
+  (load "~/.emacscore/markups.el")
+  (load "~/.emacscore/dev/shell.el")
+  ;;
+  ;; Enable rfc reader
+  ;;
+  (require 'irfc))

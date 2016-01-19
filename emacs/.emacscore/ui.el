@@ -2,11 +2,17 @@
 ;; Monokai theme
 ;;
 (if (display-graphic-p)
-    (load "~/.emacs.d/themes/monokai.el")
-  (load "~/.emacs.d/themes/smyx.el"))
-(if (display-graphic-p)
-    (enable-theme 'monokai)
-  (enable-theme 'smyx))
+        ;; load and configure material theme
+        (progn (load "~/.emacscore/themes/material.el")
+               (enable-theme 'material)
+               (load "~/.emacscore/themes/helpers/tabbar-material-style.el")
+               (load "~/.emacscore/themes/helpers/mode-line-material.el"))
+        ;; load and configure smyx
+        (progn (load "~/.emacscore/themes/smyx.el")
+               (enable-theme 'smyx)
+               (load "~/.emacscore/themes/helpers/tabbar-monokai-style.el")
+               (load "~/.emacscore/themes/helpers/mode-line-monokai.el"))
+        )
 
 ;;
 ;; Hide all components which i don't use
@@ -22,9 +28,6 @@
 ;; Set up cursor type and cursor color
 ;;
 (blink-cursor-mode 0)
-(setq-default cursor-type '(bar . 1))
-(setq cursor-type 'bar)
-(set-cursor-color "white")
 
 ;;
 ;; Set up line numbers
@@ -65,7 +68,6 @@
   (set-face-attribute 'default nil :height 150 :font "DejaVu Sans Mono"))
 
 ;; region color
-;; previously it was #2a3a3a
 (set-face-attribute 'region nil :background "grey10")
 
 ;;
@@ -143,8 +145,6 @@
 ;; Highlight current line
 (global-hl-line-mode 1)
 
-;; string line
-(set-face-background 'hl-line "gray30")
-
 ;; indentation
 (align-newline-and-indent)
+

@@ -103,16 +103,8 @@
 ;;
 (load "~/.emacscore/utils.el")
 (load "~/.emacscore/text-utils.el")
-(load "~/.emacscore/mode-line.el")
-(load "~/.emacscore/tabbar-style.el")
 (load "~/.emacscore/ui.el")
-
-
 (load "~/.emacscore/keybindings.el")
-(load "~/.emacscore/markups.el")
-(load "~/.emacscore/build/make.el")
-(load "~/.emacscore/term.el")
-(load "~/.emacs.d/lisp/rfc.el")
 
 ;;
 ;; Development
@@ -120,12 +112,6 @@
 (load "~/.emacscore/dev/c.el")
 (load "~/.emacscore/dev/erlang.el")
 (load "~/.emacscore/dev/elixir.el")
-(load "~/.emacscore/dev/shell.el")
-
-;;
-;; Enable rfc reader
-;;
-(require 'irfc)
 
 ;; Finish :)
 (message "All done, %s%s" (user-login-name) ".")

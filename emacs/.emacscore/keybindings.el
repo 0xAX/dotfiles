@@ -5,7 +5,7 @@
 ;; The F10, F10, F11, F12 are free
 (global-set-key [f1]  'dired-other-window)
 (global-set-key [f2]  'sudo-find-file)
-(global-set-key [f3]  'todo)
+(global-set-key [f3]  'reload-file)
 (global-set-key [f4]  'eval-buffer)
 (global-set-key [f5]  'open-terminal)
 (global-set-key [f6]  'rename-file-and-buffer)
@@ -14,6 +14,13 @@
 (global-set-key [f9]  'ibuffer)
 (global-set-key [f10] 'start-irc)
 (global-set-key [f12] 'load-additional-dev-modes)
+
+;;
+;; Unset some standard key bindings
+;;
+(global-unset-key "\C-f")
+(global-unset-key "\C-l")
+(global-unset-key "\C-b")
 
 ;;
 ;; external applications
@@ -42,12 +49,11 @@
 ;;
 ;; buffers manipulations
 ;;
-(global-unset-key "\C-f")
-
 (global-set-key "\C-k" 'kill-this-buffer)
 (global-set-key "\C-f" 'file-name)
 (global-set-key "\M-w" 'save-buffers-kill-emacs)
 (global-set-key "\M-d" 'delete-this-buffer-and-file)
+(global-set-key "\C-b" 'insert-bash-she-bang)
 
 (global-set-key (kbd "M-<left>")  'beginning-of-line)
 (global-set-key (kbd "M-<right>") 'end-of-line)
@@ -73,6 +79,7 @@
 ;; Emacs lisp
 ;;
 (global-set-key (kbd "C-e") 'eval-defun)
+(global-set-key (kbd "C-l") 'reload-emacs-config)
 
 ;;
 ;; ui

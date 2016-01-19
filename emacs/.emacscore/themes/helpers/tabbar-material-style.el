@@ -49,42 +49,34 @@
 (setq tabbar-buffer-groups-function 'my-tabbar-buffer-groups)
 
 ;; tabbar background
-(setq tabbar-background-color "#333333")
+(setq tabbar-background-color "#263238")
 
 ;;
 ;; selected tabbar
 ;;
 (set-face-attribute
  'tabbar-selected nil
- :background "dim gray"
- :foreground "white"
+ :background "#263238"
+ :foreground "#b0bec5"
  :family "Droid Sans Mono"
- :box '(:line-width 1 :color "gray30" :style nil))
+ :box '(:line-width 1 :color "#263238" :style nil))
 
 ;;
 ;; unselected tabbar
 ;;
 (set-face-attribute
  'tabbar-unselected nil
- :background "#333333"
- :foreground "gray"
- :box '(:line-width 1 :color "#333333" :style nil))
+ :background "#263238"
+ :foreground "#8a8a8a"
+ :box '(:line-width 1 :color "#263238" :style nil))
 
 ;;
 ;; tabbar separator color
 ;;
 (set-face-attribute
  'tabbar-separator nil
- :background "gray20"
- :height 0.6)
-
-;;
-;; tabbar buttons
-;;
-(set-face-attribute
- 'tabbar-button nil
- :background "#333333"
- :box '(:line-width 1 :color "#333333" :style nil))
+ :background "#263238"
+ :height 0.5)
 
 ;;
 ;; Enable tabbar mode
