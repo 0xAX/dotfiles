@@ -41,6 +41,12 @@
 (delete-selection-mode 1)
 
 ;;
+;; display file name to title
+;;
+(setq-default frame-title-format
+              (list '((buffer-file-name " %f" (dired-directory dired-directory
+                        (revert-buffer-function " %b" ("%b – Dir:  " default-directory)))))))
+;;
 ;; Current locale
 ;;
 (prefer-coding-system 'utf-8)
@@ -104,6 +110,7 @@
 (load "~/.emacscore/utils.el")
 (load "~/.emacscore/text-utils.el")
 (load "~/.emacscore/ui.el")
+
 (load "~/.emacscore/keybindings.el")
 
 ;;

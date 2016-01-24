@@ -16,7 +16,7 @@
 (defun emacs-config ()
   "Open ~/.emacs in new buffer"
   (interactive)
-  (find-file (file-name)))
+  (find-file "~/.emacs"))
 
 (defun reload-emacs-config ()
   "Reload ~/.emacs"
