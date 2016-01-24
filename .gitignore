@@ -1,3 +1,4 @@
+*.tut
 *.autosave
 !*.patch
 emacs/.emacs.d/ac-comphist.dat
