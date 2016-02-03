@@ -29,7 +29,7 @@ bindsym $mod+Shift+f exec terminator --profile=alex -x mc ~/
 # restart i3
 bindsym $mod+c exec i3-msg restart
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run -b -sb 'black' -nf 'white'  -nb 'sienna'
+bindsym $mod+d exec dmenu_run -b -fn "-xos4-terminus-medium-r-*-*-18-*" -sb "sienna"
 # go to the next workspace
 bindsym $mod+Tab workspace next
 # go to the prevoious workspace
