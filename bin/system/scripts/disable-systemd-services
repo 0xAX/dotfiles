@@ -18,5 +18,6 @@ sudo systemctl disable iscsi.service
 sudo systemctl disable firewalld.service
 sudo systemctl disable iio-sensor-proxy.service
 sudo systemctl disable remote-fs.target
+sudo systemctl disable crond.service
 echo "Done"
 exit 0
