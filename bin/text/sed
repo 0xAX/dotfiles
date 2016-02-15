@@ -1,0 +1,4 @@
+#
+# this scripts waits input and returns a text before `!` symbol with it symbol
+#
+sed -e 's/\(\!\).*/\1/g'

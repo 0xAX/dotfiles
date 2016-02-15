@@ -10,7 +10,7 @@ QEMU_OPTIONS="-snapshot -m 8GB -serial stdio"
 
 if [[ "$1" == "--debug" ]]
 then
-    DEBUG="-s"
+    DEBUG=" -s "
 fi
 
-qemu-system-x86_64 $DEBUG $QERMU_OPTIONS -kernel $KERNEL -initrd $INITRD -append "$KERNEL_OPTIONS"
+qemu-system-x86_64 $DEBUG $QEMU_OPTIONS -kernel $KERNEL -initrd $INITRD -append "$KERNEL_OPTIONS"

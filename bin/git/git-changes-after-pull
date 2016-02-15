@@ -1,0 +1,9 @@
+#!/bin/bash
+
+branch=$1
+
+if [ -z "$branch" ]; then
+    branch="master"
+fi
+
+git diff $branch@{1} $branch

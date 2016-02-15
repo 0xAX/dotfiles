@@ -1,0 +1,3 @@
+#!/bin/bash
+
+./configure --enable-link-time-optimization --without-pop --without-kerberos --without-kerberos5 --without-hesiod --with-sound=alsa --with-x-toolkit=gtk3 --with-xpm --with-jpeg --with-tiff --with-gif --with-png --with-rsvg --with-cairo --with-xml2 --with-imagemagick --with-xft --without-libotf --with-xim --with-xaw3d --with-dbus --without-gconf --without-gsettings --without-selinux --with-gnutls --with-zlib --with-modules --with-file-notification=inotify --without-makeinfo --with-x && make

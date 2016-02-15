@@ -1,0 +1,4 @@
+#!/bin/bash
+
+SYMBOL=$1
+sed -e 's/\(\!\).*/\1/g'

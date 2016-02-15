@@ -3,6 +3,6 @@
 AR=ar ./configure CFLAGS='-g -O0 -ftrapv' --enable-compat-libs           \
   --disable-tests --disable-kdbus --enable-silent-rules                  \
   --disable-fast-install --disable-coverage --enable-dependency-tracking \
-  --sysconfdir=/etc --localstatedir=/var --libdir=/usr/lib64
+   --disable-nls --sysconfdir=/etc --localstatedir=/var --libdir=/usr/lib64
 
 make -j4 && sudo make install-man
