@@ -1,7 +1,11 @@
 #!/bin/bash
 
+PREFIX=/usr/local
+
 cd $HOME/dev/git &&
-sudo rm -rf /usr/bin/local/git &&
-sudo rm -rf /usr/local/bin/git &&
-sudo rm -rf /usr/local/libexec/git-core &&
-make -j6 NO_GETTEXT=1 BLK_SHA1=1 prefix=/usr/local && sudo make prefix=/usr/local install
+sudo rm -rf /usr/bin/local/git $PREFIX/bin/git $PREFIX/libexec/git-core
+make -j6 NO_OPENSSL=1 USE_LIBPCRE=1 HAVE_ALLOCA_H=1 V=1 NO_GETTEXT=1 HAVE_PATHS_H=1 \
+     HAVE_STRINGS_H=1 BLK_SHA1=1 prefix=$PREFIX NO_SVN_TESTS=1 NO_DARWIN_PORTS=1 \
+     NO_APPLE_COMMON_CRYPTO=1 NO_PYTHON=1 NO_TCLTK=1 DEFAULT_HELP_FORMAT=man \
+     HAVE_CLOCK_GETTIME=1 HAVE_CLOCK_MONOTONIC=1 HAVE_GETDELIM=1 \
+     && sudo make prefix=$PREFIX install
