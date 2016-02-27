@@ -97,7 +97,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (require 'package)
 (add-to-list 'package-archives
-             '("melpa" . "http://melpa.org/packages/"))
+             '(("melpa" . "http://melpa.org/packages/")
+               ("gnu"   . "https://elpa.gnu.org/packages/")))
+
+
 (package-initialize)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -110,7 +113,6 @@
 (load "~/.emacscore/utils.el")
 (load "~/.emacscore/text-utils.el")
 (load "~/.emacscore/ui.el")
-
 (load "~/.emacscore/keybindings.el")
 
 ;;
