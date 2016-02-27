@@ -91,4 +91,11 @@
   ;;
   ;; Enable rfc reader
   ;;
-  (require 'irfc))
+  (require 'irfc)
+  ;;
+  ;; tex
+  ;;
+  (load "~/.emacs.d/latex-preview-pane/latex-preview-pane.el")
+  (require 'latex-preview-pane)
+  (latex-preview-pane-enable)
+)

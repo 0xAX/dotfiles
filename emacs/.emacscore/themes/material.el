@@ -315,7 +315,7 @@
    `(diredp-write-priv ((,class (:foreground ,yellow :background nil))))
 
    ;; Magit
-   `(magit-branch ((,class (:foreground ,green))))
+   `(magit-branch ((,class (:foreground ,yellow))))
    `(magit-diff-added ((,class (:inherit diff-added))))
    `(magit-diff-added-highlight ((,class (:inherit magit-diff-added
                                           :background ,far-background))))
@@ -352,7 +352,8 @@
    `(magit-diffstat-removed ((t (:foreground ,red))))
    `(magit-process-ok    ((t (:foreground ,green  :weight bold))))
    `(magit-process-ng    ((t (:foreground ,red    :weight bold))))
-   `(magit-branch-local  ((t (:foreground ,blue   :weight bold))))
+   `(magit-branch-local  ((t (:foreground ,red
+                                          ))))
    `(magit-branch-remote ((t (:foreground ,green  :weight bold))))
    `(magit-tag           ((t (:foreground ,orange :weight bold))))
    `(magit-hash          ((t (:foreground ,comment))))
