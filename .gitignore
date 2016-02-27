@@ -6,3 +6,4 @@ emacs/.emacs.d/ido.last
 emacs/.emacs.d/session.*
 emacs/.emacs.d/tramp
 rfc*.txt
+emacs/.emacs.d/elpa
