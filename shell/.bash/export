@@ -52,3 +52,8 @@ export LESSHISTFILE="/dev/null"
 # some additional paths
 #
 export PATH="$PATH:$WORK/rebar3"
+
+#
+# man
+#
+export MANPATH="/usr/share/man/:/usr/local/pgsql/share/man/"
