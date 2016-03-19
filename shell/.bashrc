@@ -14,6 +14,20 @@ BASHRC_DIR="$HOME/.bash"
 GNUPGHOME="$HOME/.gnupg"
 
 #
+# some systemd related
+#
+SYSTEMD_SCRIPTS="/usr/lib/systemd/scripts"
+SYSTEMD_SYSTEM="/usr/lib/systemd/system"
+SYSTEMD_CONF="/etc/systemd/system.conf"
+SYSTEMD_CONFIGS="/etc/systemd/system.conf.d"
+SYSTEMD_USER_CONF="/etc/systemd/user.conf"
+
+#
+# virtualization
+#
+NSPAWN_FEDORA_PATH="$OLD_HDD/virt"
+
+#
 # some xdg
 #
 XDG_DESKTOP_DIR="$HOME/Desktop"

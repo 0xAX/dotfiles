@@ -128,7 +128,4 @@ alias pac-update="sudo pacman -Suy"
 alias terminator="terminator --profile=alex "
 
 # postgres
-export MY_TEST_DB="/home/alex/olddisk/home/alex/db"
-export PGDATA="$MY_TEST_DB"
-alias recreate_test_db="rm -rf $MY_TEST_DB && initdb --auth=trust -D /home/alex/olddisk/home/alex/db --encoding=utf8 --locale=\"en_US.UTF-8\""
 alias oid2name="$DEV/postgres/contrib/oid2name/oid2name "
