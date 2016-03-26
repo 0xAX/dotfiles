@@ -15,6 +15,7 @@
               ((string-equal ".c" (substring (buffer-name) (- (length (buffer-name)) 2) (length (buffer-name)))) "system")
               ((string-equal ".cc" (substring (buffer-name) (- (length (buffer-name)) 3) (length (buffer-name)))) "system")
               ((string-equal ".hh" (substring (buffer-name) (- (length (buffer-name)) 3) (length (buffer-name)))) "system")
+              ((string-equal ".hpp" (substring (buffer-name) (- (length (buffer-name)) 4) (length (buffer-name)))) "system")
               ((string-equal ".S" (substring (buffer-name) (- (length (buffer-name)) 2) (length (buffer-name)))) "system")
               ((string-equal ".s" (substring (buffer-name) (- (length (buffer-name)) 2) (length (buffer-name)))) "system")
               ((string-equal ".asm" (substring (buffer-name) (- (length (buffer-name)) 4) (length (buffer-name)))) "system")
