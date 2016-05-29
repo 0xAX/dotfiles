@@ -76,12 +76,6 @@
 (global-set-key "\C-r" 'redo)
 
 ;;
-;; Emacs lisp
-;;
-(global-set-key (kbd "C-e") 'eval-defun)
-(global-set-key (kbd "C-l") 'reload-emacs-config)
-
-;;
 ;; ui
 ;;
 (global-set-key [M-f12] 'toggle-mode-line)
@@ -126,15 +120,7 @@
 (add-hook 'markdown-mode-hook (lambda () (local-set-key (kbd "C-c q") #'markdown-insert-blockquote)))
 
 ;;
-;; js
+;; Emacs lisp
 ;;
-(add-hook 'js2-mode-hook (lambda () (local-set-key (kbd "C-c h") #'js2-mode-hide-element)))
-(add-hook 'js2-mode-hook (lambda () (local-set-key (kbd "C-c s") #'js2-mode-show-element)))
-(add-hook 'js2-mode-hook (lambda () (local-set-key (kbd "RET") #'js2-line-break)))
-
-;;
-;; web mode
-;;
-(add-hook 'web-mode-hook (lambda () (local-set-key (kbd "RET") #'newline-and-indent)))
-(add-hook 'web-mode-hook (lambda () (local-set-key (kbd "\C-c C-e") #'web-mode-dom-errors-show)))
-(add-hook 'web-mode-hook (lambda () (local-set-key (kbd "\C-c C-c") 'web-mode-comment-or-uncomment)))
+(add-hook 'emacs-lisp-mode-hook (lambda () (local-set-key (kbd "\C-e") #'eval-buffer)))
+(add-hook 'emacs-lisp-mode-hook (lambda () (local-set-key (kbd "\C-l") #'reload-emacs-config)))

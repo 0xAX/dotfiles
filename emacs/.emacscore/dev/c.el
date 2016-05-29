@@ -3,12 +3,12 @@
 ;;
 ;; Indentation for C code
 ;;
-(setq c-basic-offset 4)
+(setq c-basic-offset 8)
 (setq c-default-style      '((java-mode . "java")
 			     (awk-mode . "awk")
 			     (other . "linux")))
-(setq-default c-basic-offset 4)
-(setq-default tab-width 4 indent-tabs-mode t)
+(setq-default c-basic-offset 8)
+(setq-default tab-width 8 indent-tabs-mode t)
 (define-key c-mode-base-map (kbd "RET") 'newline-and-indent)
 
 ;;
