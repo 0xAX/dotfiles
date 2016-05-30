@@ -31,11 +31,6 @@
 (desktop-save-mode 0)
 
 ;;
-;; delete trailing whitespaces
-;;
-;;(add-hook 'before-save-hook 'delete-trailing-whitespace)
-
-;;
 ;; Delete text in selection mode when typing
 ;;
 (delete-selection-mode 1)
@@ -97,8 +92,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (require 'package)
 (add-to-list 'package-archives
-             '(("melpa" . "http://melpa.org/packages/")
-               ("gnu"   . "https://elpa.gnu.org/packages/")))
+             '(("melpa" . "http://melpa.org/packages/")))
 
 
 (package-initialize)
