@@ -346,7 +346,7 @@
   :group 'edit)
 
 ;; This is autoloaded so that it will take effect without users having
-;; to `load'/`require' this package in their init file.
+;; to `load'/`require' this package in their init file.  
 ;;;###autoload
 (defcustom irfc-assoc-mode nil
   "If non-nil, RFC documents are associated with `irfc-mode'.
