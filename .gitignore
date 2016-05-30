@@ -5,5 +5,6 @@ emacs/.emacs.d/ac-comphist.dat
 emacs/.emacs.d/ido.last
 emacs/.emacs.d/session.*
 emacs/.emacs.d/tramp
+emacs/.emacs.d/elpa/archives/*
 rfc*.txt
 emacs/.emacs.d/elpa
