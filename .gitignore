@@ -1,6 +1,7 @@
 *.tut
 *.autosave
 !*.patch
+emacs/./emacs.d/elpa
 emacs/.emacs.d/ac-comphist.dat
 emacs/.emacs.d/ido.last
 emacs/.emacs.d/session.*
