@@ -1,0 +1,4 @@
+#!/bin/bash
+
+./configure --disable-profiling --enable-integer-datetimes --disable-nls --enable-spinlocks --enable-atomics --enable-debug --enable-cassert --enable-thread-safety --with-python --with-perl --with-gssapi --with-pam --with-ldap --with-openssl --with-selinux --with-systemd --with-libxml --with-libxslt  --with-gnu-ld --mandir=/usr/share/man --without-tcl
+

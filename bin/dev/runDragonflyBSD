@@ -14,3 +14,5 @@ qemu-system-sparc64 -eanbl-kvm -m 1024 -cdrom FreeBSD-10.2-RELEASE-sparc64-disc1
 
 # working
 #qemu-system-x86_64 -cdrom /home/alex/olddisk/home/alex/Downloads/dfly-x86_64-4.2.4_REL.iso -hda /home/alex/olddisk/home/alex/dfly-qcow2.img #-netdev user,id=network0 -device e1000,netdev=network0 -cpu Broadwell -smp 8 -vga std
+
+# qemu-system-x86_64 -M SandyBridge -netdev user,id=network0 -device e1000,netdev=network0 -cdrom /home/alex/olddisk/home/alex/Downloads/ -hda /home/alex/olddisk/home/alex/bsd.qcow -boot d -m 1024
