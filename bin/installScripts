@@ -13,23 +13,12 @@ GIT_DIR="$SCRIPTS_DIR/git/*"
 UBUNTU_DIR="$SCRIPTS_DIR/ubuntu/*"
 MATH_DIR="$SCRIPTS_DIR/math/*"
 SYSTEM_DIR="$SCRIPTS_DIR/system/scripts/*"
-#SYSTEMD_SCRIPTS_DIR="$SCRIPTS_DIR/system/systemd-scripts/*"
-
-# destination for scripts that will be executed by systemd
-#SYSTEMD_SCRIPTS_PATH="/usr/lib/systemd/scripts"
 
 echo "Copying standard scripts to the $SCRIPTS_DEST"
 sudo cp -r -v $SCRIPTS_DIR/installScripts $SCRIPTS_DEST
 sudo cp -r -v $SCRIPTS_DIR/dotfiles $SCRIPTS_DEST
-echo "Done."
+echo -e "\e[32mDone.\e[39m"
 
 echo "Copying scripts to $SCRIPTS_DEST"
 sudo cp -r -v $BUILD_DIR $DEV_DIR $FEDIRA_DIR $UBUNTU_DIR $GIT_DIR $SYSTEM_DIR $MATH_DIR $SCRIPTS_DEST
-echo "Done."
-
-#echo "Copying systemd-scripts to $SYSTEMD_SCRIPTS_PATH"
-#sudo mkdir -p -v $SYSTEMD_SCRIPTS_PATH
-#sudo cp -r -v $SYSTEMD_SCRIPTS_DIR $SYSTEMD_SCRIPTS_PATH
-#echo "Done."
-
 echo -e "\e[32mDone.\e[39m"
