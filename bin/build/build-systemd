@@ -5,4 +5,5 @@
   --disable-fast-install --disable-coverage --enable-dependency-tracking                        \
   --disable-nls --sysconfdir=/etc --localstatedir=/var --libdir=/usr/lib64                      \
   --with-gnu-ld --enable-kmod --enable-dbus --enable-utmp --enable-xkbcommon                    \
-  --enable-blkid --enable-seccomp --enable-ima --enable-selinux --enable-coredump && make -j4
+  --enable-blkid --enable-seccomp --enable-ima --enable-selinux --enable-coredump               \
+  --enable-manpages && make -j4

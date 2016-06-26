@@ -2,7 +2,6 @@
 
 shopt -s extglob
 
-pwd=$PWD
 SCRIPTS_DIR="$HOME/bin"
 SCRIPTS_DEST="/usr/bin"
 
@@ -14,11 +13,12 @@ UBUNTU_DIR="$SCRIPTS_DIR/ubuntu/*"
 MATH_DIR="$SCRIPTS_DIR/math/*"
 SYSTEM_DIR="$SCRIPTS_DIR/system/scripts/*"
 
-echo "Copying standard scripts to the $SCRIPTS_DEST"
-sudo cp -r -v $SCRIPTS_DIR/installScripts $SCRIPTS_DEST
-sudo cp -r -v $SCRIPTS_DIR/dotfiles $SCRIPTS_DEST
-echo -e "\e[32mDone.\e[39m"
+for SCRIPT in $BUILD_DIR $DEV_DIR $FEDIRA_DIR $GIT_DIR $UBUNTU_DIR \
+                         $MATH_DIR $SYSTEM_DIR; do
+        chmod +x $SCRIPT
+done
 
 echo "Copying scripts to $SCRIPTS_DEST"
-sudo cp -r -v $BUILD_DIR $DEV_DIR $FEDIRA_DIR $UBUNTU_DIR $GIT_DIR $SYSTEM_DIR $MATH_DIR $SCRIPTS_DEST
+sudo cp -r -v $BUILD_DIR $DEV_DIR $FEDIRA_DIR $UBUNTU_DIR $GIT_DIR \
+     $SYSTEM_DIR $MATH_DIR $SCRIPTS_DEST
 echo -e "\e[32mDone.\e[39m"
