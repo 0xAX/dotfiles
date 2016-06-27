@@ -109,6 +109,7 @@ shopt -s nocasematch
 export HISTFILESIZE=-1
 export HISTSIZE=-1
 export HISTTIMEFORMAT="[%F %T] "
+
 # disable line editing in emacs terminal
 export EMACS=1
 export FCEDIT=emacs

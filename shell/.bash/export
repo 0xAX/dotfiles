@@ -1,14 +1,23 @@
 #!/bin/bash
 
 #
+# My local scripts
+#
+export PATH=$PATH:$HOME/bin
+
+#
+# some additional paths
+#
+export PATH=$PATH:$WORK/rebar3
+export PATH=$PATH:$HOME/.cargo/bin
+export PATH=$PATH:$DEV/docker/bundles/1.12.0-dev/binary-daemon/
+export PATH=$PATH:$DEV/rkt/build-rkt-1.8.0+git/bin
+export PATH=$PATH:$DEV/rkt/build-rkt-1.8.0+git/bin
+
+#
 # elixir
 #
 export PATH="$PATH:$WORK/elixir/bin"
-
-#
-# docker
-#
-export PATH="$PATH:$DEV/docker/bundles/latest/binary"
 
 #
 # phabricator, tetrapak and rebar
@@ -25,6 +34,7 @@ export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$HOME_HDD/usr/local/pgsql/lib/"
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib/"
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib"
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:deps/dnssd/priv"
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$HOME/dev/libd"
 
 export LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LIBRARY_PATH
 
@@ -41,7 +51,7 @@ export PATH=$PATH:$HOME_HDD/usr/local/pgsql/bin/
 
 # golang
 export GOROOT=$DEV/golang/go
-export GOPATH=$DEV/dev/golang
+export GOPATH=$DEV/golang
 export PATH=$PATH:$GOROOT/bin
 export PATH=$PATH:$GOPATH/bin
 
@@ -49,11 +59,16 @@ export PATH=$PATH:$GOPATH/bin
 export LESSHISTFILE="/dev/null"
 
 #
-# some additional paths
-#
-export PATH="$PATH:$WORK/rebar3"
-
-#
 # man
 #
 export MANPATH="/usr/share/man/:/usr/local/pgsql/share/man/:$DEV/postgres/doc/src/sgml"
+
+#
+# rust
+#
+export RUST_SRC_PATH=~/dev/rust/src
+
+#
+# docker options
+#
+export DOCKER_STORAGE_OPTIONS="overlay"
