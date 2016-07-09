@@ -10,7 +10,8 @@ client.focused_inactive #333333 #5f676a #ffffff #484e50
 # Let's use Alt for mode key
 set $mod Mod1
 # default font
-font pango:DejaVu Sans Mono, FontAwesome 12
+font pango:DejaVu Sans Mono, FontAwesome 13
+
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
@@ -19,7 +20,7 @@ bindsym $mod+Return exec i3-sensible-terminal --profile=alex
 # start emacs
 bindsym $mod+e exec terminator --profile=alex -x emacs
 # start mutt
-bindsym $mod+m exec terminator --profile=alex -e "TERM=xterm-256color ~/dev/muttx/mutt"
+bindsym $mod+m exec terminator --profile=alex -e "TERM=xterm-256color ~/dev/mail/mutt"
 # start browser
 bindsym $mod+b exec firefox
 # kill focused window
