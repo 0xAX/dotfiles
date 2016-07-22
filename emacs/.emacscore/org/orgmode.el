@@ -1,9 +1,13 @@
 (require 'org-install)
+
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
 (setq org-log-done t)
 
+;;
+;; unset some keybindings, to make it more accustomed
+;;
 (add-hook 'org-mode-hook
           '(lambda ()
              (define-key org-mode-map [(control tab)] nil)))

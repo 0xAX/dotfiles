@@ -22,6 +22,7 @@
 ;;;;        Standard settings
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (add-to-list 'load-path "~/.emacs.d/lisp")
+(add-to-list 'load-path "~/dev/git2el")
 
 ;;
 ;; Some utils
@@ -41,6 +42,7 @@
 (setq-default frame-title-format
               (list '((buffer-file-name " %f" (dired-directory dired-directory
                         (revert-buffer-function " %b" ("%b – Dir:  " default-directory)))))))
+
 ;;
 ;; Current locale
 ;;
@@ -91,9 +93,7 @@
 ;;;;        Package manager
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (require 'package)
-(add-to-list 'package-archives
-             '(("melpa" . "http://melpa.org/packages/")))
-
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 
 (package-initialize)
 
@@ -107,6 +107,13 @@
 (load "~/.emacscore/utils.el")
 (load "~/.emacscore/text-utils.el")
 (load "~/.emacscore/ui.el")
+
+
+
+
+
+
+(add-to-list 'auto-mode-alist '("/mutt" . mail-mode))
 (load "~/.emacscore/keybindings.el")
 
 ;;
@@ -115,6 +122,26 @@
 (load "~/.emacscore/dev/c.el")
 (load "~/.emacscore/dev/erlang.el")
 (load "~/.emacscore/dev/elixir.el")
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ido-enable-last-directory-history nil)
+ '(ido-max-work-directory-list 0)
+ '(ido-max-work-file-list 0)
+ '(ido-record-commands nil)
+ '(indent-tabs-mode nil)
+ '(package-selected-packages
+   (quote
+    (magit debbugs seq racer ht gotest go-scratch go-rename go-guru go-eldoc go-direx go-autocomplete company-go company-emoji company-c-headers))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(show-paren-match ((t (:background "#116599" :foreground "white")))))
 
 ;; Finish :)
 (message "All done, %s%s" (user-login-name) ".")

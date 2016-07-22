@@ -31,3 +31,8 @@
 ;; json
 ;;
 (add-to-list 'auto-mode-alist '("\\.json$" . js-mode))
+
+;;
+;; toml
+;;
+(load "~/.emacs.d/lisp/toml.el")

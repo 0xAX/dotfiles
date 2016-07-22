@@ -94,9 +94,8 @@
   ;;
   (require 'irfc)
   ;;
-  ;; tex
+  ;; Load mode-specific keybindings after all modes will be
+  ;; loaded
   ;;
-  (load "~/.emacs.d/latex-preview-pane/latex-preview-pane.el")
-  (require 'latex-preview-pane)
-  (latex-preview-pane-enable)
+  (load "~/.emacscore/keybindings-hooks.el")
 )
