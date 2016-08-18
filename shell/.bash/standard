@@ -136,9 +136,9 @@ DockerRemoveContainers() {
 }
 
 function DockerInstall() {
-    sudo cp -r /home/alex/dev/docker/bundles/1.12.0-dev/binary-daemon/docker* /usr/bin
-    sudo cp -r /home/alex/dev/docker/bundles/1.12.0-dev/binary-client/docker-1.12.0-dev /usr/bin
-    sudo mv /usr/bin/docker-1.12.0-dev /usr/bin/docker
+    sudo cp -r /home/alex/dev/docker/bundles/latest/binary-daemon/docker* /usr/bin
+    sudo cp -r /home/alex/dev/docker/bundles/latest/binary-client/docker-1.13.0-dev /usr/bin
+    sudo mv /usr/bin/docker-1.13.0-dev /usr/bin/docker
 }
 
 alias docker-install=DockerInstall
