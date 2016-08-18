@@ -114,6 +114,7 @@
 ;;
 (load "~/.emacscore/dev/erlang.el")
 (load "~/.emacscore/dev/elixir.el")
+(load "~/.emacscore/vcs/magit.el")
 
 (add-to-list 'load-path "~/.emacs.d/emacs-neotree")
 (require 'neotree)
