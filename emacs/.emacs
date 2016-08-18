@@ -107,21 +107,17 @@
 (load "~/.emacscore/utils.el")
 (load "~/.emacscore/text-utils.el")
 (load "~/.emacscore/ui.el")
-
-
-
-
-
-
-(add-to-list 'auto-mode-alist '("/mutt" . mail-mode))
 (load "~/.emacscore/keybindings.el")
 
 ;;
 ;; Development
 ;;
-(load "~/.emacscore/dev/c.el")
 (load "~/.emacscore/dev/erlang.el")
 (load "~/.emacscore/dev/elixir.el")
+
+(add-to-list 'load-path "~/.emacs.d/emacs-neotree")
+(require 'neotree)
+(global-set-key [f8] 'neotree-toggle)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -135,13 +131,23 @@
  '(indent-tabs-mode nil)
  '(package-selected-packages
    (quote
-    (magit debbugs seq racer ht gotest go-scratch go-rename go-guru go-eldoc go-direx go-autocomplete company-go company-emoji company-c-headers))))
+    (magit-annex magit-filenotify magit-find-file magit-gerrit magit-gh-pulls magit-gitflow magit-p4 magit-popup magit-rockstar magit-stgit magit-svn magit-topgit magit debbugs seq racer ht gotest go-scratch go-rename go-guru go-eldoc go-direx go-autocomplete company-go company-emoji company-c-headers))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(show-paren-match ((t (:background "#116599" :foreground "white")))))
+
+;;
+;; highlight for mutt messages
+;;
+(add-to-list 'auto-mode-alist '("/mutt" . mail-mode))
+
+;;
+;; Load *.c later to make working indentation
+;;
+(load "~/.emacscore/dev/c.el")
 
 ;; Finish :)
 (message "All done, %s%s" (user-login-name) ".")

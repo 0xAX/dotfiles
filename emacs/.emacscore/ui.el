@@ -28,6 +28,7 @@
 ;; Set up cursor type and cursor color
 ;;
 (blink-cursor-mode 0)
+(setq-default cursor-type 'bar)
 
 ;;
 ;; Set up line numbers
@@ -64,8 +65,12 @@
 ;;
 ;; Set font
 ;;
-(when (member "DejaVu Sans Mono" (font-family-list))
-  (set-face-attribute 'default nil :height 150 :font "DejaVu Sans Mono"))
+(when (member "Inconsolata-10, Monaco-5, Consolas, 'Courier New', Courier" (font-family-list))
+  (set-face-attribute 'default nil :height 120 :font "Inconsolata-40, Monaco, Consolas, 'Courier New', Courier"))
+(set-default-font "Inconsolata-15")
+
+;(when (member "DejaVu Sans Mono" (font-family-list))
+;  (set-face-attribute 'default nil :height 150 :font "DejaVu Sans Mono"))
 
 ;; region color
 (set-face-attribute 'region nil :background "grey10")
@@ -145,6 +150,6 @@
 ;; Highlight current line
 (global-hl-line-mode 1)
 
-;; indentation
-(align-newline-and-indent)
 
+;; indentation
+;(align-newline-and-indent)

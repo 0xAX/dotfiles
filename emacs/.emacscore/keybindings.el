@@ -99,3 +99,7 @@
 (global-unset-key "\C-p")
 (global-set-key (kbd "C-p l") 'package-list-packages)
 (global-set-key (kbd "C-p i") 'package-install)
+
+;; increase/decrease fonts
+(global-set-key (kbd "C-+") 'text-scale-increase)
+(global-set-key (kbd "C--") 'text-scale-decrease)
