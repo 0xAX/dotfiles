@@ -51,7 +51,7 @@ PYTHON=" --with-python "
   $LOGIN_VCS $LOGINSTAT_MAIL $WRITE $GNU_LD $NCURSES $SLANG $PYTHON $SMACK $UTEMPTER $READLINE      \
   $AUDIT $SELINUX $USRDIR_PATH $PYLIB_MOUNT $BASH_COMPLETION $CHFN_LISTED $CHFN $MINIX $CRAMFS      \
   $BFS $FSCK $LOSETUP $LIBFDISK $MOUNT $LIB_MOUNT $LIB_BLKID $LIB_UUID $GTK_DOCK $MAN $BIN $SBIN    \
-  $LIBEXEC && make -j4 && sudo make install
+  $LIBEXEC "--without-ncursesw" && make -j4 && sudo make install
 
 if [ $? -eq 0 ]
 then

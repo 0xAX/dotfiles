@@ -1,0 +1,3 @@
+#!/bin/bash
+
+./configure --enable-tpm --enable-sdjournal --with-stage1-flavors='src,coreos,fly' --with-stage1-systemd-src=~/dev/systemd
