@@ -1,0 +1,5 @@
+#!/bin/bash
+
+sudo mkdir /usr/local/mysql/data
+sudo /usr/local/mysql/scripts/mysql_install_db --basedir=/usr/local/mysql --datadir=/usr/local/mysql/data --user=root --skip-grant
+sudo chown -R mysql /usr/local/mysql/bin/data

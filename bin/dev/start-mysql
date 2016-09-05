@@ -1,6 +1,14 @@
 #!/bin/bash
 
-/usr/local/mysql/bin/mysqld
+MYSQL_LOG_FILE=/var/log/mysql/error.log
 
-#use mysql;
-#update user set authentication_string=password(''), plugin='mysql_native_password' where user='root';
+sudo mkdir -p /var/log/mysql
+sudo chown -R mysql /var/log/mysql
+sudo /usr/local/mysql/bin/mysqld_safe > /dev/null 2>&1 &
+
+if [ $? -ne 0 ]; then
+    echo "Something going wrong. See $MYSQL_LOG_FILE"
+    exit -1
+fi
+
+echo "Done."

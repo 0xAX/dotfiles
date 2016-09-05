@@ -13,6 +13,8 @@ export PATH=$PATH:$HOME/.cargo/bin
 export PATH=$PATH:$DEV/docker/bundles/latest/binary-daemon/
 export PATH=$PATH:$DEV/rkt/build-rkt-1.11.0+git/target/bin
 export PATH=$PATH:$DEV/rkt/build-rkt-1.11.0+git/target/bin
+export PATH=$PATH:/usr/local/mysql/bin
+export PATH=$PATH:/usr/local/mysql/scripts
 
 #
 # elixir
@@ -35,6 +37,7 @@ export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib/"
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib"
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:deps/dnssd/priv"
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$HOME/dev/libd"
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/mysql/lib"
 
 export LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LIBRARY_PATH
 
