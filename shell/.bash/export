@@ -15,7 +15,7 @@ export PATH=$PATH:$DEV/rkt/build-rkt-1.11.0+git/target/bin
 export PATH=$PATH:$DEV/rkt/build-rkt-1.11.0+git/target/bin
 export PATH=$PATH:/usr/local/mysql/bin
 export PATH=$PATH:/usr/local/mysql/scripts
-
+export PATH=$PATH:$DEV/llvm-build/bin
 #
 # elixir
 #
