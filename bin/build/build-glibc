@@ -1,4 +1,9 @@
 #!/bin/bash
 
-cd dev/build
-../glibc/configure --prefix=/tools --build=$(../glibc/scripts/config.guess) libc_cv_forced_unwind=yes libc_cv_c_cleanup=yes --enable-shared --enable-addons --disable-force-install --enable-multi-arch --enable-obsolete-rpc
+GLIBC_DIR=/home/alex/dev/glibc
+
+LD_LIBRARY_PATH="" $GLIBC_DIR/configure --prefix=/usr --enable-bind-now --disable-profile --without-gd \
+                                        --enable-shared --without-cvs --disable-multi-arch --disable-profile \
+                                        --with-headers=/usr/include --enable-stackguard-randomization \
+                                        --enable-lock-elision=yes --enable-nss-crypt \
+                                        --enable-obsolete-rpc --enable-mathvec --with-fp --with-selinux && make

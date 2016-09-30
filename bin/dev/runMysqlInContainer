@@ -1,0 +1,5 @@
+#!/bin/bash
+
+docker run --detach --name=test-mysql --env="MYSQL_ROOT_PASSWORD=mypassword" mysql
+docker exec test-mysql /bin/bash
+docker inspect container name
