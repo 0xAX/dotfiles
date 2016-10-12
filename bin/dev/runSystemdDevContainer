@@ -1,0 +1,3 @@
+#!/bin/bash
+
+sudo systemd-nspawn -bD ~/fedora-tree/ 3
