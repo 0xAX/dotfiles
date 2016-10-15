@@ -12,12 +12,13 @@ UUID=ba317df3-22a2-43d4-ac23-0766f2efa416 /home                   ext4    defaul
 
 /dev/sda1 /home/alex/olddisk ext4 defaults,noatime 0 1
 
+tmpfs /home/alex/.tsung            tmpfs defaults 0 0
 tmpfs /var/cache/apt/archives      tmpfs defaults 0 0
 tmpfs /tmp                         tmpfs defaults 0 0
 tmpfs /var/tmp                     tmpfs defaults 0 0
 tmpfs /var/spool/postfix  	   tmpfs defaults 0 0
+#tmpfs /var/log tmpfs nodev,nosuid                0 0
 tmpfs /var/log                     tmpfs defaults,noatime,mode=0755 0 0
 tmpfs /dev/shm                     tmpfs defaults,size=20% 0 0
 tmpfs /var/spool                   tmpfs defaults,noatime,mode=1777 0 0
-tmpfs /home/alex/work/xray_web/log tmpfs defaults,noatime,mode=1777 0 0
 tmpfs /home/alex/.cache            tmpfs defaults,noatime,mode=1777 0 0
