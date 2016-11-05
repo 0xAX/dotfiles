@@ -32,13 +32,8 @@ export PATH="$PATH:$WORK/rebar/"
 # LD
 #
 export LD_LIBRARY_PATH=""
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$HOME_HDD/usr/local/pgsql/lib/"
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib/"
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib"
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:deps/dnssd/priv"
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$HOME/dev/libd"
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/mysql/lib"
-
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib/"
 export LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LIBRARY_PATH
 
 #
