@@ -13,4 +13,4 @@ then
     DEBUG=" -s "
 fi
 
-echo qemu-system-x86_64 $DEBUG $QEMU_OPTIONS -kernel $KERNEL -initrd $INITRD -append "$KERNEL_OPTIONS"
+qemu-system-x86_64 -nographic $DEBUG $QEMU_OPTIONS -kernel $KERNEL -initrd $INITRD -append "$KERNEL_OPTIONS"
