@@ -15,7 +15,7 @@
   close_term = <Alt>x
   new_tab = <Primary>t
   next_tab = <Shift>Right
-  page_down = Page_Down
+  page_down = None
   prev_tab = <Shift>Left
 [layouts]
   [[default]]
