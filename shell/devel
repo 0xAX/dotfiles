@@ -1,0 +1,15 @@
+#!/bin/bash
+
+#
+# some patch aliases
+#
+alias patchFile="patch < "
+alias patchDir="patch -p1 < "
+alias patchUndo="patch -p1 -R < "
+
+# gdb
+alias gdb="gdb -quiet "
+alias debug="gdb -quiet "
+
+# docker
+alias docker-busybox="sudo docker run -it --rm busybox"
