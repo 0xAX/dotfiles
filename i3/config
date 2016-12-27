@@ -77,9 +77,7 @@ set $tag8 "8:&#xf02d;"
 
 bindsym $mod+1 workspace $tag1
 bindsym $mod+2 exec --no-startup-id /home/alex/.i3/emacs.sh
-#exec --no-startup-id i3-msg 'workspace $tag2'
-
-#workspace $tag2
+for_window [class="^Emacs$"] move container to workspace $tag2
 bindsym $mod+3 workspace $tag3
 bindsym $mod+4 workspace $tag4
 bindsym $mod+5 workspace $tag5
@@ -126,20 +124,9 @@ mode "resize" {
 }
 
 # lock screen
-bindsym $mod+Control+l exec i3-msg workspace "10: tmp" && i3lock --tiling --dpms --color 000000
+bindsym $mod+Control+l exec i3-msg workspace number "1" && i3lock --tiling --dpms --color 000000
 
 # sound
 bindsym $mod+0 exec "amixer set Master  -q 1%+"
 bindsym $mod+9 exec "amixer set Master -q 1%-"
 bindsym $mod+u exec "amixer -q sset Master toggle"
-
-#
-# I don't want to use i3 META key in emacs
-#
-mode "passthrough" {
-    bindsym $mod+Tab mode "default"
-}
-bindsym $mod+Escape mode "passthrough"
-
-# walpaper
-#exec feh --bg-scale ~/Desktop/wallpaper-bird.jpg &
