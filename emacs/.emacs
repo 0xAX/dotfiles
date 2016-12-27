@@ -107,6 +107,7 @@
 (load "~/.emacscore/utils.el")
 (load "~/.emacscore/text-utils.el")
 (load "~/.emacscore/ui.el")
+(load "~/.emacscore/i3.el")
 (load "~/.emacscore/keybindings.el")
 
 ;;
@@ -132,7 +133,7 @@
  '(indent-tabs-mode nil)
  '(package-selected-packages
    (quote
-    (magit-annex magit-filenotify magit-find-file magit-gerrit magit-gh-pulls magit-gitflow magit-p4 magit-popup magit-rockstar magit-stgit magit-svn magit-topgit magit debbugs seq racer ht gotest go-scratch go-rename go-guru go-eldoc go-direx go-autocomplete company-go company-emoji company-c-headers))))
+    (peg docker dockerfile-mode bison-mode wanderlust magit-annex magit-filenotify magit-find-file magit-gerrit magit-gh-pulls magit-gitflow magit-p4 magit-popup magit-rockstar magit-stgit magit-svn magit-topgit magit debbugs seq racer ht gotest go-scratch go-rename go-guru go-eldoc go-direx go-autocomplete company-go company-emoji company-c-headers))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -149,6 +150,10 @@
 ;; Load *.c later to make working indentation
 ;;
 (load "~/.emacscore/dev/c.el")
+
+   (add-hook 'python-mode-hook 'guess-style-guess-tabs-mode)
+   (add-hook 'python-mode-hook (lambda ()
+                                    (guess-style-guess-tab-width)))
 
 ;; Finish :)
 (message "All done, %s%s" (user-login-name) ".")

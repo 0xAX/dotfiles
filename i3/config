@@ -15,6 +15,8 @@ font pango:DejaVu Sans Mono, FontAwesome 13
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
+bindsym $mod+Shift+f floating toggle
+
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal --profile=alex
 # start emacs
@@ -25,8 +27,6 @@ bindsym $mod+m exec terminator --profile=alex -e "TERM=xterm-256color ~/dev/mail
 bindsym $mod+b exec firefox
 # kill focused window
 bindsym $mod+q kill
-# mc
-bindsym $mod+Shift+f exec terminator --profile=alex -x mc ~/
 # restart i3
 bindsym $mod+c exec i3-msg restart
 # start dmenu (a program launcher)
@@ -35,6 +35,9 @@ bindsym $mod+d exec dmenu_run -b -fn "-xos4-terminus-medium-r-*-*-18-*" -sb "sie
 bindsym $mod+Tab workspace next
 # go to the prevoious workspace
 bindsym $mod+BackSpace workspace prev
+
+# Exit from i3
+bindsym $mod+Shift+e exit
 
 # change focus
 bindsym $mod+j focus left
@@ -54,6 +57,12 @@ bindsym $mod+t layout tabbed
 bindsym $mod+v layout splitv
 bindsym $mod+h layout splith
 
+# set default layout to tabbed
+workspace_layout tabbed
+
+# hide borders
+hide_edge_borders both
+
 #
 # workspaces
 #
@@ -67,7 +76,10 @@ set $tag7 "7:&#xf1c1;"
 set $tag8 "8:&#xf02d;"
 
 bindsym $mod+1 workspace $tag1
-bindsym $mod+2 workspace $tag2
+bindsym $mod+2 exec --no-startup-id /home/alex/.i3/emacs.sh
+#exec --no-startup-id i3-msg 'workspace $tag2'
+
+#workspace $tag2
 bindsym $mod+3 workspace $tag3
 bindsym $mod+4 workspace $tag4
 bindsym $mod+5 workspace $tag5
@@ -85,7 +97,7 @@ bindsym $mod+Shift+7 move container to workspace $tag7
 bindsym $mod+Shift+8 move container to workspace $tag8
 
 bar {
-    colors {
+        colors {
            background #000000
            statusline #ffffff
            separator  #ffffff
@@ -99,6 +111,7 @@ bar {
     position top
     status_command i3status -c ~/.i3/i3status.conf
     i3bar_command i3bar
+    strip_workspace_numbers no
 }
 
 # resizing
@@ -129,4 +142,4 @@ mode "passthrough" {
 bindsym $mod+Escape mode "passthrough"
 
 # walpaper
-exec feh --bg-scale ~/Desktop/wallpaper-bird.jpg &
+#exec feh --bg-scale ~/Desktop/wallpaper-bird.jpg &

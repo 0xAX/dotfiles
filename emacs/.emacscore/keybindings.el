@@ -103,3 +103,14 @@
 ;; increase/decrease fonts
 (global-set-key (kbd "C-+") 'text-scale-increase)
 (global-set-key (kbd "C--") 'text-scale-decrease)
+
+;; keybinding to switch other workspaces
+(global-set-key "\M-1" 'go-to-workspace-1)
+(global-set-key "\M-2" 'go-to-workspace-2)
+(global-set-key "\M-3" 'go-to-workspace-3)
+(global-set-key "\M-4" 'go-to-workspace-4)
+(global-set-key "\M-5" 'go-to-workspace-5)
+(global-set-key "\M-6" 'go-to-workspace-6)
+(global-set-key "\M-7" 'go-to-workspace-7)
+(global-set-key "\M-8" 'go-to-workspace-8)
+(global-set-key "\M-9" 'go-to-workspace-9)
