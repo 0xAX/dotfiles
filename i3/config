@@ -126,6 +126,11 @@ mode "resize" {
 # lock screen
 bindsym $mod+Control+l exec i3-msg workspace number "1" && i3lock --tiling --dpms --color 000000
 
+mode "passthrough" {
+    bindsym $mod+Tab mode "default"
+}
+bindsym $mod+Escape mode "passthrough"
+
 # sound
 bindsym $mod+0 exec "amixer set Master  -q 1%+"
 bindsym $mod+9 exec "amixer set Master -q 1%-"
