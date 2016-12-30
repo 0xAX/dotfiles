@@ -25,3 +25,4 @@ bind pager       G       bottom
 bind index       gg      first-entry
 bind index       G       last-entry
 bind index,pager R       group-reply
+bind index,pager Q       quit

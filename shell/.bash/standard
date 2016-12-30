@@ -127,11 +127,11 @@ alias terminator="terminator --profile=alex "
 #
 # docker
 #
-DockerRemoveImgs() {
+function DockerRemoveImgs() {
     docker rmi $(docker images -q) $@
 }
 
-DockerRemoveContainers() {
+function DockerRemoveContainers() {
     docker rm $(docker ps -a -q) $@
 }
 
@@ -141,10 +141,30 @@ function DockerInstall() {
     sudo mv /usr/bin/docker-1.13.0-dev /usr/bin/docker
 }
 
+function DockerRemoveUntagedImages() {
+    docker rmi $(docker images | grep "^<none>" | awk "{print $3}")
+}
+
+function DockerMySqlWorkRun() {
+    docker run -d -p 3306:3306 --name=mysql-work -e MYSQL_ALLOW_EMPTY_PASSWORD=true mariadb:10
+}
+
+function DockerMysqlFromTrunk() {
+    docker run -d -p 3306:3306 --name=mysql-8 -e MYSQL_ALLOW_EMPTY_PASSWORD=true mysql:8
+}
+
+function DockerMySqlWorkStart() {
+    docker start mysql-work
+}
+
 alias docker-install=DockerInstall
 alias docker-remove-imgs=DockerRemoveImgs
 alias docker-remove-containers=DockerRemoveContainers
 alias docker-daemon="sudo docker daemon --storage-driver=overlay --log-driver=journald"
+alias docker-remove-untaged-images=DockerRemoveUntagedImages
+alias docker-mysql-work-run=DockerMySqlWorkRun
+alias docker-mysql-work-start=DockerMySqlWorkStart
+alias docker-mysql-trunk-run=DockerMysqlFromTrunk
 
 #
 # Join into coreos

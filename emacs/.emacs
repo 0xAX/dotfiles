@@ -109,6 +109,7 @@
 (load "~/.emacscore/ui.el")
 (load "~/.emacscore/i3.el")
 (load "~/.emacscore/keybindings.el")
+(load "~/.emacscore/org/orgmode.el")
 
 ;;
 ;; Development
@@ -131,6 +132,11 @@
  '(ido-max-work-file-list 0)
  '(ido-record-commands nil)
  '(indent-tabs-mode nil)
+ '(nil nil t)
+ '(org-directory "~/todo")
+ '(org-level-1
+   ((t
+     (:inherit outline-1 :background "#455A64" :box nil :weight bold :height 1.0))))
  '(package-selected-packages
    (quote
     (peg docker dockerfile-mode bison-mode wanderlust magit-annex magit-filenotify magit-find-file magit-gerrit magit-gh-pulls magit-gitflow magit-p4 magit-popup magit-rockstar magit-stgit magit-svn magit-topgit magit debbugs seq racer ht gotest go-scratch go-rename go-guru go-eldoc go-direx go-autocomplete company-go company-emoji company-c-headers))))

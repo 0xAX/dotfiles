@@ -114,3 +114,7 @@
 (global-set-key "\M-7" 'go-to-workspace-7)
 (global-set-key "\M-8" 'go-to-workspace-8)
 (global-set-key "\M-9" 'go-to-workspace-9)
+
+;; org-mode keybindings
+(global-unset-key "\C-t")
+(global-set-key (kbd "C-t t") 'org-todo-list)

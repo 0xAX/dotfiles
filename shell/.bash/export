@@ -11,11 +11,10 @@ export PATH=$PATH:$HOME/bin
 export PATH=$PATH:$WORK/rebar3
 export PATH=$PATH:$HOME/.cargo/bin
 export PATH=$PATH:$DEV/docker/bundles/latest/binary-daemon/
-export PATH=$PATH:$DEV/rkt/build-rkt-1.16.0+git/target/bin
-export PATH=$PATH:$DEV/rkt/build-rkt-1.16.0+git/target/bin
+export PATH=$PATH:$DEV/rkt/build-rkt-1.19.0+git/target/bin
 export PATH=$PATH:/usr/local/mysql/bin
 export PATH=$PATH:/usr/local/mysql/scripts
-export PATH=$PATH:$DEV/llvm-build/bin
+
 #
 # elixir
 #
@@ -70,3 +69,8 @@ export RUST_SRC_PATH=~/dev/rust/src
 # docker options
 #
 export DOCKER_STORAGE_OPTIONS="overlay"
+
+#
+# mariadb server source code
+#
+export MYSQL_SRC_DIR="$DEV/server"

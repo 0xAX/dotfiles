@@ -63,7 +63,6 @@
   (load "~/.emacscore/dev/sed.el")
   (load "~/.emacscore/dev/nasm.el")
   (load "~/.emacscore/dev/shell.el")
-  (load "~/.emacscore/org/orgmode.el")
   (load "~/.emacscore/dev/rust.el")
   ;;
   ;; Enable rainbow mode
