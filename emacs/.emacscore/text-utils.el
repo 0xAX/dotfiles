@@ -22,6 +22,7 @@
 ;; mark current line
 ;;
 (defun mark-curr-line ()
+  (interactive)
   "Set mark for current line"
   (beginning-of-line)
   (cua-set-mark)
@@ -46,6 +47,7 @@
 ;; kill full line
 ;;
 (defun kill-full-line()
+  (interactive)
   "Kill line from the beginnig of line"
   (beginning-of-line)
   (kill-line)

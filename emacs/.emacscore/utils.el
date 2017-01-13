@@ -19,23 +19,28 @@
 ;;
 
 (defun current-file-name ()
+  (interactive)
   "Prints file name of buffer to minibuffer"
   (message (buffer-file-name)))
 
 (defun reload-file ()
+  (interactive)
   "reload a file in the current buffer"
   (find-alternate-file (file-name)))
 
 (defun insert-bash-she-bang ()
+  (interactive)
   "Insert #!/bin/bash under cursor"
   (insert "#!/bin/bash"))
 
 (defun emacs-config ()
+  (interactive)
   "Open ~/.emacs in new buffer"
   (find-file "~/.emacs"))
 
 (defun rename-file-and-buffer ()
-   "Rename the current buffer and file it is visiting."
+  (interactive)
+  "Rename the current buffer and file it is visiting."
   (interactive)
   (let ((filename (buffer-file-name)))
     (if (not (and filename (file-exists-p filename)))
@@ -48,6 +53,7 @@
           (set-visited-file-name new-name t t)))))))
 
 (defun delete-this-buffer-and-file ()
+  (interactive)
   "Remove file connected to current buffer and kill buffer."
   (interactive)
   (let ((filename (buffer-file-name))
@@ -61,6 +67,7 @@
         (message "File '%s' successfully removed" filename)))))
 
 (defun sudo-find-file (file-name)
+  (interactive)
   "Like find file, but opens the file as root."
   (interactive "FSudo Find File: ")
   (let ((tramp-file-name (concat "/sudo::" (expand-file-name file-name))))
@@ -69,7 +76,6 @@
 (defun load-additional-dev-modes ()
   (interactive)
   "Load additional development modes (web, and etc....)"
-  (load "~/.emacscore/dev/web.el")
   (load "~/.emacscore/dev/sed.el")
   (load "~/.emacscore/dev/nasm.el")
   (load "~/.emacscore/dev/shell.el")
