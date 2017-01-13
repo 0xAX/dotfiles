@@ -2,7 +2,6 @@
 ;;;;        Key bindings
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; The F10, F10, F11, F12 are free
 (global-set-key [f1]  'dired-other-window)
 (global-set-key [f2]  'sudo-find-file)
 (global-set-key [f3]  'reload-file)
@@ -13,6 +12,7 @@
 (global-set-key [f8]  'rgrep)
 (global-set-key [f9]  'ibuffer)
 (global-set-key [f10]  'magit-status)
+(global-set-key [f11] 'neotree-toggle)
 (global-set-key [f12] 'load-additional-dev-modes)
 
 ;;
@@ -50,7 +50,7 @@
 ;; buffers manipulations
 ;;
 (global-set-key "\C-k" 'kill-this-buffer)
-(global-set-key "\C-f" 'file-name)
+(global-set-key "\C-f" 'current-file-name)
 (global-set-key "\M-w" 'save-buffers-kill-emacs)
 (global-set-key "\M-d" 'delete-this-buffer-and-file)
 (global-set-key "\C-b" 'insert-bash-she-bang)

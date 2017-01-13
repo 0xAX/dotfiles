@@ -21,7 +21,6 @@
 ;; Emacs lisp
 ;;
 (add-hook 'emacs-lisp-mode-hook (lambda () (local-set-key (kbd "\C-e") #'eval-buffer)))
-(add-hook 'emacs-lisp-mode-hook (lambda () (local-set-key (kbd "\C-l") #'reload-emacs-config)))
 
 ;;
 ;; Rust mode

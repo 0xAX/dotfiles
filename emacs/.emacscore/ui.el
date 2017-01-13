@@ -69,11 +69,8 @@
   (set-face-attribute 'default nil :height 120 :font "Inconsolata-40, Monaco, Consolas, 'Courier New', Courier"))
 (set-default-font "Inconsolata-15")
 
-;(when (member "DejaVu Sans Mono" (font-family-list))
-;  (set-face-attribute 'default nil :height 150 :font "DejaVu Sans Mono"))
-
 ;; region color
-(set-face-attribute 'region nil :background "grey10")
+(set-face-attribute 'region nil :background "gray15")
 
 ;;
 ;; Set fonts
@@ -104,7 +101,6 @@
  '(ido-record-commands nil)
  '(ido-max-work-directory-list 0)
  '(ido-max-work-file-list 0))
-
 (require 'ido)
 (setq ido-save-directory-list-file nil)
 (setq ido-enable-flex-matching t)
@@ -130,26 +126,19 @@
 ;;
 ;; auto complete
 ;;
+
+;;
+;; do not store ac-comphist.dat in ~/.emacs.d/
+;;
+(when (require 'auto-complete-config nil 'noerror)
+  (setq ac-comphist-file  "~/.cache/ac-comphist.dat")
+  (ac-config-default))
+
 (add-to-list 'load-path "~/.emacs.d/popup")
 (add-to-list 'load-path "~/.emacs.d/auto-complete")
 (require 'auto-complete-config)
 (ac-config-default)
 (add-to-list 'ac-dictionary-directories "/.emacs.d/auto-complete")
 
-;;
-;; Enable pos-tip for auto-complete rendering
-;;
-(require 'pos-tip)
-
-;;
-;; Great help sometimes
-;;
-(add-to-list 'load-path "~/.emacs.d/discover-my-major")
-(require 'discover-my-major)
-
 ;; Highlight current line
 (global-hl-line-mode 1)
-
-
-;; indentation
-;(align-newline-and-indent)

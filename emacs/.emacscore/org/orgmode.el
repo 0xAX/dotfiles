@@ -1,3 +1,24 @@
+;; .emacs
+;;
+;;
+;;        DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+;;                Version 2, December 2004
+;;
+;; Everyone is permitted to copy and distribute verbatim or modified
+;; copies of this license document, and changing it is allowed as long
+;; as the name is changed.
+;;
+;;         DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+;; TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
+;;
+;;  0. You just DO WHAT THE FUCK YOU WANT TO.
+;;
+;;
+;;
+;;                                                            0xAX :)
+;;
+
+(setq  org-directory "~/todo")
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)

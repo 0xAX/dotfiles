@@ -1,27 +1,38 @@
-(defun file-name ()
-  "Prints file name of buffer"
-  (interactive)
+;; .emacs
+;;
+;;
+;;        DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+;;                Version 2, December 2004
+;;
+;; Everyone is permitted to copy and distribute verbatim or modified
+;; copies of this license document, and changing it is allowed as long
+;; as the name is changed.
+;;
+;;         DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+;; TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
+;;
+;;  0. You just DO WHAT THE FUCK YOU WANT TO.
+;;
+;;
+;;
+;;                                                            0xAX :)
+;;
+
+(defun current-file-name ()
+  "Prints file name of buffer to minibuffer"
   (message (buffer-file-name)))
 
 (defun reload-file ()
   "reload a file in the current buffer"
-  (interactive)
   (find-alternate-file (file-name)))
 
 (defun insert-bash-she-bang ()
   "Insert #!/bin/bash under cursor"
-  (interactive)
   (insert "#!/bin/bash"))
 
 (defun emacs-config ()
   "Open ~/.emacs in new buffer"
-  (interactive)
   (find-file "~/.emacs"))
-
-(defun reload-emacs-config ()
-  "Reload ~/.emacs"
-  (interactive)
-  (load "~/.emacs"))
 
 (defun rename-file-and-buffer ()
    "Rename the current buffer and file it is visiting."
@@ -56,10 +67,9 @@
     (find-file tramp-file-name)))
 
 (defun load-additional-dev-modes ()
-  "Load additional development modes (web, and etc....)"
   (interactive)
+  "Load additional development modes (web, and etc....)"
   (load "~/.emacscore/dev/web.el")
-  (load "~/.emacscore/dev/golang.el")
   (load "~/.emacscore/dev/sed.el")
   (load "~/.emacscore/dev/nasm.el")
   (load "~/.emacscore/dev/shell.el")
@@ -84,10 +94,8 @@
   ;; some build/term and text extensions
   ;;
   (load "~/.emacscore/build/make.el")
-  (load "~/.emacscore/term.el")
   (load "~/.emacs.d/lisp/rfc.el")
   (load "~/.emacscore/markups.el")
-  (load "~/.emacscore/dev/shell.el")
   ;;
   ;; Enable rfc reader
   ;;
@@ -97,4 +105,13 @@
   ;; loaded
   ;;
   (load "~/.emacscore/keybindings-hooks.el")
-)
+  ;;
+  ;; add neotree
+  ;;
+  (add-to-list 'load-path "~/.emacs.d/emacs-neotree")
+  (require 'neotree)
+  ;;
+  ;; load discover-my-major
+  ;;
+  (add-to-list 'load-path "~/.emacs.d/discover-my-major")
+  (require 'discover-my-major))

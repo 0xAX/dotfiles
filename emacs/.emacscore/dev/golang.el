@@ -3,8 +3,6 @@
 ;;
 (add-to-list 'load-path "~/.emacs.d/go-mode")
 (require 'go-mode)
-(require 'go-eldoc)
-(require 'company-go)
 
 ;;
 ;; Add some go fmt before save
