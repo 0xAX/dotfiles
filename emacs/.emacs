@@ -22,7 +22,6 @@
 ;;;;        Standard settings
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (add-to-list 'load-path "~/.emacs.d/lisp")
-(add-to-list 'load-path "~/dev/git2el")
 
 ;;
 ;; Some utils
@@ -111,6 +110,8 @@
 (load "~/.emacscore/keybindings.el")
 (load "~/.emacscore/org/orgmode.el")
 
+(i3-switch-workspace "2")
+
 ;;
 ;; Development
 ;;
@@ -139,7 +140,7 @@
      (:inherit outline-1 :background "#455A64" :box nil :weight bold :height 1.0))))
  '(package-selected-packages
    (quote
-    (peg docker dockerfile-mode bison-mode wanderlust magit-annex magit-filenotify magit-find-file magit-gerrit magit-gh-pulls magit-gitflow magit-p4 magit-popup magit-rockstar magit-stgit magit-svn magit-topgit magit debbugs seq racer ht gotest go-scratch go-rename go-guru go-eldoc go-direx go-autocomplete company-go company-emoji company-c-headers))))
+    (visual-regexp visual-regexp-steroids peg docker dockerfile-mode bison-mode wanderlust magit-annex magit-filenotify magit-find-file magit-gerrit magit-gh-pulls magit-gitflow magit-p4 magit-popup magit-rockstar magit-stgit magit-svn magit-topgit magit debbugs seq racer ht gotest go-scratch go-rename go-guru go-eldoc go-direx go-autocomplete company-go company-emoji company-c-headers))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
