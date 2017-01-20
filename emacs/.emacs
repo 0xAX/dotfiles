@@ -100,6 +100,7 @@
 ;; ui
 ;;
 (load "~/.emacscore/utils.el")
+(load "~/.emacscore/work-utils.el")
 (load "~/.emacscore/text-utils.el")
 (load "~/.emacscore/ui.el")
 (load "~/.emacscore/keybindings.el")
@@ -118,3 +119,4 @@
 
 ;; Finish :)
 (message "All done, %s%s" (user-login-name) ".")
+(put 'dired-find-alternate-file 'disabled nil)
