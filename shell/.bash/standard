@@ -162,11 +162,22 @@ alias docker-remove-imgs=DockerRemoveImgs
 alias docker-remove-containers=DockerRemoveContainers
 alias docker-daemon="sudo docker daemon --storage-driver=overlay --log-driver=journald"
 alias docker-remove-untaged-images=DockerRemoveUntagedImages
+alias docker-mysql-trunk-run=DockerMysqlFromTrunk
+
 alias docker-mysql-work-run=DockerMySqlWorkRun
 alias docker-mysql-work-start=DockerMySqlWorkStart
-alias docker-mysql-trunk-run=DockerMysqlFromTrunk
 
 #
 # Join into coreos
 #
 alias coreos-join="ssh -l core -p 2222 localhost"
+
+#
+# rkt related aliases
+#
+alias rkt-run-fedora="rkt run --interactive --insecure-options=image --net=host docker://fedora --exec=/bin/bash"
+
+#
+# something related to mysql
+#
+alias kill-mysql="pkill mysql"
