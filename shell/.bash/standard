@@ -181,3 +181,4 @@ alias rkt-run-fedora="rkt run --interactive --insecure-options=image --net=host 
 # something related to mysql
 #
 alias kill-mysql="pkill mysql"
+alias grep-mysql="grep -rlI --exclude-dir=mysql-test"
