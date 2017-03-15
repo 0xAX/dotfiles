@@ -4,6 +4,7 @@
 # My local scripts
 #
 export PATH=$PATH:$HOME/bin
+export PATH=$PATH:$DEV/mysql-queries
 
 #
 # some additional paths
