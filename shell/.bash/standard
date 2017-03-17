@@ -180,5 +180,8 @@ alias rkt-run-fedora="rkt run --interactive --insecure-options=image --net=host 
 #
 # something related to mysql
 #
+alias start-mysql="mysqld --query-cache-type=ON"
 alias kill-mysql="pkill mysql"
 alias grep-mysql="grep -rlI --exclude-dir=mysql-test"
+
+alias save-kernel-config="cp -r $DEV/linux/.config $DOTFILES/linux-dev/x86_64_conf/"
