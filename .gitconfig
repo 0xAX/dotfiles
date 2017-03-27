@@ -1,8 +1,11 @@
 [credential]
 	helper = cache
 
+[diff]
+        renameLimit = 4096
+
 [color]
-	ui = always
+	ui = auto
 	interactive = always
         grep = always
 	showbranch = always
@@ -89,6 +92,14 @@
 [user]
 	name = Alexander Kuleshov
 	email = kuleshovmail@gmail.com
+	signingkey = 14934DB6
 
 [web]
 	browser = firefox
+[http]
+	cookiefile = /home/alex/.gitcookies
+[transfer]
+	fsckObjects = true
+
+[alias]
+        one = show -s --pretty='format:%h (\"%s\")'
