@@ -1,0 +1,3 @@
+#!/bin/bash
+
+./configure --enable-threads --enable-dirty-schedulers --enable-smp-support --enable-kernel-poll --enable-sctp --enable-hipe --enable-native-libs --disable-megaco-flex-scanner-lineno --disable-megaco-reentrant-flex-scanner --enable-builtin-zlib --enable-sharing-preserving --enable-m64-build --with-termcap --with-ssl
