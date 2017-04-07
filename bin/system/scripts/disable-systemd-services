@@ -12,12 +12,16 @@ sudo systemctl disable chronyd.service
 sudo systemctl disable lldpad.service
 sudo systemctl disable lvm2-lvmetad.service
 sudo systemctl disable lvm2-monitor.service
-sudo systemctl disable auditd.service
-sudo systemctl disable firewalld.service
 sudo systemctl disable iscsi.service
 sudo systemctl disable firewalld.service
 sudo systemctl disable iio-sensor-proxy.service
 sudo systemctl disable remote-fs.target
 sudo systemctl disable crond.service
+sudo systemctl disable lvm2-lvmetad.service
+sudo systemctl disable lvm2-lvmetad.socket
+sudo systemctl disable lvm2-lvmpolld.service
+sudo systemctl disable lvm2-lvmpolld.socket
+sudo systemctl disable upower.service 
+sudo systemctl disable mcelog.service
 echo "Done"
 exit 0
