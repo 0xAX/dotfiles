@@ -134,3 +134,6 @@ source $BASHRC_DIR/network
 source $BASHRC_DIR/system
 source $BASHRC_DIR/standard
 source $BASHRC_DIR/export
+
+# switch keyboard layouts
+setxkbmap -layout us,ru -option grp:lwin_toggle
