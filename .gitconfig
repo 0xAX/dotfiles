@@ -92,7 +92,7 @@
 [user]
 	name = Alexander Kuleshov
 	email = kuleshovmail@gmail.com
-	signingkey = 14934DB6
+	signingkey = 2D66AC9B
 
 [web]
 	browser = firefox
