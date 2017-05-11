@@ -23,6 +23,8 @@ bindsym $mod+Return exec i3-sensible-terminal --profile=alex
 bindsym $mod+e exec terminator --profile=alex -x emacs
 # start mutt
 bindsym $mod+m exec terminator --profile=alex -e "TERM=xterm-256color ~/dev/mail/mutt"
+# start irssi
+bindsym $mod+i exec terminator --profile=alex -e "TERM=xterm-256color irssi"
 # start browser
 bindsym $mod+b exec firefox
 # kill focused window
@@ -38,12 +40,6 @@ bindsym $mod+BackSpace workspace prev
 
 # Exit from i3
 bindsym $mod+Shift+e exit
-
-# change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+i focus up
-bindsym $mod+l focus right
 
 bindsym $mod+Left focus left
 bindsym $mod+Right focus right
