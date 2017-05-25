@@ -82,7 +82,8 @@
 ;;
 ;; Disable system beep
 ;;
-(defvar visual-bell t)
+(setq visible-bell nil) ;; The default
+(setq ring-bell-function 'ignore)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;        Package manager
@@ -131,7 +132,9 @@
  '(ido-record-commands nil)
  '(indent-tabs-mode nil)
  '(org-directory "~/todo")
- '(package-selected-packages (quote (visual-regexp visual-regexp-steroids bison-mode))))
+ '(package-selected-packages
+   (quote
+    (irfc visual-regexp visual-regexp-steroids bison-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
