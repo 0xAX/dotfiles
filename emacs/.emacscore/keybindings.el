@@ -117,4 +117,4 @@
 
 ;; org-mode keybindings
 (global-unset-key "\C-t")
-(global-set-key (kbd "C-t t") 'org-todo-list)
+(global-set-key (kbd "C-t t") 'todo)

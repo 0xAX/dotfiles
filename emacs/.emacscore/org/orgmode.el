@@ -44,7 +44,7 @@
 
 (defun todo()
   (interactive)
-  (dired "~/todo/")
+  (dired "~/dev/todo/")
 )
 
 (defun important_todo ()

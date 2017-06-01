@@ -67,7 +67,6 @@
         (message "File '%s' successfully removed" filename)))))
 
 (defun sudo-find-file (file-name)
-  (interactive)
   "Like find file, but opens the file as root."
   (interactive "FSudo Find File: ")
   (let ((tramp-file-name (concat "/sudo::" (expand-file-name file-name))))
