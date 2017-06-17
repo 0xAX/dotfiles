@@ -6,6 +6,7 @@
 (setq c-basic-offset 8)
 (setq c-default-style      '((java-mode . "java")
 			     (awk-mode . "awk")
+                             (c++-mode . "cpp")
 			     (other . "linux")))
 (setq-default tab-width 8 indent-tabs-mode t)
 (define-key c-mode-base-map (kbd "RET") 'newline-and-indent)
