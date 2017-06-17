@@ -10,3 +10,4 @@ emacs/.emacs.d/elpa/archives/*
 rfc*.txt
 emacs/.emacs.d/elpa
 cookies
+*.data

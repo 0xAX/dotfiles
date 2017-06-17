@@ -42,6 +42,9 @@ export LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LIBRARY_PATH
 export PATH=$PATH:$KERNEL_DEV/tools/perf/
 export PATH=$PATH:/usr/lib/systemd/
 
+export ERL_LIBS=/home/alex/work/ergw/ebin
+export ERL_LIBS=$ERL_LIBS:/home/alex/work/ergw/deps/*/ebin
+
 #
 # Databases
 #
