@@ -33,6 +33,9 @@ my $update_dotfiles = 0;
 my $HOME = $ENV{'HOME'};
 my $DOTFILES_ROOT_DIR = $ENV{'DOTFILES_ROOT_DIR'} || $ENV{'PWD'};
 
+#
+# Print help if something going wrong
+#
 sub usage {
     print STDOUT <<USAGE_END;
 USAGE:
