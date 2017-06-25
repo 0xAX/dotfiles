@@ -63,6 +63,7 @@ export LESSHISTFILE="/dev/null"
 # man
 #
 export MANPATH="/usr/share/man/:/usr/local/pgsql/share/man/:$DEV/postgres/doc/src/sgml"
+export MANPATH=$MANPATH:/usr/local/share/man
 
 #
 # rust
