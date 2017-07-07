@@ -105,6 +105,9 @@ shopt -s nocaseglob
 # the same for case [[ ]]
 shopt -s nocasematch
 
+# to use docker without sudo
+newgrp docker
+
 # inhibit trancation of histor
 export HISTFILESIZE=-1
 export HISTSIZE=-1
