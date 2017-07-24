@@ -1,5 +1,0 @@
-{
-    "WantReportError": true,
-    "WantReportErrorPrompt": true,
-    "vm-driver": "kvm"
-}
