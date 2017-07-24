@@ -34,7 +34,7 @@ bindsym $mod+c exec i3-msg restart
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run -b -fn "-xos4-terminus-medium-r-*-*-18-*" -sb "sienna"
 # go to the next workspace
-bindsym $mod+Tab workspace next
+bindsym $mod+Tab exec --no-startup-id /home/alex/.i3/i3-next-workspace.pl #workspace next
 # go to the prevoious workspace
 bindsym $mod+BackSpace workspace prev
 
@@ -72,8 +72,8 @@ set $tag7 "7:&#xf1c1;"
 set $tag8 "8:&#xf02d;"
 
 bindsym $mod+1 workspace $tag1
-bindsym $mod+2 exec --no-startup-id /home/alex/.i3/emacs.sh
-for_window [class="^Emacs$"] move container to workspace $tag2
+bindsym $mod+2 exec --no-startup-id /home/alex/.i3/emacs.pl
+for_window [class="^[eE]macs$"] move container to workspace $tag2
 bindsym $mod+3 workspace $tag3
 bindsym $mod+4 workspace $tag4
 bindsym $mod+5 workspace $tag5
@@ -123,9 +123,8 @@ mode "resize" {
 bindsym $mod+Control+l exec i3-msg workspace number "1" && i3lock --tiling --dpms --color 000000
 
 mode "passthrough" {
-    bindsym $mod+Tab mode "default"
+    bindsym $mod+Escape mode "default"
 }
-bindsym $mod+Escape mode "passthrough"
 
 # sound
 bindsym $mod+0 exec "amixer set Master  -q 1%+"
