@@ -30,6 +30,13 @@
 (i3-switch-workspace "2")
 
 ;;
+;; exit from i3 passthrough mode on exit
+;;
+(add-hook 'kill-emacs-hook
+          (lambda ()
+            (shell-command-to-string "i3-msg mode default")))
+
+;;
 ;; do not save sessions
 ;;
 (desktop-save-mode 0)
@@ -131,10 +138,10 @@
  '(ido-max-work-file-list 0)
  '(ido-record-commands nil)
  '(indent-tabs-mode nil)
- '(org-directory "~/todo")
+ '(org-directory "~/todo" t)
  '(package-selected-packages
    (quote
-    (irfc visual-regexp visual-regexp-steroids bison-mode))))
+    (imenu-anywhere use-package irony plantuml-mode irfc visual-regexp visual-regexp-steroids bison-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

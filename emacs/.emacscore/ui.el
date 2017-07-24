@@ -65,8 +65,8 @@
 ;;
 ;; Set font
 ;;
-(when (member "Inconsolata-10, Monaco-5, Consolas, 'Courier New', Courier" (font-family-list))
-  (set-face-attribute 'default nil :height 120 :font "Inconsolata-40, Monaco, Consolas, 'Courier New', Courier"))
+;;(when (member "Inconsolata-10, Monaco-5, Consolas, 'Courier New', Courier" (font-family-list))
+;;  (set-face-attribute 'default nil :height 120 :font "Inconsolata-40, Monaco, Consolas, 'Courier New', Courier"))
 (set-default-font "Inconsolata-15")
 
 ;; region color
