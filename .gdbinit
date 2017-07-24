@@ -1,1 +1,1 @@
-set history save off
+set logging off
