@@ -6,7 +6,7 @@ WORK="$HOME/work"
 GIT_DEV="$DEV/git"
 KERNEL_DEV="$DEV/linux"
 PATCH_DIR="$HOME/patches"
-DOTFILES="$DEV/my-dotfiles"
+DOTFILES="$DEV/dotfiles"
 OLD_HDD="$HOME/olddisk$HOME"
 MUTT_PATH="$DEV/muttx"
 BASHRC="$HOME/.bashrc"
@@ -104,9 +104,6 @@ shopt -s hostcomplete
 shopt -s nocaseglob
 # the same for case [[ ]]
 shopt -s nocasematch
-
-# to use docker without sudo
-newgrp docker
 
 # inhibit trancation of histor
 export HISTFILESIZE=-1
