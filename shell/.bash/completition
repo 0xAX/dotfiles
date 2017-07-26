@@ -3,4 +3,4 @@
 #
 
 # git completion
-. $DEV/git/contrib/completion/git-completion.bash
+. /etc/bash_completion.d/git-completion.bash

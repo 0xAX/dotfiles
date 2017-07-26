@@ -12,7 +12,6 @@ export PATH=$PATH:$DEV/mysql-queries
 export PATH=$PATH:$WORK/rebar3
 export PATH=$PATH:$HOME/.cargo/bin
 export PATH=$PATH:$DEV/docker/bundles/latest/binary-daemon/
-export PATH=$PATH:$DEV/rkt/build-rkt-1.21.0+git/target/bin
 export PATH=$PATH:/usr/local/mysql/bin
 export PATH=$PATH:/usr/local/mysql/scripts
 
