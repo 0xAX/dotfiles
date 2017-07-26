@@ -11,3 +11,5 @@ rfc*.txt
 emacs/.emacs.d/elpa
 cookies
 *.data
+history
+emacs/.emacs.d/eshell/history
