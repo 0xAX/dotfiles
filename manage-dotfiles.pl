@@ -139,8 +139,9 @@ if ($update_dotfiles == 1) {
     #
     print PUSHCOLOR BOLD YELLOW;
     print "Remove ignored stuff:\n";
+    system("git", "clean", "-x", "-f", "-d");    
+
     print POPCOLOR;
-    system("git", "clean", "-x", "-f", "-d");
 
     exit(0);
 }
@@ -169,9 +170,9 @@ if ($install_dotfiles == 1) {
     # shell
     print "Copying shell...\n";
     copy("shell/.bash_logout", "$HOME/");
-    copy("shell/.bash_profile", "$HOME");
-    copy("shell/.bashrc", "$HOME");
-    dircopy("shell/.bash", "$HOME");
+    copy("shell/.bash_profile", "$HOME/");
+    copy("shell/.bashrc", "$HOME/");
+    dircopy("shell/.bash", "$HOME/.bash");
 
     # terminal configuration
     print "Copying terminator configuration...\n";
@@ -193,7 +194,7 @@ if ($install_dotfiles == 1) {
     # intputrc configuration
     print "Copying .inputrc...\n";
     copy(".inputrc", "$HOME/");
-    
+
     print POPCOLOR;
 
     exit(0);
