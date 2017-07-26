@@ -93,6 +93,9 @@
 ;;
 (icomplete-mode t)
 
+(defadvice auto-complete-mode (around disable-auto-complete-for-python)
+  (unless (eq major-mode 'c-mode) ad-do-it))
+
 ;;
 ;; ido mode
 ;;

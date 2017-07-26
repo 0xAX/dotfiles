@@ -29,7 +29,6 @@
    "%] "
    (global-mode-string global-mode-string)
    " | "
-   ;(:eval (list (nyan-create)))
    "["
     (:propertize "%p" 'face 'font-lock-constant-face) ;; % above top
     "/"

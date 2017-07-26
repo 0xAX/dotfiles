@@ -1,10 +1,3 @@
-
-;;
-;; funny mode-line
-;;
-(add-to-list 'load-path "~/.emacs.d/nyan-mode")
-(require 'nyan-mode)
-
 ;;
 ;; Mode line setup
 ;;
@@ -35,10 +28,14 @@
    ;;
    "%] "
    (global-mode-string global-mode-string)
-   ; nyan-mode uses nyan cat as an alternative to %p
-    " | "
-   (:eval (list (nyan-create)))
+   " | "
+   "["
+    (:propertize "%p" 'face 'font-lock-constant-face) ;; % above top
+    "/"
+    (:propertize "%I" 'face 'font-lock-constant-face) ;; size
+    "] "
    (:propertize "|" face mode-line-position-face)
+
    "-%-"
    ))
 

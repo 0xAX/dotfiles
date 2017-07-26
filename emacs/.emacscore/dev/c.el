@@ -1,17 +1,40 @@
 (require 'cc-mode)
 
 ;;
-;; Indentation for C code
+;; Indentation for C/C++ code
 ;;
 (setq c-basic-offset 8)
-(setq c-default-style      '((java-mode . "java")
-			     (awk-mode . "awk")
-                             (c++-mode . "cpp")
-			     (other . "linux")))
+(setq c-default-style '((java-mode . "java")
+                        (awk-mode . "awk")
+                        (c++-mode . "cpp")
+                        (other . "linux")))
+(setq c-default-style "bsd")
 (setq-default tab-width 8 indent-tabs-mode t)
 (define-key c-mode-base-map (kbd "RET") 'newline-and-indent)
 
 ;;
+;; company mode for autocomplete
+;;
+(add-to-list 'load-path "~/.emacs.d/company-20170715.1035")
+(add-to-list 'load-path "~/.emacs.d/company-c-headers-20170531.1330")
+(require 'company)
+(add-hook 'after-init-hook 'global-company-mode)
+(setq company-backends (delete 'company-semantic company-backends))
+(define-key c-mode-map  [(tab)] 'company-complete)
+(define-key c++-mode-map  [(tab)] 'company-complete)
+(add-to-list 'company-backends 'company-c-headers)
+
+;;
+;; Some helpers
+;;
+(defun open-includes-dir ()
+  "Open /usr/include in tree."
+  (interactive)
+  (load-additional-dev-modes)
+  (neotree-dir "/usr/include"))
+(define-key c-mode-base-map (kbd "C-t") 'open-includes-dir)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; For linux kernel
 ;;
 (defun c-lineup-arglist-tabs-only (ignored)
@@ -41,3 +64,4 @@
                 (setq indent-tabs-mode t)
                 (setq show-trailing-whitespace t)
                 (c-set-style "linux-tabs-only")))))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

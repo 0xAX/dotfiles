@@ -125,6 +125,15 @@
 (load "~/.emacscore/vcs/magit.el")
 (load "~/.emacscore/term.el")
 
+;;
+;; load snippets
+;;
+(add-to-list 'load-path "~/.emacs.d/yasnippet")
+(require 'yasnippet)
+(setq yas-snippet-dirs
+      '("~/.emacscore/snippets"))
+(yas-global-mode 1)
+
 ;; Finish :)
 (message "All done, %s%s" (user-login-name) ".")
 (put 'dired-find-alternate-file 'disabled nil)
@@ -138,10 +147,7 @@
  '(ido-max-work-file-list 0)
  '(ido-record-commands nil)
  '(indent-tabs-mode nil)
- '(org-directory "~/todo" t)
- '(package-selected-packages
-   (quote
-    (imenu-anywhere use-package irony plantuml-mode irfc visual-regexp visual-regexp-steroids bison-mode))))
+ '(org-directory "~/todo" t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

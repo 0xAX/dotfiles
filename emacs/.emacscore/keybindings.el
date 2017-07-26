@@ -11,7 +11,7 @@
 (global-set-key [f7]  'delete-this-buffer-and-file)
 (global-set-key [f8]  'rgrep)
 (global-set-key [f9]  'ibuffer)
-(global-set-key [f10]  'magit-status)
+(global-set-key [f10] 'magit-status)
 (global-set-key [f11] 'neotree-toggle)
 (global-set-key [f12] 'load-additional-dev-modes)
 
@@ -118,3 +118,6 @@
 ;; org-mode keybindings
 (global-unset-key "\C-t")
 (global-set-key (kbd "C-t t") 'todo)
+
+;; indentation
+(global-set-key (kbd "RET") 'newline-and-indent)
