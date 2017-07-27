@@ -76,6 +76,12 @@
 (global-set-key "\C-r" 'redo)
 
 ;;
+;; enable/disable auto-complete-mode
+;;
+(global-unset-key "\M-a")
+(global-set-key "\M-a" 'auto-complete-mode)
+
+;;
 ;; ui
 ;;
 (global-set-key [M-f12] 'toggle-mode-line)
