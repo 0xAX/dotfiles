@@ -163,15 +163,3 @@
  '(org-level-8 ((t (:inherit outline-8 :background "#263238" :foreground "gold2"))))
  '(org-todo ((t (:background "#263238" :foreground "orange red" :weight bold))))
  '(show-paren-match ((t (:background "#116599" :foreground "white")))))
-
-
-;(defun major-mode-changed-event ()
-;  (cond
-;   ((string-equal (buffer-local-value 'major-mode (get-buffer (current-buffer))) "c-mode") (message "c-mode"))
-;   ((string-equal (buffer-local-value 'major-mode (get-buffer (current-buffer))) "c++-mode") (message "c++-mode"))
-;   (t "default"))
-
-;;  (cond
-;;   ((string= "c-mode" mode-name) (message "aaa"))))
-
-;(add-hook 'window-configuration-change-hook  'major-mode-changed-event)

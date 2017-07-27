@@ -93,15 +93,6 @@
 ;;
 (icomplete-mode t)
 
-(defadvice auto-complete-mode (around disable-auto-complete-for-c-mode)
-  (unless (eq major-mode 'c-mode) ad-do-it))
-(defadvice auto-complete-mode (around disable-auto-complete-for-c++-mode)
-  (unless (eq major-mode 'c++-mode) ad-do-it))
-
-;(defadvice auto-complete-mode (around disable-auto-complete-for-python)
-;  (unless (eq major-mode 'python-mode) ad-do-it))
-
-(ad-activate 'auto-complete-mode)
 ;;
 ;; ido mode
 ;;
