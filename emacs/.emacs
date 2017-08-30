@@ -147,7 +147,8 @@
  '(ido-max-work-file-list 0)
  '(ido-record-commands nil)
  '(indent-tabs-mode nil)
- '(org-directory "~/todo" t))
+ '(org-directory "~/todo" t)
+ '(package-selected-packages (quote (bison-mode racer))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
