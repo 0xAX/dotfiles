@@ -23,5 +23,6 @@ sudo systemctl disable lvm2-lvmpolld.service
 sudo systemctl disable lvm2-lvmpolld.socket
 sudo systemctl disable upower.service 
 sudo systemctl disable mcelog.service
+sudo systemctl disable packagekit.service
 echo "Done"
 exit 0
