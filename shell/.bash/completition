@@ -3,4 +3,14 @@
 #
 
 # git completion
-. /etc/bash_completion.d/git-completion.bash
+if [[ -f ~/.conf/kube-autocomplete.sh ]];
+then
+  . /etc/bash_completion.d/git-completion.bash
+fi
+
+# kubernetes auto completion
+if [[ -f ~/.conf/kube-autocomplete.sh ]];
+then
+  source ~/.conf/kube-autocomplete.sh
+fi
+  
