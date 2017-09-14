@@ -4,7 +4,7 @@
 (if (display-graphic-p)
         ;; load and configure material theme
         (progn (load "~/.emacscore/themes/material.el")
-               (enable-theme 'material)
+              (enable-theme 'material)
                (load "~/.emacscore/themes/helpers/tabbar-material-style.el")
                (load "~/.emacscore/themes/helpers/mode-line-material.el"))
         ;; load and configure smyx
@@ -54,12 +54,17 @@
 (require 'paren)
 (setq show-paren-style 'expression)
 (show-paren-mode 2)
-(electric-pair-mode)
+
+;;
+;; auto complete
+;;
+(electric-pair-mode 1)
 (setq electric-pair-pairs '(
                             (?\" . ?\")
                             (?\{ . ?\})
                             (?\' . ?\')
-                            (?\< . ?\>)
+			    (?\& . ?\&)
+			    (?\| . ?\|)
                             (?\`  . ?\`)))
 
 ;;
