@@ -41,8 +41,8 @@ export LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LIBRARY_PATH
 export PATH=$PATH:$KERNEL_DEV/tools/perf/
 export PATH=$PATH:/usr/lib/systemd/
 
-export ERL_LIBS=/home/alex/work/ergw/ebin
-export ERL_LIBS=$ERL_LIBS:/home/alex/work/ergw/deps/*/ebin
+#export ERL_LIBS=/home/alex/work/ergw/ebin
+#export ERL_LIBS=$ERL_LIBS:/home/alex/work/ergw/deps/*/ebin
 
 #
 # Databases
@@ -78,3 +78,9 @@ export DOCKER_STORAGE_OPTIONS="overlay"
 # mariadb server source code
 #
 export MYSQL_SRC_DIR="$DEV/server"
+
+# export java
+export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk
+
+# path to SSL certs
+export SSL_CERT_FILE=/etc/ssl/certs/ca-bundle.crt
