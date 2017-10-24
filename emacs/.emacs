@@ -122,7 +122,6 @@
 (load "~/.emacscore/dev/c.el")
 (load "~/.emacscore/dev/golang.el")
 (load "~/.emacscore/dev/rust.el")
-(load "~/.emacscore/vcs/magit.el")
 (load "~/.emacscore/term.el")
 
 ;;
