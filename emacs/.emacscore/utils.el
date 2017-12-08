@@ -28,11 +28,6 @@
   "reload a file in the current buffer"
   (find-alternate-file (file-name)))
 
-(defun insert-bash-she-bang ()
-  (interactive)
-  "Insert #!/bin/bash under cursor"
-  (insert "#!/bin/bash"))
-
 (defun emacs-config ()
   (interactive)
   "Open ~/.emacs in new buffer"
@@ -76,7 +71,6 @@
   (interactive)
   "Load additional development modes (web, and etc....)"
   (load "~/.emacscore/dev/sed.el")
-  (load "~/.emacscore/dev/nasm.el")
   (load "~/.emacscore/dev/shell.el")
   (load "~/.emacscore/dev/rust.el")
   ;;

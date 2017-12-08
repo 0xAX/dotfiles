@@ -89,7 +89,7 @@
 ;;
 ;; Disable system beep
 ;;
-(setq visible-bell nil) ;; The default
+(setq visible-bell nil)
 (setq ring-bell-function 'ignore)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -123,19 +123,14 @@
 (load "~/.emacscore/dev/golang.el")
 (load "~/.emacscore/dev/rust.el")
 (load "~/.emacscore/term.el")
+(load "~/.emacscore/vcs/magit.el")
 
-;;
-;; load snippets
-;;
-(add-to-list 'load-path "~/.emacs.d/yasnippet")
-(require 'yasnippet)
-(setq yas-snippet-dirs
-      '("~/.emacscore/snippets"))
-(yas-global-mode 1)
-
-;; Finish :)
-(message "All done, %s%s" (user-login-name) ".")
+;; open file in a dired
 (put 'dired-find-alternate-file 'disabled nil)
+
+;;
+;; Custom variables
+;;
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -147,7 +142,11 @@
  '(ido-record-commands nil)
  '(indent-tabs-mode nil)
  '(org-directory "~/todo" t)
- '(package-selected-packages (quote (bison-mode racer))))
+ '(package-selected-packages (quote (magit bison-mode))))
+
+;;
+;; Custom faces
+;;
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -163,3 +162,5 @@
  '(org-level-8 ((t (:inherit outline-8 :background "#263238" :foreground "gold2"))))
  '(org-todo ((t (:background "#263238" :foreground "orange red" :weight bold))))
  '(show-paren-match ((t (:background "#116599" :foreground "white")))))
+
+(message "All done, %s%s" (user-login-name) ".")

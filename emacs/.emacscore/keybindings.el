@@ -53,7 +53,6 @@
 (global-set-key "\C-f" 'current-file-name)
 (global-set-key "\M-w" 'save-buffers-kill-emacs)
 (global-set-key "\M-d" 'delete-this-buffer-and-file)
-(global-set-key "\C-b" 'insert-bash-she-bang)
 
 (global-set-key (kbd "M-<left>")  'beginning-of-line)
 (global-set-key (kbd "M-<right>") 'end-of-line)

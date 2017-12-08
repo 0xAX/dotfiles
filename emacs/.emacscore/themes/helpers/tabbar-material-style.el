@@ -20,7 +20,6 @@
               ((string-equal ".S" (substring (buffer-name) (- (length (buffer-name)) 2) (length (buffer-name)))) "system")
               ((string-equal ".s" (substring (buffer-name) (- (length (buffer-name)) 2) (length (buffer-name)))) "system")
               ((string-equal ".asm" (substring (buffer-name) (- (length (buffer-name)) 4) (length (buffer-name)))) "system")
-              ((string-equal ".nasm" (substring (buffer-name) (- (length (buffer-name)) 5) (length (buffer-name)))) "system")
               ((string-equal ".ld" (substring (buffer-name) (- (length (buffer-name)) 3) (length (buffer-name)))) "system")
               ((string-equal "Makefile" (substring (buffer-name) (- (length (buffer-name)) 8) (length (buffer-name)))) "system")
               ((string-equal ".mk" (substring (buffer-name) (- (length (buffer-name)) 3) (length (buffer-name)))) "system")
