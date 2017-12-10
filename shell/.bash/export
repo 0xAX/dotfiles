@@ -5,6 +5,8 @@
 #
 export PATH=$PATH:$HOME/bin
 export PATH=$PATH:$DEV/mysql-queries
+export PATH=$PATH:$DEV/etcd/bin
+export PATH=$PATH:$DEV/kubernetes/cluster
 
 #
 # some additional paths

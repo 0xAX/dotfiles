@@ -185,3 +185,15 @@ alias kill-mysql="pkill mysql"
 alias grep-mysql="grep -rlI --exclude-dir=mysql-test"
 
 alias save-kernel-config="cp -r $DEV/linux/.config $DOTFILES/linux-dev/x86_64_conf/"
+
+#
+# k8s related scripts
+#
+function k8s-tp-test-cluster-context() {
+    export KUBECONFIG=$HOME/.kube/tp-k8s.conf
+    kubectl config set-context --namespace=tposs-testing lab
+}
+
+function k8s-local-cluster-context() {
+    export KUBECONFIG=/var/run/kubernetes/admin.kubeconfig
+}
