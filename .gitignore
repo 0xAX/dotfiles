@@ -8,8 +8,9 @@ emacs/.emacs.d/session.*
 emacs/.emacs.d/tramp
 emacs/.emacs.d/elpa/archives/*
 rfc*.txt
-emacs/.emacs.d/elpa
 cookies
 *.data
 history
 emacs/.emacs.d/eshell/history
+*.gpg
+*.kbx
