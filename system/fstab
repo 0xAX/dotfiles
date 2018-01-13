@@ -11,6 +11,7 @@ UUID=a78a8ace-7296-470a-9dc5-2a6f2716bb07 /boot                   ext4    defaul
 UUID=ba317df3-22a2-43d4-ac23-0766f2efa416 /home                   ext4    defaults,noatime,discard 0 2
 
 /dev/sda1 /home/alex/olddisk ext4 defaults,noatime 0 1
+/dev/sdc1 /home/alex/disk    ext4 defaults,noatime,discard 0 2
 
 tmpfs /var/cache/apt/archives      tmpfs defaults 0 0
 tmpfs /tmp                         tmpfs defaults 0 0
