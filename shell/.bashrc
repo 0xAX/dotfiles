@@ -2,6 +2,8 @@
 # Global environment
 #
 DEV="$HOME/dev"
+DISK="$HOME/disk"
+DEV_DISK="$DISK/dev"
 WORK="$HOME/work"
 GIT_DEV="$DEV/git"
 KERNEL_DEV="$DEV/linux"

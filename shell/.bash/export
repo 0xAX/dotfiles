@@ -5,7 +5,7 @@
 #
 export PATH=$PATH:$HOME/bin
 export PATH=$PATH:$DEV/mysql-queries
-export PATH=$PATH:$DEV/etcd/bin
+export PATH=$PATH:$DEV_DISK/etcd/bin
 export PATH=$PATH:$DEV/kubernetes/cluster
 
 #
@@ -86,3 +86,5 @@ export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk
 
 # path to SSL certs
 export SSL_CERT_FILE=/etc/ssl/certs/ca-bundle.crt
+
+# etcd
