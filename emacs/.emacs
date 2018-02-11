@@ -141,8 +141,8 @@
  '(ido-max-work-file-list 0)
  '(ido-record-commands nil)
  '(indent-tabs-mode nil)
- '(org-directory "~/todo" t)
- '(package-selected-packages (quote (magit bison-mode))))
+ '(org-directory "~/todo")
+ '(package-selected-packages (quote (typescript magit bison-mode))))
 
 ;;
 ;; Custom faces
