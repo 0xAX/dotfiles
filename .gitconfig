@@ -98,8 +98,9 @@
 	browser = firefox
 [http]
 	cookiefile = /home/alex/.gitcookies
+
 [transfer]
-	fsckObjects = true
+	fsckObjects = false
 
 [alias]
         one = show -s --pretty='format:%h (\"%s\")'
