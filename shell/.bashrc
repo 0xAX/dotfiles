@@ -1,37 +1,30 @@
-#
+#!/bin/bash
+
 # Global environment
-#
-DEV="$HOME/dev"
 DISK="$HOME/disk"
 DEV_DISK="$DISK/dev"
-WORK="$HOME/work"
-GIT_DEV="$DEV/git"
-KERNEL_DEV="$DEV/linux"
-PATCH_DIR="$HOME/patches"
-DOTFILES="$DEV/dotfiles"
-OLD_HDD="$HOME/olddisk$HOME"
-MUTT_PATH="$DEV/muttx"
 BASHRC="$HOME/.bashrc"
 BASHRC_DIR="$HOME/.bash"
 GNUPGHOME="$HOME/.gnupg"
+PATCH_DIR="$HOME/patches"
+OLD_HDD="$HOME/olddisk$HOME"
+VIRT_DIR="$OLD_HDD/virt"
 
-#
+# Paths to dev env
+DEV="$HOME/dev"
+WORK="$HOME/work"
+GIT_DEV="$DEV/git"
+KERNEL_DEV="$DEV/linux"
+DOTFILES="$DEV/dotfiles"
+
 # some systemd related
-#
 SYSTEMD_SCRIPTS="/usr/lib/systemd/scripts"
 SYSTEMD_SYSTEM="/usr/lib/systemd/system"
 SYSTEMD_CONF="/etc/systemd/system.conf"
 SYSTEMD_CONFIGS="/etc/systemd/system.conf.d"
 SYSTEMD_USER_CONF="/etc/systemd/user.conf"
 
-#
-# virtualization
-#
-NSPAWN_FEDORA_PATH="$OLD_HDD/virt"
-
-#
 # some xdg
-#
 XDG_DESKTOP_DIR="$HOME/Desktop"
 XDG_DOCUMENTS_DIR="$HOME/Documents"
 XDG_DOWNLOAD_DIR="$HOME/Downloads"
@@ -41,9 +34,7 @@ XDG_PUBLICSHARE_DIR="$HOME/Public"
 XDG_TEMPLATES_DIR="$HOME/.Templates"
 XDG_VIDEOS_DIR="$HOME/Videos"
 
-#
 # OS dependend
-#
 OS=$(uname)
 if [ "$OS" == "FreeBSD" ] || [ "$OS" == "DragonFly" ]; then
     export SHELL="/usr/local/bin/bash"
@@ -61,11 +52,11 @@ else
     alias lsd="ls -lF"
 fi
 
-#
-# let's export some global env
-#
+# global env
 export EDITOR="emacs"
 export BROWSER="firefox"
+
+# global development env
 export CC=gcc
 export AS=as
 export AR=ar
@@ -73,17 +64,9 @@ export CXX=g++
 export LD=ld
 export TAR=tar
 
-#
 # terminal for i3
-#
 export TERMINAL="terminator"
 
-#
-# bash options
-#
-# check error and if it is a minor error
-# cd to a given dir
-shopt -s cdspell
 # check a given command in hash at first
 shopt -s checkhash
 # check LINES and COLUMNS after every command
@@ -114,18 +97,25 @@ export HISTTIMEFORMAT="[%F %T] "
 
 # disable line editing in emacs terminal
 export EMACS=1
-export FCEDIT=emacs
 export TMPDIR=/tmp
 
-#
-# locale
-#
-export LANG="en_US.UTF-8"
-export LC_ALL="en_US.UTF-8"
+# default locale
+LANG="en_US.UTF-8"
+LC_CTYPE="en_US.UTF-8"
+LC_NUMERIC="en_US.UTF-8"
+LC_TIME="en_US.UTF-8"
+LC_COLLATE="en_US.UTF-8"
+LC_MONETARY="en_US.UTF-8"
+LC_MESSAGES="en_US.UTF-8"
+LC_PAPER="en_US.UTF-8"
+LC_NAME="en_US.UTF-8"
+LC_ADDRESS="en_US.UTF-8"
+LC_TELEPHONE="en_US.UTF-8"
+LC_MEASUREMENT="en_US.UTF-8"
+LC_IDENTIFICATION="en_US.UTF-8"
+LC_ALL="en_US.UTF-8"
 
-#
-# includes
-#
+# include other sources
 source $BASHRC_DIR/term-colors
 source $BASHRC_DIR/archives
 source $BASHRC_DIR/network
@@ -136,6 +126,14 @@ source $BASHRC_DIR/network
 source $BASHRC_DIR/system
 source $BASHRC_DIR/standard
 source $BASHRC_DIR/export
+source $BASHRC_DIR/docker
+source $BASHRC_DIR/k8s
+
+# include if we are using arch-linux
+test -f /etc/arch-release && source $BASHRC_DIR/arch-linux
+
+# include if we are using debian based distro
+(test -f /etc/debian_version || cat /etc/os-release | grep Ubuntu) && source $BASHRC_DIR/debian
 
 # switch keyboard layouts
 setxkbmap -layout us,ru -option grp:lwin_toggle

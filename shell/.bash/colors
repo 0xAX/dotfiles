@@ -1,3 +1,5 @@
+#!/bin/bash
+
 LS_COLORS='ex=92:di=34:fi=1:ln=31:pi=5:so=5:bd=5:cd=5:or=31'
 export LS_COLORS
 

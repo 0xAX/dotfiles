@@ -1,55 +1,25 @@
 #!/bin/bash
 
-#
-# My local scripts
-#
+# some additional PATHS
 export PATH=$PATH:$HOME/bin
-export PATH=$PATH:$DEV/mysql-queries
-export PATH=$PATH:$DEV_DISK/etcd/bin
-export PATH=$PATH:$DEV/kubernetes/cluster
-
-#
-# some additional paths
-#
 export PATH=$PATH:$WORK/rebar3
 export PATH=$PATH:$HOME/.cargo/bin
-export PATH=$PATH:$DEV/docker/bundles/latest/binary-daemon/
-export PATH=$PATH:/usr/local/mysql/bin
-export PATH=$PATH:/usr/local/mysql/scripts
+export PATH=$PATH:$WORK/elixir/bin
+test -d ${DEV_DISK}/etcd/bin && export PATH=$PATH:$DEV_DISK/etcd/bin
+test -d /usr/local/mysql/bin && export PATH=$PATH:/usr/local/mysql/bin
+test -d /usr/local/mysql/scripts && export PATH=$PATH:/usr/local/mysql/scripts
+test -d ${DEV_DISK}/db/usr/local/mysql/bin && export PATH=$PATH:${DEV_DISK}/db/usr/local/mysql/bin
+test -d ${DEV_DISK}/db/usr/local/mysql/scripts && export PATH=$PATH:${DEV_DISK}/db/usr/local/mysql/scripts
 
-#
-# elixir
-#
-export PATH="$PATH:$WORK/elixir/bin"
-
-#
-# phabricator, tetrapak and rebar
-#
-export PATH="$PATH:$WORK/util/arcanist/bin/"
-export PATH="$PATH:$WORK/tetrapak/bin/"
-export PATH="$PATH:$WORK/rebar/"
-
-#
-# LD
-#
+# Linker options
 export LD_LIBRARY_PATH=""
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib"
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib/"
 export LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LIBRARY_PATH
 
-#
 # Kernel and C dev, systemd
-#
 export PATH=$PATH:$KERNEL_DEV/tools/perf/
 export PATH=$PATH:/usr/lib/systemd/
-
-#export ERL_LIBS=/home/alex/work/ergw/ebin
-#export ERL_LIBS=$ERL_LIBS:/home/alex/work/ergw/deps/*/ebin
-
-#
-# Databases
-#
-export PATH=$PATH:$HOME_HDD/usr/local/pgsql/bin/
 
 # golang
 export GOROOT=$DEV/golang/go
@@ -60,31 +30,18 @@ export PATH=$PATH:$GOPATH/bin
 # less
 export LESSHISTFILE="/dev/null"
 
-#
 # man
-#
 export MANPATH="/usr/share/man/:/usr/local/pgsql/share/man/:$DEV/postgres/doc/src/sgml"
 export MANPATH=$MANPATH:/usr/local/share/man
 
-#
-# rust
-#
-export RUST_SRC_PATH=~/dev/rust/src
-
-#
 # docker options
-#
 export DOCKER_STORAGE_OPTIONS="overlay"
 
-#
 # mariadb server source code
-#
-export MYSQL_SRC_DIR="$DEV/server"
+export MYSQL_SRC_DIR="${DEV_DISK}/server"
 
 # export java
 export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk
 
 # path to SSL certs
 export SSL_CERT_FILE=/etc/ssl/certs/ca-bundle.crt
-
-# etcd

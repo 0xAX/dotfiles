@@ -1,17 +1,20 @@
 #!/bin/bash
 
-# awk
+# awk aliaease
 alias awk="gawk --optimize"
+
+# cp aliases
+alias cp='cp -r '
+
+# mkdir aliases
+alias mkdir="mkdir -p"
+
+# rm aliases
+alias rm="rm -rf -i"
+alias rmi="rm -rf --interactive"
 
 # reload ~/.bashrc
 alias reloadBash="source ~/.bashrc"
-# always copy recursively
-alias cp='cp -r '
-# mkdir
-alias mkdir="mkdir -p"
-# rm
-alias rm="rm -rf -i"
-alias rmi="rm -rf --interactive"
 
 # navigation
 alias work='cd $WORK'
@@ -21,6 +24,7 @@ alias oldhome='cd $OLD_HDD'
 alias downloads="cd $OLD_HDD/Downloads"
 alias golang="cd $DEV/golang/src/github.com/0xAX"
 alias linux="cd $DEV/linux"
+alias disk='cd ${DISK}'
 
 # navigation by configs
 alias bashrc="cd ~ && emacs -nw .bashrc"
@@ -72,21 +76,6 @@ alias find_here_type="find . -type "
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
 
-# apt and aptitude
-alias apt-install="sudo apt-get install "
-alias apt-remove="sudo apt-get purge "
-alias apt-update="sudo apt-get update "
-alias apt-upgrade="sudo apt-get upgrade "
-alias apt-urls="sudo nano /etc/apt/sources.list "
-alias apt-packages="sudo apt-cache pkgnames "
-alias apt-search="sudo apt-cache search "
-alias apt-info="sudo apt-cache show "
-alias apt-clean="sudo apt-get clean"
-alias apt-check="sudo apt-get check"
-alias apt-auto-clean="sudo apt-get autoclean"
-alias apt-auto-remove="sudo apt-get autoremove"
-alias apt-pkg-version="sudo aptitude versions "
-
 # wc
 alias lines="wc -l "
 alias words="wc -w "
@@ -99,6 +88,7 @@ alias day='date +%A'
 alias monthNum='date +%d'
 alias dayNum='date +%e'
 alias month="date +%B"
+alias timestamp="date +%s"
 
 # clear
 alias cl='clear'
@@ -118,82 +108,11 @@ alias nano=vim
 # i3 related aliases
 alias i3-restart="i3-msg restart"
 
-# pacman
-alias pac-update="sudo pacman -Suy"
-
 # terminator
 alias terminator="terminator --profile=alex "
 
-#
-# docker
-#
-function DockerRemoveImgs() {
-    docker rmi $(docker images -q) $@
-}
-
-function DockerRemoveContainers() {
-    docker rm $(docker ps -a -q) $@
-}
-
-function DockerInstall() {
-    sudo cp -r /home/alex/dev/docker/bundles/latest/binary-daemon/docker* /usr/bin
-    sudo cp -r /home/alex/dev/docker/bundles/latest/binary-client/docker-1.13.0-dev /usr/bin
-    sudo mv /usr/bin/docker-1.13.0-dev /usr/bin/docker
-}
-
-function DockerRemoveUntagedImages() {
-    docker rmi $(docker images | grep "^<none>" | awk "{print $3}")
-}
-
-function DockerMySqlWorkRun() {
-    docker run -d -p 3306:3306 --name=mysql-work -e MYSQL_ALLOW_EMPTY_PASSWORD=true mariadb:10
-}
-
-function DockerMysqlFromTrunk() {
-    docker run -d -p 3306:3306 --name=mysql-8 -e MYSQL_ALLOW_EMPTY_PASSWORD=true mysql:8
-}
-
-function DockerMySqlWorkStart() {
-    docker start mysql-work
-}
-
-alias docker-install=DockerInstall
-alias docker-remove-imgs=DockerRemoveImgs
-alias docker-remove-containers=DockerRemoveContainers
-alias docker-daemon="sudo docker daemon --storage-driver=overlay --log-driver=journald"
-alias docker-remove-untaged-images=DockerRemoveUntagedImages
-alias docker-mysql-trunk-run=DockerMysqlFromTrunk
-
-alias docker-mysql-work-run=DockerMySqlWorkRun
-alias docker-mysql-work-start=DockerMySqlWorkStart
-
-#
-# Join into coreos
-#
-alias coreos-join="ssh -l core -p 2222 localhost"
-
-#
-# rkt related aliases
-#
-alias rkt-run-fedora="rkt run --interactive --insecure-options=image --net=host docker://fedora --exec=/bin/bash"
-
-#
-# something related to mysql
-#
-alias start-mysql="mysqld --query-cache-type=ON"
+# other aliases related to mysql
 alias kill-mysql="pkill mysql"
-alias grep-mysql="grep -rlI --exclude-dir=mysql-test"
 
+# Linux kernel
 alias save-kernel-config="cp -r $DEV/linux/.config $DOTFILES/linux-dev/x86_64_conf/"
-
-#
-# k8s related scripts
-#
-function k8s-tp-test-cluster-context() {
-    export KUBECONFIG=$HOME/.kube/tp-k8s.conf
-    kubectl config set-context --namespace=tposs-testing lab
-}
-
-function k8s-local-cluster-context() {
-    export KUBECONFIG=/var/run/kubernetes/admin.kubeconfig
-}
