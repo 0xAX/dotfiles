@@ -1,0 +1,42 @@
+#!/bin/bash
+
+#
+# mariadb docker scripts
+#
+function docker-mysql-work-run() {
+    docker run -d -p 3306:3306 --name=mysql-work -e MYSQL_ALLOW_EMPTY_PASSWORD=true mariadb:10.3
+}
+
+function docker-mysql-work-start() {
+    docker start mysql-work
+}
+
+function docker-mysql-8-run() {
+    docker run --name mysql-server -e MYSQL_ROOT_PASSWORD=root -d mysql:8.0
+}
+
+#
+# mysql-8 docker scripts
+#
+function docker-mysql-8-start() {
+    docker start mysql-server
+}
+
+function docker-mysql-8-stop() {
+    docker stop mysql-server
+}
+
+#
+# postgres docker scripts
+#
+function docker-postgres-run() {
+    docker run --name postgres-server -e POSTGRES_PASSWORD=root -d postgres:10.2
+}
+
+function docker-postgres-start() {
+    docker start postgres-server
+}
+
+function docker-postgres-stop() {
+    docker stop postgres-server
+}

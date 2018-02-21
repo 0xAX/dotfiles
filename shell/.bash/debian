@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# apt and aptitude aliases
+alias apt-install="sudo apt-get install "
+alias apt-remove="sudo apt-get purge "
+alias apt-update="sudo apt-get update "
+alias apt-upgrade="sudo apt-get upgrade "
+alias apt-urls="sudo nano /etc/apt/sources.list "
+alias apt-packages="sudo apt-cache pkgnames "
+alias apt-search="sudo apt-cache search "
+alias apt-info="sudo apt-cache show "
+alias apt-clean="sudo apt-get clean"
+alias apt-check="sudo apt-get check"
+alias apt-auto-clean="sudo apt-get autoclean"
+alias apt-auto-remove="sudo apt-get autoremove"
+alias apt-pkg-version="sudo aptitude versions "

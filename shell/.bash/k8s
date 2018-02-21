@@ -1,0 +1,10 @@
+#!/bin/bash
+
+function k8s-tp-test-cluster-context() {
+    export KUBECONFIG=$HOME/.kube/tp-k8s.conf
+    kubectl config set-context --namespace=tposs-testing lab
+}
+
+function k8s-local-cluster-context() {
+    export KUBECONFIG=/var/run/kubernetes/admin.kubeconfig
+}
