@@ -142,7 +142,10 @@
  '(ido-record-commands nil)
  '(indent-tabs-mode nil)
  '(org-directory "~/todo")
- '(package-selected-packages (quote (typescript magit bison-mode))))
+ '(package-selected-packages (quote (magit bison-mode))))
+
+;; do not remove new line at the end of buffer
+(setq mode-require-final-newline t)
 
 ;;
 ;; Custom faces
