@@ -34,7 +34,7 @@ bindsym $mod+c exec i3-msg restart
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run -b -fn "-xos4-terminus-medium-r-*-*-18-*" -sb "sienna"
 # go to the next workspace
-bindsym $mod+Tab exec --no-startup-id /home/alex/.i3/i3-next-workspace.pl #workspace next
+bindsym $mod+Tab exec --no-startup-id /home/alex/.i3/i3-next-workspace.pl
 # go to the prevoious workspace
 bindsym $mod+BackSpace workspace prev
 

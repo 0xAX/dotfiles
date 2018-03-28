@@ -1,40 +1,42 @@
-;; .emacs
+;;; .emacs.el --- My init file for GNU Emacs  -*- lexical-binding: t -*-
 ;;
+;; Author:  Alexander Kuleshov <kuleshovmail@gmail.com>
+;; URL:     https://github.com/0xAX/med
 ;;
-;;        DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
-;;                Version 2, December 2004
+;; License: See LICENSE file.
 ;;
-;; Everyone is permitted to copy and distribute verbatim or modified
-;; copies of this license document, and changing it is allowed as long
-;; as the name is changed.
-;;
-;;         DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
-;; TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
-;;
-;;  0. You just DO WHAT THE FUCK YOU WANT TO.
-;;
-;;
-;;
-;;                                                            0xAX :)
-;;
+;;                                                                
+;;                                                          dddddddd
+;;                                                          d::::::d
+;;                                                          d::::::d
+;;                                                          d::::::d
+;;                                                        d:::::d 
+;;     mmmmmmm    mmmmmmm       eeeeeeeeeeee        ddddddddd:::::d 
+;;   mm:::::::m  m:::::::mm   ee::::::::::::ee    dd::::::::::::::d 
+;;  m::::::::::mm::::::::::m e::::::eeeee:::::ee d::::::::::::::::d 
+;;  m::::::::::::::::::::::me::::::e     e:::::ed:::::::ddddd:::::d 
+;;  m:::::mmm::::::mmm:::::me:::::::eeeee::::::ed::::::d    d:::::d 
+;;  m::::m   m::::m   m::::me:::::::::::::::::e d:::::d     d:::::d 
+;;  m::::m   m::::m   m::::me::::::eeeeeeeeeee  d:::::d     d:::::d 
+;;  m::::m   m::::m   m::::me:::::::e           d:::::d     d:::::d 
+;;  m::::m   m::::m   m::::me::::::::e          d::::::ddddd::::::dd
+;;  m::::m   m::::m   m::::m e::::::::eeeeeeee   d:::::::::::::::::d
+;;  m::::m   m::::m   m::::m  ee:::::::::::::e    d:::::::::ddd::::d
+;;  mmmmmm   mmmmmm   mmmmmm    eeeeeeeeeeeeee     ddddddddd   ddddd
+
+;;;
+;;; If we are using i3wm, load related configuration
+;;;
+(let*
+    ((i3-socket (shell-command-to-string "i3 --get-socketpath"))
+     (i3 (file-exists-p (replace-regexp-in-string "\n$" "" i3-socket))))
+  (if i3
+      (load "~/.emacscore/desktop/i3.el")))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;        Standard settings
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (add-to-list 'load-path "~/.emacs.d/lisp")
-
-;;
-;; As we started switch to second workspace
-;;
-(load "~/.emacscore/desktop/i3.el")
-(i3-switch-workspace "2")
-
-;;
-;; exit from i3 passthrough mode on exit
-;;
-(add-hook 'kill-emacs-hook
-          (lambda ()
-            (shell-command-to-string "i3-msg mode default")))
 
 ;;
 ;; do not save sessions
@@ -98,7 +100,9 @@
 (require 'package)
 (add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-(package-initialize)
+
+(if (version< emacs-version "27.0")
+    (package-initialize))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;        Load extensions

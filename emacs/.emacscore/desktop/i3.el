@@ -1,3 +1,13 @@
+;;
+;; exit from i3 passthrough mode on exit
+;;
+(add-hook 'kill-emacs-hook
+          (lambda ()
+            (shell-command-to-string "i3-msg mode default")))
+
+;;
+;; switch to the given workspace.
+;;
 (defmacro i3-switch-workspace (workspace)
   `(defun ,(intern (concat "go-to-workspace-" workspace)) ()
      (interactive)
@@ -15,8 +25,15 @@
 (i3-switch-workspace "9")
 
 (defun switch-to-next-i3-workspace ()
+  "switch to the next i3 workspace"
   (interactive)
   (shell-command-to-string "i3-msg mode default")
   (shell-command-to-string "i3-msg workspace next"))
 
+;;
+;; go to the default namespace
+;;
+(i3-switch-workspace "2")
+
+;; i3 keybindings
 (global-set-key (kbd "<M-tab>") 'switch-to-next-i3-workspace)
