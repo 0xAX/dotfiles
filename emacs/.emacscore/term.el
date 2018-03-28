@@ -6,7 +6,7 @@
 (setenv "SHELL" shell-file-name)
 
 (defadvice ansi-term (after advise-ansi-term-coding-system activate)
-  (set-buffer-process-coding-system 'utf-8-unix 'utf-8-unix))
+  (set-process-coding-system 'utf-8-unix 'utf-8-unix))
 
 ;; close the terminal buffer automatically on exit
 (defadvice term-sentinel (around my-advice-term-sentinel (proc msg) activate)
