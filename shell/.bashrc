@@ -135,5 +135,8 @@ test -f /etc/arch-release && source $BASHRC_DIR/arch-linux
 # include if we are using debian based distro
 (test -f /etc/debian_version || cat /etc/os-release | grep Ubuntu) && source $BASHRC_DIR/debian
 
+# turn off dpms
+xset s off -dpms
+
 # switch keyboard layouts
 setxkbmap -layout us,ru -option grp:lwin_toggle
