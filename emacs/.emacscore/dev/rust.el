@@ -15,8 +15,8 @@
     (setq tab-width 4)
     (setq rust-indent-offset 4)))
 
-(setq racer-cmd "~/.cargo/bin/racer")
-(setq racer-rust-src-path "~/dev/rust/src")
+;;(setq racer-cmd "~/.cargo/bin/racer")
+;;(setq racer-rust-src-path "~/disk/dev/rust/src")
 
-(add-hook 'rust-mode-hook #'company-mode)
-(setq company-tooltip-align-annotations t)
+;;(add-hook 'rust-mode-hook #'company-mode)
+;;(setq company-tooltip-align-annotations t)
