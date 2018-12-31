@@ -8,3 +8,5 @@ function k8s-tp-test-cluster-context() {
 function k8s-local-cluster-context() {
     export KUBECONFIG=/var/run/kubernetes/admin.kubeconfig
 }
+
+export KUBECONFIG=/home/alex/Downloads/admin.conf

@@ -12,7 +12,7 @@ function docker-mysql-work-start() {
 }
 
 function docker-mysql-8-run() {
-    docker run --name mysql-server -e MYSQL_ROOT_PASSWORD=root -d mysql:8.0
+    docker run -p 3306:3306 --name mysql-server -e MYSQL_ROOT_PASSWORD=root -e MYSQL_ALLOW_EMPTY_PASSWORD=true -d mysql:5.7
 }
 
 #
