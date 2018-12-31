@@ -1,0 +1,26 @@
+[general]
+accounts = Personal
+maxsyncaccounts = 3
+
+[Account Personal]
+localrepository = Local
+remoterepository = Remote
+#status_backend = sqlite
+
+[Repository Local]
+type = Maildir
+localfolders = ~/disk/Maildir/kuleshovmail
+
+[Repository Remote]
+type = IMAP
+remotehost = imap.gmail.com
+remoteuser = kuleshovmail@gmail.com
+remotepass = password
+# remotepasseval = get_pass("vbsmart")
+ssl = yes
+maxconnections = 1
+realdelete = yes
+sslcacertfile = /etc/pki/tls/certs/ca-bundle.crt
+holdconnectionopen = true
+keepalive = 120
+folderfilter = lambda folder: folder not in ['[Gmail]/Trash', '[Gmail]/Sent Mail', '[Gmail]/Drafts', '[Gmail]/Spam']
