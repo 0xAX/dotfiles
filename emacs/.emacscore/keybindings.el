@@ -31,6 +31,7 @@
 (global-set-key (kbd "C-x b")   'browse-url)
 (global-set-key (kbd "C-x p")   'ping)
 (global-set-key (kbd "C-x l")   'list-colors-display)
+(global-set-key (kbd "C-x m")   'mu4e)
 
 ;; Text manipulation
 (global-set-key "\C-a" 'mark-page)
