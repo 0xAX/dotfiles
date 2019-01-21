@@ -84,21 +84,11 @@
 (load "~/.emacscore/dev/golang.el")
 (load "~/.emacscore/dev/rust.el")
 (load "~/.emacscore/term.el")
-(load "~/.emacscore/vcs/magit.el")
 
 ;; finally loaded everything
 (message "All done, %s%s" (user-login-name) ".")
 
 ;; lisp configuration
-(setq inferior-lisp-program
-      (executable-find "sbcl"))
-(add-to-list 'load-path "~/.emacs.d/slime")
-(require 'slime-autoloads)
-
-;; email configuration
-(add-to-list 'load-path "~/.emacs.d/mu4e")
-(load "~/.emacscore/mail/mail.el")
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
