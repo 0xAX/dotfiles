@@ -1,0 +1,11 @@
+cmake  -DPLUGIN_TOKUDB=YES -DPLUGIN_MROONGA=YES -DPLUGIN_SPIDER=YES -DPLUGIN_PERFSCHEMA=YES -DPLUGIN_SPHINX=YES -DPLUGIN_ARCHIVE=YES -DPLUGIN_ROCKSDB=YES -DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache -DCMAKE_BUILD_TYPE=Debug -DWITH_SSL=system -DWITH_ZLIB=system -DBUILD_TESTING=false -DCONC_WITH_CURL=true -DCONC_WITH_SSL=true -DENABLE_DTRACE=false -DENABLED_LOCAL_INFILE=true .
+
+https://github.com/0xAX/mariadb-server/commit/e1a212ebbcea6d51a4bc1fe672bc6ff392477a39
+
+https://jira.mariadb.org/browse/MDEV-15696?jql=project%20%3D%20MDEV%20AND%20resolution%20%3D%20Unresolved%20AND%20assignee%20is%20EMPTY%20ORDER%20BY%20priority%20DESC - issue
+
+https://mariadb.com/kb/en/library/create-server/ - create server
+
+TODO:
+
+1. should we have something like check_show_access for server acceess
