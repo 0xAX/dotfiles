@@ -25,7 +25,13 @@
 
 ;; set of TODO keywords highligted in org-mode
 (setq org-todo-keywords
-      '((sequence "TODO" "IN PROGRESS" "STATE" "|" "DONE")))
+      '(
+        (sequence "TODO" "|" "DONE")
+        (sequence "IN PROGRESS" "|" "DONE")))
+
+(setq org-todo-keyword-faces
+  '(("TODO" . (:foreground "orange red" :weight bold))
+    ("IN PROGRESS" . "gold")))
 
 (defun todo()
   "Open TODO directory"

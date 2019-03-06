@@ -9,4 +9,4 @@ function k8s-local-cluster-context() {
     export KUBECONFIG=/var/run/kubernetes/admin.kubeconfig
 }
 
-export KUBECONFIG=/home/alex/Downloads/admin.conf
+export KUBECONFIG=/home/alex/disk/important/admin.conf

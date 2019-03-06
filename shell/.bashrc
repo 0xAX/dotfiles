@@ -138,5 +138,7 @@ test -f /etc/arch-release && source $BASHRC_DIR/arch-linux
 # turn off dpms
 xset s off -dpms
 
+export GVFS_DISABLE_FUSE=1
+
 # switch keyboard layouts
 setxkbmap -layout us,ru -option grp:lwin_toggle
