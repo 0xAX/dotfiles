@@ -21,6 +21,7 @@
 (global-unset-key "\C-f")
 (global-unset-key "\C-l")
 (global-unset-key "\C-b")
+(global-unset-key "\C-n")
 
 ;; external applications
 (global-set-key (kbd "C-x f")   'ftp)
@@ -57,6 +58,9 @@
 (global-set-key [C-left]  'tabbar-backward-tab)
 (global-set-key [C-right] 'tabbar-forward-tab)
 (global-set-key [C-tab]   'tabbar-forward-group)
+
+;; files manipulation
+(global-set-key "\C-n" 'new-file)
 
 ;; enable/disable auto-complete-mode
 (global-unset-key "\M-a")

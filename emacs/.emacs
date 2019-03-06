@@ -32,7 +32,7 @@
       (load "~/.emacscore/desktop/i3.el")))
 
 ;; Load Standard routines that may be used in other elisp files
-(load "~/.emacscore/utils.el")
+(load "~/.emacscore/extensions.el")
 
 ;; do not save sessions
 (desktop-save-mode 0)
@@ -69,6 +69,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; ui
+(load "~/.emacscore/file-utils.el")
 (load "~/.emacscore/text-utils.el")
 (load "~/.emacscore/keybindings.el")
 (load "~/.emacscore/org/orgmode.el")
