@@ -62,16 +62,4 @@ color body red  default "^\-[^\-]+.*"
 #
 set date_format="%m-%d-%y"
 set index_format="%2C |%Z| %d %-30.30F %s"
-
 set quote_regexp="^( {0,4}[>|:#]| {0,4}[a-z0-9]+[>|]+)+"
-
-#
-# sidebar
-#
-set sidebar_width=25
-color sidebar green default
-bind index <left> sidebar-prev
-bind index <right> sidebar-next
-bind index <space> sidebar-open
-bind index <Esc>S sidebar-toggle
-set sort_sidebar=unsorted
