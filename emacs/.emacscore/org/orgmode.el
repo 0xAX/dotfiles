@@ -1,9 +1,4 @@
 ;;; .emacs --- My org-mode configuration  -*- lexical-binding: t -*-
-;;
-;; Author:  Alexander Kuleshov <kuleshovmail@gmail.com>
-;; URL:     https://github.com/0xAX/med
-;;
-;; License: See LICENSE file.
 
 ;; path to org directory
 (setq org-directory "~/dev/todo")
