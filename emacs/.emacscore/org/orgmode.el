@@ -56,5 +56,4 @@
  '(org-level-6 ((t (:inherit outline-6 :background "#263238" :foreground "DarkOrange2"))))
  '(org-level-7 ((t (:inherit outline-7 :background "#263238" :foreground "DarkOrange3"))))
  '(org-level-8 ((t (:inherit outline-8 :background "#263238" :foreground "gold2"))))
- '(org-todo ((t (:background "#263238" :foreground "orange red" :weight bold))))
  '(org-todo ((t (:background "#263238" :foreground "orange red" :weight bold)))))
