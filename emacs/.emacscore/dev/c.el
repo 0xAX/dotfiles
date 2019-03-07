@@ -14,8 +14,8 @@
 (define-key c-mode-base-map (kbd "RET") 'newline-and-indent)
 
 ;; company mode for autocomplete
-(add-to-list 'load-path "~/.emacs.d/company-20170715.1035")
-(add-to-list 'load-path "~/.emacs.d/company-c-headers-20170531.1330")
+(add-to-list 'load-path "~/.emacs.d/company")
+(add-to-list 'load-path "~/.emacs.d/company-c-headers")
 (require 'company)
 (add-hook 'after-init-hook 'global-company-mode)
 (setq company-backends (delete 'company-semantic company-backends))
