@@ -1,9 +1,4 @@
 ;;; ido.el --- My configuration for ido  -*- lexical-binding: t -*-
-;;
-;; Author:  Alexander Kuleshov <kuleshovmail@gmail.com>
-;; URL:     https://github.com/0xAX/med
-;;
-;; License: See LICENSE file.
 
 ;; enable ido mode
 (require 'ido)

@@ -1,9 +1,4 @@
 ;;; text-utils.el --- Text utilities for GNU Emacs  -*- lexical-binding: t -*-
-;;
-;; Author:  Alexander Kuleshov <kuleshovmail@gmail.com>
-;; URL:     https://github.com/0xAX/med
-;;
-;; License: See LICENSE file.
 
 (defun mark-curr-line ()
   "Set mark for current line"  

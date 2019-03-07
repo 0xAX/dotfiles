@@ -1,9 +1,4 @@
 ;;; tabbar-material-style.el --- GNU Emacs tabbar styles for material theme  -*- lexical-binding: t -*-
-;;
-;; Author:  Alexander Kuleshov <kuleshovmail@gmail.com>
-;; URL:     https://github.com/0xAX/med
-;;
-;; License: See LICENSE file.
 
 ;; Tabbar mode
 (add-to-list 'load-path "~/.emacs.d/tabbar")

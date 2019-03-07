@@ -1,9 +1,4 @@
 ;;; ui.el --- UI configuration of GNU Emacs  -*- lexical-binding: t -*-
-;;
-;; Author:  Alexander Kuleshov <kuleshovmail@gmail.com>
-;; URL:     https://github.com/0xAX/med
-;;
-;; License: See LICENSE file.
 
 ;; yes-or-no-p to y-n
 (defalias 'yes-or-no-p 'y-or-n-p)

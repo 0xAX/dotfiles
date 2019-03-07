@@ -1,6 +1,4 @@
-;;
 ;; exit from i3 passthrough mode on exit
-;;
 (add-hook 'kill-emacs-hook
           (lambda ()
             (shell-command-to-string "i3-msg mode default")))

@@ -1,9 +1,4 @@
 ;;; markups.el --- Stuff for different markup languages  -*- lexical-binding: t -*-
-;;
-;; Author:  Alexander Kuleshov <kuleshovmail@gmail.com>
-;; URL:     https://github.com/0xAX/med
-;;
-;; License: See LICENSE file.
 
 ;; Markdown mode
 (add-to-list 'load-path "~/.emacs.d/markdown")

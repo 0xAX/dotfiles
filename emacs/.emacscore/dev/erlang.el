@@ -1,9 +1,4 @@
 ;;; erlang.el --- Erlang routines for GNU Emacs  -*- lexical-binding: t -*-
-;;
-;; Author:  Alexander Kuleshov <kuleshovmail@gmail.com>
-;; URL:     https://github.com/0xAX/med
-;;
-;; License: See LICENSE file.
 
 (setq load-path (cons "~/.emacs.d/erlang/"
       load-path))

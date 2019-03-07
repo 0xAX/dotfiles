@@ -1,10 +1,6 @@
 ;;; keybindings.el --- Global keybindings -*- lexical-binding: t -*-
-;;
-;; Author:  Alexander Kuleshov <kuleshovmail@gmail.com>
-;; URL:     https://github.com/0xAX/med
-;;
-;; License: See LICENSE file.
 
+;; F(n) keybindings
 (global-set-key [f1]  'dired-other-window)
 (global-set-key [f2]  'sudo-find-file)
 (global-set-key [f3]  'reload-file)

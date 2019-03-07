@@ -1,19 +1,14 @@
 ;;; c.el --- C/C++ for GNU Emacs  -*- lexical-binding: t -*-
-;;
-;; Author:  Alexander Kuleshov <kuleshovmail@gmail.com>
-;; URL:     https://github.com/0xAX/med
-;;
-;; License: See LICENSE file.
 
 (require 'cc-mode)
 
 ;; Indentation for C/C++ code
 (setq c-basic-offset 8)
 (setq c-default-style '((java-mode . "java")
-                        (awk-mode . "awk")
-                        (c++-mode . "linux")
-			(cc-mode . "linux")
-                        (other . "linux")))
+                        (awk-mode  . "awk")
+                        (c++-mode  . "linux")
+			(cc-mode   . "linux")
+                        (other     . "linux")))
 (setq c-default-style "bsd")
 (setq-default tab-width 8 indent-tabs-mode t)
 (define-key c-mode-base-map (kbd "RET") 'newline-and-indent)

@@ -1,9 +1,4 @@
 ;;; mode-line-material.el --- GNU Emacs modeline styles for material theme  -*- lexical-binding: t -*-
-;;
-;; Author:  Alexander Kuleshov <kuleshovmail@gmail.com>
-;; URL:     https://github.com/0xAX/med
-;;
-;; License: See LICENSE file.
 
 ;; Mode line setup
 (setq-default
