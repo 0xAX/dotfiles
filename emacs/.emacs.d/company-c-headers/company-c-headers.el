@@ -4,7 +4,6 @@
 
 ;; Author: Alastair Rankine <alastair@girtby.net>
 ;; Keywords: development company
-;; Package-Version: 20170531.1330
 ;; Package-Requires: ((emacs "24.1") (company "0.8"))
 
 ;; This file is not part of GNU Emacs.
@@ -42,6 +41,7 @@
 
 (require 'company)
 (require 'rx)
+(require 'cl)
 (require 'cl-lib)
 
 (defgroup company-c-headers nil
@@ -144,7 +144,7 @@ Filters on the appropriate regex for the current major mode."
                     (setq next nil)
                     tmp)))
       )
-    candidates
+    (remove-duplicates candidates :test 'equal)
     ))
 
 (defun company-c-headers--meta (candidate)
