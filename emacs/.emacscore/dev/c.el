@@ -13,16 +13,6 @@
 (setq-default tab-width 8 indent-tabs-mode t)
 (define-key c-mode-base-map (kbd "RET") 'newline-and-indent)
 
-;; company mode for autocomplete
-(add-to-list 'load-path "~/.emacs.d/company")
-(add-to-list 'load-path "~/.emacs.d/company-c-headers")
-(require 'company)
-(add-hook 'after-init-hook 'global-company-mode)
-(setq company-backends (delete 'company-semantic company-backends))
-(define-key c-mode-map  [(tab)] 'company-complete)
-(define-key c++-mode-map  [(tab)] 'company-complete)
-(add-to-list 'company-backends 'company-c-headers)
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; For linux kernel
 ;;
@@ -48,7 +38,7 @@
           (lambda ()
            (let ((filename (buffer-file-name)))
               (when (and filename
-                         (string-match (expand-file-name "~/dev/linux")
+                         (string-match (expand-file-name "~/dev/dev/linux")
                                        filename))
                 (setq indent-tabs-mode t)
                 (setq show-trailing-whitespace t)

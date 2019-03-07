@@ -57,6 +57,7 @@
 (load "~/.emacscore/dev/elisp.el")
 (load "~/.emacscore/dev/erlang.el")
 (load "~/.emacscore/dev/elixir.el")
+(load "~/.emacscore/dev/company.el")
 (load "~/.emacscore/dev/c.el")
 (load "~/.emacscore/dev/golang.el")
 (load "~/.emacscore/term.el")
