@@ -22,7 +22,3 @@
 ;; company mode keybindings for C/C++
 (define-key c-mode-map  [(tab)] 'company-complete)
 (define-key c++-mode-map  [(tab)] 'company-complete)
-
-;; (setq company-minimum-prefix-length 1)
-;; (setq company-idle-delay 0.1)
-(push '(company-rtags company-keywords) company-backends)
