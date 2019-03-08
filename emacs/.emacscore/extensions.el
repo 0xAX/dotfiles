@@ -5,7 +5,6 @@
   (interactive)
   (load "~/.emacscore/dev/sed.el")
   (load "~/.emacscore/dev/shell.el")
-  (load "~/.emacscore/dev/rust.el")
   ;;
   ;; YAML mode
   ;;
