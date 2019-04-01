@@ -16,6 +16,7 @@
   new_tab = <Primary>t
   next_tab = <Shift>Right
   page_down = None
+  paste = <Primary>v
   prev_tab = <Shift>Left
 [layouts]
   [[default]]
