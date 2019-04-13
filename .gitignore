@@ -7,6 +7,7 @@ emacs/.emacs.d/ido.last
 emacs/.emacs.d/session.*
 emacs/.emacs.d/tramp
 emacs/.emacs.d/elpa/archives/*
+emacs/.emacs.d/url/cache/*
 rfc*.txt
 cookies
 *.data
