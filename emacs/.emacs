@@ -60,7 +60,12 @@
 (load "~/.emacscore/dev/company.el")
 (load "~/.emacscore/dev/c.el")
 (load "~/.emacscore/dev/golang.el")
+(load "~/.emacscore/dev/common-lisp")
 (load "~/.emacscore/term.el")
+(load "~/.emacscore/snippets.el")
+
+(custom-set-variables
+ '(indent-tabs-mode nil))
 
 ;; finally loaded everything
 (message "All done, %s%s" (user-login-name) ".")
