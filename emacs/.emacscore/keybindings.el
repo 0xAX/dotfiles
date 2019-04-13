@@ -102,3 +102,6 @@
 
 ;; i3 keybindings
 (global-set-key (kbd "<M-tab>") 'switch-to-next-i3-workspace)
+
+;; common lisp
+(global-set-key (kbd "C-x e") 'slime-eval-defun)
