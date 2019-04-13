@@ -69,7 +69,7 @@
                             (?\`  . ?\`)))
 
 ;; Set font
-(set-frame-font "Inconsolata-16")
+(set-frame-font "Inconsolata-15")
 
 ;; region color
 (set-face-attribute 'region nil :background "gray15")
