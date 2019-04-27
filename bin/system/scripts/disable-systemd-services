@@ -24,5 +24,6 @@ sudo systemctl disable lvm2-lvmpolld.socket
 sudo systemctl disable upower.service 
 sudo systemctl disable mcelog.service
 sudo systemctl disable packagekit.service
+sudo systemctl disable ModemManager.service
 echo "Done"
 exit 0
