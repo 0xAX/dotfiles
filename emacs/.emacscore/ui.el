@@ -15,14 +15,20 @@
 
 ;; Current them for graphic and terminal mode
 (if (display-graphic-p)
-        ;; load and configure material theme
-        (progn (load "~/.emacscore/themes/material.el")
-	       (enable-theme 'material)
-               (load "~/.emacscore/themes/helpers/tabbar-material-style.el")
-               (load "~/.emacscore/themes/helpers/mode-line-material.el"))
-        ;; load and configure smyx
-        (progn (load "~/.emacscore/themes/smyx.el")
-               (enable-theme 'smyx)))
+    ;; load and configure material theme
+    (progn
+      (load "~/.emacs.d/solarized/solarized.el")
+      (load "~/.emacs.d/solarized/solarized-theme.el")
+      (load "~/.emacs.d/solarized/solarized-light-theme.el")
+      (load "~/.emacscore/themes/helpers/tabbar-solarized-light-style.el")
+      (enable-theme 'solarized-light))
+    ;; (progn (load "~/.emacscore/themes/material.el")
+    ;;        (enable-theme 'material)
+    ;;        (load "~/.emacscore/themes/helpers/tabbar-material-style.el")
+    ;;        (load "~/.emacscore/themes/helpers/mode-line-material.el"))
+  ;; load and configure smyx
+  (progn (load "~/.emacscore/themes/smyx.el")
+         (enable-theme 'smyx)))
 
 ;; hide scroll bar
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
@@ -100,6 +106,3 @@
 
 (add-to-list 'load-path "~/.emacs.d/popup")
 (add-to-list 'load-path "~/.emacs.d/auto-complete")
-;;(require 'auto-complete-config)
-;;(ac-config-default)
-;;(add-to-list 'ac-dictionary-directories "/.emacs.d/auto-complete")

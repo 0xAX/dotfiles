@@ -51,6 +51,7 @@
 (load "~/.emacscore/org/orgmode.el")
 (load "~/.emacscore/ido.el")
 (load "~/.emacscore/dired.el")
+(load "~/.emacs.d/dash.el/dash.el")
 (load "~/.emacscore/ui.el")
 
 ;; Development
@@ -70,8 +71,11 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" default)))
  '(indent-tabs-mode nil)
- '(package-selected-packages (quote (cider))))
+ '(package-selected-packages (quote (solarized-theme cider))))
 
 ;; finally loaded everything
 (message "All done, %s%s" (user-login-name) ".")
