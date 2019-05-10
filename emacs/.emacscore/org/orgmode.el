@@ -1,6 +1,6 @@
 ;;; .emacs --- My org-mode configuration  -*- lexical-binding: t -*-
 
-;; path to org directory
+;; set path to org directory
 (setq org-directory "~/dev/todo")
 ;; enable org-mode for *.org files
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
