@@ -31,6 +31,9 @@
 (setq auto-save-list-file-name  nil)
 (setq auto-save-default         nil)
 
+;; set current theme
+(setq current-theme "solarized")
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;        Package manager
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

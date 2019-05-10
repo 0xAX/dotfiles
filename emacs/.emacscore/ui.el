@@ -16,17 +16,18 @@
 ;; Current them for graphic and terminal mode
 (if (display-graphic-p)
     ;; load and configure material theme
-    (progn
-      (load "~/.emacs.d/solarized/solarized.el")
-      (load "~/.emacs.d/solarized/solarized-theme.el")
-      (load "~/.emacs.d/solarized/solarized-light-theme.el")
-      (load "~/.emacscore/themes/helpers/tabbar-solarized-light-style.el")
-      (enable-theme 'solarized-light))
-    ;; (progn (load "~/.emacscore/themes/material.el")
-    ;;        (enable-theme 'material)
-    ;;        (load "~/.emacscore/themes/helpers/tabbar-material-style.el")
-    ;;        (load "~/.emacscore/themes/helpers/mode-line-material.el"))
-  ;; load and configure smyx
+    (pcase current-theme
+      ("material" (progn
+                    (load "~/.emacscore/themes/material.el")
+                    (load "~/.emacscore/themes/helpers/tabbar-material-style.el")
+                    (load "~/.emacscore/themes/helpers/mode-line-material.el")
+                    (enable-theme 'material)))
+      ("solarized" (progn
+                     (load "~/.emacs.d/solarized/solarized.el")
+                     (load "~/.emacs.d/solarized/solarized-theme.el")
+                     (load "~/.emacs.d/solarized/solarized-light-theme.el")
+                     (load "~/.emacscore/themes/helpers/tabbar-solarized-light-style.el")
+                     (enable-theme 'solarized-light))))
   (progn (load "~/.emacscore/themes/smyx.el")
          (enable-theme 'smyx)))
 
