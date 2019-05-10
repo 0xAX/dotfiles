@@ -22,7 +22,7 @@ bindsym $mod+Return exec i3-sensible-terminal --profile=alex
 # start emacs
 bindsym $mod+e exec terminator --profile=alex -x emacs
 # start mutt
-bindsym $mod+m exec terminator --profile=alex -e "TERM=xterm-256color ~/dev/mail/mutt"
+bindsym $mod+m exec terminator --profile=alex -e "TERM=xterm-256color mutt"
 # start irssi
 bindsym $mod+i exec terminator --profile=alex -e "TERM=xterm-256color irssi"
 # start browser
