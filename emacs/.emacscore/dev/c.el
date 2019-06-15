@@ -1,12 +1,12 @@
 ;;; c.el --- C/C++ for GNU Emacs  -*- lexical-binding: t -*-
-
 (require 'cc-mode)
+
+(c-set-offset 'innamespace 0)
 
 ;; Indentation for C/C++ code
 (setq c-basic-offset 8)
 (setq c-default-style '((java-mode . "java")
                         (awk-mode  . "awk")
-                        (c++-mode  . "linux")
 			(cc-mode   . "linux")
                         (other     . "linux")))
 (setq c-default-style "bsd")
