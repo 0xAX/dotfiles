@@ -16,7 +16,14 @@ test -d ${DEV_DISK}/db/usr/local/mysql/scripts && export PATH=$PATH:${DEV_DISK}/
 export LD_LIBRARY_PATH=""
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib"
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib/"
-export LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LIBRARY_PATH
+
+# add psql library path if it is installed
+if [ -d "/usr/local/pgsql" ];
+then
+    export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/pgsql/lib"
+fi
+
+export LIBRARY_PATH=/usr/lib/x86_64-linux-gnu
 
 # Kernel and C dev, systemd
 export PATH=$PATH:$KERNEL_DEV/tools/perf/
