@@ -67,6 +67,7 @@
 (load "~/.emacscore/dev/common-lisp.el")
 (load "~/.emacscore/term.el")
 (load "~/.emacscore/snippets.el")
+(load "~/.emacscore/dev/ocaml.el")
 (yas-reload-all)
 
 (custom-set-variables
