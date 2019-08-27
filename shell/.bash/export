@@ -16,14 +16,7 @@ test -d ${DEV_DISK}/db/usr/local/mysql/scripts && export PATH=$PATH:${DEV_DISK}/
 export LD_LIBRARY_PATH=""
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib"
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib/"
-
-# add psql library path if it is installed
-if [ -d "/usr/local/pgsql" ];
-then
-    export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/pgsql/lib"
-fi
-
-export LIBRARY_PATH=/usr/lib/x86_64-linux-gnu
+export LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu
 
 # Kernel and C dev, systemd
 export PATH=$PATH:$KERNEL_DEV/tools/perf/
@@ -56,3 +49,5 @@ export JAVA_HOME=/usr/java/jdk-12.0.1
 
 # path to SSL certs
 export SSL_CERT_FILE=/etc/ssl/certs/ca-bundle.crt
+
+test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
