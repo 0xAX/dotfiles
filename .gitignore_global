@@ -1,3 +1,4 @@
+build/*
 *.patch
 *.log
 *~
@@ -5,7 +6,6 @@
 .#*
 \#*#
 *.tmp
-#config/config.exs
 .todo
 
 # Compiled source #
