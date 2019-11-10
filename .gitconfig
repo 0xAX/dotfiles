@@ -32,7 +32,7 @@
 	editor = "emacs -nw"
 	filemode = false
 	trustctime = false
-	excludesfile = ~/.gitignore_global
+	excludesfile = /home/alex/.gitignore_global
 	checkstat = default
 	quotepath = false
 	eol = native

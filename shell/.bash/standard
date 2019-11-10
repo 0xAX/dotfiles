@@ -116,3 +116,6 @@ alias kill-mysql="pkill mysql"
 
 # Linux kernel
 alias save-kernel-config="cp -r $DEV/linux/.config $DOTFILES/linux-dev/x86_64_conf/"
+
+# start ercdf with default configuration
+alias ercdf-start="rebar3 shell --config config/ercdf.config"
