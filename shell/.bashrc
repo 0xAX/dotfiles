@@ -36,10 +36,9 @@ XDG_VIDEOS_DIR="$HOME/Videos"
 
 # OS dependend
 OS=$(uname)
-if [ "$OS" == "FreeBSD" ] || [ "$OS" == "DragonFly" ]; then
+echo $OS
+if [ "$OS" == "FreeBSD" ] || [ "$OS" == "OpenBSD" ]; then
     export SHELL="/usr/local/bin/bash"
-    export MAKE="/usr/local/bin/gmake"
-    source /usr/local/share/bash-completion/bash_completion
 else
     export SHELL="/bin/bash"
     export MAKE="/usr/bin/make"
@@ -133,7 +132,7 @@ source $BASHRC_DIR/k8s
 test -f /etc/arch-release && source $BASHRC_DIR/arch-linux
 
 # include if we are using debian based distro
-(test -f /etc/debian_version || cat /etc/os-release | grep Ubuntu) && source $BASHRC_DIR/debian
+(test -f /etc/debian_version || test -f /etc/os-release && cat /etc/os-release | grep Ubuntu) && source $BASHRC_DIR/debian
 
 # turn off dpms
 xset s off -dpms
