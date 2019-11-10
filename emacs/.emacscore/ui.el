@@ -89,7 +89,8 @@
 (windmove-default-keybindings)
 
 ;; Hide sparators
-(fringe-mode '(0 . 0))
+(if (display-graphic-p)
+  (fringe-mode '(0 . 0)))
 
 ;; auto complete mini buffer
 (icomplete-mode t)
