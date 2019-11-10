@@ -36,7 +36,6 @@ XDG_VIDEOS_DIR="$HOME/Videos"
 
 # OS dependend
 OS=$(uname)
-echo $OS
 if [ "$OS" == "FreeBSD" ] || [ "$OS" == "OpenBSD" ]; then
     export SHELL="/usr/local/bin/bash"
 else
