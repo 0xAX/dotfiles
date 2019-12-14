@@ -12,7 +12,7 @@ then
 fi
 
 OS=$(uname)
-if [ "$OS" == "OpenBSD" ];
+if [ "$OS" == "OpenBSD" ] || [ "$OS" == "NetBSD" ];
 then
     PS1="[\d \t \u@\h:\w ] $ "
 else

@@ -36,7 +36,7 @@ XDG_VIDEOS_DIR="$HOME/Videos"
 
 # OS dependend
 OS=$(uname)
-if [ "$OS" == "FreeBSD" ] || [ "$OS" == "OpenBSD" ]; then
+if [ "$OS" == "FreeBSD" ] || [ "$OS" == "OpenBSD" ] || [ "$OS" == "NetBSD" ]; then
     export SHELL="/usr/local/bin/bash"
 else
     export SHELL="/bin/bash"
@@ -98,20 +98,22 @@ export EMACS=1
 export TMPDIR=/tmp
 
 # default locale
-LANG="en_US.UTF-8"
-LC_CTYPE="en_US.UTF-8"
-LC_NUMERIC="en_US.UTF-8"
-LC_TIME="en_US.UTF-8"
-LC_COLLATE="en_US.UTF-8"
-LC_MONETARY="en_US.UTF-8"
-LC_MESSAGES="en_US.UTF-8"
-LC_PAPER="en_US.UTF-8"
-LC_NAME="en_US.UTF-8"
-LC_ADDRESS="en_US.UTF-8"
-LC_TELEPHONE="en_US.UTF-8"
-LC_MEASUREMENT="en_US.UTF-8"
-LC_IDENTIFICATION="en_US.UTF-8"
-LC_ALL="en_US.UTF-8"
+if [ "$OS" != "NetBSD" ]; then
+  LANG="en_US.UTF-8"
+  LC_CTYPE="en_US.UTF-8"
+  LC_NUMERIC="en_US.UTF-8"
+  LC_TIME="en_US.UTF-8"
+  LC_COLLATE="en_US.UTF-8"
+  LC_MONETARY="en_US.UTF-8"
+  LC_MESSAGES="en_US.UTF-8"
+  LC_PAPER="en_US.UTF-8"
+  LC_NAME="en_US.UTF-8"
+  LC_ADDRESS="en_US.UTF-8"
+  LC_TELEPHONE="en_US.UTF-8"
+  LC_MEASUREMENT="en_US.UTF-8"
+  LC_IDENTIFICATION="en_US.UTF-8"
+  LC_ALL="en_US.UTF-8"
+fi
 
 # include other sources
 source $BASHRC_DIR/term-colors
