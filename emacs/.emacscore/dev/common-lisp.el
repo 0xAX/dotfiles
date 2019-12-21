@@ -1,7 +1,8 @@
 (add-to-list 'load-path "~/.emacs.d/slime")
 (require 'slime-autoloads)
 
-(setq inferior-lisp-program "/usr/bin/sbcl")
+(setq inferior-lisp-program
+      (shell-command-to-string "command -v sbcl"))
 
 (setq slime-lisp-implementations
       '((sbcl ("sbcl" "--noinform") :coding-system utf-8-unix)))
@@ -17,4 +18,4 @@
      (define-key slime-mode-map (kbd "C-c i") 'slime-inspect)
      (define-key slime-mode-map (kbd "C-c C-s") 'slime-selector)))
 
-(setq slime-contribs '(slime-fancy))
+(slime-setup '(slime-fancy slime-quicklisp slime-asdf))
