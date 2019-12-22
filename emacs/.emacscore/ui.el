@@ -107,5 +107,9 @@
   (setq ac-comphist-file  "~/.cache/ac-comphist.dat")
   (ac-config-default))
 
+;; Enable column number in mode-line
+(setq column-number-mode t)
+
+;; Load popup and auto-complete
 (add-to-list 'load-path "~/.emacs.d/popup")
 (add-to-list 'load-path "~/.emacs.d/auto-complete")
