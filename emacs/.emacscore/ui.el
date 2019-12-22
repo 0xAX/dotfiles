@@ -75,8 +75,10 @@
 			    (?\| . ?\|)
                             (?\`  . ?\`)))
 
-;; Set font
-(set-frame-font "Inconsolata-15")
+(cond ((file-directory-p "/usr/share/fonts/fira-code")
+       (set-frame-font "Fira Code-14"))
+      (t
+       (set-frame-font "Monospace-14")))
 
 ;; region color
 (set-face-attribute 'region nil :background "gray15")
