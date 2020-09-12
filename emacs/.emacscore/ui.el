@@ -14,7 +14,7 @@
                                                          (revert-buffer-function " %b" ("%b – Dir:  " default-directory)))))))
 
 ;; Current them for graphic and terminal mode
-(if (display-graphic-p)
+;(if (display-graphic-p)
     ;; load and configure material theme
     (pcase current-theme
       ("material" (progn
@@ -28,8 +28,8 @@
                      (load "~/.emacs.d/solarized/solarized-light-theme.el")
                      (load "~/.emacscore/themes/helpers/tabbar-solarized-light-style.el")
                      (enable-theme 'solarized-light))))
-  (progn (load "~/.emacscore/themes/smyx.el")
-         (enable-theme 'smyx)))
+  ;; (progn (load "~/.emacscore/themes/smyx.el")
+  ;;        (enable-theme 'smyx)))
 
 ;; hide scroll bar
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))

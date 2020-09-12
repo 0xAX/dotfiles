@@ -4,14 +4,14 @@
 (c-set-offset 'innamespace 0)
 
 ;; Indentation for C/C++ code
-(setq c-basic-offset 8)
+(setq c-basic-offset 4)
 (setq c-default-style '((java-mode . "java")
                         (awk-mode  . "awk")
 			(cc-mode   . "linux")
                         (other     . "linux")))
-(setq c-default-style "bsd")
-(setq-default tab-width 8 indent-tabs-mode t)
-(define-key c-mode-base-map (kbd "RET") 'newline-and-indent)
+;;(setq c-default-style "bsd")
+;;(setq-default tab-width 8 indent-tabs-mode t)
+;;(define-key c-mode-base-map (kbd "RET") 'newline-and-indent)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; For linux kernel
