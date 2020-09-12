@@ -21,6 +21,7 @@ bindsym $mod+Shift+f floating toggle
 bindsym $mod+Return exec i3-sensible-terminal --profile=alex
 # start emacs
 bindsym $mod+e exec terminator --profile=alex -x emacs
+bindsym $mod+j exec rofi -show ssh
 # start mutt
 bindsym $mod+m exec terminator --profile=alex -e "TERM=xterm-256color mutt"
 # start irssi
