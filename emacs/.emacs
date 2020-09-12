@@ -58,6 +58,7 @@
 (load "~/.emacscore/ido.el")
 (load "~/.emacscore/dired.el")
 (load "~/.emacs.d/dash.el/dash.el")
+(load "~/.emacscore/dev/coq.el")
 (load "~/.emacscore/ui.el")
 
 ;; Development
