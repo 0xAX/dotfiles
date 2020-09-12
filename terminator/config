@@ -1,23 +1,39 @@
 [global_config]
-  always_on_top = True
-  always_split_with_profile = True
   borderless = True
-  custom_url_handler = urlview
-  enabled_plugins = ,
   hide_tabbar = True
   scroll_tabbar = True
-  suppress_multiple_term_dialog = True
-  title_font = Eeyek Unicode 12
+  always_on_top = True
+  use_custom_url_handler = True
+  custom_url_handler = urlview
   title_hide_sizetext = True
   title_transmit_bg_color = "#585858"
-  use_custom_url_handler = True
+  enabled_plugins = ,
+  suppress_multiple_term_dialog = True
+  always_split_with_profile = True
+  title_font = Eeyek Unicode 12
 [keybindings]
-  close_term = <Alt>x
   new_tab = <Primary>t
-  next_tab = <Shift>Right
-  page_down = None
+  close_term = <Alt>x
   paste = <Primary>v
+  page_down = None
+  next_tab = <Shift>Right
   prev_tab = <Shift>Left
+[profiles]
+  [[default]]
+  [[alex]]
+    icon_bell = False
+    background_color = "#fdf6e3"
+    cursor_shape = ibeam
+    cursor_color = "#82cdb9"
+    font = Fira Code Bold 14
+    foreground_color = "#657b83"
+    show_titlebar = False
+    scrollbar_position = hidden
+    scroll_on_output = True
+    scrollback_lines = 200000
+    palette = "#1b1d1e:#f92672:#f37259:#fd971f:#56c2d6:#8c54fe:#465457:#ccccc6:#505354:#ff5995:#00ff39:#feed6c:#f37259:#9e6ffe:#899ca1:#efefe0"
+    use_system_font = False
+    copy_on_selection = True
 [layouts]
   [[default]]
     [[[child1]]]
@@ -27,19 +43,3 @@
       parent = ""
       type = Window
 [plugins]
-[profiles]
-  [[default]]
-  [[alex]]
-    background_color = "#fdf6e3"
-    copy_on_selection = True
-    cursor_color = "#82cdb9"
-    cursor_shape = ibeam
-    font = Fira Code Bold 14
-    foreground_color = "#657b83"
-    icon_bell = False
-    palette = "#1b1d1e:#f92672:#f37259:#fd971f:#56c2d6:#8c54fe:#465457:#ccccc6:#505354:#ff5995:#00ff39:#feed6c:#f37259:#9e6ffe:#899ca1:#efefe0"
-    scroll_on_output = True
-    scrollback_lines = 2000
-    scrollbar_position = hidden
-    show_titlebar = False
-    use_system_font = False
