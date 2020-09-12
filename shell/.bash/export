@@ -2,8 +2,11 @@
 
 # some additional PATHS
 export PATH=$PATH:$HOME/bin
+export PTAH=$PATH:$HOME/.krew/bin
+
 # ocaml
 export PATH=$PATH:$HOME/.opam/default/bin
+export PATH=$PATH:/usr/lib/jvm/java-1.8.0/bin
 export PATH=$PATH:$WORK/rebar3
 export PATH=$PATH:$HOME/.cargo/bin
 export PATH=$PATH:$WORK/elixir/bin
@@ -54,3 +57,7 @@ export SSL_CERT_FILE=/etc/ssl/certs/ca-bundle.crt
 
 test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
+CVSROOT=anoncvs@anoncvs.fr.NetBSD.org:/pub/NetBSD-CVS
+export CVSROOT
+export CVS_RSH=ssh

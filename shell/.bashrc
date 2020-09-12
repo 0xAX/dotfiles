@@ -36,8 +36,10 @@ XDG_VIDEOS_DIR="$HOME/Videos"
 
 # OS dependend
 OS=$(uname)
-if [ "$OS" == "FreeBSD" ] || [ "$OS" == "OpenBSD" ] || [ "$OS" == "NetBSD" ]; then
+if [ "$OS" == "FreeBSD" ] || [ "$OS" == "DragonFly" ]; then
     export SHELL="/usr/local/bin/bash"
+    export MAKE="/usr/local/bin/gmake"
+    source /usr/local/share/bash-completion/bash_completion
 else
     export SHELL="/bin/bash"
     export MAKE="/usr/bin/make"
@@ -56,8 +58,8 @@ export BROWSER="firefox"
 
 # global development env
 export CC=gcc
-export AS=as
-export AR=ar
+#export AS=as
+#export AR=ar
 export CXX=g++
 export LD=ld
 export TAR=tar
@@ -98,22 +100,20 @@ export EMACS=1
 export TMPDIR=/tmp
 
 # default locale
-if [ "$OS" != "NetBSD" ]; then
-  LANG="en_US.UTF-8"
-  LC_CTYPE="en_US.UTF-8"
-  LC_NUMERIC="en_US.UTF-8"
-  LC_TIME="en_US.UTF-8"
-  LC_COLLATE="en_US.UTF-8"
-  LC_MONETARY="en_US.UTF-8"
-  LC_MESSAGES="en_US.UTF-8"
-  LC_PAPER="en_US.UTF-8"
-  LC_NAME="en_US.UTF-8"
-  LC_ADDRESS="en_US.UTF-8"
-  LC_TELEPHONE="en_US.UTF-8"
-  LC_MEASUREMENT="en_US.UTF-8"
-  LC_IDENTIFICATION="en_US.UTF-8"
-  LC_ALL="en_US.UTF-8"
-fi
+LANG="en_US.UTF-8"
+LC_CTYPE="en_US.UTF-8"
+LC_NUMERIC="en_US.UTF-8"
+LC_TIME="en_US.UTF-8"
+LC_COLLATE="en_US.UTF-8"
+LC_MONETARY="en_US.UTF-8"
+LC_MESSAGES="en_US.UTF-8"
+LC_PAPER="en_US.UTF-8"
+LC_NAME="en_US.UTF-8"
+LC_ADDRESS="en_US.UTF-8"
+LC_TELEPHONE="en_US.UTF-8"
+LC_MEASUREMENT="en_US.UTF-8"
+LC_IDENTIFICATION="en_US.UTF-8"
+LC_ALL="en_US.UTF-8"
 
 # include other sources
 source $BASHRC_DIR/term-colors
@@ -133,7 +133,7 @@ source $BASHRC_DIR/k8s
 test -f /etc/arch-release && source $BASHRC_DIR/arch-linux
 
 # include if we are using debian based distro
-(test -f /etc/debian_version || test -f /etc/os-release && cat /etc/os-release | grep Ubuntu) && source $BASHRC_DIR/debian
+(test -f /etc/debian_version || cat /etc/os-release | grep Ubuntu) && source $BASHRC_DIR/debian
 
 # turn off dpms
 xset s off -dpms
@@ -142,3 +142,7 @@ export GVFS_DISABLE_FUSE=1
 
 # switch keyboard layouts
 setxkbmap -layout us,ru -option grp:lwin_toggle
+
+alias tp-proxy-up='ssh -fNTMD 8080 jump'
+alias tp-proxy-status='ssh -TO check jump'
+alias tp-proxy-down='ssh -TO exit jump'
