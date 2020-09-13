@@ -4,13 +4,13 @@
 # Feel free to reuse and enjoy (0xAX)
 #
 
-client.focused          #8b3626 #8b3626 #ffffff #8b3626
-client.focused_inactive #333333 #5f676a #ffffff #484e50
+client.focused          #eee8d5 #fdf6e3 #073642 #8b3626
+client.unfocused        #eee8d5 #eee8d5 #839496 #8b3626
 
 # Let's use Alt for mode key
 set $mod Mod1
 # default font
-font pango:DejaVu Sans Mono, FontAwesome 13
+font pango:FiraCode, FontAwesome 13
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
