@@ -119,3 +119,6 @@ alias save-kernel-config="cp -r $DEV/linux/.config $DOTFILES/linux-dev/x86_64_co
 
 # start ercdf with default configuration
 alias ercdf-start="rebar3 shell --config config/ercdf.config"
+
+# i3 aliases
+alias i3-restart="i3-msg restart"
