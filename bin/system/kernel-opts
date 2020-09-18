@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if ! command -v grubby &> /dev/null
+then
+    echo "Error: grubby not installed on the system"
+    exit 1
+fi
+
+KERNEL_ARGS="rhgb quiet audit=0 systemd.unified_cgroup_hierarchy=0 systemd.debug-shell=1 amdgpu.si_support=1 radeon.si_support=0"
+
+sudo grubby --update-kernel=ALL --args="$KERNEL_ARGS"
+
+exit 0
