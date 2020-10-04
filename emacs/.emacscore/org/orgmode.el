@@ -19,10 +19,9 @@
              (define-key org-mode-map [(control k)] nil)))
 
 ;; set of TODO keywords highligted in org-mode
-;; (setq org-todo-keywords
-;;       '(
-;;         (sequence "TODO" "|" "DONE")
-;;         (sequence "IN PROGRESS" "|" "DONE")))
+(setq org-todo-keywords
+      '(
+        (sequence "TODO" "IN-PROGRESS" "WAITING" "RESEARCH" "NEED-TESTS" "DONE")))
 
 ;; (setq org-todo-keyword-faces
 ;;   '(("TODO" . (:foreground "orange red" :weight bold))
