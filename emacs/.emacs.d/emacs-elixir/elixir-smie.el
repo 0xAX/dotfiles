@@ -25,10 +25,11 @@
 
 ;;; Code:
 
-(require 'smie)
+(require 'smie)           ; Simple minded indentation engine
+(require 'cl-lib)         ; `cl-flet'
 
 ;; HACK: Patch for Emacs 24.3 smie that fix
-;; https://github.com/elixir-lang/emacs-elixir/issues/107.
+;; https://github.com/elixir-editors/emacs-elixir/issues/107.
 ;;
 ;; defadvice is used to change the behavior only for elixir-mode.
 ;; Definition of advice is a definition of corresponding function
@@ -66,10 +67,12 @@
                                (rassoc next smie-closer-alist))))
                      (smie-indent-calculate))))))))
 
-;; FIXME: This is me being lazy. CL is a compile-time dep only.
-;; (But for now, there is no real file-compilation plot, so let's
-;; scrape by with the runtime dep.)
-(require 'cl)
+(defun elixir-smie-looking-around (back at)
+  "Check if looking backwards at BACK and forward at AT."
+  (and (looking-at-p at) (looking-back back)))
+
+;; Declare variable that we need from the smie package
+(defvar smie--parent)
 
 (defvar elixir-smie-verbose-p nil
   "Emit context information about the current syntax state.")
@@ -79,6 +82,13 @@
 
     ;; Note that ?_ might be better as class "_", but either seems to
     ;; work:
+    (modify-syntax-entry ?| "." table)
+    (modify-syntax-entry ?- "." table)
+    (modify-syntax-entry ?+ "." table)
+    (modify-syntax-entry ?* "." table)
+    (modify-syntax-entry ?/ "." table)
+    (modify-syntax-entry ?< "." table)
+    (modify-syntax-entry ?> "." table)
     (modify-syntax-entry ?_ "_" table)
     (modify-syntax-entry ?? "w" table)
     (modify-syntax-entry ?~ "w" table)
@@ -105,8 +115,7 @@
      '((id)
        (statements (statement)
                    (statement ";" statements))
-       (statement ("def" non-block-expr "do" statements "end")
-                  (non-block-expr "fn" match-statements "end")
+       (statement (non-block-expr "fn" match-statements "end")
                   (non-block-expr "do" statements "end")
                   ("if" non-block-expr "do" statements "else" statements "end")
                   ("if" non-block-expr "do" statements "end")
@@ -118,9 +127,13 @@
                   ("try" "do" statements "catch" match-statements "end")
                   ("try" "do" statements "rescue" match-statements "end")
                   ("try" "do" statements "end")
-                  ("case" non-block-expr "do" match-statements "end"))
+                  ("case" non-block-expr "do" match-statements "end")
+                  ("for" non-block-expr "COMMA" "do:" non-block-expr)
+		  ("for" non-block-expr "COMMA" "into:" non-block-expr "COMMA" "do" statements "end")
+		  ("for" non-block-expr "COMMA" "into:" non-block-expr "COMMA" "do:" non-block-expr)
+		  ("with" non-block-expr "do" statements "else" statements "end")
+		  ("with" non-block-expr "do:" non-block-expr "COMMA" "else:" non-block-expr))
        (non-block-expr (non-block-expr "OP" non-block-expr)
-                       (non-block-expr "COMMA" non-block-expr)
                        ("(" non-block-expr ")")
                        ("{" non-block-expr "}")
                        ("[" non-block-expr "]")
@@ -150,6 +163,9 @@
 (defvar elixir-smie--block-operator-regexp
   (rx "->" (0+ nonl)))
 
+(defvar elixir-smie--oneline-def-operator-regexp
+  (rx "do:" (0+ nonl)))
+
 (defvar elixir-smie--spaces-til-eol-regexp
   (rx (and (1+ space) eol))
   "Regex representing one or more whitespace characters concluding with eol.")
@@ -169,6 +185,47 @@
 (defun elixir-smie--implicit-semi-p ()
   (not (or (memq (char-before) '(?\{ ?\[))
            (looking-back elixir-smie--operator-regexp (- (point) 3) t))))
+
+(defun elixir-smie-current-line-contains-built-in-keyword-p ()
+  "Return non-nil if the current line contains built in keywords with a `.'"
+  (save-excursion
+    (beginning-of-line)
+    (looking-at ".+\\.\\(case\\|try\\|if\\|rescue\\)")))
+
+(defun elixir-smie-last-line-end-with-block-operator-p ()
+  "Return non-nil if the previous line ends with a `->' operator."
+  (save-excursion
+    (forward-line -1)
+    (move-end-of-line 1)
+    (looking-back elixir-smie--block-operator-regexp (- (point) 3) t)))
+
+(defun elixir-smie-last-line-start-with-block-operator-p ()
+  (save-excursion
+    (forward-line -1)
+    (beginning-of-line)
+    (looking-at "^\s+->.+$")))
+
+(defun elixir-smie-current-line-start-with-pipe-operator-p ()
+  (save-excursion
+    (beginning-of-line)
+    (looking-at "^\s*|>.+$")))
+
+(defun elixir-smie-last-line-is-assignment-p ()
+  (save-excursion
+    (forward-line -1)
+    (beginning-of-line)
+    (looking-at "^.+=.+$")))
+
+(defun elixir-smie-last-line-start-with-pipe-operator-p ()
+  (save-excursion
+    (forward-line -1)
+    (beginning-of-line)
+    (looking-at "^\s*|>.+$")))
+
+(defun elixir-smie-line-starts-with-do-colon-p ()
+  (save-excursion
+    (beginning-of-line)
+    (looking-at "^\s+do:")))
 
 (defun elixir-smie--semi-ends-match ()
   "Return non-nil if the current line concludes a match block."
@@ -194,12 +251,13 @@
           (forward-char)
           (self-call))
          ((looking-at elixir-smie--spaces-til-eol-regexp)
-          (move-beginning-of-line 2)
+          (forward-char)
           (self-call))
          ;; And if we're NOT on a blank line, move to the end of the line, and see
          ;; if we're looking back at a block operator.
          (t (move-end-of-line 1)
-            (looking-back elixir-smie--block-operator-regexp)))))))
+            (and (looking-back elixir-smie--block-operator-regexp)
+                 (not (looking-back ".+fn.+")))))))))
 
 (defun elixir-smie--same-line-as-parent (parent-pos child-pos)
   "Return non-nil if `child-pos' is on same line as `parent-pos'."
@@ -215,22 +273,31 @@
    ((and (or (looking-at elixir-smie--comment-regexp)
              (looking-at "[\n#]"))
          (elixir-smie--implicit-semi-p))
-    (when (not (save-excursion
-                 (forward-comment 1)
-                 (eobp)))
-      (if (eolp) (forward-char 1) (forward-comment 1)))
+    (if (eolp) (forward-char 1) (forward-comment 1))
     ;; Note: `elixir-smie--semi-ends-match' will be called when the point is at
     ;; the beginning of a new line. Keep that in mind.
     (if (elixir-smie--semi-ends-match)
         "MATCH-STATEMENT-DELIMITER"
-      ";"))
+      (if (and (looking-at ".+,$")
+               (not (> (nth 0 (syntax-ppss)) 0)))
+          "COMMA"
+        ";")))
    ((looking-at elixir-smie--block-operator-regexp)
     (goto-char (match-end 0))
     "->")
    ((looking-at elixir-smie--operator-regexp)
     (goto-char (match-end 0))
     "OP")
-   (t (smie-default-forward-token))))
+   (t
+    (let ((token (smie-default-forward-token)))
+      (unless (or (elixir-smie-empty-string-p token)
+		  (elixir-smie--at-dot-call))
+	token)))))
+
+(defun elixir-smie--at-dot-call ()
+  (and (eq ?w (char-syntax (following-char)))
+       (eq (char-before) ?.)
+       (not (eq (char-before (1- (point))) ?.))))
 
 (defun elixir-smie-backward-token ()
   (let ((pos (point)))
@@ -240,7 +307,10 @@
            (elixir-smie--implicit-semi-p))
       (if (elixir-smie--semi-ends-match)
           "MATCH-STATEMENT-DELIMITER"
-        ";"))
+        (if (and (looking-back ",$" (- (point) 3) t)
+                 (not (> (nth 0 (syntax-ppss)) 0)))
+	    "COMMA"
+	  ";")))
      ((looking-back elixir-smie--block-operator-regexp (- (point) 3) t)
       (goto-char (match-beginning 0))
       "->")
@@ -250,7 +320,10 @@
      ((looking-back elixir-smie--operator-regexp (- (point) 3) t)
       (goto-char (match-beginning 0))
       "OP")
-     (t (smie-default-backward-token)))))
+     (t (let ((token (smie-default-backward-token)))
+          (unless (or (elixir-smie-empty-string-p token)
+                      (elixir-smie--at-dot-call))
+            token))))))
 
 (defun verbose-elixir-smie-rules (kind token)
   (let ((value (elixir-smie-rules kind token)))
@@ -264,39 +337,375 @@
 
 (defun elixir-smie-rules (kind token)
   (pcase (cons kind token)
+    (`(:list-intro . ";")
+     -4)
+    (`(:list-intro . nil)
+     -4)
+    (`(:elem . args)
+     -4)
+    (`(:before . "COMMA")
+     (cond
+      ((and (smie-rule-parent-p "with")
+            (smie-rule-hanging-p))
+       (smie-rule-parent 5))
+      ((and (smie-rule-parent-p ";")
+            (smie-rule-hanging-p))
+       (smie-rule-parent))
+      ((and (smie-rule-parent-p "COMMA")
+            (smie-rule-hanging-p))
+       (if (save-excursion
+	     (forward-line 1)
+	     (move-beginning-of-line 1)
+	     (looking-at "^.+do:.+$"))
+	   (smie-rule-parent -5)
+	 (smie-rule-parent)))
+      ((and (smie-rule-parent-p "COMMA")
+            (not (smie-rule-hanging-p)))
+       (smie-rule-parent elixir-smie-indent-basic))
+      ((smie-rule-parent-p "(")
+       (smie-rule-parent))
+      ((smie-rule-parent-p "if")
+       (smie-rule-parent))
+      ((smie-rule-parent-p "->")
+       (smie-rule-parent))))
+    (`(:after . "COMMA")
+     (cond
+      ((and (smie-rule-parent-p ";")
+            (smie-rule-hanging-p))
+       (smie-rule-parent elixir-smie-indent-basic))
+      ((and (smie-rule-parent-p "with")
+            (smie-rule-hanging-p))
+       (smie-rule-parent 5))
+      ((and (smie-rule-parent-p "{")
+            (smie-rule-hanging-p))
+       (smie-rule-parent elixir-smie-indent-basic))
+      ((and (smie-rule-parent-p "[")
+            (smie-rule-hanging-p))
+       0)
+      ((smie-rule-parent-p "COMMA")
+       (smie-rule-parent elixir-smie-indent-basic))
+      ((smie-rule-parent-p "->")
+       (smie-rule-parent elixir-smie-indent-basic))
+      (t (smie-rule-parent elixir-smie-indent-basic))))
     (`(:before . "OP")
-     (when (and (not (smie-rule-hanging-p))
-                (smie-rule-prev-p "OP"))
-       -2))
+     (cond
+      ((smie-rule-parent-p "for")
+       (smie-rule-parent))
+      ((and (not (smie-rule-hanging-p))
+            (elixir-smie-current-line-start-with-pipe-operator-p)
+            (elixir-smie-last-line-is-assignment-p))
+       (smie-rule-parent))
+      ((and (not (smie-rule-hanging-p))
+            (elixir-smie-current-line-start-with-pipe-operator-p))
+       (cons 'column  (elixir-smie--previous-line-indentation)))
+      ((and (not (smie-rule-hanging-p))
+            (smie-rule-prev-p "OP"))
+       (- elixir-smie-indent-basic))
+      ((smie-rule-parent-p "def" "defp" "defmacro" "defmacrop")
+       (smie-rule-parent))
+      (t (smie-rule-parent))))
     (`(:after . "OP")
      (cond
       ((smie-rule-sibling-p) nil)
-      ((smie-rule-hanging-p) (smie-rule-parent elixir-smie-indent-basic))
-      (t (smie-rule-parent))))
+      ((smie-rule-hanging-p)
+       (smie-rule-parent elixir-smie-indent-basic))
+      ((and (not (smie-rule-sibling-p))
+            (not (smie-rule-hanging-p))
+            (smie-rule-parent-p "do:"))
+       (smie-rule-parent))
+      ((smie-rule-parent-p ";")
+       (smie-rule-parent))
+      ((smie-rule-parent-p "{")
+       (smie-rule-parent elixir-smie-indent-basic))
+      (t (smie-rule-parent (- elixir-smie-indent-basic)))))
     (`(:before . "MATCH-STATEMENT-DELIMITER")
      (cond
-      ((and (not (smie-rule-sibling-p))
+      ((and (smie-rule-parent-p "do")
             (smie-rule-hanging-p))
-       (smie-rule-parent elixir-smie-indent-basic))))
+       (smie-rule-parent))
+      ((and (smie-rule-parent-p "do")
+            (not (smie-rule-hanging-p)))
+       (smie-rule-parent elixir-smie-indent-basic))
+      ((and (smie-rule-parent-p "fn"))
+       (smie-rule-parent elixir-smie-indent-basic))
+      ;; There is a case when between two line inside a def block
+      ;; when jumping to the next line and indent, where the cursor
+      ;; jumps too much in front.
+      ;;
+      ;; Example:
+      ;; def generate_pkg(path, opts) do
+      ;;   name = Path.basename(Path.expand(path))
+      ;;
+      ;;   File.mkdir_p!(path)
+      ;;                              <-
+      ;;   File.cd! path, fn ->
+      ;;     _generate_pkg(name, opts)
+      ;;   end
+      ;; end
+      ((and (smie-rule-parent-p "do")
+            (not (smie-rule-hanging-p)))
+       0)
+      ((and (not (smie-rule-sibling-p))
+            (nth 2 smie--parent)
+            (smie-rule-hanging-p))
+       (smie-rule-parent elixir-smie-indent-basic))
+      ((and (not (smie-rule-sibling-p))
+            (not (nth 2 smie--parent))
+            (smie-rule-hanging-p))
+       (smie-rule-parent))))
+    (`(:after . "MATCH-STATEMENT-DELIMITER")
+     (cond
+      ((and (smie-rule-parent-p "MATCH-STATEMENT-DELIMITER")
+            (smie-rule-hanging-p)
+            (smie-rule-sibling-p))
+       (smie-rule-parent))
+      ((and (smie-rule-parent-p "after")
+            (smie-rule-hanging-p))
+       (smie-rule-parent elixir-smie-indent-basic))
+      ;; Correct indentation after a one-line fn definition
+      ;; Example:
+      ;;
+      ;;  sum = Enum.reduce(dbms, fn(x, sum) -> x + sum end)
+      ;;  average_dbm = sum / length(addresses)
+      ((smie-rule-parent-p "fn")
+       (smie-rule-parent elixir-smie-indent-basic))
+      (t
+       (smie-rule-parent))))
     (`(:before . "fn")
-     (smie-rule-parent))
+     (cond
+      ((smie-rule-parent-p "(")
+       (smie-rule-parent))
+      (t (smie-rule-parent))))
+    (`(:before . "for")
+     (cond
+      ((elixir-smie-last-line-end-with-block-operator-p)
+       (smie-rule-parent elixir-smie-indent-basic))
+      ((and (smie-rule-parent-p ";")
+	    (smie-rule-prev-p "OP"))
+       (smie-rule-parent))
+      ((smie-rule-prev-p "OP" "def")
+       (smie-rule-parent -2))))
+    (`(:before . "into:")
+     (cond
+      ((smie-rule-parent-p "COMMA")
+       (smie-rule-parent elixir-smie-indent-basic))))
+    (`(:before . "do:")
+     (cond
+      ((smie-rule-parent-p "def" "defp" "defmacro" "defmacrop")
+       (if (save-excursion
+	     (move-beginning-of-line 1)
+	     (looking-at "^\s*do:.+$"))
+	   (smie-rule-parent)
+	 (smie-rule-parent)))
+      ;; Example
+      ;;
+      ;; hi = for i <- list, do: i
+      ;; # weird spacing now <- Indent
+      ;;
+      ;; for i <- list, do: i
+      ;; IO.puts 'WORKED' <- Indent
+      ((and (smie-rule-parent-p "for")
+            (not (smie-rule-hanging-p)))
+       (smie-rule-parent))
+      ((and (smie-rule-parent-p ";")
+            (not (smie-rule-hanging-p))
+	    (save-excursion
+	      (move-beginning-of-line 1)
+	      (looking-at "^\s*do:.+$")))
+       (if (> (nth 0 (syntax-ppss)) 0)
+	   (smie-rule-parent (- 3))
+	 (smie-rule-parent elixir-smie-indent-basic)))
+      ((and (smie-rule-parent-p ";")
+            (not (smie-rule-hanging-p)))
+       (if (> (nth 0 (syntax-ppss)) 0)
+	   (smie-rule-parent (- elixir-smie-indent-basic))
+	 (smie-rule-parent)))
+      ((and (smie-rule-parent-p "OP")
+            (not (smie-rule-hanging-p)))
+       (smie-rule-parent elixir-smie-indent-basic))
+      ((and (smie-rule-parent-p "COMMA")
+            (not (smie-rule-hanging-p)))
+       (smie-rule-parent elixir-smie-indent-basic))))
+    (`(:before . "do")
+     (cond
+      ((and (smie-rule-parent-p "for")
+            (smie-rule-hanging-p))
+       (if (save-excursion
+	     (move-beginning-of-line 1)
+	     (looking-at "^.+\sfor\s.+\sdo\s*"))
+	   (smie-rule-parent elixir-smie-indent-basic)
+	 (smie-rule-parent (+ elixir-smie-indent-basic
+			      elixir-smie-indent-basic))))
+      ((and (smie-rule-parent-p "case")
+            (smie-rule-hanging-p))
+       (smie-rule-parent elixir-smie-indent-basic))
+      ;; There is a case when between two line inside a def block
+      ;; when jumping to the next line and indent, where the cursor
+      ;; jumps too much in front.
+      ;;
+      ;; Example:
+      ;; def generate_pkg(path, opts) do
+      ;;   name = Path.basename(Path.expand(path))
+      ;;
+      ;;   File.mkdir_p!(path)
+      ;;                              <-
+      ;;   File.cd! path, fn ->
+      ;;     _generate_pkg(name, opts)
+      ;;   end
+      ;; end
+      ((and (smie-rule-parent-p "def")
+            (smie-rule-hanging-p))
+       (smie-rule-parent elixir-smie-indent-basic))
+      (t elixir-smie-indent-basic)))
     (`(:before . "end")
-     (smie-rule-parent))
+     (cond
+      ((smie-rule-parent-p "for")
+       (smie-rule-parent))
+      ((smie-rule-parent-p "(")
+       (smie-rule-parent))
+      (t (smie-rule-parent))))
+    (`(:before . "else:")
+     (cond
+      ((smie-rule-parent-p ";")
+       (if (> (nth 0 (syntax-ppss)) 0)
+	   (smie-rule-parent elixir-smie-indent-basic)
+	 (smie-rule-parent)))
+      ((smie-rule-parent-p "if")
+       (smie-rule-parent elixir-smie-indent-basic))
+      (t (smie-rule-parent))))
     ;; Closing paren on the other line
     (`(:before . "(")
-     (smie-rule-parent))
+     (cond
+      ((smie-rule-parent-p "fn")
+       (smie-rule-parent elixir-smie-indent-basic))
+      ;; Indent parenthesis correctly inside a block
+      ;;
+      ;; Example:
+      ;;
+      ;; def bar do
+      ;;   ()
+      ;; .....
+      ((smie-rule-parent-p "do")
+       (smie-rule-parent))
+      ((smie-rule-parent-p "OP")
+       (smie-rule-parent))
+      ((and (smie-rule-parent-p "with")
+	    (smie-rule-hanging-p))
+       (smie-rule-parent))
+      ((and (smie-rule-parent-p "with")
+	    (not (smie-rule-hanging-p)))
+       (smie-rule-parent 3))
+      ((smie-rule-parent-p ";")
+       (smie-rule-parent))
+      (t (smie-rule-parent))))
     (`(:before . "[")
      (cond
       ((smie-rule-hanging-p)
        (smie-rule-parent))))
+    (`(:before . "{")
+     (cond
+      ((smie-rule-parent-p "COMMA")
+       (smie-rule-parent))
+      ;; Example
+      ;;
+      ;; case parse do
+      ;;   { [ help: true ], _, _ }
+      ;;     -> :help
+      ;;   { _, [ user, project, count ], _ }
+      ((and (not (smie-rule-hanging-p))
+            (smie-rule-parent-p "do"))
+       ;; If the last line ends with a block operator `->'
+       ;; indent two spaces more
+       ;;
+       ;; Example
+       ;;
+       ;; case File.read("/usr/share/dict/words") do
+       ;;   {:ok, contents} ->
+       ;;     {:something, contents} <- Indent here two spaces
+       ;;   ...
+       (if (elixir-smie-last-line-end-with-block-operator-p)
+           (smie-rule-parent elixir-smie-indent-basic)))
+      ((and (smie-rule-parent-p "MATCH-STATEMENT-DELIMITER")
+            (not (smie-rule-hanging-p)))
+       (if (elixir-smie-last-line-end-with-block-operator-p)
+           (smie-rule-parent elixir-smie-indent-basic)
+         (if (elixir-smie-last-line-start-with-block-operator-p)
+             (smie-rule-parent (- elixir-smie-indent-basic))
+           (smie-rule-parent))))
+      ((and (smie-rule-parent-p "OP")
+            (smie-rule-hanging-p))
+       (smie-rule-parent))
+      ((smie-rule-parent-p ";")
+       (if (save-excursion
+             (move-end-of-line 1)
+             (looking-back elixir-smie--block-operator-regexp (- (point) 3) t))
+           (smie-rule-parent (- elixir-smie-indent-basic))
+         (if (save-excursion
+	       (move-beginning-of-line 1)
+	       (looking-at "^.+->.+$"))
+	     (smie-rule-parent (- elixir-smie-indent-basic))
+	   (smie-rule-parent))))))
+    (`(:after . "{")
+     (cond
+      ((smie-rule-hanging-p)
+       (smie-rule-parent elixir-smie-indent-basic))
+      (t elixir-smie-indent-basic)))
     (`(:after . "[")
      (cond
       ((smie-rule-hanging-p)
-       (smie-rule-parent elixir-smie-indent-basic))))
+       (smie-rule-parent elixir-smie-indent-basic))
+      (t elixir-smie-indent-basic)))
+    (`(:before . "if")
+     (cond
+      ;; Indent when if is inside a `->' block
+      ;;
+      ;; Example:
+      ;;
+      ;; whatever ->
+      ;;   if true do <-
+      ;;     :foo
+      ;;   end
+      ;;   ....
+      ((elixir-smie-last-line-end-with-block-operator-p)
+       (smie-rule-parent elixir-smie-indent-basic))
+      ;; Indent if inside else
+      ;;
+      ;; Example:
+      ;;
+      ;; else
+      ;;   if condition, do: :bar <-
+      ;; end
+      ((smie-rule-parent-p "else")
+       (smie-rule-parent elixir-smie-indent-basic))
+      (t (smie-rule-parent))))
     (`(:before . "->")
      (cond
-      ((smie-rule-hanging-p)
-       (smie-rule-parent elixir-smie-indent-basic))))
+      ;; Example
+      ;;
+      ;; receive do
+      ;; after
+      ;;   2000 ->
+      ;;     IO.puts 'hello'
+      ;;     IO.puts 'status 2000 ends' <- Indent second line
+      ;;   { :ok } ->
+      ;;     ....
+      ((and (smie-rule-parent-p "after")
+            (not (smie-rule-sibling-p)))
+       (smie-rule-parent (+ elixir-smie-indent-basic
+                            elixir-smie-indent-basic)))
+      ;; Example
+      ;;
+      ;; case parse do
+      ;;   { [ help: true ], _, _ }
+      ;;     -> :help
+      ;;   ...
+      ((and (not (smie-rule-hanging-p))
+            (smie-rule-parent-p "do"))
+       elixir-smie-indent-basic)
+      ((and (not (smie-rule-hanging-p))
+            (smie-rule-parent-p "MATCH-STATEMENT-DELIMITER"))
+       (smie-rule-parent))
+      (t (smie-rule-parent elixir-smie-indent-basic))))
     (`(:after . "->")
      (cond
       ;; This first condition is kind of complicated so I'll try to make this
@@ -322,26 +731,175 @@
       ;; Otherwise, if just indent by two.
       ((smie-rule-hanging-p)
        (cond
-        ((smie-rule-parent-p "after" "catch" "do" "rescue" "try")
-         elixir-smie-indent-basic)
-        (t
-         (smie-rule-parent elixir-smie-indent-basic))))))
+        ((smie-rule-parent-p "catch" "rescue" "else")
+         (smie-rule-parent (+ elixir-smie-indent-basic
+                              elixir-smie-indent-basic)))
+        ((smie-rule-parent-p "do" "try")
+         (smie-rule-parent elixir-smie-indent-basic))
+        ;; Example
+        ;;
+        ;; receive do
+        ;; after
+        ;;   2000 ->
+        ;;     IO.puts 'hello' <- Indent two spaces
+        ((and (smie-rule-parent-p "after")
+              (smie-rule-hanging-p)
+              (not (smie-rule-sibling-p)))
+         (smie-rule-parent (+ elixir-smie-indent-basic
+                              elixir-smie-indent-basic)))
+        (t (smie-rule-parent elixir-smie-indent-basic))))))
     (`(:before . ";")
      (cond
-      ((smie-rule-parent-p "after" "catch" "def" "defmodule" "defp" "do" "else"
-                           "fn" "if" "rescue" "try" "unless")
+      ;; Handle cases where built in keywords are used
+      ;; as function names.
+      ;;
+      ;; Example:
+      ;;
+      ;; def foo(test) do
+      ;;   test_case = test.case
+      ;;   run(test_case)
+      ;; end
+      ((and (smie-rule-parent-p "case" "try" "rescue")
+            (smie-rule-hanging-p)
+            (elixir-smie-current-line-contains-built-in-keyword-p))
+       (+ (- (cdr (smie-rule-parent))) (+ elixir-smie-indent-basic
+                                          elixir-smie-indent-basic)))
+      ;; There is a case after an one line definition of functions/macros
+      ;; when an `if' keyword token is involved, where the next block `end'
+      ;; token will have a `if' as parent and it's hanging.
+      ;;
+      ;; Example:
+      ;;
+      ;; defmacro my_if(expr, do: if_block), do: if(expr, do: if_block, else: nil)
+      ;; defmacro my_if(expr, do: if_block, else: else_block) do
+      ;;   ...
+      ;; end <- parent is `if`
+      ((and (smie-rule-parent-p "if")
+            (smie-rule-hanging-p))
+       (smie-rule-parent))
+      ((and (smie-rule-parent-p "else")
+            (smie-rule-hanging-p))
+       (smie-rule-parent elixir-smie-indent-basic))
+      ((smie-rule-parent-p "catch" "def" "defmodule" "defp" "do" "else"
+                           "fn" "if" "rescue" "try" "unless" "defmacro" "defmacrop")
+       (smie-rule-parent))
+      ((smie-rule-parent-p "after")
+       (smie-rule-parent elixir-smie-indent-basic))
+      ;; Example
+      ;;
+      ;; case parse do
+      ;;   { [ help: true ], _, _ }
+      ;;     -> :help
+      ;;   { _, [ user, project, count ], _ }
+      ;;     -> { user, project, count }
+      ;;   ...
+      ((and (smie-rule-parent-p "->")
+            (smie-rule-hanging-p))
+       (smie-rule-parent))
+      ((and (smie-rule-parent-p ";")
+      	    (smie-rule-hanging-p)
+      	    (save-excursion
+      	      (move-beginning-of-line 1)
+      	      (looking-at "^\s+else:.+$"))
+      	    (not (save-excursion
+      	      (move-beginning-of-line 1)
+      	      (looking-at "^\s+else:.+)$"))))
+       (smie-rule-parent (- elixir-smie-indent-basic)))
+      ((and (smie-rule-parent-p ";")
+	    (save-excursion
+	      (move-beginning-of-line 1)
+	      (looking-at "^.+,$")))
+       (smie-rule-parent))
+      ((and (smie-rule-parent-p ";")
+      	    (smie-rule-hanging-p)
+      	    (save-excursion
+      	      (move-beginning-of-line 1)
+      	      (looking-at "^\s+do:.+$"))
+      	    (not (save-excursion
+		   (move-beginning-of-line 1)
+		   (looking-at "^\s+do:.+)$"))))
+       (smie-rule-parent))
+      ((elixir-smie-current-line-start-with-pipe-operator-p)
+       (smie-rule-parent))
+      ((smie-rule-parent-p "(")
        (smie-rule-parent elixir-smie-indent-basic))))
     (`(:after . ";")
      (cond
       ((smie-rule-parent-p "def")
        (smie-rule-parent))
+      ((and (smie-rule-parent-p "if")
+            (elixir-smie-current-line-contains-built-in-keyword-p))
+       (+ (- (cdr (smie-rule-parent))) (+ elixir-smie-indent-basic
+                                          elixir-smie-indent-basic)))
       ((smie-rule-parent-p "if")
        (smie-rule-parent))
+      ((smie-rule-parent-p "after")
+       (smie-rule-parent elixir-smie-indent-basic))
       ((and (smie-rule-parent-p "(")
+            (boundp 'smie--parent)
             (save-excursion
               (goto-char (cadr smie--parent))
               (smie-rule-hanging-p)))
        (smie-rule-parent elixir-smie-indent-basic))))))
+
+(defun elixir-smie--heredoc-at-current-point-p ()
+  "Return non-nil if cursor is at a string."
+  (save-excursion
+    (or (and (nth 3 (save-excursion
+                      (let ((pos (point)))
+                        (parse-partial-sexp 1 pos))))
+             (nth 8 (save-excursion
+                      (let ((pos (point)))
+                        (parse-partial-sexp 1 pos)))))
+        (and (looking-at "\"\"\"")
+             (match-beginning 0)))))
+
+(defun elixir-smie--previous-line-empty-p ()
+  "Return non-nil if the previous line is blank."
+  (save-excursion
+    (forward-line -1)
+    (move-beginning-of-line 1)
+    (looking-at "[[:space:]]*$")))
+
+(defun elixir-smie--previous-line-indentation ()
+  "Return the indentation of the previous line."
+  (save-excursion
+    (forward-line -1)
+    (current-indentation)))
+
+;; Add the custom function to handle indentation inside heredoc to the
+;; smie-indent-functions list. The indentation function will only be
+;; process inside an elixir-mode.
+(defun elixir-smie--indent-inside-heredoc ()
+  "Handle indentation inside Elixir heredocs.
+
+Rules:
+  1. If the previous line is empty, indent as the basic indentation
+     at the beginning of the heredoc.
+  2. If the previous line is not empty, indent as the previous line.
+"
+  (if (eq major-mode 'elixir-mode)
+      (if (elixir-smie--heredoc-at-current-point-p)
+          (let ((indent
+                 (save-excursion
+                   (when (re-search-backward "^\\(\s+\\)\\(@doc\\|@moduledoc\\|.*\\)\"\"\"" nil t)
+                     (string-width (match-string 1))))))
+	    (cond
+	     ((elixir-smie--previous-line-empty-p)
+	      (goto-char indent))
+	     ((and (not (save-excursion (looking-at "\"\"\"")))
+		   (not (elixir-smie--previous-line-empty-p)))
+	      (goto-char (elixir-smie--previous-line-indentation)))
+	     (indent
+	      (goto-char indent)))))))
+
+(defun elixir-smie-empty-string-p (string)
+  "Return non-nil if STRING is null, blank or whitespace only."
+  (or (null string)
+      (string= string "")
+      (if (string-match-p "^\s+$" string) t)))
+
+(add-to-list 'smie-indent-functions 'elixir-smie--indent-inside-heredoc)
 
 (provide 'elixir-smie)
 

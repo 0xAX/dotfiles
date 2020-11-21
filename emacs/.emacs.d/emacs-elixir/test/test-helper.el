@@ -1,11 +1,12 @@
 ;;; test-helper.el --- Test helper
 
 ;;; Commentary:
-;; 
+;;
 
 ;;; Code:
 
-(require 'ert-x)
+(require 'ert-x)          ; `ert-with-test-buffer'
+(require 'cl-lib)         ; `cl-defmacro'
 
 (message "Running tests on Emacs %s" emacs-version)
 
@@ -17,21 +18,20 @@
 ;; Load the elixir-mode under test
 (require 'elixir-mode)
 
+;; Load elixir-format under test
+(require 'elixir-format)
+
 ;; Helpers
 
-(defmacro* elixir-deftest (name args &body body)
-  (declare (indent 2)
-           (&define :name test name sexp
-                    [&optional [":documentation" stringp]]
-                    [&optional [":expected-result" sexp]]
-                    def-body))
+(cl-defmacro elixir-deftest (name args &body body)
+  (declare (indent 2))
   `(ert-deftest ,(intern (format "elixir-ert-%s" name)) ()
      ""
      ,@args
      (let ((elixir-smie-verbose-p t))
        ,@body)))
 
-(defmacro* elixir-ert-with-test-buffer ((&rest args) initial-contents &body body)
+(cl-defmacro elixir-ert-with-test-buffer ((&rest args) initial-contents &body body)
   (declare (indent 2))
   `(ert-with-test-buffer (,@args)
      (elixir-mode)
@@ -49,7 +49,7 @@
      (goto-char (point-min))
      ,@body))
 
-(defmacro* elixir-def-indentation-test (name args initial-contents expected-output)
+(cl-defmacro elixir-def-indentation-test (name args initial-contents expected-output)
   (declare (indent 2))
   `(elixir-deftest ,name ,args
      (elixir-ert-with-test-buffer (:name ,(format "(Expected)" name))
@@ -66,6 +66,38 @@
   (defun ert-runner/run-tests-batch-and-exit (selector)
     (ert-run-tests-interactively selector)))
 
-(provide 'test-helper)
+(setq elixir-format-elixir-path (executable-find "elixir"))
+(setq elixir-format-mix-path (executable-find "mix"))
+
+(defconst elixir-format-test-example "defmodule Foo do
+use GenServer.Behaviour
+def foobar do
+if true, do: IO.puts \"yay\"
+end
+end")
+
+(defconst elixir-format-wrong-test-example "defmodule Foo do
+use GenServer.Behaviour
+def foobar do
+if true, do: IO.puts \"yay\"
+end")
+
+(setq elixir-version (let ((str (shell-command-to-string (concat elixir-format-elixir-path " --version"))))
+  (car (when (string-match "\s\\(.+[.].+[.].+\\)[\s\n]" str)
+    (list (match-string 1 str))))))
+
+(defconst elixir-formatter-supported
+  (>= (string-to-number elixir-version) (string-to-number "1.6"))
+  )
+
+(defconst elixir-format-formatted-test-example
+  "defmodule Foo do
+  use GenServer.Behaviour
+
+  def foobar do
+    if true, do: IO.puts(\"yay\")
+  end
+end
+")
 
 ;;; test-helper.el ends here

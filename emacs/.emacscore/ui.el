@@ -80,9 +80,6 @@
       (t
        (set-frame-font "Monospace-14")))
 
-;; region color
-(set-face-attribute 'region nil :background "gray15")
-
 ;; Set fonts
 (custom-set-faces
  '(show-paren-match ((t (:background "#116599" :foreground "white")))))
