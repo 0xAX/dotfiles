@@ -57,7 +57,7 @@
  'tabbar-selected nil
  :background "#fdf6e3"
  :foreground "#002b36"
- :family "Droid Sans Mono"
+ :family "Fira Code-14"
  :box '(:line-width 1 :color "#fdf6e3" :style nil))
 
 ;; unselected tabbar
@@ -65,7 +65,7 @@
  'tabbar-unselected nil
  :background "#fdf6e3"
  :foreground "#93a1a1"
- :box '(:line-width 1 :color "#eee8d5" :style nil))
+ :box '(:line-width 1 :color "#fdf6e3" :style nil))
 
 ;; tabbar separator color
 (set-face-attribute

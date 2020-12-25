@@ -1,8 +1,9 @@
 ;;; utils.el --- Auxiliary functions for GNU Emacs  -*- lexical-binding: t -*-
 
-(defun load-additional-dev-modes ()
-  "Load additional development modes (web, and etc....)"  
+(defun load-additional-modes ()
+  "Load additional modes (web, and etc....)"  
   (interactive)
+  (load "~/.emacscore/extensions/rainbow-mode-1.0.5.el")
   (load "~/.emacscore/dev/sed.el")
   (load "~/.emacscore/dev/shell.el")
   ;;
