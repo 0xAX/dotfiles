@@ -1,150 +1,54 @@
 #!/bin/bash
 
-function usage {
-    echo "Usage:"
-    echo "dotfiles --store /home/path/to/git/dotfiles/dir"
-    echo "dotfiles --restore /home/user/path/to/git/dotfiles/dir"
-}
-
-if [[ $# -ne 2 ]]; then
-    usage
+if [[ $# -ne 1 ]]; then
+    echo "Error: provide command: --update-repo or --update-system"
     exit -1
 fi
 
-DIR=$2
-BASH="$DIR/shell/"
-BIN="$DIR/bin/"
-EMACS="$DIR/emacs"
-LINUXDEV="$DIR/linux-dev/x86_64_conf"
-SYSTEM="$DIR/system"
-SYSTEMD="$SYSTEM/systemd"
-MAIL="$DIR/mail"
-PRIVATE="$DIR/private"
-GPG="$DIR/GPG/"
+DOTFILES="$HOME/dev/dotfiles"
 
 case $1 in
---store)
-    #
+--update-repo)
     # copy .bashrc and related stuff
-    #
-    cp -r ~/.bash $BASH
-    cp -r ~/.bashrc $BASH
-    cp -r ~/.bash_logout $BASH
-    cp -r ~/.bash_profile $BASH
+    cp -r ~/bin ~/.bash ~/.bashrc ~/.bash_logout ~/.bash_profile "$DOTFILES"/shell
 
-    #
-    # write scripts and other useful stuff to bin/
-    #
-    cp -r ~/bin/* $BIN/
-
-    #
     # copy emacs directories
-    #
     rm -rf *.session
-    cp -r ~/.emacs ~/.emacs.d ~/.emacscore $EMACS/
+    cp -r ~/.emacs ~/.emacs.d ~/.emacscore "$DOTFILES"/emacs
 
-    #
-    # copy linux config
-    #
-    cp -r /home/alex/dev/linux/.config $LINUXDEV/
+    # copy i3 stuff
+    cp -r ~/.config/i3/* "$DOTFILES"/i3
 
-    #
-    # copy email
-    #
-    cp -r ~/.muttrc $MAIL/
-    cp -r ~/.urlview $MAIL/
+    # copy terminator stuff
+    cp -r ~/.config/terminator/config  "$DOTFILES"/terminator
 
-    rm -rf $MAIL/.mutt/.mutt-alias.gpg
-    cp -r ~/.mutt/.mutt-alias $MAIL/.mutt
-    echo "Write pass for .mutt-alias"
-    gpg -c $MAIL/.mutt/.mutt-alias
-    rm -rf $MAIL/.mutt/.mutt-alias
-
-    rm -rf $MAIL/.mutt/.account.personal.gpg
-    cp -r ~/.mutt/.account.personal $MAIL/.mutt
-    echo "Write pass for .account-personal"
-    gpg -c $MAIL/.mutt/.account.personal
-    rm -rf $MAIL/.mutt/.account.personal
-
-    cp -r ~/.mutt/.hdrs $MAIL/.mutt
-    cp -r ~/.mutt/.hdrs $MAIL/.mutt
-    cp -r ~/.mutt/.keysrc $MAIL/.mutt
-    cp -r ~/.mutt/.mutt-ui $MAIL/.mutt
-    cp -r ~/.mutt/.mutt.pgprc $MAIL/.mutt
-
-    #
-    # copy system stuff
-    #
-    sudo cp -r /etc/fstab $SYSTEM
-    sudo cp -r /etc/default/grub $SYSTEM
-    sudo cp -r /etc/dnf/dnf.conf $SYSTEM
-    sudo cp -r /etc/bash_completion.d $SYSTEM
-
-    sudo cp -r /usr/lib/systemd/system/fstrim.service $SYSTEMD
-    sudo cp -r /usr/lib/systemd/system/fstrim.timer $SYSTEMD
-    sudo cp -r /usr/lib/systemd/system/logs.service $SYSTEMD
-    sudo cp -r /etc/sysctl.conf $SYSTEM
-    #
     # copy other dotfiles
-    #
-    cp -r ~/.gdbinit $DIR
-    cp -r ~/.gitconfig $DIR
-    cp -r ~/.gitignore_global $DIR
-    cp -r ~/.hgignore $DIR
-    cp -r ~/.nanorc $DIR
-    cp -r ~/.tmux.conf $DIR
-    cp -r ~/.vimrc $DIR
-    cp -r ~/.inputrc $DIR
-    cp -r ~/.gpg-public-key $DIR
-    cp -r ~/.gnupg/gpg.conf $GPG
-
-    #
-    # copy private stuf
-    #
-    rm -rf $PRIVATE/.ercpass.gpg
-    cp -r ~/.ercpass $PRIVATE/
-    echo "Write pass for .ercpass"
-    gpg -c $PRIVATE/.ercpass
-    rm -rf $PRIVATE/.ercpass
-
-    rm -rf $PRIVATE/todo.tgz.gpg
-    cp -r ~/dev/learning/todo $PRIVATE
-    tar -cvzf $PRIVATE/todo.tgz $PRIVATE/todo
-    echo "Write pass for todo"
-    gpg -c $PRIVATE/todo.tgz
-    rm -rf $PRIVATE/todo.tgz
-    rm -rf $PRIVATE/todo
+    cp -r ~/.gdbinit "$DOTFILES"
+    cp -r ~/.gitconfig "$DOTFILES"/git
+    cp -r ~/.gitignore_global "$DOTFILES"/git
+    cp -r ~/.tmux.conf "$DOTFILES"
+    cp -r ~/.inputrc "$DOTFILES"
+    cp -r ~/.gpg-public-key "$DOTFILES"
     ;;
---restore)
-    cd $DIR
-    #
-    # Copy standard dtofiles
-    #
-    cp -r .tmux.conf .gdbinit .inputrc .nanorc .hgignore .gitignore_global .gitconfig $HOME/
+--update-system)
+    # copy standard dtofiles
+    cp -r .tmux.conf .gdbinit .inputrc "$DOTFILES"/git/* $HOME/
+
+    # copy emacs files
     cp -r emacs/.emacs emacs/.emacs.d emacs/.emacscore $HOME/
 
-    #
+    # copy i3 stuff
+    cp -r "$DOTFILES"/i3/* "$HOME/.i3"
+
+    # copy terminator stuff
+    cp -r "$DOTFILES"/terminator/* "$HOME/.config/terminator"
+
     # Copy scripts to $HOME directory
-    #
-    cp -r bin $HOME
-
-    #
-    # Copy mail scripts
-    #
-    cp -r mail/.mutt .muttrc .urlview $HOME/
-
-    #
-    # copy .bash
-    #
-    cp -r shell/.bash_logout shell/.bash_profile shell/.bashrc shell/.bash shell/.profile $HOME/
-
-    # ok, go back
-    cd -
-
-    echo "NOTE: private and system scripts are not installed, do it manually!"
+    cp -r "$DOTFILES"/shell/* $HOME
     ;;
 *)
-    usage
+    echo "Error: provide command: --update-repo or --update-system"
+    exit -1
     ;;
 esac
 
