@@ -127,3 +127,5 @@ alias i3-restart="i3-msg restart"
 alias runerl="BINDIR=/home/alex/disk/dev/otp/bin/x86_64-unknown-linux-gnu ./bin/x86_64-unknown-linux-gnu/erlexec"
 alias diff-erl-updates="git log master..master-upstream"
 alias diff-erl-updates-tree="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative master...master-upstream"
+
+alias ssh-agent-enable="eval $(ssh-agent -s)"
