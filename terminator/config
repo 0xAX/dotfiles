@@ -20,6 +20,7 @@
   prev_tab = <Shift>Left
 [profiles]
   [[default]]
+    cursor_color = "#aaaaaa"
   [[alex]]
     icon_bell = False
     background_color = "#fdf6e3"
@@ -39,6 +40,7 @@
     [[[child1]]]
       parent = window0
       type = Terminal
+      profile = alex
     [[[window0]]]
       parent = ""
       type = Window

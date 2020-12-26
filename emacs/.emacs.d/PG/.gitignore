@@ -1,7 +1,0 @@
-.byte-compile
-nohup.out
-TAGS
-ChangeLog
-proof-general-autoloads.el
-*.elc
-*~
