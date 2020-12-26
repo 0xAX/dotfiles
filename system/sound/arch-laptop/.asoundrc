@@ -1,7 +1,0 @@
-pcm.dmixout {
-  # Just pass this on to the system dmix
-  type plug
-  slave {
-     pcm "dmix"
-  }
-}
