@@ -1,6 +1,0 @@
-#!/bin/bash
-
-echo "Stop mysql"
-sudo systemctl stop mariadb.service
-sudo systemctl status mariadb.service
-echo "Done."
