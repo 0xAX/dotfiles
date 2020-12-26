@@ -45,7 +45,7 @@ case $1 in
     cp -r "$DOTFILES"/terminator/* "$HOME/.config/terminator"
 
     # Copy scripts to $HOME directory
-    cp -r "$DOTFILES"/shell/* $HOME
+    cp -r "$DOTFILES"/shell/. "$DOTFILES/bin" $HOME
 
     # install bin scripts
     "$HOME/bin/installScripts"
