@@ -10,7 +10,6 @@ DEV_DIR="$SCRIPTS_DIR/dev/*"
 FEDORA_DIR="$SCRIPTS_DIR/fedora/*"
 GIT_DIR="$SCRIPTS_DIR/git/*"
 GIT_PROMPT="$SCRIPTS_DIR/git-prompt/*"
-UBUNTU_DIR="$SCRIPTS_DIR/ubuntu/*"
 MATH_DIR="$SCRIPTS_DIR/math/*"
 SYSTEM_DIR="$SCRIPTS_DIR/system/scripts/*"
 
