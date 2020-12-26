@@ -19,15 +19,6 @@ bindsym $mod+Shift+f floating toggle
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal --profile=alex
-# start emacs
-bindsym $mod+e exec terminator --profile=alex -x emacs
-bindsym $mod+j exec rofi -show ssh
-# start mutt
-bindsym $mod+m exec terminator --profile=alex -e "TERM=xterm-256color mutt"
-# start irssi
-bindsym $mod+i exec terminator --profile=alex -e "TERM=xterm-256color irssi"
-# start browser
-bindsym $mod+b exec firefox
 # kill focused window
 bindsym $mod+q kill
 # restart i3
@@ -35,13 +26,14 @@ bindsym $mod+c exec i3-msg restart
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run -b -fn '-xos4-terminus-medium-r-*-*-18-*' -nb '#fdf6e3' -sb "#002b36" -nf '#888888' -nf '#888888' 
 # go to the next workspace
-bindsym $mod+Tab exec --no-startup-id /home/alex/.i3/i3-next-workspace.pl
+bindsym $mod+Tab workspace next
 # go to the prevoious workspace
 bindsym $mod+BackSpace workspace prev
 
 # Exit from i3
 bindsym $mod+Shift+e exit
 
+# Move between i3 windows
 bindsym $mod+Left focus left
 bindsym $mod+Right focus right
 bindsym $mod+Up focus up
