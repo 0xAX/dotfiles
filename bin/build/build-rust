@@ -1,3 +1,0 @@
-#!/bin/bash
-
-./configure --enable-optimize --disable-docs --enable-ccache --enable-local-rust --enable-dist-host-only --enable-rustbuild && make -j4

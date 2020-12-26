@@ -1,5 +1,0 @@
-#!/bin/bash
-
-sudo cp -r ~/dev/git-manpages/man1/* /usr/share/man/man1/
-sudo cp -r ~/dev/git-manpages/man5/* /usr/share/man/man5/
-sudo cp -r ~/dev/git-manpages/man7/* /usr/share/man/man7/

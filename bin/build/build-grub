@@ -1,3 +1,0 @@
-#!/bin/bash
-
-./configure --disable-nls --enable-efiemu --enable-mm-debug --enable-cache-stats --enable-boot-time --enable-grub-mkfont --enable-device-mapper --enable-liblzma && make

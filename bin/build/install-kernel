@@ -1,8 +1,0 @@
-#!/bin/bash
-
-cd $DEV/linux
-make -j4
-sudo make headers_install
-sudo make modules_install
-sudo make install
-sudo update-local-kernel

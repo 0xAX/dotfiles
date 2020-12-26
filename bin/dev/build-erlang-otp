@@ -1,9 +1,0 @@
-./configure --enable-dirty-schedulers               \
-            --disable-plain-emulator                \
-            --enable-kernel-poll                    \
-            --enable-sctp                           \
-            --enable-hipe                           \
-            --disable-megaco-flex-scanner-lineno    \
-            --disable-megaco-reentrant-flex-scanner \
-            --enable-fips                           \
-            --with-ssl

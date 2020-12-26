@@ -1,3 +1,0 @@
-#!/bin/bash
-
-sudo dnf --releasever=23 --disablerepo='*' --enablerepo=fedora --nogpgcheck --installroot /home/alex/olddisk/home/alex/virt install passwd dnf fedora-release vim-minimal systemd

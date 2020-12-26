@@ -1,5 +1,0 @@
-#!/bin/bash
-
-./configure --enable-tap-tests --enable-depend --enable-cassert --with-llvm --with-icu --with-python --with-pam  --with-openssl --with-selinux --with-systemd --with-libxml 
-
-exit 0;
