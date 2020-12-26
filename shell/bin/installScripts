@@ -13,13 +13,13 @@ GIT_PROMPT="$SCRIPTS_DIR/git-prompt/*"
 MATH_DIR="$SCRIPTS_DIR/math/*"
 SYSTEM_DIR="$SCRIPTS_DIR/system/scripts/*"
 
-for SCRIPT in $BUILD_DIR \
-	      $DEV_DIR   \
+for SCRIPT in $BUILD_DIR  \
+	      $DEV_DIR    \
 	      $FEDIRA_DIR \
-	      $GIT_DIR  \
+	      $GIT_DIR    \
 	      $GIT_PROMPT \
 	      $UBUNTU_DIR \
-	      $MATH_DIR \
+	      $MATH_DIR   \
 	      $SYSTEM_DIR; do
         chmod +x $SCRIPT
 done
