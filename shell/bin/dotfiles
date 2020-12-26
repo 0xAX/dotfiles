@@ -1,5 +1,7 @@
 #!/bin/bash
 
+shopt -u dotglob
+
 if [[ $# -ne 1 ]]; then
     echo "Error: provide command: --update-repo or --update-system"
     exit -1
@@ -17,7 +19,7 @@ case $1 in
     cp -r ~/.emacs ~/.emacs.d ~/.emacscore "$DOTFILES"/emacs
 
     # copy i3 stuff
-    cp -r ~/.config/i3/* "$DOTFILES"/i3
+    cp -r ~/.i3/* "$DOTFILES"/i3
 
     # copy terminator stuff
     cp -r ~/.config/terminator/config  "$DOTFILES"/terminator
@@ -32,10 +34,10 @@ case $1 in
     ;;
 --update-system)
     # copy standard dtofiles
-    cp -r .tmux.conf .gdbinit .inputrc "$DOTFILES"/git/* $HOME/
+    cp -r .tmux.conf .gdbinit .inputrc "$DOTFILES/git/." "$HOME"
 
     # copy emacs files
-    cp -r emacs/.emacs emacs/.emacs.d emacs/.emacscore $HOME/
+    cp -r emacs/.emacs emacs/.emacs.d emacs/.emacscore "$HOME"
 
     # copy i3 stuff
     cp -r "$DOTFILES"/i3/* "$HOME/.i3"
@@ -45,6 +47,9 @@ case $1 in
 
     # Copy scripts to $HOME directory
     cp -r "$DOTFILES"/shell/* $HOME
+
+    # install bin scripts
+    "$HOME/bin/installScripts"
     ;;
 *)
     echo "Error: provide command: --update-repo or --update-system"
