@@ -104,3 +104,6 @@
 
 [alias]
         one = show -s --pretty='format:%h (\"%s\")'
+
+[pull]
+	rebase = false
