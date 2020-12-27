@@ -8,7 +8,6 @@
 
 This repository contains the official collection of snippets for [yasnippet](http://github.com/capitaomorte/yasnippet).
 
-You can see [here](http://andreacrotti.github.io/yasnippet-snippets/snippets.html) a big HTML page with all the available snippets grouped by mode.
 
 # How to install
 
@@ -19,7 +18,7 @@ You can install this package from melpa, by first ensuring that you have the mel
 ```lisp
 (require 'package)
 (add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+             '("melpa" . "http://melpa.org/packages/") t)
 (package-initialize)
 ```
 
@@ -29,6 +28,10 @@ Once that is done, then just refresh the packages and install it with.
 * <kbd>M-x package-install yasnippet-snippets</kbd>
 
 Now all the snippets will load automatically, as soon as yasnippet loads.
+
+## On Debian ≥10 and derivatives such as Ubuntu ≥ 18.10
+
+`sudo apt install elpa-yasnippet-snippets`
 
 # Contributing
 
