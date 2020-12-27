@@ -81,6 +81,7 @@
 
 [commit]
 	signoff = true
+	gpgsign = true
 
 [status]
 	branch = true
@@ -92,7 +93,7 @@
 [user]
 	name = Alexander Kuleshov
 	email = kuleshovmail@gmail.com
-	signingkey = 2D66AC9B
+	signingkey = 6D980FFA0624AF79
 
 [web]
 	browser = firefox
