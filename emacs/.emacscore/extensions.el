@@ -3,7 +3,8 @@
 (defun load-additional-modes ()
   "Load additional modes (web, and etc....)"  
   (interactive)
-  (load "~/.emacscore/extensions/rainbow-mode-1.0.5.el")
+  (load "~/.emacscore/lisp/rainbow-mode-1.0.5.el")
+  (rainbow-mode)
   (load "~/.emacscore/dev/sed.el")
   (load "~/.emacscore/dev/shell.el")
   ;;
