@@ -1,6 +1,7 @@
 [![License GPL 3][badge-license]](http://www.gnu.org/licenses/gpl-3.0.txt)
-[![Build Status](https://travis-ci.org/elixir-lang/emacs-elixir.svg?branch=master)](https://travis-ci.org/elixir-lang/emacs-elixir)
+[![Build Status](https://travis-ci.org/elixir-editors/emacs-elixir.svg?branch=master)](https://travis-ci.org/elixir-editors/emacs-elixir)
 [![MELPA Stable](http://stable.melpa.org/packages/elixir-mode-badge.svg)](http://stable.melpa.org/#/elixir-mode)
+[![MELPA](http://melpa.org/packages/elixir-mode-badge.svg)](http://melpa.org/#/elixir-mode)
 
 # Elixir Mode
 
@@ -14,12 +15,13 @@ Provides font-locking, indentation and navigation support for the
 - [Usage](#usage)
   - [Interactive Commands](#interactive-commands)
   - [Configuration](#configuration)
-  - [Hooks](#hooks)
   - [Keymapping](#keymapping)
 - [Notes](#notes)
 - [Elixir Tooling Integration](#elixir-tooling-integration)
+- [Elixir Format](#elixir-format)
 - [History](#history)
 - [Contributing](#contributing)
+- [License](#license)
 
 ## Installation
 
@@ -27,10 +29,10 @@ Provides font-locking, indentation and navigation support for the
 
 `package.el` is the built-in package manager in Emacs.
 
-`Elixir-Mode` is available on the two major community maintained repositories -
-[MELPA STABLE](melpa-stable.milkbox.net) and [MELPA](http://melpa.milkbox.net).
+`elixir-mode` is available on the two major community maintained repositories -
+[MELPA STABLE](https://stable.melpa.org/) and [MELPA](https://melpa.org/).
 
-You can install `Elixir-Mode` with the following command:
+You can install `elixir-mode` with the following command:
 
 <kbd>M-x package-install [RET] elixir-mode [RET]</kbd>
 
@@ -88,47 +90,7 @@ You can install `Elixir-Mode` manually by placing `Elixir-Mode` on your `load-pa
         <td>Switches to elixir-mode.</td>
     </tr>
     <tr>
-        <td><code>elixir-mode-compile-file</code></td>
-        <td>Compile Elixir files. Works fine on <code>*.exs</code> files, too, if needed.</td>
-     <tr>
-        <td><code>elixir-cos-mode</code></td>
-        <td>Applies compile-on-save minor mode.</td>
-    </tr>
-    <tr>
-        <td><code>elixir-mode-iex</code></td>
-        <td>
-            Launch <code>iex</code> inside Emacs. Use <code>C-u</code>
-            <a href="http://www.gnu.org/software/emacs/manual/html_node/elisp/Prefix-Command-Arguments.html">univesal-argument</a>
-            to run <code>iex</code> with some additional arguments.
-        </td>
-    </tr>
-    <tr>
-        <td><code>elixir-mode-eval-on-region</code></td>
-        <td>Evaluates the Elixir code on the marked region.
-            This is bound to <code>C-c ,r</code> while in <code>elixir-mode</code>.</td>
-    </tr>
-    <tr>
-        <td><code>elixir-mode-eval-on-current-line</code></td>
-        <td>Evaluates the Elixir code on the current line.
-            This is bound to <code>C-c ,c</code> while in <code>elixir-mode</code>.</td>
-    </tr>
-    <tr>
-        <td><code>elixir-mode-eval-on-current-buffer</code></td>
-        <td>Evaluates the Elixir code in the current buffer.
-            This is bound to <code>C-c ,b</code> while in <code>elixir-mode</code>.</td>
-    </tr>
-    <tr>
-        <td><code>elixir-mode-string-to-quoted-on-region</code></td>
-        <td>Get the representation of the expression on the marked region.
-            This is bound to <code>C-c ,a</code> while in <code>elixir-mode</code>.</td>
-    </tr>
-    <tr>
-        <td><code>elixir-mode-string-to-quoted-on-current-line</code></td>
-        <td>Get the representation of the expression on the current line.
-            This is bound to <code>C-c ,l</code> while in <code>elixir-mode</code>.</td>
-    </tr>
-    <tr>
-        <td><code>elixir-mode-opengithub</code></td>
+        <td><code>elixir-mode-open-github</code></td>
         <td>Open the GitHub page for Elixir.</td>
     </tr>
     </tr>
@@ -161,58 +123,15 @@ functionality easily.
 (add-to-list 'auto-mode-alist '("\\.elixir2\\'" . elixir-mode))
 ```
 
-Custom variables for elixir-mode.
-
-<table>
-    <tr>
-        <th>Variable</th>
-        <th>Default</th>
-        <th>Description</th>
-    </tr>
-    <tr>
-        <td><code>elixir-compiler-command (string)</code></td>
-        <td><code>"elixirc"</code></td>
-        <td>Command to compile Elixir code.</td>
-    </tr>
-    <tr>
-        <td><code>elixir-iex-command (string)</code></td>
-        <td><code>"iex"</code></td>
-        <td>Command to start an interactive REPL in <code>IEX</code>.</td>
-    </tr>
-    <tr>
-        <td><code>elixir-mode-cygwin-paths (boolean)</code></td>
-        <td><code>t</code></td>
-        <td>Should Cygwin paths be used on Windows?</td>
-    </tr>
-    <tr>
-        <td><code>elixir-mode-cygwin-prefix (string)</code></td>
-        <td><code>"/cygdrive/C"</code></td>
-        <td>The prefix for Cygwin-style paths.</td>
-    </tr>
-</table>
-
-### Hooks
-
-Hooks can be used to add functionality to elixir-mode. This example
-adds compile on save.
-
-```lisp
-(defun elixir-mode-compile-on-save ()
-  "Elixir mode compile files on save."
-	(and (file-exists (buffer-file-name))
-	     (file-exists (elixir-mode-compiled-file-name))
-			 (elixir-cos-mode t)))
-(add-hook 'elixir-mode-hook 'elixir-mode-compile-on-save)
-```
-
 ### Keymapping
 
 Keymaps can be added to the `elixir-mode-map` variable.
 
-## Notes
+### Pairing
 
-If you want to use `ruby-end-mode` for a more comfortable editing
-experience, you can add the following to your `elixir-mode-hook`:
+[Smartparens](https://github.com/Fuco1/smartparens) has direct support for Elixir.
+
+Alternatively, if you want to use `ruby-end-mode`, you can add the following to your `elixir-mode-hook`:
 
 ```lisp
 (add-to-list 'elixir-mode-hook
@@ -225,7 +144,47 @@ experience, you can add the following to your `elixir-mode-hook`:
 
 ## Elixir Tooling Integration
 
-If you looking for elixir tooling integration for emacs, check: [alchemist.el](https://github.com/tonini/alchemist.el)
+If you looking for elixir tooling integration for Emacs, check: [alchemist.el](https://github.com/tonini/alchemist.el)
+
+You can use [web-mode.el](http://web-mode.org) to edit elixir templates (eex files).
+
+[mix.el](https://github.com/ayrat555/mix.el) provides a minor mode for integration with Mix, a build tool that ships with Elixir.
+
+
+## Elixir Format
+
+``` elisp
+M-x elixir-format
+```
+
+### Add elixir-mode hook to run elixir format on file save
+
+``` elisp
+;; Create a buffer-local hook to run elixir-format on save, only when we enable elixir-mode.
+(add-hook 'elixir-mode-hook
+          (lambda () (add-hook 'before-save-hook 'elixir-format nil t)))
+```
+
+To use a `.formatter.exs` you can either set `elixir-format-arguments` globally to a path like this:
+
+``` elisp
+(setq elixir-format-arguments (list "--dot-formatter" "/path/to/.formatter.exs"))
+```
+
+or you set `elixir-format-arguments` in a hook like this:
+
+``` elisp
+(add-hook 'elixir-format-hook (lambda ()
+                                 (if (projectile-project-p)
+                                      (setq elixir-format-arguments
+                                            (list "--dot-formatter"
+                                                  (concat (locate-dominating-file buffer-file-name ".formatter.exs") ".formatter.exs")))
+                                   (setq elixir-format-arguments nil))))
+```
+
+In this example we use [Projectile](https://github.com/bbatsov/projectile) to determine if we are in a project and then set `elixir-format-arguments` accordingly.
+Please note that this code snippet may cause unhappiness if there is no `.formatter.exs` file available.
+
 
 ## History
 
@@ -234,6 +193,13 @@ This mode is based on the
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://github.com/elixir-lang/emacs-elixir/blob/master/CONTRIBUTING.md) for guidelines on how to contribute to this project.
+Please read [CONTRIBUTING.md](https://github.com/elixir-editors/emacs-elixir/blob/master/CONTRIBUTING.md) for guidelines on how to contribute to this project.
+
+## License
+
+Copyright © 2011-2017 Samuel Tonini, Matt DeBoard, Andreas Fuchs, secondplanet and
+[contributors](https://github.com/elixir-editors/emacs-elixir/contributors).
+
+Distributed under the GNU General Public License, version 3
 
 [badge-license]: https://img.shields.io/badge/license-GPL_3-green.svg
