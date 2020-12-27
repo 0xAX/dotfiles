@@ -68,6 +68,7 @@
 (load "~/.emacscore/dev/c.el")
 (load "~/.emacscore/term.el")
 (load "~/.emacscore/snippets.el")
+(load "~/.emacscore/vcs/magit.el")
 (yas-reload-all)
 
 ;; finally loaded everything
