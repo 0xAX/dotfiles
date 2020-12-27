@@ -55,6 +55,7 @@ fi
 # global env
 export EDITOR="emacs"
 export BROWSER="firefox"
+export EMACS="emacs"
 
 # global development env
 export CC=gcc
@@ -94,10 +95,6 @@ shopt -s nocasematch
 export HISTFILESIZE=-1
 export HISTSIZE=-1
 export HISTTIMEFORMAT="[%F %T] "
-
-# disable line editing in emacs terminal
-export EMACS=1
-export TMPDIR=/tmp
 
 # default locale
 LANG="en_US.UTF-8"
