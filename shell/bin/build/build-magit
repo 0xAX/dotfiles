@@ -4,4 +4,7 @@ cd "$HOME/.emacs.d/magit-deps"
 git clone git@github.com:magit/libegit2.git
 make
 
+rm -rf .git
+rm -rf libgit2/.git
+
 exit 0
