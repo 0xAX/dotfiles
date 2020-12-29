@@ -71,5 +71,8 @@
 (load "~/.emacscore/vcs/magit.el")
 (yas-reload-all)
 
+;; supress all deprecation warnings
+(setq warning-minimum-level :emergency)
+
 ;; finally loaded everything
 (message "All done, %s%s" (user-login-name) ".")
