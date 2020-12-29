@@ -80,8 +80,8 @@
 	editor = emacs
 
 [commit]
-	signoff = true
-	gpgsign = true
+	signoff = false
+	gpgsign = false
 
 [status]
 	branch = true
