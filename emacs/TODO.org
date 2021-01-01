@@ -12,3 +12,7 @@ to check it and unbind
 *** TODO text between brackets not highlighted with solarized colors
 but should be
 *** TODO make help in README.md in dotfiles/.emacs with description of current configuration
+*** TODO take a look at [[https://github.com/abo-abo/swiper][ivy]]
+
+it might be better replacement for ido
+*** TODO consider to use **use-package** instead of putting everything to .emacs.d
