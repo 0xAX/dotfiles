@@ -1,0 +1,14 @@
+* Things to improve in Emacs configuration 
+** org-mode
+*** TODO C-down/left/right/up does not move between windows
+need to rebind it
+** make-mode
+*** TODO CUA copy/paste does not work for now
+It looks like it is binded to something else, it would be good
+to check it and unbind
+** e-mail
+*** TODO finish GNUS configuration
+** miscellaneous
+*** TODO text between brackets not highlighted with solarized colors
+but should be
+*** TODO make help in README.md in dotfiles/.emacs with description of current configuration
