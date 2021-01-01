@@ -30,6 +30,8 @@
 (setq make-backup-files         nil)
 (setq auto-save-list-file-name  nil)
 (setq auto-save-default         nil)
+(setq create-lockfiles          nil)
+(setq user-emacs-directory      "~/.cache/emacs")
 
 ;; set current theme
 (setq current-theme "solarized")
