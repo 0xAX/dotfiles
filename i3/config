@@ -24,7 +24,8 @@ bindsym $mod+q kill
 # restart i3
 bindsym $mod+c exec i3-msg restart
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run -b -fn '-xos4-terminus-medium-r-*-*-18-*' -nb '#fdf6e3' -sb "#002b36" -nf '#888888' -nf '#888888' 
+#bindsym $mod+d exec dmenu_run -b -fn '-xos4-terminus-medium-r-*-*-18-*' 
+bindsym $mod+d exec dmenu_run -b -fn "Fira Code Retina-14" -nb '#073642' -sb "#073642" -nf '#fdf6e3' -sf '#fdf6e3'
 # go to the next workspace
 bindsym $mod+Tab workspace next
 # go to the prevoious workspace
