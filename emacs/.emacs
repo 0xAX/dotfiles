@@ -68,6 +68,7 @@
 (load "~/.emacscore/dev/elixir.el")
 (load "~/.emacscore/dev/company.el")
 (load "~/.emacscore/dev/c.el")
+(load "~/.emacscore/dev/common-lisp.el")
 (load "~/.emacscore/term.el")
 (load "~/.emacscore/snippets.el")
 (load "~/.emacscore/vcs/magit.el")
