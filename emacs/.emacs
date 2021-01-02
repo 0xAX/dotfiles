@@ -34,7 +34,7 @@
 (setq user-emacs-directory      "~/.cache/emacs")
 
 ;; set current theme
-(setq current-theme "solarized")
+(setq current-theme "solarized-emacs")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;        Package manager
@@ -79,3 +79,16 @@
 
 ;; finally loaded everything
 (message "All done, %s%s" (user-login-name) ".")
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(show-paren-match ((t (:background "#116599" :foreground "white"))))
+ '(tabbar-default ((t (:background "#fdf6e3" :foreground "dodger blue")))))

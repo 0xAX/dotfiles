@@ -15,12 +15,14 @@
 
 ;; Current theme
 (progn
-  (load "~/.emacs.d/solarized/solarized.el")
-  (load "~/.emacs.d/solarized/solarized-theme.el")
-  (load "~/.emacs.d/solarized/solarized-light-theme.el")
-  (load "~/.emacscore/themes/solarized/tabbar-solarized-light-style.el")
+  (load "~/.emacs.d/solarized-emacs/solarized-palettes.el")
+  (load "~/.emacs.d/solarized-emacs/solarized-faces.el")
+  (load "~/.emacs.d/solarized-emacs/solarized.el")
+  (load "~/.emacs.d/solarized-emacs/solarized-theme.el")
+  (load "~/.emacs.d/solarized-emacs/solarized-light-theme.el")
   (setq x-underline-at-descent-line t)
-  (enable-theme 'solarized-light))
+  (enable-theme 'solarized-light)
+  (load "~/.emacscore/themes/solarized/tabbar-solarized-light-style.el"))
 
 ;; hide scroll bar
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
