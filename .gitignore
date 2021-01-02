@@ -9,6 +9,9 @@ emacs/.emacs.d/tramp
 emacs/.emacs.d/elpa/archives/*
 emacs/.emacs.d/url/cache/*
 emacs/.emacs.d/eshell/lastdir
+emacs/.emacs.d/solarized-emacs/dev-emacs.d/
+emacs/.emacs.d/solarized-emacs/colorlab/
+emacs/.emacs.d/solarized-emacs/child-theme-example/
 rfc*.txt
 cookies
 *.data
