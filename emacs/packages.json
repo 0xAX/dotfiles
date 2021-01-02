@@ -1,0 +1,6 @@
+{
+    "slime": {
+	"source": "git@github.com:slime/slime.git",
+	"tag": "v2.26.1"
+    }
+}
