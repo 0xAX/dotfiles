@@ -18,7 +18,7 @@
   (load "~/.emacs.d/solarized/solarized.el")
   (load "~/.emacs.d/solarized/solarized-theme.el")
   (load "~/.emacs.d/solarized/solarized-light-theme.el")
-  (load "~/.emacscore/themes/helpers/tabbar-solarized-light-style.el")
+  (load "~/.emacscore/themes/solarized/tabbar-solarized-light-style.el")
   (setq x-underline-at-descent-line t)
   (enable-theme 'solarized-light))
 
