@@ -3,4 +3,8 @@
 	"source": "git@github.com:slime/slime.git",
 	"tag": "v2.26.1"
     }
+    "solarized-emacs": {
+	"source": "git@github.com:bbatsov/solarized-emacs.git",
+	"hash": "67f261c7b3d1a041e5c8964df680f8132703fc17"
+    }
 }
