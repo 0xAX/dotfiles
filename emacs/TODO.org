@@ -8,6 +8,8 @@ It looks like it is binded to something else, it would be good
 to check it and unbind
 ** e-mail
 *** TODO finish GNUS configuration
+** lisp
+*** TODO add keybidning for slime-load-system
 ** miscellaneous
 *** TODO text between brackets not highlighted with solarized colors
 but should be
