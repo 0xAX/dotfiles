@@ -55,7 +55,7 @@
 ;; use custom faces as default one inherits font-size and other
 ;; things from other configuration
 (custom-set-faces
- '(tabbar-default ((t (:background "#fdf6e3" :foreground "#eee8d5" :font "Fira Code-13"))))
+ '(tabbar-default ((t (:background "#fdf6e3" :foreground "#eee8d5" :font "Fira Code-12"))))
  '(tabbar-selected ((t (:background "#fdf6e3" :foreground "#839496"))))
  '(tabbar-unselected ((t (:background "#fdf6e3" :foreground "#93a1a1"))))
  '(tabbar-modified ((t (:background "#fdf6e3" :foreground "#d33682"))))
