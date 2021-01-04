@@ -24,11 +24,11 @@
 (global-set-key (kbd "C-x t")   'telnet)
 (global-set-key (kbd "C-x g")   'gdb)
 (global-set-key (kbd "C-x RET") 'calc)
-(global-set-key (kbd "C-x c")   'calendar)
+(global-set-key (kbd "C-x y")   'calendar)
 (global-set-key (kbd "C-x b")   'browse-url)
 (global-set-key (kbd "C-x p")   'ping)
 (global-set-key (kbd "C-x l")   'list-colors-display)
-(global-set-key (kbd "C-x m")   'man-follow)
+(global-set-key (kbd "C-x m")   'woman)
 
 ;; Text manipulation
 (global-set-key "\C-a" 'mark-page)
@@ -38,6 +38,7 @@
 (global-set-key "\M-k" 'kill-full-line)
 (global-set-key "\C-g" 'goto-line)
 (global-set-key "\C-s" 'isearch-forward)
+(global-set-key "\C-b" 'isearch-backward)
 (global-set-key (kbd "TAB") 'tab-to-tab-stop)
 
 ;; buffers manipulations
@@ -50,6 +51,14 @@
 (global-set-key (kbd "M-<down>") 'end-of-buffer)
 (global-set-key (kbd "C-c c") 'emacs-config)
 
+;; help
+(global-set-key (kbd "C-h m") 'describe-mode)
+(global-set-key (kbd "C-h k") 'describe-key)
+(global-set-key (kbd "C-h b") 'describe-bindings)
+(global-set-key (kbd "C-h f") 'describe-function)
+(global-set-key (kbd "C-h v") 'describe-variable)
+(global-set-key (kbd "C-h s") 'describe-symbol)
+
 ;; tabbar keybindings
 (global-set-key [C-left]  'tabbar-backward-tab)
 (global-set-key [C-right] 'tabbar-forward-tab)
@@ -57,16 +66,6 @@
 
 ;; files manipulation
 (global-set-key "\C-n" 'new-file)
-
-;; enable/disable auto-complete-mode
-(global-unset-key "\M-a")
-(global-set-key "\M-a" 'auto-complete-mode)
-
-;; ui
-(global-set-key [M-f12] 'toggle-mode-line)
-
-;; Help
-(global-set-key (kbd "C-h") 'discover-my-major)
 
 ;; Window size manipulation
 (global-set-key (kbd "C-S-<left>") 'shrink-window-horizontally)
@@ -93,15 +92,8 @@
 (global-set-key "\M-8" 'go-to-workspace-8)
 (global-set-key "\M-9" 'go-to-workspace-9)
 
-;; org-mode keybindings
-(global-unset-key "\C-t")
-(global-set-key (kbd "C-t t") 'todo)
-
 ;; indentation
 (global-set-key (kbd "RET") 'newline-and-indent)
 
 ;; i3 keybindings
 (global-set-key (kbd "<M-tab>") 'switch-to-next-i3-workspace)
-
-;; common lisp
-(global-set-key (kbd "C-x e") 'slime-eval-defun)
