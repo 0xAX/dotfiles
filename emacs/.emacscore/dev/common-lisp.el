@@ -7,4 +7,27 @@
 ;; setup path to lisp compiler
 (setq inferior-lisp-program "/usr/bin/sbcl")
 
-(setq slime-contribs '(slime-scratch slime-asdf slime-editing-commands))
+;; setup lisp implementations
+(setq slime-lisp-implementations
+      '((sbcl ("/usr/bin/sbcl") :coding-system utf-8-unix)))
+
+;; set default lisp
+(setq slime-default-lisp 'sbcl)
+
+;; add for SLIME contribs
+(setq slime-contribs '(slime-scratch
+		       slime-asdf
+		       slime-editing-commands))
+
+;; try to start swank faster
+(when (file-exists-p "~/sbcl.core-for-slime")
+  (setq slime-lisp-implementations
+	'((sbcl ("sbcl" "--core" "~/sbcl.core-for-slime")))))
+
+(defun slime-keybindings ()
+  (local-set-key (kbd "C-h s")   'slime-describe-symbol)
+  (local-set-key (kbd "C-h f")   'slime-describe-function)
+  (local-set-key (kbd "M-l")     'slime-load-system))
+
+(add-hook 'slime-mode-hook          #'slime-keybindings)
+(add-hook 'slime-repl-mode-hook     #'slime-keybindings)
