@@ -6,3 +6,5 @@
 
 ;; setup path to lisp compiler
 (setq inferior-lisp-program "/usr/bin/sbcl")
+
+(setq slime-contribs '(slime-scratch slime-asdf slime-editing-commands))
