@@ -125,7 +125,8 @@ alias i3-restart="i3-msg restart"
 
 # erlang dev
 alias runerl="BINDIR=/home/alex/disk/dev/otp/bin/x86_64-unknown-linux-gnu ./bin/x86_64-unknown-linux-gnu/erlexec"
-alias diff-erl-updates="git log master..master-upstream"
-alias diff-erl-updates-tree="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative master...master-upstream"
 
-alias ssh-agent-enable="eval $(ssh-agent -s)"
+# nightly browser
+alias browser-nightly-run-directly="./obj-x86_64-pc-linux-gnu/dist/bin/firefox --MOZ_LOG=\"gParserLog:5\""
+alias browser-nightly-run="MACH_USE_SYSTEM_PYTHON=1 ./mach run"
+alias browser-nightly-build="MACH_USE_SYSTEM_PYTHON=1 ./mach build"
