@@ -1,10 +1,5 @@
 #!/bin/bash
 
-#
-# Additional bash completions
-#
-
-# git completion
 if [[ -f /etc/bash_completion.d/git-completion.bash ]];
 then
     source /usr/share/bash-completion/completions/git
