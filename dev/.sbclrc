@@ -10,7 +10,7 @@
          (progn
            (pushnew (truename "~/dev/sigma") ql:*local-project-directories* )
 	   (ql:register-local-projects)))
-      ((probe-file "~/dev/sigma/sigma.asd")
+      ((probe-file "~/disk/dev/sigma/sigma.asd")
          (progn
-           (pushnew (truename "~/dev/sigma") ql:*local-project-directories* )
+           (pushnew (truename "~/disk/dev/sigma") ql:*local-project-directories* )
 	   (ql:register-local-projects))))
