@@ -2,7 +2,6 @@
 
 # some additional PATHS
 export PATH=$PATH:$HOME/bin
-export PTAH=$PATH:$HOME/.krew/bin
 
 # ocaml
 export PATH=$PATH:$HOME/.opam/default/bin
@@ -27,8 +26,6 @@ export LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu
 export PATH=$PATH:$KERNEL_DEV/tools/perf/
 export PATH=$PATH:/usr/lib/systemd/
 
-export ERL_LIBS=$ERL_LIBS:/home/alex/work/radierl
-
 # golang
 export GOROOT=$DEV/golang/go
 export GOPATH=$DEV/golang
@@ -45,19 +42,5 @@ export MANPATH=$MANPATH:/usr/local/share/man
 # docker options
 export DOCKER_STORAGE_OPTIONS="overlay"
 
-# mariadb server source code
-export MYSQL_SRC_DIR="${DEV_DISK}/server"
-
-# export java
-export JAVA_HOME=/usr/java/jdk-12.0.1
-#export PATH=$PATH:/usr/java/jdk-12.0.1/bin
-
 # path to SSL certs
 export SSL_CERT_FILE=/etc/ssl/certs/ca-bundle.crt
-
-test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
-export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
-
-CVSROOT=anoncvs@anoncvs.fr.NetBSD.org:/pub/NetBSD-CVS
-export CVSROOT
-export CVS_RSH=ssh
