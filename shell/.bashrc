@@ -125,6 +125,7 @@ source $BASHRC_DIR/standard
 source $BASHRC_DIR/export
 source $BASHRC_DIR/docker
 source $BASHRC_DIR/k8s
+source $BASHRC_DIR/wallpapers
 
 # include if we are using arch-linux
 test -f /etc/arch-release && source $BASHRC_DIR/arch-linux
@@ -139,7 +140,3 @@ export GVFS_DISABLE_FUSE=1
 
 # switch keyboard layouts
 setxkbmap -layout us,ru -option grp:lwin_toggle
-
-alias tp-proxy-up='ssh -fNTMD 8080 jump'
-alias tp-proxy-status='ssh -TO check jump'
-alias tp-proxy-down='ssh -TO exit jump'

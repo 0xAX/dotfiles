@@ -1,0 +1,7 @@
+#!/bin/bash
+
+FEH=$(whereis feh | awk '{print $2}')
+if [ ! -z "$FEH" ]
+then
+    $FEH --bg-scale "$HOME/dev/dotfiles/wallpapers/solarized-dark-wallpaper.jpg"
+fi
