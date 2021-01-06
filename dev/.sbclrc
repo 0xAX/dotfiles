@@ -1,4 +1,5 @@
-;;; The following lines added by ql:add-to-init-file:
+;;;; -*- Mode: Lisp; Syntax: ANSI-Common-Lisp; Base: 10 -*-
+
 #-quicklisp
 (let ((quicklisp-init (merge-pathnames "quicklisp/setup.lisp"
                                        (user-homedir-pathname))))
