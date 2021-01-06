@@ -112,7 +112,6 @@ LC_ALL="en_US.UTF-8"
 
 # include other sources
 source $BASHRC_DIR/archives
-source $BASHRC_DIR/network
 source $BASHRC_DIR/completition
 source $BASHRC_DIR/prompt
 source $BASHRC_DIR/devel
