@@ -1,3 +1,0 @@
-#!/bin/bash
-
-alias pac-update="sudo pacman -Suy"

@@ -127,12 +127,6 @@ source $BASHRC_DIR/docker
 source $BASHRC_DIR/k8s
 source $BASHRC_DIR/wallpapers
 
-# include if we are using arch-linux
-test -f /etc/arch-release && source $BASHRC_DIR/arch-linux
-
-# include if we are using debian based distro
-(test -f /etc/debian_version || cat /etc/os-release | grep Ubuntu) && source $BASHRC_DIR/debian
-
 # turn off dpms
 xset s off -dpms
 
