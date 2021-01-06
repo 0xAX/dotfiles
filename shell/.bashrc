@@ -119,12 +119,12 @@ source $BASHRC_DIR/system
 source $BASHRC_DIR/standard
 source $BASHRC_DIR/export
 source $BASHRC_DIR/docker
-source $BASHRC_DIR/k8s
 source $BASHRC_DIR/wallpapers
 
 # turn off dpms
 xset s off -dpms
 
+# not start gvfsd fs
 export GVFS_DISABLE_FUSE=1
 
 # switch keyboard layouts
