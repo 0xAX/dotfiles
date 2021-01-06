@@ -115,7 +115,6 @@ source $BASHRC_DIR/archives
 source $BASHRC_DIR/completition
 source $BASHRC_DIR/prompt
 source $BASHRC_DIR/devel
-source $BASHRC_DIR/network
 source $BASHRC_DIR/system
 source $BASHRC_DIR/standard
 source $BASHRC_DIR/export
