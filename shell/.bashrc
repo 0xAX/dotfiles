@@ -59,8 +59,6 @@ export EMACS="emacs"
 
 # global development env
 export CC=gcc
-#export AS=as
-#export AR=ar
 export CXX=g++
 export LD=ld
 export TAR=tar
