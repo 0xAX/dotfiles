@@ -111,7 +111,6 @@ LC_IDENTIFICATION="en_US.UTF-8"
 LC_ALL="en_US.UTF-8"
 
 # include other sources
-source $BASHRC_DIR/term-colors
 source $BASHRC_DIR/archives
 source $BASHRC_DIR/network
 source $BASHRC_DIR/completition
