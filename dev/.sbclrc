@@ -6,6 +6,8 @@
   (when (probe-file quicklisp-init)
     (load quicklisp-init)))
 
+(declaim (sb-ext:muffle-conditions sb-kernel:redefinition-warning))
+
 (cond ((probe-file "~/dev/sigma/sigma.asd")
          (progn
            (pushnew (truename "~/dev/sigma") ql:*local-project-directories* )
