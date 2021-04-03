@@ -44,3 +44,6 @@ export DOCKER_STORAGE_OPTIONS="overlay"
 
 # path to SSL certs
 export SSL_CERT_FILE=/etc/ssl/certs/ca-bundle.crt
+
+# virtual machines
+export VAGRANT_HOME=/home/alex/disk2/.vagrant.d/
