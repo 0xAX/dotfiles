@@ -84,6 +84,8 @@
      `(trailing-whitespace ((,class (:background ,red))))
      `(vertical-border ((,class (:foreground ,s-line))))
      `(warning ((,class (:foreground ,yellow ))))
+     `(next-error ((,class (:foreground ,magenta-2fg :background ,magenta-2bg :weight normal))))
+
 ;;;;; compilation
      `(compilation-column-face ((,class (:foreground ,cyan :underline nil))))
      `(compilation-column-number ((,class (:inherit font-lock-doc-face :foreground ,cyan
@@ -198,6 +200,11 @@
      `(Man-overstrike ((,class (:foreground ,blue :weight bold))))
      `(Man-reverse ((,class (:foreground ,orange))))
      `(Man-underline ((,class (:foreground ,green :underline t))))
+
+;;;;; pulse
+     `(pulse-highlight-start-face ((,light-class
+                                    (:background ,(solarized-color-blend yellow base03 0.4)))
+                                   (,dark-class (:background ,(solarized-color-blend cyan base03 0.4)))))
 ;;;;; wid-edit
      `(widget-field ((,class (:background ,base02))))
 ;;;;; font lock
@@ -873,7 +880,7 @@
        ((,class (,@(and (>= emacs-major-version 27) '(:extend t))
                  :background ,base02))))
 ;;;;; hydra
-     `(hydra-face-red ((,class (:foreground ,red))))
+     `(hydra-face-red ((,class (:foreground ,base1 :weight bold))))
      `(hydra-face-blue ((,class (:foreground ,blue))))
      `(hydra-face-amaranth ((,class (:foreground ,orange))))
      `(hydra-face-pink ((,class (:foreground ,magenta))))
@@ -1015,6 +1022,9 @@
      `(linum-relative-current-face ((,class (:inherit linum))))
 ;;;;; display-line-number-mode
      `(line-number ((,class (:weight thin :underline nil :foreground ,s-fringe-fg :background ,s-fringe-bg))))
+     `(line-number-minor-tick ((,class (:inherit line-number :weight normal))))
+     `(line-number-major-tick ((,class (:inherit line-number-minor-tick :weight bold))))
+     `(line-number-current-line ((,class (:inherit line-number :background ,base03 :foreground ,base0))))
 ;;;;; lsp-ui
      `(lsp-ui-doc-background ((,class (:background ,base03))))
      `(lsp-ui-doc-header ((,class (:background ,yellow-1bg :foreground ,yellow-1fg))))
@@ -1356,7 +1366,11 @@
      `(notmuch-tree-match-date-face ((,class (:foreground ,yellow))))
      `(notmuch-tree-match-tag-face ((,class (:foreground ,cyan))))
      `(notmuch-tree-no-match-face ((,class (:inherit font-lock-comment-face))))
-
+;;;;; orderless
+     `(orderless-match-face-0 ((,class (:foreground ,blue))))
+     `(orderless-match-face-1 ((,class (:foreground ,magenta))))
+     `(orderless-match-face-2 ((,class (:foreground ,yellow))))
+     `(orderless-match-face-3 ((,class (:foreground ,green))))
 ;;;;; org-mode
      `(org-agenda-structure
        ((,class (:foreground ,base1 :background ,base02
@@ -1557,8 +1571,8 @@
      `(rst-level-6 ((,class (:inherit org-level-6))))
 ;;;;; selectrum-mode
      `(selectrum-current-candidate ((,class (:weight bold :background ,base02 :underline t))))
-     `(selectrum-primary-highlight ((,class (:foreground ,base1))))
-     `(selectrum-secondary-highlight ((,class (:foreground ,yellow))))
+     `(selectrum-primary-highlight ((,class (:foreground ,yellow))))
+     `(selectrum-secondary-highlight ((,class (:foreground ,blue))))
 ;;;;; sh-mode
      `(sh-quoted-exec ((,class (:foreground ,violet :weight bold))))
      `(sh-escaped-newline ((,class (:foreground ,yellow :weight bold))))
@@ -1788,6 +1802,8 @@
        ((t (:underline nil :background ,(solarized-color-blend yellow-l s-base3 0.2)))))
      `(transient-mismatched-key
        ((t (:underline nil :background ,(solarized-color-blend red-l s-base3 0.2)))))
+     `(transient-separator           ((t (,@(and (>= emacs-major-version 27) '(:extend t))
+                                          :background ,s-line))))
 ;;;;; tuareg
      `(tuareg-font-lock-governing-face ((,class (:foreground ,magenta :weight bold))))
      `(tuareg-font-lock-multistage-face ((,class (:foreground ,blue :background ,base02
@@ -1969,6 +1985,9 @@
      `(window-divider-last-pixel ((,class (:foreground ,s-mode-line-bg))))
 ;;;;; window-number-mode
      `(window-number-face ((,class (:foreground ,green))))
+;;;;; woman
+     `(woman-bold ((,class (:inherit Man-overstrike))))
+     `(woman-italic ((,class (:inherit Man-underline))))
 ;;;;; yascroll
      `(yascroll:thumb-text-area
        ((,class (:foreground ,base01 :background ,base01))))
