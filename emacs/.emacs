@@ -74,21 +74,22 @@
 (load "~/.emacscore/vcs/magit.el")
 (yas-reload-all)
 
+;; do not use tabs for indentation at all
+(setq-default indent-tabs-mode nil)
+
 ;; supress all deprecation warnings
 (setq warning-minimum-level :emergency)
 
 ;; finally loaded everything
 (message "All done, %s%s" (user-login-name) ".")
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(show-paren-match ((t (:background "#116599" :foreground "white"))))
- '(tabbar-default ((t (:background "#fdf6e3" :foreground "dodger blue")))))
+ '(tabbar-default ((t (:background "#fdf6e3" :foreground "#eee8d5" :font "Fira Code-12"))))
+ '(tabbar-modified ((t (:background "#fdf6e3" :foreground "#d33682"))))
+ '(tabbar-selected ((t (:background "#fdf6e3" :foreground "#839496"))))
+ '(tabbar-separator ((t (:background "#fdf6e3" :foreground "#fdf6e3"))))
+ '(tabbar-unselected ((t (:background "#fdf6e3" :foreground "#93a1a1")))))
