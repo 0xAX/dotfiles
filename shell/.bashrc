@@ -129,3 +129,4 @@ export GVFS_DISABLE_FUSE=1
 
 # switch keyboard layouts
 setxkbmap -layout us,ru -option grp:lwin_toggle
+source "$HOME/.cargo/env"

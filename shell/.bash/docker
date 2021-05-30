@@ -5,7 +5,6 @@
 #
 function docker-mysql-work-run() {
     docker run --ulimit nofile=262144:262144 --net=host \
-	   --sysctl net.core.somaxconn=8092 -d          \
 	   -p 3306:3306 --name=mysql-work               \
 	   -e MYSQL_ALLOW_EMPTY_PASSWORD=true mariadb:10.3
 }
