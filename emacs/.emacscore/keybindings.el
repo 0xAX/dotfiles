@@ -81,6 +81,11 @@
 (global-set-key (kbd "C-+") 'text-scale-increase)
 (global-set-key (kbd "C--") 'text-scale-decrease)
 
+;; Special cases for `C-+` keybinding for dired
+(add-hook 'dired-mode-hook
+  (lambda ()
+   (local-set-key (kbd "C-+") 'dired-create-directory)))
+
 ;; keybinding to switch other workspaces
 (global-set-key "\M-1" 'go-to-workspace-1)
 (global-set-key "\M-2" 'go-to-workspace-2)
