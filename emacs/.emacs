@@ -74,6 +74,7 @@
 (straight-use-package 'company)
 (straight-use-package 'company-c-headers)
 (straight-use-package 'magit)
+(straight-use-package 'slime)
 (straight-use-package 'yasnippet)
 (straight-use-package 'yasnippet-snippets)
 (straight-use-package 'yaml)
