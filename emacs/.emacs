@@ -73,6 +73,7 @@
 ;; Install and use packages
 (straight-use-package 'company)
 (straight-use-package 'company-c-headers)
+(straight-use-package 'erlang)
 (straight-use-package 'magit)
 (straight-use-package 'slime)
 (straight-use-package 'yasnippet)
@@ -86,7 +87,6 @@
 (load "~/.emacscore/org/orgmode.el")
 (load "~/.emacscore/ido.el")
 (load "~/.emacscore/dired.el")
-(load "~/.emacs.d/dash.el/dash.el")
 (load "~/.emacscore/ui.el")
 
 ;; Development

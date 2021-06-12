@@ -1,8 +1,5 @@
 ;;; erlang.el --- Erlang routines for GNU Emacs  -*- lexical-binding: t -*-
 
-(setq load-path (cons "~/.emacs.d/erlang/"
-      load-path))
-
 (setq exec-path (cons "/usr/local/lib/erlang/bin" exec-path))
 
 (add-to-list 'auto-mode-alist '("\\.erl?$" . erlang-mode))
