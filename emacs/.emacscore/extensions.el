@@ -10,7 +10,6 @@
   ;;
   ;; YAML mode
   ;;
-  (add-to-list 'load-path "~/.emacs.d/yaml")
   (require 'yaml-mode)
   ;;
   ;; some build/term and text extensions

@@ -76,6 +76,7 @@
 (straight-use-package 'magit)
 (straight-use-package 'yasnippet)
 (straight-use-package 'yasnippet-snippets)
+(straight-use-package 'yaml)
 
 ;; ui
 (load "~/.emacscore/file-utils.el")
@@ -117,3 +118,5 @@
  '(tabbar-selected ((t (:background "#fdf6e3" :foreground "#839496"))))
  '(tabbar-separator ((t (:background "#fdf6e3" :foreground "#fdf6e3"))))
  '(tabbar-unselected ((t (:background "#fdf6e3" :foreground "#93a1a1")))))
+
+(kill-buffer "*straight-process*")
