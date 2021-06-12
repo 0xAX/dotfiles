@@ -1,2 +1,0 @@
-# Stop HTML documents from skewing the repository's language stats
-*.html linguist-generated=true

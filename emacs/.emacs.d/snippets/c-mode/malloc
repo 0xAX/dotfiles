@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: malloc
-# key: malloc
-# --
-$0 = malloc(sizeof($1)${2: * ${3:3}});
-if (!$0)
-{
-        
-}
