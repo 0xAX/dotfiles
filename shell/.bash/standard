@@ -126,6 +126,8 @@ alias i3-restart="i3-msg restart"
 # erlang dev
 alias runerl="BINDIR=/home/alex/dev/otp/bin/x86_64-pc-linux-gnu ./bin/x86_64-pc-linux-gnu/erlexec"
 alias builderl="cd /home/alex/dev/otp && ./otp_build all"
+alias otp_23_activate=". /home/alex/dev/otp-23/activate"
+alias otp_24_activate=". /home/alex/dev/otp-24/activate"
 
 # nightly browser
 alias browser-nightly-run-directly="./obj-x86_64-pc-linux-gnu/dist/bin/firefox --MOZ_LOG=\"gParserLog:5\""
