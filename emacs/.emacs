@@ -72,6 +72,8 @@
 
 ;; Install and use packages
 (straight-use-package 'magit)
+(straight-use-package 'yasnippet)
+(straight-use-package 'yasnippet-snippets)
 
 ;; ui
 (load "~/.emacscore/file-utils.el")
@@ -93,7 +95,6 @@
 (load "~/.emacscore/lisp/cmake.el")
 (load "~/.emacscore/term.el")
 (load "~/.emacscore/snippets.el")
-(yas-reload-all)
 
 ;; do not use tabs for indentation at all
 (setq-default indent-tabs-mode nil)

@@ -1,8 +1,14 @@
-(add-to-list 'load-path "~/.emacs.d/yasnippet")
 (require 'yasnippet)
+
 (add-hook 'prog-mode-hook #'yas-minor-mode)
 
-(setq yas-snippet-dirs
-      '("~/.emacs.d/yasnippet-snippets/snippets" "~/.emacs.d/snippets"))
+(setq straight-yas-dir
+      (concat user-emacs-directory "/straight/build/yasnippet-snippets/snippets"))
 
+;; Configure snippets directories
+(setq yas-snippet-dirs
+      '(straight-yas-dir ".emacscore/snippets"))
+
+;; Enable yas for all
+(yas-reload-all)
 (yas-global-mode 1)
