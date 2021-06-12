@@ -5,11 +5,10 @@
 (require 'slime-autoloads)
 
 ;; setup path to lisp compiler
-(setq inferior-lisp-program "/usr/bin/sbcl")
-
-;; setup lisp implementations
-(setq slime-lisp-implementations
-      '((sbcl ("/usr/bin/sbcl") :coding-system utf-8-unix)))
+(when (file-exists-p "/usr/bin/sbcl")
+  (setq inferior-lisp-program "/usr/bin/sbcl"))
+(when (file-exists-p "/usr/local/bin/sbcl")
+  (setq inferior-lisp-program "/usr/local/bin/sbcl"))
 
 ;; set default lisp
 (setq slime-default-lisp 'sbcl)
