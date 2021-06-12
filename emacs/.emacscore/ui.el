@@ -102,3 +102,12 @@
 
 ;; Enable column number in mode-line
 (setq column-number-mode t)
+
+;; Ivy configuration
+(ivy-mode)
+(ivy-posframe-mode)
+
+(cond ((file-directory-p "/usr/share/fonts/fira-code")
+       (setq ivy-posframe-font "Fira Code-13"))
+      (t
+       (setq ivy-posframe-font "Monospace")))

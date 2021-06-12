@@ -40,6 +40,7 @@
 (global-set-key "\C-s" 'isearch-forward)
 (global-set-key "\C-b" 'isearch-backward)
 (global-set-key (kbd "TAB") 'tab-to-tab-stop)
+(global-set-key "\C-s" 'swiper)
 
 ;; buffers manipulations
 (global-set-key "\C-k" 'kill-this-buffer)
