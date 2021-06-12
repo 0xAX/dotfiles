@@ -76,6 +76,7 @@
 (straight-use-package 'erlang)
 (straight-use-package 'elixir)
 (straight-use-package 'magit)
+(straight-use-package 'markdown-mode)
 (straight-use-package 'pkg-info)
 (straight-use-package 'solarized-emacs)
 (straight-use-package 'slime)

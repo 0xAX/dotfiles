@@ -1,7 +1,6 @@
 ;;; markups.el --- Stuff for different markup languages  -*- lexical-binding: t -*-
 
 ;; Markdown mode
-(add-to-list 'load-path "~/.emacs.d/markdown")
 (require 'markdown-mode)
 
 (autoload 'markdown-mode "markdown-mode"
