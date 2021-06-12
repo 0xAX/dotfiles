@@ -74,11 +74,13 @@
 (straight-use-package 'company)
 (straight-use-package 'company-c-headers)
 (straight-use-package 'erlang)
+(straight-use-package 'elixir)
 (straight-use-package 'magit)
+(straight-use-package 'pkg-info)
 (straight-use-package 'slime)
+(straight-use-package 'yaml)
 (straight-use-package 'yasnippet)
 (straight-use-package 'yasnippet-snippets)
-(straight-use-package 'yaml)
 
 ;; ui
 (load "~/.emacscore/file-utils.el")
