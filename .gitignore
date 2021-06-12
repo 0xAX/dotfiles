@@ -19,5 +19,4 @@ history
 emacs/.emacs.d/eshell/history
 *.gpg
 *.kbx
-emacs/.emacs.d/eshell/lastdir
-emacs/.emacs.d/magit-deps/libegit2/
+emacs/.emacs.d
