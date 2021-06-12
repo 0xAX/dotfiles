@@ -7,9 +7,6 @@
   (if i3
       (load "~/.emacscore/desktop/i3.el")))
 
-;; Load Standard routines that may be used in other elisp files
-(load "~/.emacscore/extensions.el")
-
 ;; do not save sessions
 (desktop-save-mode 0)
 ;; Delete text in selection mode when typing
@@ -81,7 +78,7 @@
 (straight-use-package 'solarized-emacs)
 (straight-use-package 'slime)
 (straight-use-package 'tabbar)
-(straight-use-package 'yaml)
+(straight-use-package 'yaml-mode)
 (straight-use-package 'yasnippet)
 (straight-use-package 'yasnippet-snippets)
 
@@ -95,15 +92,24 @@
 (load "~/.emacscore/ui.el")
 
 ;; Development
+(load "~/.emacscore/dev/sed.el")
+(load "~/.emacscore/dev/shell.el")
 (load "~/.emacscore/dev/elisp.el")
 (load "~/.emacscore/dev/erlang.el")
 (load "~/.emacscore/dev/elixir.el")
 (load "~/.emacscore/dev/company.el")
 (load "~/.emacscore/dev/c.el")
 (load "~/.emacscore/dev/common-lisp.el")
-(load "~/.emacscore/lisp/cmake.el")
+
+;; Load miscellaneous things
 (load "~/.emacscore/term.el")
 (load "~/.emacscore/snippets.el")
+(load "~/.emacscore/build/make.el")
+(load "~/.emacscore/markups.el")
+
+;; load 1 file things
+(load "~/.emacscore/lisp/cmake.el")
+(load "~/.emacscore/lisp/rainbow-mode-1.0.5.el")
 
 ;; do not use tabs for indentation at all
 (setq-default indent-tabs-mode nil)
