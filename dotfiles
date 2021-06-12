@@ -16,7 +16,6 @@ case $1 in
 
     # copy emacs directories
     rm -rf *.session
-    cp -r ~/.emacs ~/.emacs.d ~/.emacscore "$DOTFILES"/emacs
 
     # copy i3 stuff
     cp -r ~/.i3/* "$DOTFILES"/i3
@@ -34,9 +33,6 @@ case $1 in
 --update-system)
     # copy standard dtofiles
     cp -r .tmux.conf .gdbinit .inputrc "$DOTFILES/git/." "$HOME"
-
-    # copy emacs files
-    cp -r emacs/.emacs emacs/.emacs.d emacs/.emacscore "$HOME"
 
     # copy i3 stuff
     cp -r "$DOTFILES"/i3/* "$HOME/.i3"
