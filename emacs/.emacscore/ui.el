@@ -24,7 +24,8 @@
   (load (concat solarized-theme-path "/solarized-theme.el"))
   (load (concat solarized-theme-path "/solarized-light-theme.el"))
   (setq x-underline-at-descent-line t)
-  (enable-theme 'solarized-light))
+  (enable-theme 'solarized-light)
+  (load "~/.emacscore/themes/solarized/tabbar-solarized-light-style.el"))
 
 ;; hide scroll bar
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))

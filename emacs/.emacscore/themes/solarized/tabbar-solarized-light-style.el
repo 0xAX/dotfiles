@@ -1,7 +1,6 @@
-;;; tabbar-material-style.el --- GNU Emacs tabbar styles for material theme  -*- lexical-binding: t -*-
+;;; tabbar-solarized-style.el --- GNU Emacs tabbar styles for material theme  -*- lexical-binding: t -*-
 
 ;; Tabbar mode
-(add-to-list 'load-path "~/.emacs.d/tabbar")
 (require 'tabbar)
 
 ;; All tabs in one group
@@ -61,5 +60,15 @@
  '(tabbar-modified ((t (:background "#fdf6e3" :foreground "#d33682"))))
  '(tabbar-separator ((t (:background "#fdf6e3" :foreground "#fdf6e3")))))
 
-;; ;; enable tabbar mode
+;;
+;; Hide tabbar buttons
+;;
+(setq tabbar-hide-header-button t)
+(setq tabbar-use-images nil)
+
+(customize-set-variable 'tabbar-scroll-right-button '(("") ""))
+(customize-set-variable 'tabbar-scroll-left-button '(("") ""))
+(customize-set-variable 'tabbar-buffer-home-button '(("") ""))
+
+;; enable tabbar mode
 (tabbar-mode)
