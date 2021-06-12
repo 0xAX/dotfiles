@@ -72,9 +72,9 @@
                             (?\`  . ?\`)))
 
 (cond ((file-directory-p "/usr/share/fonts/fira-code")
-       (set-frame-font "Fira Code-14"))
+       (set-frame-font "Fira Code-13"))
       (t
-       (set-frame-font "Monospace-14")))
+       (set-frame-font "Monospace-13")))
 
 ;; Set fonts
 (custom-set-faces
