@@ -52,6 +52,27 @@
 ;;;;        Load other extensions
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;;
+;; Load straight.el
+;;
+;; https://github.com/raxod502/straight.el
+;;
+(defvar bootstrap-version 5)
+(setq package-enable-at-startup nil)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory)))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+
+;; Install and use packages
+(straight-use-package 'magit)
+
 ;; ui
 (load "~/.emacscore/file-utils.el")
 (load "~/.emacscore/text-utils.el")
@@ -72,7 +93,6 @@
 (load "~/.emacscore/lisp/cmake.el")
 (load "~/.emacscore/term.el")
 (load "~/.emacscore/snippets.el")
-(load "~/.emacscore/vcs/magit.el")
 (yas-reload-all)
 
 ;; do not use tabs for indentation at all
