@@ -28,7 +28,7 @@
 (setq auto-save-list-file-name  nil)
 (setq auto-save-default         nil)
 (setq create-lockfiles          nil)
-(setq user-emacs-directory      "~/.cache/emacs")
+(setq user-emacs-directory      "~/.emacs.d")
 
 ;; set current theme
 (setq current-theme "solarized-emacs")
@@ -83,6 +83,7 @@
 (straight-use-package 'magit)
 (straight-use-package 'markdown-mode)
 (straight-use-package 'pkg-info)
+(straight-use-package 'org-bullets)
 (straight-use-package 'solarized-emacs)
 (straight-use-package 'slime)
 (straight-use-package 'tabbar)
