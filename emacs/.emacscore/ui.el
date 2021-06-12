@@ -13,16 +13,18 @@
                                         (dired-directory dired-directory
                                                          (revert-buffer-function " %b" ("%b – Dir:  " default-directory)))))))
 
+(setq solarized-theme-path
+      (concat user-emacs-directory "/straight/build/solarized-emacs"))
+
 ;; Current theme
 (progn
-  (load "~/.emacs.d/solarized-emacs/solarized-palettes.el")
-  (load "~/.emacs.d/solarized-emacs/solarized-faces.el")
-  (load "~/.emacs.d/solarized-emacs/solarized.el")
-  (load "~/.emacs.d/solarized-emacs/solarized-theme.el")
-  (load "~/.emacs.d/solarized-emacs/solarized-light-theme.el")
+  (load (concat solarized-theme-path "/solarized-palettes.el"))
+  (load (concat solarized-theme-path "/solarized-faces.el"))
+  (load (concat solarized-theme-path "/solarized.el"))
+  (load (concat solarized-theme-path "/solarized-theme.el"))
+  (load (concat solarized-theme-path "/solarized-light-theme.el"))
   (setq x-underline-at-descent-line t)
-  (enable-theme 'solarized-light)
-  (load "~/.emacscore/themes/solarized/tabbar-solarized-light-style.el"))
+  (enable-theme 'solarized-light))
 
 ;; hide scroll bar
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
