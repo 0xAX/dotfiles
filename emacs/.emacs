@@ -71,6 +71,8 @@
   (load bootstrap-file nil 'nomessage))
 
 ;; Install and use packages
+(straight-use-package 'company)
+(straight-use-package 'company-c-headers)
 (straight-use-package 'magit)
 (straight-use-package 'yasnippet)
 (straight-use-package 'yasnippet-snippets)

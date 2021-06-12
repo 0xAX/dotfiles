@@ -1,9 +1,5 @@
 ;;; company.el --- C/C++ for GNU Emacs  -*- lexical-binding: t -*-
 
-;; company mode for autocomplete
-(add-to-list 'load-path "~/.emacs.d/company")
-(add-to-list 'load-path "~/.emacs.d/company-c-headers")
-
 (require 'cc-mode)
 (require 'company)
 
