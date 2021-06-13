@@ -70,7 +70,6 @@
 (setq ivy-use-virtual-buffers t)
 (setq enable-recursive-minibuffers t)
 
-
 ;; Install and use packages
 (straight-use-package 'company)
 (straight-use-package 'company-c-headers)
@@ -86,6 +85,7 @@
 (straight-use-package 'org-bullets)
 (straight-use-package 'solarized-emacs)
 (straight-use-package 'slime)
+(straight-use-package 'slime-company)
 (straight-use-package 'tabbar)
 (straight-use-package 'yaml-mode)
 (straight-use-package 'yasnippet)
@@ -99,6 +99,7 @@
 (load "~/.emacscore/ido.el")
 (load "~/.emacscore/dired.el")
 (load "~/.emacscore/ui.el")
+(load "~/.emacscore/vcs/magit.el")
 
 ;; Development
 (load "~/.emacscore/dev/sed.el")
