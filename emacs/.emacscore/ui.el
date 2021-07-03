@@ -77,8 +77,8 @@
        (set-frame-font "Monospace-13")))
 
 ;; Set fonts
-(custom-set-faces
- '(show-paren-match ((t (:background "#116599" :foreground "white")))))
+;; (custom-set-faces
+;;  '(show-paren-match ((t (:background "#116599" :foreground "white")))))
 
 ;; Navigation
 (windmove-default-keybindings)
