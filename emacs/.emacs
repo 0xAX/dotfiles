@@ -73,19 +73,19 @@
 ;; Install and use packages
 (straight-use-package 'company)
 (straight-use-package 'company-c-headers)
+(straight-use-package 'counsel)
 (straight-use-package 'erlang)
 (straight-use-package 'elixir)
 (straight-use-package 'ivy)
 (straight-use-package 'ivy-posframe)
-(straight-use-package 'counsel)
-(straight-use-package 'swiper)
 (straight-use-package 'magit)
 (straight-use-package 'markdown-mode)
-(straight-use-package 'pkg-info)
 (straight-use-package 'org-bullets)
+(straight-use-package 'pkg-info)
 (straight-use-package 'solarized-emacs)
 (straight-use-package 'slime)
 (straight-use-package 'slime-company)
+(straight-use-package 'swiper)
 (straight-use-package 'tabbar)
 (straight-use-package 'yaml-mode)
 (straight-use-package 'yasnippet)
@@ -129,16 +129,17 @@
 
 ;; finally loaded everything
 (message "All done, %s%s" (user-login-name) ".")
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(show-paren-match ((t (:background "#116599" :foreground "white"))))
- '(tabbar-default ((t (:background "#fdf6e3" :foreground "#eee8d5" :font "Fira Code-12"))))
- '(tabbar-modified ((t (:background "#fdf6e3" :foreground "#d33682"))))
- '(tabbar-selected ((t (:background "#fdf6e3" :foreground "#839496"))))
- '(tabbar-separator ((t (:background "#fdf6e3" :foreground "#fdf6e3"))))
- '(tabbar-unselected ((t (:background "#fdf6e3" :foreground "#93a1a1")))))
+;; (custom-set-faces
+;;  ;; custom-set-faces was added by Custom.
+;;  ;; If you edit it by hand, you could mess it up, so be careful.
+;;  ;; Your init file should contain only one such instance.
+;;  ;; If there is more than one, they won't work right.
+;;  '(show-paren-match ((t (:background "#116599" :foreground "white"))))
+;;  '(tabbar-default ((t (:background "#fdf6e3" :foreground "#eee8d5" :font "Fira Code-12"))))
+;;  '(tabbar-modified ((t (:background "#fdf6e3" :foreground "#d33682"))))
+;;  '(tabbar-selected ((t (:background "#fdf6e3" :foreground "#839496"))))
+;;  '(tabbar-separator ((t (:background "#fdf6e3" :foreground "#fdf6e3"))))
+;;  '(tabbar-unselected ((t (:background "#fdf6e3" :foreground "#93a1a1")))))
 
 (kill-buffer "*straight-process*")
+(kill-buffer "*straight-byte-compilation*")
