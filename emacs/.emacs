@@ -116,6 +116,7 @@
 (load "~/.emacscore/snippets.el")
 (load "~/.emacscore/build/make.el")
 (load "~/.emacscore/markups.el")
+(load "~/.emacscore/dotfiles.el")
 
 ;; load 1 file things
 (load "~/.emacscore/lisp/cmake.el")

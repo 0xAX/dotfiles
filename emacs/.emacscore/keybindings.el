@@ -18,6 +18,7 @@
 (global-unset-key "\C-l")
 (global-unset-key "\C-b")
 (global-unset-key "\C-n")
+(global-unset-key "\C-d")
 
 ;; external applications
 (global-set-key (kbd "C-x f")   'ftp)
@@ -102,3 +103,7 @@
 
 ;; i3 keybindings
 (global-set-key (kbd "<M-tab>") 'switch-to-next-i3-workspace)
+
+;; dotfiles repo
+(global-set-key (kbd "C-d C-u") 'update-dotfiles-repo)
+(global-set-key (kbd "C-d C-s") 'update-dotfiles-system)
