@@ -2,7 +2,7 @@
 
 ;; bash is a standard shell
 (setq explicit-shell-file-name "/bin/bash")
-(setq shell-file-name "bash")
+(setq shell-file-name "/bin/bash")
 (setenv "SHELL" shell-file-name)
 
 (defadvice ansi-term (after advise-ansi-term-coding-system activate)
