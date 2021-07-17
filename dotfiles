@@ -12,7 +12,7 @@ DOTFILES="$HOME/dev/dotfiles"
 case $1 in
 --update-repo)
     # copy .bashrc and related stuff
-    cp -r ~/bin ~/.bash ~/.bashrc ~/.bash_logout ~/.bash_profile "$DOTFILES"/shell
+    cp -r ~/bin ~/.bash ~/.bashrc ~/.bash_logout ~/.bash_profile ~/.xinitrc "$DOTFILES"/shell
 
     # copy emacs directories
     rm -rf *.session
