@@ -1,24 +1,20 @@
 
 #
 # /etc/fstab
-# Created by anaconda on Thu Jul 30 17:06:01 2015
+# Created by anaconda on Wed Apr 19 17:59:21 2017
 #
 # Accessible filesystems, by reference, are maintained under '/dev/disk'
 # See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info
 #
-UUID=943eb4bb-be3f-4252-83e9-2c7345a9bcf4 /                       ext4    defaults,noatime,discard 0 2
-UUID=a78a8ace-7296-470a-9dc5-2a6f2716bb07 /boot                   ext4    defaults,noatime,discard 0 2
-UUID=ba317df3-22a2-43d4-ac23-0766f2efa416 /home                   ext4    defaults,noatime,discard 0 2
+/dev/mapper/fedora-root /                       ext4    defaults,noatime,discard        0 2
+UUID=2983373c-5f00-40a3-b151-eef19b43bca9 /boot         ext4    defaults,noatime,discard        0 2
+/dev/mapper/fedora-home /home                   ext4    defaults,noatime,discard        0 2
+/dev/mapper/fedora-swap swap                    swap    defaults        0 0
 
 /dev/sda1 /home/alex/olddisk ext4 defaults,noatime 0 1
-/dev/sdc1 /home/alex/disk    ext4 defaults,noatime,discard 0 2
+/dev/sdd1 /home/alex/disk    ext4 defaults,noatime,nodiratime 0 2
+/dev/sdc1 /home/alex/disk2   ext4 defaults,noatime,nodiratime 0 2
 
-tmpfs /var/cache/apt/archives      tmpfs defaults 0 0
 tmpfs /tmp                         tmpfs defaults 0 0
 tmpfs /var/tmp                     tmpfs defaults 0 0
-tmpfs /var/spool/postfix  	   tmpfs defaults 0 0
-tmpfs /var/log                     tmpfs defaults,noatime,mode=0755 0 0
-tmpfs /dev/shm                     tmpfs defaults,size=20% 0 0
-tmpfs /var/spool                   tmpfs defaults,noatime,mode=1777 0 0
 tmpfs /home/alex/.cache            tmpfs defaults,noatime,mode=1777 0 0
-tmpfs /var/lib/mysql_tmp           tmpfs defaults,rw,gid=27,uid=27,size=200M,noatime,mode=0750 0 0
