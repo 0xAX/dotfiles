@@ -2,9 +2,11 @@
 
 # Get the aliases and functions
 if [ -f ~/.bashrc ]; then
-	. ~/.bashrc
+    . ~/.bashrc
 fi
 
-
-# opam configuration
-test -r /home/alex/.opam/opam-init/init.sh && . /home/alex/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
+# Start i3
+if [[ -z $DISPLAY && $XDG_VTNR -eq 2 ]]
+then
+    exec startx
+fi

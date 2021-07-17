@@ -21,9 +21,28 @@ sudo systemctl disable lvm2-lvmetad.service
 sudo systemctl disable lvm2-lvmetad.socket
 sudo systemctl disable lvm2-lvmpolld.service
 sudo systemctl disable lvm2-lvmpolld.socket
-sudo systemctl disable upower.service 
 sudo systemctl disable mcelog.service
 sudo systemctl disable packagekit.service
 sudo systemctl disable ModemManager.service
-echo "Done"
+sudo systemctl disable rpcbind.socket
+sudo systemctl disable rpcbind.target
+sudo systemctl disable rpc_pipefs.target
+sudo systemctl disable rpc-statd.service
+sudo systemctl disable rpc-statd-notify.service
+sudo systemctl disable gssproxy
+sudo systemctl disable packagekit.service
+sudo systemctl disable colord.service
+sudo systemctl disable switcheroo-control.service
+sudo systemctl disable accounts-daemon.service
+
+batteries=$(ls -a /sys/class/power_supply/ | wc -l)
+if [[ $(batteries) -eq 2 ]];
+then
+    sudo systemctl disable upower.service
+else
+    # Disable everything that is not at laptop
+    sudo systemctl disable wpa_supplicant.service
+    sudo systemctl disable gdm
+fi
+
 exit 0
