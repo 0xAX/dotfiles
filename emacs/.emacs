@@ -79,6 +79,7 @@
 (straight-use-package 'ivy)
 (straight-use-package 'ivy-posframe)
 (straight-use-package 'magit)
+(straight-use-package 'merlin)
 (straight-use-package 'markdown-mode)
 (straight-use-package 'org-bullets)
 (straight-use-package 'pkg-info)
@@ -87,6 +88,7 @@
 (straight-use-package 'slime-company)
 (straight-use-package 'swiper)
 (straight-use-package 'tabbar)
+(straight-use-package 'tuareg)
 (straight-use-package 'yaml-mode)
 (straight-use-package 'yasnippet)
 (straight-use-package 'yasnippet-snippets)
@@ -110,6 +112,7 @@
 (load "~/.emacscore/dev/company.el")
 (load "~/.emacscore/dev/c.el")
 (load "~/.emacscore/dev/common-lisp.el")
+(load "~/.emacscore/dev/ocaml.el")
 
 ;; Load miscellaneous things
 (load "~/.emacscore/term.el")
