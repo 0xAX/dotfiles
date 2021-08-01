@@ -83,6 +83,7 @@
 (straight-use-package 'markdown-mode)
 (straight-use-package 'org-bullets)
 (straight-use-package 'pkg-info)
+(straight-use-package 'rust-mode)
 (straight-use-package 'solarized-emacs)
 (straight-use-package 'slime)
 (straight-use-package 'slime-company)
