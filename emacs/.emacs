@@ -88,7 +88,6 @@
 (straight-use-package 'slime-company)
 (straight-use-package 'swiper)
 (straight-use-package 'tabbar)
-(straight-use-package 'tuareg)
 (straight-use-package 'yaml-mode)
 (straight-use-package 'yasnippet)
 (straight-use-package 'yasnippet-snippets)
@@ -112,7 +111,6 @@
 (load "~/.emacscore/dev/company.el")
 (load "~/.emacscore/dev/c.el")
 (load "~/.emacscore/dev/common-lisp.el")
-(load "~/.emacscore/dev/ocaml.el")
 
 ;; Load miscellaneous things
 (load "~/.emacscore/term.el")
