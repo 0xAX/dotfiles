@@ -79,7 +79,6 @@
 (straight-use-package 'ivy)
 (straight-use-package 'ivy-posframe)
 (straight-use-package 'magit)
-(straight-use-package 'merlin)
 (straight-use-package 'markdown-mode)
 (straight-use-package 'org-bullets)
 (straight-use-package 'pkg-info)
