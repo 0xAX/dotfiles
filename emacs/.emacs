@@ -71,6 +71,7 @@
 (setq enable-recursive-minibuffers t)
 
 ;; Install and use packages
+(straight-use-package 'asn1-mode)
 (straight-use-package 'company)
 (straight-use-package 'company-c-headers)
 (straight-use-package 'counsel)
