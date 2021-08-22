@@ -7,7 +7,7 @@
 
 ;; Configure snippets directories
 (setq yas-snippet-dirs
-      '(straight-yas-dir ".emacscore/snippets"))
+      '(straight-yas-dir "~/.emacscore/snippets"))
 
 ;; Enable yas for all
 (yas-reload-all)
