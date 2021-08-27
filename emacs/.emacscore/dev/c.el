@@ -9,9 +9,6 @@
                         (awk-mode  . "awk")
 			(cc-mode   . "linux")
                         (other     . "linux")))
-;;(setq c-default-style "bsd")
-;;(setq-default tab-width 8 indent-tabs-mode t)
-;;(define-key c-mode-base-map (kbd "RET") 'newline-and-indent)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; For linux kernel
