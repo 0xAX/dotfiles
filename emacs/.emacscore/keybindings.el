@@ -30,6 +30,7 @@
 (global-set-key (kbd "C-x p")   'ping)
 (global-set-key (kbd "C-x l")   'list-colors-display)
 (global-set-key (kbd "C-x m")   'woman)
+(global-set-key (kbd "C-x e")   'eshell)
 
 ;; Text manipulation
 (global-set-key "\C-a" 'mark-page)
