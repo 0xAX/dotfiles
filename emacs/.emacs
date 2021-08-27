@@ -79,6 +79,7 @@
 (straight-use-package 'elixir)
 (straight-use-package 'ivy)
 (straight-use-package 'ivy-posframe)
+(straight-use-package 'ggtags)
 (straight-use-package 'magit)
 (straight-use-package 'markdown-mode)
 (straight-use-package 'org-bullets)
