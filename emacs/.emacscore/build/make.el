@@ -2,17 +2,12 @@
 
 (require 'make-mode)
 
-(defconst makefile-nmake-statements
-  `("!IF" "!ELSEIF" "!ELSE" "!ENDIF" "!MESSAGE" "!ERROR" "!INCLUDE" ,@makefile-statements)
-  "List of keywords understood by nmake.")
-
-(defconst makefile-nmake-font-lock-keywords
-  (makefile-make-font-lock-keywords
-   makefile-var-use-regex
-   makefile-nmake-statements
-t))
-
-(define-derived-mode makefile-nmake-mode makefile-mode "nMakefile"
-  "An adapted `makefile-mode' that knows about nmake."
-  (setq font-lock-defaults
-    `(makefile-nmake-font-lock-keywords ,@(cdr font-lock-defaults))))
+;; special hook to fix cua-mode in makefiles
+;;
+;; NOTE: not really sure why but when I am openning Makefile/GNUMakefile
+;; in my GNU Emacs - Cua mode is broken by some reasons. Re-enabling
+;; helps to fix it.
+(add-hook 'makefile-mode-hook
+          (lambda () (progn
+                       (cua-mode nil)
+                       (cua-mode t))))
