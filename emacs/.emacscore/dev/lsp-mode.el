@@ -29,3 +29,11 @@
 (add-hook 'lsp-ui-doc-frame-hook
           (lambda (frame _w)
             (set-face-attribute 'default frame :font "Firacode" :height 150)))
+
+(setq lsp-ui-doc-header t)
+(setq lsp-ui-doc-show-with-cursor t)
+(setq lsp-ui-doc-include-signature t)
+(setq lsp-ui-doc-use-childframe t)
+
+;; TODO lsp-ui-doc-focus-frame
+;; TODO lsp-ui-doc-unfocus-frame

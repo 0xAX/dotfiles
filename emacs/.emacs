@@ -75,6 +75,7 @@
 (straight-use-package 'company)
 (straight-use-package 'company-c-headers)
 (straight-use-package 'counsel)
+(straight-use-package 'eglot)
 (straight-use-package 'erlang)
 (straight-use-package 'elixir)
 (straight-use-package 'ivy)
