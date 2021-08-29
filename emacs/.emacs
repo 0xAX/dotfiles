@@ -80,6 +80,9 @@
 (straight-use-package 'ivy)
 (straight-use-package 'ivy-posframe)
 (straight-use-package 'ggtags)
+(straight-use-package 'lsp-mode)
+(straight-use-package 'lsp-ui)
+(straight-use-package 'lsp-treemacs)
 (straight-use-package 'magit)
 (straight-use-package 'markdown-mode)
 (straight-use-package 'org-bullets)
@@ -95,6 +98,7 @@
 (straight-use-package 'yasnippet-snippets)
 
 ;; ui
+(load "~/.emacscore/system.el")
 (load "~/.emacscore/file-utils.el")
 (load "~/.emacscore/text-utils.el")
 (load "~/.emacscore/keybindings.el")
@@ -105,6 +109,7 @@
 (load "~/.emacscore/vcs/magit.el")
 
 ;; Development
+(load "~/.emacscore/dev/lsp-mode.el")
 (load "~/.emacscore/dev/sed.el")
 (load "~/.emacscore/dev/shell.el")
 (load "~/.emacscore/dev/elisp.el")
@@ -129,21 +134,14 @@
 (setq-default indent-tabs-mode nil)
 
 ;; supress all deprecation warnings
-(setq warning-minimum-level :emergency)
+(setq warning-minimum-level -1)
+
+
+;; kill unneded buffers
+(when (get-buffer "*straight-process*")
+  (kill-buffer "*straight-process*"))
+(when (get-buffer "*straight-byte-compilation*")
+  (kill-buffer "*straight-byte-compilation*"))
 
 ;; finally loaded everything
 (message "All done, %s%s" (user-login-name) ".")
-;; (custom-set-faces
-;;  ;; custom-set-faces was added by Custom.
-;;  ;; If you edit it by hand, you could mess it up, so be careful.
-;;  ;; Your init file should contain only one such instance.
-;;  ;; If there is more than one, they won't work right.
-;;  '(show-paren-match ((t (:background "#116599" :foreground "white"))))
-;;  '(tabbar-default ((t (:background "#fdf6e3" :foreground "#eee8d5" :font "Fira Code-12"))))
-;;  '(tabbar-modified ((t (:background "#fdf6e3" :foreground "#d33682"))))
-;;  '(tabbar-selected ((t (:background "#fdf6e3" :foreground "#839496"))))
-;;  '(tabbar-separator ((t (:background "#fdf6e3" :foreground "#fdf6e3"))))
-;;  '(tabbar-unselected ((t (:background "#fdf6e3" :foreground "#93a1a1")))))
-
-(kill-buffer "*straight-process*")
-(kill-buffer "*straight-byte-compilation*")
