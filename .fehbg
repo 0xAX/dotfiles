@@ -1,0 +1,3 @@
+#!/bin/sh
+
+/usr/bin/feh --no-fehbg --bg-scale '/home/alex/dev/dotfiles/wallpapers/solarized-dark-wallpaper.jpg' 
