@@ -1,0 +1,21 @@
+#!/bin/bash
+
+if ! command -v op &> /dev/null
+then
+    echo "Error: op command not found" 1>&2
+    exit 1
+fi
+
+if ! command -v neomutt &> /dev/null
+then
+    echo "Error: neomutt command not found" 1>&2
+    exit 1
+fi
+
+token=$(op signin --raw)
+export OP_SESSION_my="$token"
+eval $(op signin my)
+
+neomutt -F /home/alex/.neomutrc
+
+exit 0;
