@@ -1,0 +1,159 @@
+#
+# Generic settings
+#
+set realname="Alexander Kuleshov"
+set from="kuleshovmail@gmail.com"
+
+set sleep_time=0
+set beep=no
+set editor = emacs
+set sort = threads
+set sort_aux = last-date-received
+set index_format = "%4C %Z %{%b %d %R} %-15.15L (%?l?%4l&%4c?) %s"
+set sidebar_visible
+set sidebar_format=" %B%* %F:%N:%S"
+set mail_check_stats
+set delete = yes
+set reply_to = yes
+set reverse_name =  yes
+set fast_reply = yes
+set forward_quote = yes
+set menu_scroll = yes
+set include = yes
+set quit = yes
+set help = yes
+set mail_check = 240
+set pager_index_lines = 5
+set use_from = yes
+set attribution = "On %d, %n wrote:"
+set charset = "utf8"
+set metoo = yes
+set sort_alias = alias
+set askcc = yes
+set alias_file = "~/.mutt/.mutt-alias"
+
+#
+# Generic headers
+#
+my_hdr X-Operating-System: `uname`
+my_hdr X-UTC-Date: `date -u`
+my_hdr X-Date: `date`
+
+#
+# Generic network settings
+#
+set connect_timeout=30
+set imap_keepalive=30
+set timeout=600
+set imap_idle=yes
+unset imap_passive
+unset suspend
+
+#
+# Generic mailbox configuration
+#
+set mbox_type=Maildir
+set folder="imaps://imap.gmail.com:993"
+set spoolfile="+INBOX"
+set record="+[Gmail]/Sent Mail"
+set postponed="+[Gmail]/Drafts"
+
+#
+# Imap configuration
+#
+set imap_user="kuleshovmail@gmail.com"
+set imap_pass=`op get item qvmlw4o5342mdtofsdpxaorvdi | jq '.details.password'`
+mailboxes =INBOX =[Gmail]/Sent\ Mail =[Gmail]/Drafts =[Gmail]/Spam =[Gmail]/Trash
+mailboxes =Elixir =Emacs =Erlang =Github-Repos =ImportantMail =Interesting
+mailboxes =Kernel =MySQL =NetBSD =OpenBSD =Travelping =xerions
+set sidebar_delim_chars="/"
+
+#
+# SMTP configuration
+#
+set smtp_url="smtps://kuleshovmail@gmail.com@smtp.gmail.com:465/"
+set smtp_pass=`op get item qvmlw4o5342mdtofsdpxaorvdi | jq '.details.password'`
+
+#
+# Keybindings
+#
+bind generic <up>     previous-entry
+bind generic <down>   next-entry
+bind pager   <up>     previous-line
+bind pager   <down>   next-line
+bind pager       g       top
+bind pager       G       bottom
+bind index,pager R       group-reply
+bind index,pager Q       quit
+
+# sidebar keybindings
+bind index,pager <C-Up> sidebar-prev
+bind index,pager <C-Down> sidebar-next
+bind index,pager <C-Right> sidebar-open
+bind index,pager o sidebar-open
+
+#
+# headers order
+#
+ignore *
+unhdr_order *
+unignore  Date: From: Reply-To: Mail-Followup-To: To: Cc: Subject:
+hdr_order From: To: Cc: Subject: Date: Reply-To:
+
+#
+# header colors
+#
+color header yellow default "^(From|To|Reply-to|Cc|Subject|Date):"
+
+#
+# Sidebar colors
+#
+color sidebar_indicator default color237         # Dark blue background
+color sidebar_highlight default color237        # Grey background
+
+#
+# Default color definitions
+#
+color normal     color6        default
+color quoted     color208      default
+color quoted1    color208      default
+color quoted2    color208      default
+color quoted3    color208      default
+color quoted4    color208      default
+
+# deleted message
+color index red default "~D"
+# related to me
+color index green default "~F"
+
+# status line
+set status_format="-%r-Mutt: [Msgs:%?M?%M/?%m%?n? New:%n?%?d? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p? Inc:%b?]---[%s]-%>------------------[%h]-
+
+#
+# Urls
+#
+color body green default "(http|https|ftp|news|telnet|finger)://[^ \"\t\r\n]*"
+color body green default "[-a-z_0-9.%$]+@[-a-z_0-9.]+\\.[-a-z][-a-z]+"
+mono body bold "(http|https|ftp|news|telnet|finger)://[^ \"\t\r\n]*"
+
+#
+# patch
+#
+color body color39 default "^diff --git.*"
+color body color39 default "^index [a-f0-9].*"
+color body color242 default "^\-\-\- .*"
+color body color242 default "^[\+]{3} .*"
+color body brightblue default "^@@.*"
+color body color40 default "^[\+][^\+]+.*"
+color body red  default "^\-[^\-]+.*"
+
+#
+# index colors
+#
+set date_format="%m-%d-%y"
+set index_format="%2C |%Z| %d %-30.30F %s"
+set quote_regexp="^( {0,4}[>|:#]| {0,4}[a-z0-9]+[>|]+)+"
+
+# TODO
+# gpg
+# multiple accounts
