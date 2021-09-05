@@ -1,3 +1,6 @@
 #!/usr/bin/env bash
 
-exec i3
+if [ "$WM" = "i3" ]
+then
+    exec i3
+fi

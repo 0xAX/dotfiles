@@ -66,6 +66,9 @@ export TAR=tar
 # terminal for i3
 export TERMINAL="terminator"
 
+# Default wm
+export WM="i3"
+
 # check a given command in hash at first
 shopt -s checkhash
 # check LINES and COLUMNS after every command
