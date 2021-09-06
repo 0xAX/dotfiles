@@ -1,3 +1,5 @@
+;;; i3.el --- Do not conflict with WM keybindings  -*- lexical-binding: t -*-
+
 ;; exit from i3 passthrough mode on exit
 (add-hook 'kill-emacs-hook
           (lambda ()
@@ -29,6 +31,6 @@
   (shell-command-to-string "i3-msg workspace next"))
 
 ;;
-;; go to the default namespace
+;; go to the default namespace if we'are in emacs window
 ;;
 (i3-switch-workspace "2")
