@@ -66,11 +66,7 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
-(setq ivy-use-virtual-buffers t)
-(setq enable-recursive-minibuffers t)
-
 ;; Install and use packages
-(straight-use-package 'asn1-mode)
 (straight-use-package 'company)
 (straight-use-package 'company-c-headers)
 (straight-use-package 'counsel)
@@ -78,7 +74,6 @@
 (straight-use-package 'elixir)
 (straight-use-package 'ivy)
 (straight-use-package 'ivy-posframe)
-(straight-use-package 'ggtags)
 (straight-use-package 'lsp-mode)
 (straight-use-package 'lsp-ui)
 (straight-use-package 'lsp-treemacs)
