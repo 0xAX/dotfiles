@@ -128,7 +128,6 @@
 ;; supress all deprecation warnings
 (setq warning-minimum-level -1)
 
-
 ;; kill unneded buffers
 (when (get-buffer "*straight-process*")
   (kill-buffer "*straight-process*"))
