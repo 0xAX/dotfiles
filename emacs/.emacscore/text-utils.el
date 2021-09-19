@@ -7,7 +7,6 @@
   (cua-set-mark)
   (end-of-line))
 
-;; replace all
 (defun replace-all (find replace)
   "Find & Replace all"
   (interactive
@@ -20,7 +19,6 @@
   (goto-char cursor-position)
   (message "done"))
 
-;; kill full line
 (defun kill-full-line()
   "Kill line from the beginnig of line"  
   (interactive)
