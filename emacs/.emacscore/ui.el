@@ -13,10 +13,7 @@
                                         (dired-directory dired-directory
                                                          (revert-buffer-function " %b" ("%b – Dir:  " default-directory)))))))
 
-;; allow recursive command execution
-(setq enable-recursive-minibuffers t)
-
-;; set path to solarized them
+;; set path to solarized theme
 (setq solarized-theme-path
       (concat user-emacs-directory "/straight/build/solarized-emacs"))
 
