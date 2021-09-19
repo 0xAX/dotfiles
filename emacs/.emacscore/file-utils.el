@@ -1,7 +1,7 @@
 ;;; utils.el --- Auxiliary functions for GNU Emacs  -*- lexical-binding: t -*-
 
 (defun reload-file ()
-  "reload a file in the current buffer"  
+  "Reload a file in the current buffer"
   (interactive)
   (find-alternate-file (buffer-file-name)))
 
