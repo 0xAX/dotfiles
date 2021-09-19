@@ -19,7 +19,7 @@
           (set-visited-file-name new-name t t)))))))
 
 (defun delete-this-buffer-and-file ()
-  "Remove file connected to current buffer and kill buffer."  
+  "Remove file connected to current buffer and kill buffer."
   (interactive)
   (let ((filename (buffer-file-name))
         (buffer (current-buffer))
