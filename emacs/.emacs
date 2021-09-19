@@ -30,9 +30,6 @@
 (setq create-lockfiles          nil)
 (setq user-emacs-directory      "~/.emacs.d")
 
-;; set current theme
-(setq current-theme "solarized-emacs")
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;        Package manager
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -40,9 +37,10 @@
 (setq package-check-signature 'nil)
 (setq package-check-signature nil)
 (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
-(setq package-archives '(("melpa" . "https://melpa.org/packages/")
-                         ("elpa" . "https://elpa.gnu.org/packages/")))
-(package-initialize)
+(add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+(if (version< emacs-version "27.0")
+    (package-initialize))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;        Load other extensions
@@ -129,6 +127,7 @@
 
 ;; supress all deprecation warnings
 (setq warning-minimum-level -1)
+
 
 ;; kill unneded buffers
 (when (get-buffer "*straight-process*")
