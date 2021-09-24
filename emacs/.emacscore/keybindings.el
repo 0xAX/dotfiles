@@ -22,7 +22,7 @@
 
 ;; external applications
 (global-set-key (kbd "C-x f")   'ftp)
-(global-set-key (kbd "C-x t")   'telnet)
+(global-set-key (kbd "C-x t")   'todo)
 (global-set-key (kbd "C-x g")   'gdb)
 (global-set-key (kbd "C-x RET") 'calc)
 (global-set-key (kbd "C-x y")   'calendar)

@@ -5,38 +5,66 @@
 ;; enable org-mode for *.org files
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 
-;; unset some keybindings, to make it more accustomed
+;; Enable auto-search in org-mode so any non-standard keypress in C-x C-j
+;; mode will lead to search according to pressed keys
+(setq org-goto-auto-isearch t)
+
+;; First of all unset some keybindings
 (add-hook 'org-mode-hook
           '(lambda ()
-             (define-key org-mode-map [(control tab)] nil)))
+             (define-key org-mode-map [(control tab)] nil)
+             (define-key org-mode-map [(control k)] nil)
+             (define-key org-mode-map [(control a)] nil)
+             ;; used for switching between left/right windows
+             (define-key org-mode-map [(shift left)] nil)
+             (define-key org-mode-map [(shift right)] nil)
+             ;; used for switching between up/down windows
+             (define-key org-mode-map [(shift down)] nil)
+             (define-key org-mode-map [(shift up)] nil)
+             ;; execute source code inside org-mode documents
+             (define-key org-mode-map (kbd "C-x e") 'org-execute-block)
+             (define-key org-mode-map (kbd "C-x C-e") 'org-execute-block)))
 
-(add-hook 'org-mode-hook
-          '(lambda ()
-             (define-key org-mode-map [(control a)] nil)))
+;; Enable support for org-tables everywhere
+(add-hook 'message-mode-hook 'turn-on-orgtbl)
+;; Disable linum mode for org-mode as it looks ugly there
+(add-hook 'org-mode-hook '(lambda () (linum-mode -1)))
 
-(add-hook 'org-mode-hook
-          '(lambda ()
-             (define-key org-mode-map [(control k)] nil)))
-
-;; set of TODO keywords highligted in org-mode
-(setq org-todo-keywords
-      '(
-        (sequence "TODO" "IN-PROGRESS" "WAITING" "RESEARCH" "NEED-TESTS" "DONE")))
-
-(defun todo()
-  "Open TODO directory"
+(defun help/org-2every-src-block (fn)
+  "Visit every Source-Block and evaluate `FN'."
   (interactive)
-  (dired org-directory))
+  (save-excursion
+    (goto-char (point-min))
+    (let ((case-fold-search t))
+      (while (re-search-forward (concat help/org-special-pre "BEGIN_SRC") nil t)
+        (let ((element (org-element-at-point)))
+          (when (eq (org-element-type element) 'src-block)
+            (funcall fn element)))))
+    (save-buffer)))
 
-(custom-set-faces
-  '(org-level-1 ((t (:inherit outline-1 :height 0.999))))
-  '(org-level-2 ((t (:inherit outline-2 :height 0.8))))
-  '(org-level-3 ((t (:inherit outline-3 :height 0.799))))
-  '(org-level-4 ((t (:inherit outline-4 :height 0.777))))
-  '(org-level-5 ((t (:inherit outline-5 :height 1.0))))
-)
+(defun help/org-2every-src-block ()
+  (interactive)
+  (goto-char (point-min))
+  (while (re-search-forward "RESULTS" nil t)
+    (org-babel-remove-result-one-or-many t))
+  (save-buffer))
 
-(require 'org-bullets)
-(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
-;; (setq org-ellipsis " …")
-;; (setq org-bullets-bullet-list '("•"))
+;; (define-key org-mode-map (kbd "s-]") (lambda () (interactive)
+;;                                        (help/org-2every-src-block
+;;                                         'org-babel-remove-result)))
+
+
+;;(add-hook 'kill-buffer-hook 'help/org-2every-src-block)
+
+;; (add-hook
+;;  'kill-buffer-hook
+;;  '(lambda () (when (string= (symbol-name major-mode) "org-mode")
+;;                (progn
+;;                  (message "Close file")
+;;                  (save-buffer)
+;;                  (org-babel-remove-result-one-or-many t)))))
+
+;; load additional org-mode helpers
+(load "~/.emacscore/org/org-api.el")
+(load "~/.emacscore/org/org-babel.el")
+(load "~/.emacscore/org/org-ui.el")

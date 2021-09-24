@@ -5,7 +5,10 @@
     ((i3-socket (shell-command-to-string "i3 --get-socketpath"))
      (i3 (file-exists-p (replace-regexp-in-string "\n$" "" i3-socket))))
   (if i3
-      (load "~/.emacscore/desktop/i3.el")))
+      (progn
+        (load "~/.emacscore/desktop/i3.el")
+        (setq *i3* "true"))
+    (setq *i3* "false")))
 
 ;; do not save sessions
 (desktop-save-mode 0)
@@ -70,6 +73,7 @@
 (straight-use-package 'counsel)
 (straight-use-package 'erlang)
 (straight-use-package 'elixir)
+(straight-use-package 'material-theme)
 (straight-use-package 'ivy)
 (straight-use-package 'ivy-posframe)
 (straight-use-package 'lsp-mode)
@@ -77,6 +81,8 @@
 (straight-use-package 'lsp-treemacs)
 (straight-use-package 'magit)
 (straight-use-package 'markdown-mode)
+(straight-use-package 'latex-math-preview) ;; https://gitlab.com/latex-math-preview/latex-math-preview
+(straight-use-package 'leuven-theme)
 (straight-use-package 'org-bullets)
 (straight-use-package 'pkg-info)
 (straight-use-package 'rust-mode)
