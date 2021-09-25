@@ -31,10 +31,12 @@
           (beginning-of-line)
           (next-line)
           (next-line)
-          (cua-paste 1)))))
+          (insert "\n#+RESULTS:\n:RESULTS:")
+          (cua-paste 1)
+          (insert "\n:END:")))))
    (t (progn
         (shell-command-to-string "i3-msg mode default")
-        (org-babel-execute-src-block) ))))
+        (org-babel-execute-src-block)))))
 
 ;; List of langauges supported by babel
 (org-babel-do-load-languages

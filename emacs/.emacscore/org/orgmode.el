@@ -30,39 +30,20 @@
 ;; Disable linum mode for org-mode as it looks ugly there
 (add-hook 'org-mode-hook '(lambda () (linum-mode -1)))
 
-(defun help/org-2every-src-block (fn)
-  "Visit every Source-Block and evaluate `FN'."
+(defun org-remove-all-results-blocks ()
+  "Go through the org buffer and remove all RESULTS"
   (interactive)
-  (save-excursion
-    (goto-char (point-min))
-    (let ((case-fold-search t))
-      (while (re-search-forward (concat help/org-special-pre "BEGIN_SRC") nil t)
-        (let ((element (org-element-at-point)))
-          (when (eq (org-element-type element) 'src-block)
-            (funcall fn element)))))
-    (save-buffer)))
+  (when (string= (symbol-name major-mode) "org-mode")
+    (progn
+      (goto-char (point-min))
+      (while (re-search-forward "RESULTS" nil t)
+        (org-babel-remove-result-one-or-many t))
+      (setq buffer-save-without-query t)
+      (save-buffer)
+      (setq buffer-save-without-query nil))))
 
-(defun help/org-2every-src-block ()
-  (interactive)
-  (goto-char (point-min))
-  (while (re-search-forward "RESULTS" nil t)
-    (org-babel-remove-result-one-or-many t))
-  (save-buffer))
-
-;; (define-key org-mode-map (kbd "s-]") (lambda () (interactive)
-;;                                        (help/org-2every-src-block
-;;                                         'org-babel-remove-result)))
-
-
-;;(add-hook 'kill-buffer-hook 'help/org-2every-src-block)
-
-;; (add-hook
-;;  'kill-buffer-hook
-;;  '(lambda () (when (string= (symbol-name major-mode) "org-mode")
-;;                (progn
-;;                  (message "Close file")
-;;                  (save-buffer)
-;;                  (org-babel-remove-result-one-or-many t)))))
+;; remove results from org-mode buffers before exit
+(add-hook 'kill-buffer-hook 'org-remove-all-results-blocks)
 
 ;; load additional org-mode helpers
 (load "~/.emacscore/org/org-api.el")
