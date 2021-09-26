@@ -30,4 +30,7 @@
 
 ;; use org-bullets to pretify org-mode documents
 (require 'org-bullets)
-(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+(add-hook 'org-mode-hook
+          (lambda () (progn
+                       (electric-indent-mode -1)
+                       (org-bullets-mode 1))))
