@@ -43,7 +43,7 @@
       (setq buffer-save-without-query nil))))
 
 ;; remove results from org-mode buffers before exit
-(add-hook 'kill-buffer-hook 'org-remove-all-results-blocks)
+;; (add-hook 'kill-buffer-hook 'org-remove-all-results-blocks)
 
 ;; load additional org-mode helpers
 (load "~/.emacscore/org/org-api.el")
