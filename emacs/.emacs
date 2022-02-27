@@ -68,9 +68,11 @@
   (load bootstrap-file nil 'nomessage))
 
 ;; Install and use packages
+(straight-use-package 'bison-mode)
 (straight-use-package 'company)
 (straight-use-package 'company-c-headers)
 (straight-use-package 'counsel)
+(straight-use-package 'go-mode)
 (straight-use-package 'erlang)
 (straight-use-package 'elixir)
 (straight-use-package 'material-theme)

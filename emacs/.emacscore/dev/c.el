@@ -8,4 +8,4 @@
 (setq c-basic-offset 4)
 
 ;; add lsp-mode for C
-(add-hook 'c-mode-hook 'lsp)
+;;(add-hook 'c-mode-hook 'lsp)

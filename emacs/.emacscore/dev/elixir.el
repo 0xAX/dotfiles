@@ -3,9 +3,9 @@
 (require 'elixir-mode)
 
 ;; add lsp-mode for elixir-mode
-(add-hook 'elixir-mode-hook 'lsp)
+;;(add-hook 'elixir-mode-hook 'lsp)
 
-(setq lsp-elixir-local-server-command "/home/alex/dev/elixir-ls/release/language_server.sh")
-(setq lsp-elixir-dialyzer-enabled t)
-(setq lsp-elixir-fetch-deps t)
-(setq lsp-elixir-mix-env "test")
+;; (setq lsp-elixir-local-server-command "/home/alex/dev/elixir-ls/release/language_server.sh")
+;; (setq lsp-elixir-dialyzer-enabled t)
+;; (setq lsp-elixir-fetch-deps t)
+;; (setq lsp-elixir-mix-env "test")

@@ -124,7 +124,7 @@ alias ercdf-start="rebar3 shell --config config/ercdf.config"
 alias i3-restart="i3-msg restart"
 
 # erlang dev
-alias runerl="BINDIR=/home/alex/dev/otp/bin/x86_64-pc-linux-gnu ./bin/x86_64-pc-linux-gnu/erlexec"
+alias runerl="BINDIR=/home/alex/disk/dev/otp/bin/x86_64-pc-linux-gnu ./bin/x86_64-pc-linux-gnu/erlexec"
 alias builderl="cd /home/alex/dev/otp && ./otp_build all"
 alias otp_23_activate=". /home/alex/dev/otp-23/activate"
 alias otp_24_activate=". /home/alex/dev/otp-24/activate"
