@@ -36,13 +36,12 @@
 (setq lsp-ui-doc-include-signature t)
 (setq lsp-ui-doc-use-childframe t)
 
-  (setq lsp-file-watch-ignored
-        '(".idea" ".ensime_cache" ".eunit" "node_modules"
-          ".git" ".hg" ".fslckout" "_FOSSIL_"
-          ".bzr" "_darcs" ".tox" ".svn" ".stack-work" "vendor" "doc"
-          "build" "_build" "deps" "postgres-data" "dia" "/home/alex/work/tposs/src")
-        )
-
+(setq lsp-file-watch-ignored
+      '(".idea" ".ensime_cache" ".eunit" "node_modules"
+        ".git" ".hg" ".fslckout" "_FOSSIL_"
+        ".bzr" "_darcs" ".tox" ".svn" ".stack-work" "vendor" "doc"
+        "build" "_build" "deps" "postgres-data" "dia" "/home/alex/work/tposs/src")
+      )
 
 ;; TODO lsp-ui-doc-focus-frame
 ;; TODO lsp-ui-doc-unfocus-frame
