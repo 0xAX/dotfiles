@@ -23,7 +23,12 @@
    (set-frame-height  5)
    (erlang-shell))
 
-(setq erlang-indent-level 4)
+(setq erlang-mode-hook
+    (function (lambda ()
+		(setq indent-tabs-mode t)
+		(setq tab-width 8)
+		(setq c-indent-level 4)
+		(linum-mode 1))))
 
 (add-hook 'erlang-mode-hook 'my-erlang-mode-hook)
 (require 'erlang-start)
