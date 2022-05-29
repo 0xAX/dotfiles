@@ -81,6 +81,7 @@
 (straight-use-package 'lsp-mode)
 (straight-use-package 'lsp-ui)
 (straight-use-package 'lsp-treemacs)
+(straight-use-package 'lua-mode)
 (straight-use-package 'magit)
 (straight-use-package 'markdown-mode)
 (straight-use-package 'latex-math-preview) ;; https://gitlab.com/latex-math-preview/latex-math-preview
