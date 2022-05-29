@@ -9,5 +9,6 @@
 
 (setq tab-width 8)
 (setq c-basic-offset 8)
+
 ;; add lsp-mode for C
-;;(add-hook 'c-mode-hook 'lsp)
+(add-hook 'c-mode-hook 'lsp)

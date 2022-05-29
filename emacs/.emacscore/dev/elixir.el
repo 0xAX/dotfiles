@@ -2,10 +2,13 @@
 
 (require 'elixir-mode)
 
-;; add lsp-mode for elixir-mode
-;;(add-hook 'elixir-mode-hook 'lsp)
+(setq lsp-elixir-script-path
+      "/home/alex/dev/elixir-ls/release/language_server.sh")
 
-;; (setq lsp-elixir-local-server-command "/home/alex/dev/elixir-ls/release/language_server.sh")
-;; (setq lsp-elixir-dialyzer-enabled t)
-;; (setq lsp-elixir-fetch-deps t)
-;; (setq lsp-elixir-mix-env "test")
+(when (file-exists-p lsp-elixir-script-path)
+  (add-hook 'elixir-mode-hook 'lsp)
+  (setq lsp-elixir-local-server-command
+        lsp-elixir-script-path)
+  (setq lsp-elixir-dialyzer-enabled t)
+  (setq lsp-elixir-fetch-deps t)
+  (setq lsp-elixir-mix-env "test"))
