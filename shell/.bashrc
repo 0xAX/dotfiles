@@ -138,3 +138,4 @@ NO_AT_BRIDGE=1
 
 # Fix gpg without gdb and other Gnome things
 export GPG_TTY=$(tty)
+. "$HOME/.cargo/env"

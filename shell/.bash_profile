@@ -13,3 +13,4 @@ fi
 
 eval `ssh-agent -s`
 eval `gpg-agent --daemon`
+. "$HOME/.cargo/env"
