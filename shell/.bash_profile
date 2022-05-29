@@ -11,6 +11,16 @@ then
     exec startx
 fi
 
-eval `ssh-agent -s`
-eval `gpg-agent --daemon`
-. "$HOME/.cargo/env"
+# start ssh agent if it is not
+SSH_AGENT_PID=$(pidof ssh-agent)
+if [ -z "$SSH_AGENT_PID" ];
+then
+    eval `ssh-agent -s`
+fi
+
+# start gpg agent if it is not
+GPG_AGENT_PID=$(pidof gpg-agent)
+if [ -z "$GPG_AGENT_PID" ];
+then
+    eval `gpg-agent --daemon`
+fi
