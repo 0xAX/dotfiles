@@ -72,6 +72,7 @@
 (straight-use-package 'company)
 (straight-use-package 'company-c-headers)
 (straight-use-package 'counsel)
+(straight-use-package 'bnf-mode)
 (straight-use-package 'go-mode)
 (straight-use-package 'erlang)
 (straight-use-package 'elixir)
@@ -84,7 +85,6 @@
 (straight-use-package 'lua-mode)
 (straight-use-package 'magit)
 (straight-use-package 'markdown-mode)
-(straight-use-package 'latex-math-preview) ;; https://gitlab.com/latex-math-preview/latex-math-preview
 (straight-use-package 'leuven-theme)
 (straight-use-package 'org-bullets)
 (straight-use-package 'pkg-info)
