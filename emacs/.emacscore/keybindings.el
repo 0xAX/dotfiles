@@ -11,7 +11,6 @@
 (global-set-key [f8]  'rgrep)
 (global-set-key [f9]  'ibuffer)
 (global-set-key [f10] 'magit-status)
-(global-set-key [f11] 'load-additional-modes)
 
 ;; Unset some standard key bindings
 (global-unset-key "\C-f")

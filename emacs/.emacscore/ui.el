@@ -111,10 +111,14 @@
 ;; Enable column number in mode-line
 (setq column-number-mode t)
 
+;; set standard tab width
+(setq tab-width 8)
+
 ;; Ivy configuration
 (ivy-mode)
 (ivy-posframe-mode)
 
+;; some customization for fonts directories
 (cond ((file-directory-p "/usr/share/fonts/fira-code")
        (setq ivy-posframe-font "Fira Code-13"))
       (t

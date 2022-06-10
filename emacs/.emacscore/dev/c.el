@@ -7,8 +7,5 @@
 ;; Indentation for C/C++ code
 (setq c-basic-offset 4)
 
-(setq tab-width 8)
-(setq c-basic-offset 8)
-
-;; add lsp-mode for C
-(add-hook 'c-mode-hook 'lsp)
+(when (executable-find "clangd")
+  (add-hook 'c-mode-hook 'lsp))
