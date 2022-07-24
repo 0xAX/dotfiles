@@ -121,6 +121,7 @@ source $BASHRC_DIR/export
 source $BASHRC_DIR/docker
 source $BASHRC_DIR/wallpapers
 source $BASHRC_DIR/terminal
+source "$HOME/.cargo/env"
 
 # turn off dpms
 xset s off -dpms
@@ -136,4 +137,3 @@ NO_AT_BRIDGE=1
 
 # Fix gpg without gdb and other Gnome things
 export GPG_TTY=$(tty)
-. "$HOME/.cargo/env"
