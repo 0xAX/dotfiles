@@ -1,0 +1,16 @@
+# terminal for i3
+
+ALACRITTY=$(whereis alacritty | awk '{ print $2 }')
+TERMINATOR=$(whereis terminator | awk '{ print $2 }')
+
+if [ -n "$ALACRITTY" ];
+then
+    export TERMINAL="alacritty"
+else
+    if [ -n "$TERMINATOR" ];
+    then
+        export TERMINAL="alacritty"
+    else
+        echo "Erorr: TERMINAL environment variable is not set"
+    fi
+fi
