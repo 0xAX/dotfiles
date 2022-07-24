@@ -63,9 +63,6 @@ export CXX=g++
 export LD=ld
 export TAR=tar
 
-# terminal for i3
-export TERMINAL="terminator"
-
 # Default wm
 export WM="i3"
 
@@ -123,6 +120,7 @@ source $BASHRC_DIR/standard
 source $BASHRC_DIR/export
 source $BASHRC_DIR/docker
 source $BASHRC_DIR/wallpapers
+source $BASHRC_DIR/terminal
 
 # turn off dpms
 xset s off -dpms
