@@ -9,7 +9,7 @@ then
 else
     if [ -n "$TERMINATOR" ];
     then
-        export TERMINAL="alacritty"
+        export TERMINAL="terminator --profile=alex"
     else
         echo "Erorr: TERMINAL environment variable is not set"
     fi

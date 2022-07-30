@@ -1,7 +1,12 @@
 #!/bin/bash
 
-FEH=$(whereis feh | awk '{print $2}')
-if [ ! -z "$FEH" ]
+# if we're starting system manually via startx the DISPLAY env variable might be
+# not set.
+if [ ! -z "$DISPLAY" ];
 then
-    $FEH --bg-scale "$HOME/dev/dotfiles/wallpapers/solarized-dark-wallpaper.jpg"
+   FEH=$(whereis feh | awk '{print $2}')
+   if [ ! -z "$FEH" ]
+   then
+       $FEH --bg-scale "$HOME/dev/dotfiles/wallpapers/solarized-dark-wallpaper.jpg"
+   fi
 fi

@@ -18,7 +18,7 @@ floating_modifier $mod
 bindsym $mod+Shift+f floating toggle
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal --profile=alex
+bindsym $mod+Return exec i3-sensible-terminal
 # kill focused window
 bindsym $mod+q kill
 # restart i3
