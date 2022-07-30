@@ -109,7 +109,6 @@
 (load "~/.emacscore/dired.el")
 (load "~/.emacscore/ui.el")
 (load "~/.emacscore/vcs/magit.el")
-(load "~/emacs-tmux.el")
 
 ;; Development
 (load "~/.emacscore/dev/lsp-mode.el")
