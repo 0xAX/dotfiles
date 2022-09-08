@@ -45,3 +45,6 @@
 
 ;; TODO lsp-ui-doc-focus-frame
 ;; TODO lsp-ui-doc-unfocus-frame
+
+(with-eval-after-load 'lsp-mode
+  (add-to-list 'lsp-file-watch-ignored-directories "/home/alex/disk/dev/otp"))
