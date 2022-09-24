@@ -1,18 +1,18 @@
 ;;;; -*- Mode: Lisp; Syntax: ANSI-Common-Lisp; Base: 10 -*-
 
+(declaim (sb-ext:muffle-conditions sb-kernel:redefinition-warning))
+
 #-quicklisp
 (let ((quicklisp-init (merge-pathnames "quicklisp/setup.lisp"
                                        (user-homedir-pathname))))
   (when (probe-file quicklisp-init)
     (load quicklisp-init)))
 
-(declaim (sb-ext:muffle-conditions sb-kernel:redefinition-warning))
+(defun devdirs ()
+  (directory (concatenate
+              'string
+              (sb-ext:posix-getenv "HOME")
+              "/dev/*/*.asd")))
 
-(cond ((probe-file "~/dev/sigma/sigma.asd")
-         (progn
-           (pushnew (truename "~/dev/sigma") ql:*local-project-directories* )
-	   (ql:register-local-projects)))
-      ((probe-file "~/disk/dev/sigma/sigma.asd")
-         (progn
-           (pushnew (truename "~/disk/dev/sigma") ql:*local-project-directories* )
-	   (ql:register-local-projects))))
+(loop for proj in (devdirs)
+      do (pushnew (directory-namestring proj) asdf:*central-registry*))
