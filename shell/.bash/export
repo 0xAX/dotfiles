@@ -27,7 +27,7 @@ export PATH=$PATH:$KERNEL_DEV/tools/perf/
 export PATH=$PATH:/usr/lib/systemd/
 
 # golang
-export GOROOT=$DEV/golang/go
+export GOROOT=$DEV/go
 export GOPATH=$DEV/golang
 export PATH=$PATH:$GOROOT/bin
 export PATH=$PATH:$GOPATH/bin
