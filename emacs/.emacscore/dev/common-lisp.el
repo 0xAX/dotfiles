@@ -9,9 +9,6 @@
 (when (file-exists-p "/usr/local/bin/sbcl")
   (setq inferior-lisp-program "/usr/local/bin/sbcl"))
 
-;; setup slime
-;; (slime-setup '(slime-fancy slime-company))
-
 ;; set default lisp
 (setq slime-default-lisp 'sbcl)
 
