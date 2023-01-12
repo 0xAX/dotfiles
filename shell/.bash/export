@@ -10,6 +10,7 @@ export PATH=$PATH:$WORK/rebar3
 export PATH=$PATH:$HOME/.cargo/bin
 export PATH=$PATH:$WORK/elixir/bin
 export PATH=$PATH:/usr/local/pgsql/bin/
+export PATH=$PATH:/home/alex/disk2/mysql/bin
 test -d ${DEV_DISK}/etcd/bin && export PATH=$PATH:$DEV_DISK/etcd/bin
 test -d /usr/local/mysql/bin && export PATH=$PATH:/usr/local/mysql/bin
 test -d /usr/local/mysql/scripts && export PATH=$PATH:/usr/local/mysql/scripts
@@ -27,7 +28,7 @@ export PATH=$PATH:$KERNEL_DEV/tools/perf/
 export PATH=$PATH:/usr/lib/systemd/
 
 # golang
-export GOROOT=$DEV/go
+export GOROOT=$DEV/golang/go
 export GOPATH=$DEV/golang
 export PATH=$PATH:$GOROOT/bin
 export PATH=$PATH:$GOPATH/bin
