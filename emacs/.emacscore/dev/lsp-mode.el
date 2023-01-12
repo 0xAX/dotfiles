@@ -43,8 +43,5 @@
         "build" "_build" "deps" "postgres-data" "dia" "/home/alex/work/tposs/src")
       )
 
-(with-eval-after-load 'lsp-mode
-  (add-to-list 'lsp-file-watch-ignored-directories "/home/alex/disk/dev/otp"))
-
 ;; TODO lsp-ui-doc-focus-frame
 ;; TODO lsp-ui-doc-unfocus-frame
