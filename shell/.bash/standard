@@ -139,10 +139,8 @@ alias tp-proxy-up='ssh -fNTMD 8080 jump'
 alias tp-proxy-status='ssh -TO check jump'
 alias tp-proxy-down='ssh -TO exit jump'
 
-# run vm for work
+# work aliases
 alias run-ubuntu-vm='qemu-kvm -m 6G -vga virtio -display default,show-cursor=on -smp 2 -drive file=ubuntu-desktop-18.04.qcow2,if=virtio -net user,hostfwd=tcp::10022-:22 -net nic'
-
-# work related aliases
 alias enable-pcs-cache='export PCS_STORAGE=mysql; export CACHE_SESSIONS=true;'
 alias disable-pcs-cache='unset PCS_STORAGE; unset CACHE_SESSIONS;'
 alias enable-pcs-mysql='export PCS_STORAGE=mysql; unset CACHE_SESSIONS;'
