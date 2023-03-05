@@ -25,3 +25,12 @@
   (beginning-of-line)
   (kill-line)
   (delete-backward-char 1))
+
+(defun enable-ligatures ()
+  (global-prettify-symbols-mode 1)
+  (add-hook 'prog-mode-hook
+          (lambda ()
+            (push '("<=" . ?≤) prettify-symbols-alist)
+            (push '(">=" . ?≥) prettify-symbols-alist)
+            (push '("!=" . ?≠) prettify-symbols-alist)
+            (push '("->" . ?→) prettify-symbols-alist))))
