@@ -10,9 +10,3 @@
 ;; prettify some symbols
 (add-hook 'rust-mode-hook
           (lambda () (prettify-symbols-mode)))
-
-(defvar rust-prettify-symbols-alist
-  '(("&&" . ?∧) ("||" . ?∨)
-    ("<=" . ?≤)  (">=" . ?≥) ("!=" . ?≠)
-    ("INFINITY" . ?∞) ("->" . ?→) ("=>" . ?⇒))
-  "Alist of symbol prettifications used for `prettify-symbols-alist'.")
