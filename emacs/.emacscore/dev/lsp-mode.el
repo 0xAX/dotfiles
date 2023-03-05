@@ -1,7 +1,6 @@
 (require 'lsp-mode)
 
 ;; install dependencies for lsp-mode
-
 (when (file-exists-p "/etc/fedora-release")
   (when (string= (shell-command-to-string "command -v clangd") "")
     (sudo-shell-command "dnf install clang-tools-extra -y"))
@@ -10,6 +9,9 @@
 
 ;; Setup keybindings for lsp-mode
 (setq lsp-keymap-prefix "C-c C-l")
+
+;; Disable auto-guessing
+(setq lsp-auto-guess-root nil)
 
 ;; configure emacs-lisp gc and other runtime things for lsp-mode
 (setq gc-cons-threshold (* 100 1024 1024)
@@ -36,12 +38,25 @@
 (setq lsp-ui-doc-include-signature t)
 (setq lsp-ui-doc-use-childframe t)
 
-(setq lsp-file-watch-ignored
-      '(".idea" ".ensime_cache" ".eunit" "node_modules"
-        ".git" ".hg" ".fslckout" "_FOSSIL_"
-        ".bzr" "_darcs" ".tox" ".svn" ".stack-work" "vendor" "doc"
-        "build" "_build" "deps" "postgres-data" "dia" "/home/alex/work/tposs/src")
-      )
-
 ;; TODO lsp-ui-doc-focus-frame
 ;; TODO lsp-ui-doc-unfocus-frame
+
+(setq lsp-file-watch-ignored
+      '(".idea"
+        ".ensime_cache"
+        ".eunit"
+        "node_modules"
+        ".git"
+        ".hg"
+        ".fslckout"
+        "_FOSSIL_"
+        ".bzr"
+        "_darcs"
+        ".tox"
+        ".svn"
+        ".stack-work" "vendor" "doc"
+        "build"
+        "_build"
+        "deps"
+        "postgres-data"
+        "dia"))
