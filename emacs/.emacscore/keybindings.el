@@ -120,5 +120,5 @@
   (lambda ()
     (local-set-key (kbd "C-c C-c") 'rust-compile)
     (local-set-key (kbd "C-c C-k") 'rust-check)
-    (local-set-set (kbd "C-c C-t") 'rust-test)
+    (local-set-key (kbd "C-c C-t") 'rust-test)
     (local-set-key (kbd "C-c C-l") 'rust-run-clippy)))
