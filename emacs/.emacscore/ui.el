@@ -80,13 +80,11 @@
                             (?\`  . ?\`)))
 
 (cond ((file-directory-p "/usr/share/fonts/fira-code")
-       (set-frame-font "Fira Code-13"))
+       (progn
+         (set-frame-font "Fira Code-13")
+         (enable-ligatures)))
       (t
        (set-frame-font "Monospace-13")))
-
-;; Set fonts
-;; (custom-set-faces
-;;  '(show-paren-match ((t (:background "#116599" :foreground "white")))))
 
 ;; Navigation
 (windmove-default-keybindings)
