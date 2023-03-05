@@ -1,0 +1,18 @@
+(require 'rust-mode)
+;; Rust style-guide recommends to use spaces:
+;; https://doc.rust-lang.org/1.0.0/style/style/whitespace.html
+(add-hook 'rust-mode-hook
+          (lambda () (setq indent-tabs-mode nil)))
+
+;; format the code on save
+(setq rust-format-on-save t)
+
+;; prettify some symbols
+(add-hook 'rust-mode-hook
+          (lambda () (prettify-symbols-mode)))
+
+(defvar rust-prettify-symbols-alist
+  '(("&&" . ?∧) ("||" . ?∨)
+    ("<=" . ?≤)  (">=" . ?≥) ("!=" . ?≠)
+    ("INFINITY" . ?∞) ("->" . ?→) ("=>" . ?⇒))
+  "Alist of symbol prettifications used for `prettify-symbols-alist'.")
