@@ -59,4 +59,5 @@
         "_build"
         "deps"
         "postgres-data"
-        "dia"))
+        "/home/alex/work/tposs/dia"
+        "/home/alex/work/tposs/src"))

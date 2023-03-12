@@ -147,3 +147,31 @@
 
 ;; finally loaded everything
 (message "All done, %s%s" (user-login-name) ".")
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(warning-suppress-log-types '((flymake flymake))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(org-level-1 ((t (:inherit outline-1 :height 0.7))))
+ '(org-level-2 ((t (:inherit outline-2 :height 0.8))))
+ '(org-level-3 ((t (:inherit outline-3 :height 0.799))))
+ '(org-level-4 ((t (:inherit outline-4 :height 0.777))))
+ '(org-level-5 ((t (:inherit outline-5 :height 1.0))))
+ '(tabbar-default ((t (:background "#fdf6e3" :foreground "#eee8d5" :font "Fira Code-12"))))
+ '(tabbar-modified ((t (:background "#fdf6e3" :foreground "#d33682"))))
+ '(tabbar-selected ((t (:background "#fdf6e3" :foreground "#839496"))))
+ '(tabbar-separator ((t (:background "#fdf6e3" :foreground "#fdf6e3"))))
+ '(tabbar-unselected ((t (:background "#fdf6e3" :foreground "#93a1a1")))))
+
+(custom-set-icons
+ ;; custom-set-icons was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+)
