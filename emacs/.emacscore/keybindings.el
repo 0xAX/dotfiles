@@ -101,7 +101,7 @@
 
 ;; dotfiles repo
 (global-set-key (kbd "C-d C-u") 'update-dotfiles-repo)
-(global-set-key (kbd "C-d C-s") 'update-system-dotfiles)
+(global-set-key (kbd "C-d C-s") 'update-dotfiles-system)
 
 ;; magit keybindings
 (global-set-key (kbd "C-x C-l") 'magit-log-buffer-file)
