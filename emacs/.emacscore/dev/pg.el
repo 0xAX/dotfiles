@@ -1,6 +1,6 @@
 ;;; pg.el --- PG configuration -*- lexical-binding: t -*-
 
-(defconst +pg-dir+ "~/.emacs.d/PG/generic/proof-site")
+(defconst +pg-el+ "/home/alex/.emacs.d/PG/generic/proof-site.el")
 
-(when (file-directory-p +pg-dir+)
-  (load "~/.emacs.d/PG/generic/proof-site"))
+(when (file-exists-p +pg-el+)
+  (load +pg-el+))
