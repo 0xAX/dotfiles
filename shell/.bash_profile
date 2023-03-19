@@ -24,3 +24,6 @@ if [ -z "$GPG_AGENT_PID" ];
 then
     eval `gpg-agent --daemon`
 fi
+
+# opam configuration
+test -r /home/alex/.opam/opam-init/init.sh && . /home/alex/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
