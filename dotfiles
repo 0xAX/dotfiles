@@ -36,6 +36,7 @@ case $1 in
     cp -r .tmux.conf .gdbinit .inputrc "$DOTFILES/git/." "$HOME"
 
     # copy emacs files
+    rm -rf "$HOME"/{.emacs,.emacscore}
     cp -r emacs/.emacs emacs/.emacscore "$HOME"
     
     # copy i3 stuff
