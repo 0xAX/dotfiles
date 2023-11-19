@@ -35,7 +35,7 @@ case $1 in
     cp -r ~/.inputrc "$DOTFILES"
     ;;
 --update-system)
-    # copy standard dtofiles
+    # copy standard dotfiles
     cp -r .tmux.conf .gdbinit .inputrc "$DOTFILES/git/." "$HOME"
 
     # copy emacs files
