@@ -129,9 +129,6 @@ xset s off -dpms
 # not start gvfsd fs
 export GVFS_DISABLE_FUSE=1
 
-# switch keyboard layouts
-setxkbmap -layout us,ru -option grp:lwin_toggle
-
 # Disable Gnome accessibility bridge
 NO_AT_BRIDGE=1
 
