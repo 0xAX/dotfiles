@@ -24,6 +24,9 @@ case $1 in
     # copy terminator stuff
     cp -r ~/.config/terminator/config  "$DOTFILES"/terminator
 
+    # copy system (per-user) files
+    cp -r ~/{.Xkbmap,.Xresources} "$DOTFILES"/system/
+
     # copy other dotfiles
     cp -r ~/.gdbinit "$DOTFILES"
     cp -r ~/.gitconfig "$DOTFILES"/git
@@ -47,6 +50,9 @@ case $1 in
 
     # Copy scripts to $HOME directory
     cp -r "$DOTFILES"/shell/. "$DOTFILES/shell/bin" $HOME
+
+    # copy system (per-user) files
+    cp -r "$DOTFILES"/system/{.Xkbmap,.Xresources} ~/
 
     # install bin scripts
     "$HOME/bin/installScripts"
