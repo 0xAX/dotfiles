@@ -78,6 +78,8 @@
 (straight-use-package 'go-mode)
 (straight-use-package 'ivy)
 (straight-use-package 'ivy-posframe)
+(straight-use-package 'julia-mode)
+(straight-use-package 'julia-repl)
 (straight-use-package 'leuven-theme)
 (straight-use-package 'lsp-mode)
 (straight-use-package 'lsp-ui)
