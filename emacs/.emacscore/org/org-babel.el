@@ -60,9 +60,9 @@
 (when (string= *i3* "true")
   (progn
     (add-hook 'org-babel-execute-src-block-hook
-              '(lambda () (org-execute-code-block)))
+              #'(lambda () (org-execute-code-block)))
     (add-hook 'org-babel-after-execute-hook
-              '(lambda () (shell-command-to-string "i3-msg mode passthrough")))))
+              #'(lambda () (shell-command-to-string "i3-msg mode passthrough")))))
 
 ;; remove confirmation for code execution,
 ;; I hope I know what I am doing
