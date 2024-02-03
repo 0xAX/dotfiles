@@ -144,3 +144,6 @@ alias run-ubuntu-vm='qemu-kvm -m 6G -vga virtio -display default,show-cursor=on 
 alias enable-pcs-cache='export PCS_STORAGE=mysql; export CACHE_SESSIONS=true;'
 alias disable-pcs-cache='unset PCS_STORAGE; unset CACHE_SESSIONS;'
 alias enable-pcs-mysql='export PCS_STORAGE=mysql; unset CACHE_SESSIONS;'
+
+# gnupg aliases
+gpg=gpg2
