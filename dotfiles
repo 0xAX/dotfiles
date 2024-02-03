@@ -12,7 +12,7 @@ DOTFILES="$HOME/dev/dotfiles"
 case $1 in
 --update-repo)
     # copy gnupg related files
-    cp -r ~/.gnupg/gpg-agent.conf ~/.gnupg/gpg.conf "$DOTFILES"/.gnupg
+    cp -r ~/.gnupg/public.key ~/.gnupg/gpg-agent.conf ~/.gnupg/gpg.conf "$DOTFILES"/.gnupg
     # copy .bashrc and related stuff
     cp -r ~/bin ~/.bash ~/.bashrc ~/.bash_logout ~/.bash_profile ~/.xinitrc "$DOTFILES"/shell
 
@@ -35,7 +35,7 @@ case $1 in
     ;;
 --update-system)
     # copy gnupg related files
-    cp -r "$DOTFILES"/.gnupg/*.conf ~/.gnupg/
+    cp -r "$DOTFILES"/.gnupg/*.conf "$DOTFILES"/.gnupg/public.key ~/.gnupg/
 
     # copy standard dtofiles
     cp -r .tmux.conf .gdbinit .inputrc "$DOTFILES/git/." "$HOME"
