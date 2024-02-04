@@ -109,6 +109,7 @@
 (load "~/.emacscore/org/orgmode.el")
 (load "~/.emacscore/ido.el")
 (load "~/.emacscore/dired.el")
+(load "~/.emacscore/gpg.el")
 (load "~/.emacscore/ui.el")
 (load "~/.emacscore/vcs/magit.el")
 
