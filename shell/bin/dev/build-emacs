@@ -7,7 +7,7 @@
             --enable-link-time-optimization          \
             --with-mailutils --with-pop              \
             --with-sound=alsa --with-json            \
-            --with-tree-sitter --with-pgtk           \
+            --with-tree-sitter                       \
             --with-native-compilation=yes            \
             --with-imagemagick
 
