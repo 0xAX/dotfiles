@@ -111,6 +111,7 @@
 (load "~/.emacscore/org/orgmode.el")
 (load "~/.emacscore/ido.el")
 (load "~/.emacscore/dired.el")
+(load "~/.emacscore/gpg.el")
 (load "~/.emacscore/ui.el")
 (load "~/.emacscore/vcs/magit.el")
 
@@ -147,8 +148,6 @@
   (kill-buffer "*straight-process*"))
 (when (get-buffer "*straight-byte-compilation*")
   (kill-buffer "*straight-byte-compilation*"))
-(when (get-buffer "*Async-native-compile-log*")
-  (kill-buffer "*Async-native-compile-log*"))
 
 ;; finally loaded everything
 (message "All done, %s%s" (user-login-name) ".")

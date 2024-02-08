@@ -81,7 +81,10 @@
 
 [commit]
 	signoff = false
-	gpgsign = false
+	gpgsign = true
+
+[gpg]
+        program = /usr/bin/gpg2
 
 [status]
 	branch = true

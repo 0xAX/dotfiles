@@ -1,0 +1,14 @@
+#!/bin/bash
+
+./autogen.sh && \
+./configure --enable-profiling --enable-checking=all \
+            --enable-gtk-deprecation-warnings        \
+            --enable-gcc-warnings=warn-only          \
+            --enable-link-time-optimization          \
+            --with-mailutils --with-pop              \
+            --with-sound=alsa --with-json            \
+            --with-tree-sitter                       \
+            --with-native-compilation=yes            \
+            --with-imagemagick
+
+exit 0
