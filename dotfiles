@@ -11,8 +11,12 @@ DOTFILES="$HOME/dev/dotfiles"
 
 case $1 in
 --update-repo)
+    # copy zig/zls related files
+    cp -r ~/.config/zls.json "$DOTFILES"/.config
+    
     # copy gnupg related files
     cp -r ~/.gnupg/public.key ~/.gnupg/gpg-agent.conf ~/.gnupg/gpg.conf "$DOTFILES"/.gnupg
+
     # copy .bashrc and related stuff
     cp -r ~/bin ~/.bash ~/.bashrc ~/.bash_logout ~/.bash_profile ~/.xinitrc "$DOTFILES"/shell
 
@@ -37,6 +41,9 @@ case $1 in
     cp -r ~/.inputrc "$DOTFILES"
     ;;
 --update-system)
+    # copy zig/zls related files
+    cp -r "$DOTFILES"/.config/zls.json ~/.config/
+
     # copy gnupg related files
     cp -r "$DOTFILES"/.gnupg/*.conf "$DOTFILES"/.gnupg/public.key ~/.gnupg/
 
