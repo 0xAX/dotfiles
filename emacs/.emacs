@@ -204,3 +204,6 @@
       inhibit-compacting-font-caches t)
 
 (setq idle-update-delay 1.0)
+
+;; Hide *async-native-compile* buffer
+(setq warning-minimum-level :error)
