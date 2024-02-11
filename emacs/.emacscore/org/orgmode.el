@@ -1,7 +1,14 @@
 ;;; .emacs --- My org-mode configuration  -*- lexical-binding: t -*-
 
 ;; set path to org directory
-(setq org-directory "~/dev/todo")
+(when (file-directory-p "~/dev/todo")
+  (setq org-directory "~/dev/todo"))
+(when (file-directory-p "~/disk/dev/todo")
+  (setq org-directory "~/disk/dev/todo"))
+
+;; Add ability to add closing notes to the done items
+(setq org-log-done 'note)
+
 ;; enable org-mode for *.org files
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 
@@ -41,9 +48,6 @@
       (setq buffer-save-without-query t)
       (save-buffer)
       (setq buffer-save-without-query nil))))
-
-;; remove results from org-mode buffers before exit
-;; (add-hook 'kill-buffer-hook 'org-remove-all-results-blocks)
 
 ;; load additional org-mode helpers
 (load "~/.emacscore/org/org-api.el")
