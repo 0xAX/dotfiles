@@ -15,7 +15,7 @@ SYSTEM_DIR="$SCRIPTS_DIR/system/scripts/*"
 
 for SCRIPT in $BUILD_DIR  \
 	      $DEV_DIR    \
-	      $FEDIRA_DIR \
+	      $FEDORA_DIR \
 	      $GIT_DIR    \
 	      $GIT_PROMPT \
 	      $UBUNTU_DIR \
@@ -27,7 +27,7 @@ done
 echo "Copying scripts to $SCRIPTS_DEST"
 sudo cp -r -v $BUILD_DIR \
      $DEV_DIR            \
-     $FEDIRA_DIR         \
+     $FEDORA_DIR         \
      $UBUNTU_DIR         \
      $GIT_DIR            \
      $GIT_PROMPT         \
