@@ -11,6 +11,9 @@ DOTFILES="$HOME/dev/dotfiles"
 
 case $1 in
 --update-repo)
+    # copy lisp/sbcl configuration
+    cp -r ~/.sbclrc "$DOTFILES"/dev/
+
     # copy zig/zls related files
     cp -r ~/.config/zls.json "$DOTFILES"/.config
     
@@ -41,6 +44,9 @@ case $1 in
     cp -r ~/.inputrc "$DOTFILES"
     ;;
 --update-system)
+    # copy lisp/sbcl configuration
+    cp -r "$DOTFILES"/dev/.sbclrc ~/.sbclrc 
+
     # copy zig/zls related files
     cp -r "$DOTFILES"/.config/zls.json ~/.config/
 
