@@ -16,7 +16,6 @@ for SCRIPT in $DEV_DIR    \
 	      $FEDORA_DIR \
 	      $GIT_DIR    \
 	      $GIT_PROMPT \
-	      $UBUNTU_DIR \
 	      $MATH_DIR   \
 	      $SYSTEM_DIR; do
         chmod +x $SCRIPT
@@ -25,7 +24,6 @@ done
 echo "Copying scripts to $SCRIPTS_DEST"
 sudo cp -r -v $DEV_DIR   \
      $FEDORA_DIR         \
-     $UBUNTU_DIR         \
      $GIT_DIR            \
      $GIT_PROMPT         \
      $SYSTEM_DIR         \
