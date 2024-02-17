@@ -4,17 +4,17 @@
 
 (declaim (sb-ext:muffle-conditions sb-kernel:redefinition-warning))
 
-#-quicklisp
-(let ((quicklisp-init (merge-pathnames "quicklisp/setup.lisp"
-                                       (user-homedir-pathname))))
-  (when (probe-file quicklisp-init)
-    (load quicklisp-init)))
+(when (probe-file "/home/alex/quicklisp/setup.lisp")
+  #-quicklisp
+  (let ((quicklisp-init (merge-pathnames "quicklisp/setup.lisp"
+                                         (user-homedir-pathname))))
+    (when (probe-file quicklisp-init)
+      (load quicklisp-init))))
 
-(defun devdirs ()
-  (directory (concatenate
-              'string
-              (sb-ext:posix-getenv "HOME")
-              "/dev/*/*.asd")))
+(defun dev-directories ()
+  (list (directory (concatenate 'string (sb-ext:posix-getenv "HOME") "/dev/*/*.asd"))
+        (directory (concatenate 'string (sb-ext:posix-getenv "HOME") "/disk/dev/*/*.asd"))))
 
-(loop for proj in (devdirs)
+(loop for proj in (dev-directories)
+      if proj
       do (pushnew (directory-namestring proj) asdf:*central-registry*))
