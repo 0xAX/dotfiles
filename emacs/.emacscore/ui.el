@@ -45,11 +45,11 @@
 
 ;; Set up line numbers
 (if (version< emacs-version "29.0")
+  (display-line-numbers-mode)
     (progn
       (require 'linum)
       (global-linum-mode 1)
-      (setq linum-format " %d "))
-  (display-line-numbers-mode))
+      (setq linum-format " %d ")))
 
 ;; (add-hook 'after-change-major-mode-hook
 ;;           '(lambda ()
