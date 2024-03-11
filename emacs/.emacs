@@ -54,6 +54,7 @@
 ;;
 ;; https://github.com/raxod502/straight.el
 ;;
+
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
@@ -92,7 +93,12 @@
 (straight-use-package 'pkg-info)
 (straight-use-package 'rust-mode)
 (straight-use-package 'rustic)
-(straight-use-package 'solarized-emacs)
+(straight-use-package
+ '(solarized-emacs
+   :type git
+   :host github
+   :repo "bbatsov/solarized-emacs"
+   :branch "master"))
 (straight-use-package 'slime)
 (straight-use-package 'slime-company)
 (straight-use-package 'swiper)

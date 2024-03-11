@@ -12,11 +12,11 @@ DOTFILES="$HOME/dev/dotfiles"
 case $1 in
 --update-repo)
     # copy lisp/sbcl configuration
-    cp -r ~/.sbclrc "$DOTFILES"/dev/
+    test -r ~/.sbclrc && cp -r ~/.sbclrc "$DOTFILES"/dev/
 
     # copy zig/zls related files
     cp -r ~/.config/zls.json "$DOTFILES"/.config
-    
+
     # copy gnupg related files
     cp -r ~/.gnupg/public.key ~/.gnupg/gpg-agent.conf ~/.gnupg/gpg.conf "$DOTFILES"/.gnupg
 
@@ -26,6 +26,7 @@ case $1 in
     # copy emacs directories
     rm -rf *.session
     cp -r ~/.emacs ~/.emacscore "$DOTFILES"/emacs
+    cp -r ~/.emacs.d/straight/versions/default.el "$DOTFILES"/emacs
 
     # copy i3 stuff
     cp -r ~/.i3/* "$DOTFILES"/i3
@@ -45,7 +46,7 @@ case $1 in
     ;;
 --update-system)
     # copy lisp/sbcl configuration
-    cp -r "$DOTFILES"/dev/.sbclrc ~/.sbclrc 
+    cp -r "$DOTFILES"/dev/.sbclrc ~/.sbclrc
 
     # copy zig/zls related files
     cp -r "$DOTFILES"/.config/zls.json ~/.config/
@@ -59,7 +60,8 @@ case $1 in
     # copy emacs files
     rm -rf "$HOME"/{.emacs,.emacscore}
     cp -r emacs/.emacs emacs/.emacscore "$HOME"
-    
+    cp -r "$DOTFILES"/emacs/default.el ~/.emacs.d/straight/versions
+
     # copy i3 stuff
     cp -r "$DOTFILES"/i3/* "$HOME/.i3"
 
