@@ -44,19 +44,12 @@
 (setq-default cursor-type 'bar)
 
 ;; Set up line numbers
-(if (version< emacs-version "29.0")
-  (display-line-numbers-mode)
+(if (< emacs-major-version 29)
     (progn
       (require 'linum)
       (global-linum-mode 1)
-      (setq linum-format " %d ")))
-
-;; (add-hook 'after-change-major-mode-hook
-;;           '(lambda ()
-;;              (message (symbol-name major-mode))
-;;             (if (equal major-mode 'org-mode)
-;;                 (global-linum-mode 0)
-;;               (global-linum-mode 1))))
+      (setq linum-format " %d "))
+    (global-display-line-numbers-mode 1))
 
 ;; Highlight current line
 (global-hl-line-mode 1)
