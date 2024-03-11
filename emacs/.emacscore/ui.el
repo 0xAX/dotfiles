@@ -44,9 +44,12 @@
 (setq-default cursor-type 'bar)
 
 ;; Set up line numbers
-(require 'linum)
-(global-linum-mode 1)
-(setq linum-format " %d ")
+(if (version< emacs-version "29.0")
+    (progn
+      (require 'linum)
+      (global-linum-mode 1)
+      (setq linum-format " %d "))
+  (display-line-numbers-mode))
 
 ;; (add-hook 'after-change-major-mode-hook
 ;;           '(lambda ()
