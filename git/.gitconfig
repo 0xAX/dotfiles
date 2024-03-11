@@ -1,117 +1,118 @@
 [credential]
-	helper = cache
+        helper = cache
 
 [diff]
         renameLimit = 4096
 
 [color]
-	ui = auto
-	interactive = always
+        ui = auto
+        interactive = always
         grep = always
-	showbranch = always
+        showbranch = always
 
 [color "branch"]
-	current = green bold
-	local   = yellow bold
-	remote  = magenta bold
+        current = green bold
+        local   = yellow bold
+        remote  = magenta bold
 
 [color "diff"]
-	meta = white bold
-	frag = magenta bold
-	old = red bold
-	new = green bold
-	whitespace = red reverse
+        meta = white bold
+        frag = magenta bold
+        old = red bold
+        new = green bold
+        whitespace = red reverse
 
 [color "status"]
-	added = green bold
-	changed = yellow bold
-	untracked = red bold
+        added = green bold
+        changed = yellow bold
+        untracked = red bold
         unmerged = magenta bold
 
 [core]
-	editor = "emacs -nw"
-	filemode = false
-	trustctime = false
-	excludesfile = /home/alex/.gitignore_global
-	checkstat = default
-	quotepath = false
-	eol = native
+        editor = "emacs -nw"
+        filemode = false
+        trustctime = false
+        excludesfile = /home/alex/.gitignore_global
+        checkstat = default
+        quotepath = false
+        eol = native
 
 [diff]
-	renames = true
+        renames = true
 
 [gc]
-	auto = 5000
+        auto = 5000
 
 [grep]
-	lineNumber = true
-	patternType = extended
-	extendedRegexp = true
+        lineNumber = true
+        patternType = extended
+        extendedRegexp = true
 
 [help]
-	format = man
-	autocorrect = 1
+        format = man
+        autocorrect = 1
 
 [log]
-	date = rfc
+        date = rfc
 
 [man]
-	viewer = man
+        viewer = man
 
 [push]
-	default = current
+    default = current
 
 [rebase]
-	stat = true
+    stat = true
 
 [reset]
-	confirmHardReset = true
+    confirmHardReset = true
 
 [sendemail]
-	from = Alexander Kuleshov <kuleshovmail@gmail.com>
-	smtpencryption = tls
-	smtpserver = smtp.gmail.com
-	smtpuser = kuleshovmail@gmail.com
-	smtpserverport = 587
-	multiedit = true
-	confirm = always
+    from = Alexander Kuleshov <kuleshovmail@gmail.com>
+    smtpencryption = tls
+    smtpserver = smtp.gmail.com
+    smtpuser = kuleshovmail@gmail.com
+    smtpserverport = 587
+    multiedit = true
+    confirm = always
 
 [sequence]
-	editor = emacs
+    editor = emacs
 
 [commit]
-	signoff = false
-	gpgsign = true
+    signoff = false
+    gpgsign = true
 
 [gpg]
-        program = /usr/bin/gpg2
+    program = /usr/bin/gpg2
 
 [status]
-	branch = true
-	displayCommentPrefix = true
-	relativePaths = false
-	showUntrackedFiles = all
-	submodulesummary = true
+    branch = true
+    displayCommentPrefix = true
+    relativePaths = false
+    showUntrackedFiles = all
+    submodulesummary = true
 
 [user]
-	name = Alexander Kuleshov
-	email = kuleshovmail@gmail.com
-	signingkey = 6D980FFA0624AF79
+    name = Alexander Kuleshov
+    email = kuleshovmail@gmail.com
+    signingkey = 6D980FFA0624AF79
 
 [web]
-	browser = firefox
+    browser = firefox
 
 [http]
-	cookiefile = /home/alex/.gitcookies
+    cookiefile = /home/alex/.gitcookies
 
 [transfer]
-	fsckObjects = false
+    fsckObjects = false
 
 [alias]
-        one = show -s --pretty='format:%h (\"%s\")'
+    one = show -s --pretty='format:%h (\"%s\")'
 
 [pull]
-	rebase = false
+    rebase = false
+
 [cinnabar]
-	version-check = 1620808716
-	helper = /home/alex/.mozbuild/git-cinnabar/git-cinnabar-helper
+    version-check = 1620808716
+    helper = /home/alex/.mozbuild/git-cinnabar/git-cinnabar-helper
