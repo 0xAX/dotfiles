@@ -3,6 +3,9 @@
 ;; yes-or-no-p to y-n
 (defalias 'yes-or-no-p 'y-or-n-p)
 
+;; Enable text wrapping
+(global-visual-line-mode)
+
 ;; Disable system beep
 (setq visible-bell nil)
 (setq ring-bell-function 'ignore)
