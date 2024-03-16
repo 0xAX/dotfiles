@@ -10,7 +10,7 @@
 (setq org-src-fontify-natively t)
 
 ;; Pretify special symbols
-(setq org-toggle-pretty-entities t)
+(org-toggle-pretty-entities)
 
 ;; set of TODO keywords highligted in org-mode
 (setq org-todo-keywords

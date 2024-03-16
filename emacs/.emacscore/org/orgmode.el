@@ -1,5 +1,7 @@
 ;;; .emacs --- My org-mode configuration  -*- lexical-binding: t -*-
 
+(require 'org)
+
 ;; set path to org directory
 (when (file-directory-p "~/dev/todo")
   (setq org-directory "~/dev/todo"))
@@ -16,26 +18,22 @@
 ;; mode will lead to search according to pressed keys
 (setq org-goto-auto-isearch t)
 
-;; First of all unset some keybindings
-(add-hook 'org-mode-hook
-          #'(lambda ()
-              (define-key org-mode-map [(control tab)] nil)
-              (define-key org-mode-map [(control k)] nil)
-              (define-key org-mode-map [(control a)] nil)
-              ;; used for switching between left/right windows
-              (define-key org-mode-map [(shift left)] nil)
-              (define-key org-mode-map [(shift right)] nil)
-              ;; used for switching between up/down windows
-              (define-key org-mode-map [(shift down)] nil)
-              (define-key org-mode-map [(shift up)] nil)
-              ;; execute source code inside org-mode documents
-              (define-key org-mode-map (kbd "C-x e") 'org-execute-block)
-              (define-key org-mode-map (kbd "C-x C-e") 'org-execute-block)))
+;;
+;; First of all change and unset some keybindings
+;;
+;; used for switching between tabs
+(define-key org-mode-map [(control tab)] nil)
+;; used for switching between left/right windows
+(define-key org-mode-map [(control k)] nil)
+(define-key org-mode-map [(control a)] nil)
+;; used for switching between up/down windows
+(define-key org-mode-map [(shift down)] nil)
+(define-key org-mode-map [(shift up)] nil)
+;; show the help for special symbols
+(define-key org-mode-map (kbd "C-x C-m") 'org-entities-help)
 
 ;; Enable support for org-tables everywhere
 (add-hook 'message-mode-hook 'turn-on-orgtbl)
-;; Disable linum mode for org-mode as it looks ugly there
-(add-hook 'org-mode-hook #'(lambda () (linum-mode -1)))
 
 (defun org-remove-all-results-blocks ()
   "Go through the org buffer and remove all RESULTS"
