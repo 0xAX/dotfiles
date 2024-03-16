@@ -26,7 +26,7 @@ case $1 in
     # copy emacs directories
     rm -rf *.session
     cp -r ~/.emacs ~/.emacscore "$DOTFILES"/emacs
-    cp -r ~/.emacs.d/straight/versions/default.el "$DOTFILES"/emacs
+    test -r ~/.emacs.d/straight/versions/default.el && cp -r ~/.emacs.d/straight/versions/default.el "$DOTFILES"/emacs
 
     # copy i3 stuff
     cp -r ~/.i3/* "$DOTFILES"/i3
