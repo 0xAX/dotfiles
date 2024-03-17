@@ -41,3 +41,7 @@ that appears during evaluation."
 ;; remove confirmation for code execution,
 ;; I hope I know what I am doing
 (setq org-confirm-babel-evaluate nil)
+
+;; Default flags passed to each C code block
+(defvar org-babel-default-header-args:C
+  '((:flags . "-Wall -Wextra -Werror -WWstrict-prototypes  -Wcast-qual -Wconversion -Wpedantic -std=c17")))
