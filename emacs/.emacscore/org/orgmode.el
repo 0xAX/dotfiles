@@ -14,9 +14,25 @@
 ;; enable org-mode for *.org files
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 
+;; Some good defaults
+(setq-default
+ org-startup-indented t
+ line-spacing 1
+ org-src-fontify-natively t
+ org-fontify-quote-and-verse-block t
+ org-pretty-entities t
+ org-startup-with-inline-images t
+ org-hide-emphasis-markers t
+ org-adapt-indentation nil
+ org-src-preserve-indentation nil
+ org-edit-src-content-indentation 0)
+
 ;; Enable auto-search in org-mode so any non-standard keypress in C-x C-j
 ;; mode will lead to search according to pressed keys
 (setq org-goto-auto-isearch t)
+
+;; Enable pretty printing of special symbols
+(org-toggle-pretty-entities)
 
 ;;
 ;; First of all change and unset some keybindings

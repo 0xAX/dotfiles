@@ -1,17 +1,5 @@
 ;;; .emacs --- My org-mode configuration  -*- lexical-binding: t -*-
 
-;; disable weird indentation of standard org-mode
-(setq
- org-adapt-indentation nil
- org-src-preserve-indentation nil
- org-edit-src-content-indentation 0)
-
-;; Fontify code in code blocks
-(setq org-src-fontify-natively t)
-
-;; Pretify special symbols
-(org-toggle-pretty-entities)
-
 ;; set of TODO keywords highligted in org-mode
 (setq org-todo-keywords
       '((sequence "TODO"
