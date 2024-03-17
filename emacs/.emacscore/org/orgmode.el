@@ -34,36 +34,11 @@
 ;; Enable pretty printing of special symbols
 (org-toggle-pretty-entities)
 
-;;
-;; First of all change and unset some keybindings
-;;
-;; used for switching between tabs
-(define-key org-mode-map [(control tab)] nil)
-;; used for switching between left/right windows
-(define-key org-mode-map [(control k)] nil)
-(define-key org-mode-map [(control a)] nil)
-;; used for switching between up/down windows
-(define-key org-mode-map [(shift down)] nil)
-(define-key org-mode-map [(shift up)] nil)
-;; show the help for special symbols
-(define-key org-mode-map (kbd "C-x C-m") 'org-entities-help)
-
 ;; Enable support for org-tables everywhere
 (add-hook 'message-mode-hook 'turn-on-orgtbl)
-
-(defun org-remove-all-results-blocks ()
-  "Go through the org buffer and remove all RESULTS"
-  (interactive)
-  (when (string= (symbol-name major-mode) "org-mode")
-    (progn
-      (goto-char (point-min))
-      (while (re-search-forward "RESULTS" nil t)
-        (org-babel-remove-result-one-or-many t))
-      (setq buffer-save-without-query t)
-      (save-buffer)
-      (setq buffer-save-without-query nil))))
 
 ;; load additional org-mode helpers
 (load "~/.emacscore/org/org-api.el")
 (load "~/.emacscore/org/org-babel.el")
 (load "~/.emacscore/org/org-ui.el")
+(load "~/.emacscore/org/org-keybindings.el")
