@@ -6,8 +6,11 @@ that appears during evaluation."
   (interactive)
   (org-babel-remove-result-one-or-many t)
   (org-open-at-point)
-  (kill-buffer "*Org Babel Results*")
-  (delete-window))
+  (if (not (get-buffer "*Org-Babel Error Output*"))
+      (progn
+        (kill-buffer "*Org Babel Results*")
+        (delete-window))
+    (switch-to-buffer "*Org-Babel Error Output*" 'norecord t)))
 
 ;; List of langauges supported by babel
 (org-babel-do-load-languages
