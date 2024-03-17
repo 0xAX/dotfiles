@@ -9,6 +9,20 @@ that appears during evaluation."
   (kill-buffer "*Org Babel Results*")
   (delete-window))
 
+;; List of langauges supported by babel
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((python . t)
+   (C . t)
+   (emacs-lisp . t)
+   (lisp . t)
+   (plantuml . t)
+   (latex . t)
+   (octave . t)
+   (perl . t)
+   (scheme . t)
+   (sql . t)))
+
 ;; Do not execute code on C-c C-c by default as it will be re-binded
 (setq org-babel-no-eval-on-ctrl-c-ctrl-c t)
 
