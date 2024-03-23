@@ -22,6 +22,7 @@ that appears during evaluation."
    (plantuml . t)
    (latex . t)
    (octave . t)
+   (julia . t)
    (perl . t)
    (scheme . t)
    (sql . t)))
@@ -38,9 +39,10 @@ that appears during evaluation."
     (add-hook 'org-babel-after-execute-hook
               #'(lambda () (shell-command-to-string "i3-msg mode passthrough")))))
 
-;; remove confirmation for code execution,
-;; I hope I know what I am doing
+;; Remove confirmation for code execution,
 (setq org-confirm-babel-evaluate nil)
+(setq org-export-use-babel nil)
+(setq org-adapt-indentation nil)
 
 ;; Default flags passed to each C code block
 (defvar org-babel-default-header-args:C
