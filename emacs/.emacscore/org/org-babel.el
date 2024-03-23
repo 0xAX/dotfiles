@@ -46,4 +46,4 @@ that appears during evaluation."
 
 ;; Default flags passed to each C code block
 (defvar org-babel-default-header-args:C
-  '((:flags . "-Wall -Wextra -Werror -WWstrict-prototypes  -Wcast-qual -Wconversion -Wpedantic -std=c17")))
+  '((:flags . "-Wall -Wextra -Werror -Wstrict-prototypes  -Wcast-qual -Wconversion -Wpedantic -std=c17")))
