@@ -29,7 +29,7 @@
         unmerged = magenta bold
 
 [core]
-        editor = "emacs -nw"
+        editor = "$EMACS"
         filemode = false
         trustctime = false
         excludesfile = /home/alex/.gitignore_global

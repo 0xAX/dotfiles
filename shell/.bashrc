@@ -53,9 +53,15 @@ else
 fi
 
 # global env
-export EDITOR="emacs"
 export BROWSER="firefox"
-export EMACS="emacs"
+
+if [ -f "/home/alex/disk/dev/emacs/src/emacs" ];
+then
+    export EMACS="/home/alex/disk/dev/emacs/src/emacs"
+else
+    export EMACS="emacs"
+fi
+export EDITOR="$EMACS"
 
 # global development env
 export CC=gcc
