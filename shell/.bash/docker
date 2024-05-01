@@ -17,7 +17,6 @@ function docker-mysql-work-start() {
 function docker-mysql-8-run() {
     docker run -p 3306:3306 --ulimit nofile=262144:262144       \
 	   --name mysql-server --sysctl net.core.somaxconn=8092 \
-	   -e MYSQL_ROOT_PASSWORD=root                          \
 	   -e MYSQL_ALLOW_EMPTY_PASSWORD=true -d mysql:8.0
 }
 
