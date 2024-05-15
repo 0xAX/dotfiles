@@ -1,9 +1,5 @@
 ;;; .emacs --- My init file for GNU Emacs  -*- lexical-binding: t -*-
 
-;; Sanity stuff
-;; (setq debug-on-error t)
-;; (setq backtrace-on-error t)
-
 ;; If we are using i3wm, load related configuration
 (let*
     ((i3-socket (shell-command-to-string "i3 --get-socketpath"))
