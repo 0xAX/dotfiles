@@ -6,7 +6,7 @@
           (lambda () (setq indent-tabs-mode nil)))
 
 ;; format the code on save
-(setq rust-format-on-save t)
+(setq rustic-format-on-save t)
 
 ;; prettify some symbols
 (add-hook 'rust-mode-hook
