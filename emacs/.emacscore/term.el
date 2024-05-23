@@ -19,6 +19,15 @@
 ;; we need to scroll
 (setq term-buffer-maximum-size 0) 
 
+;; Improves terminal emulator (vterm/eat) throughput
+(setq read-process-output-max (* 2 1024 1024)
+      process-adaptive-read-buffering nil
+      ;; Improve scrolling and other UI responsiveness
+      fast-but-imprecise-scrolling t
+      redisplay-skip-fontification-on-input t
+      inhibit-compacting-font-caches t
+      idle-update-delay 1.0)
+
 ;; Open new terminal with name
 (defun open-terminal (terminal-name)
   "Open terminal with custom buffer name"

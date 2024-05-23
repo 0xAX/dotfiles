@@ -6,6 +6,9 @@
 ;; Enable text wrapping
 (global-visual-line-mode)
 
+;; do not remove new line at the end of buffer
+(setq mode-require-final-newline t)
+
 ;; Disable system beep
 (setq visible-bell nil)
 (setq ring-bell-function 'ignore)
@@ -18,7 +21,9 @@
 
 ;; set path to solarized theme
 (setq solarized-theme-path
-      (concat user-emacs-directory "/straight/build/solarized-emacs"))
+      (concat user-emacs-directory "/elpa/solarized-emacs"))
+;(setq solarized-theme-path
+;      (concat user-emacs-directory "/straight/build/solarized-emacs"))
 
 ;; Current theme
 (progn

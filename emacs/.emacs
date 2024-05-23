@@ -1,6 +1,11 @@
 ;;; .emacs --- My init file for GNU Emacs  -*- lexical-binding: t -*-
 
-;; If we are using i3wm, load related configuration
+;; Set directory for dependencies and primary configuration
+(setq user-emacs-directory "~/.emacs.d")
+;; Set directory with secondary configuration
+(setq user-emacs-configuration-directory "~/.emacscore")
+
+;; If we are using i3wm, load related configuration.
 (let*
     ((i3-socket (shell-command-to-string "i3 --get-socketpath"))
      (i3 (file-exists-p (replace-regexp-in-string "\n$" "" i3-socket))))
@@ -15,102 +20,40 @@
 ;; Delete text in selection mode when typing
 (delete-selection-mode 1)
 
-;; Current locales
+;; Set character sets
 (prefer-coding-system        'utf-8)
+;; Set coding system of terminal output
 (set-terminal-coding-system  'utf-8)
+;; Set codign system for keyboard input
 (set-keyboard-coding-system  'utf-8)
+;; Set coding system to communicate with other X systems
 (set-selection-coding-system 'utf-8)
+;; Set coding system to use with system messages
 (setq locale-coding-system   'utf-8)
+;; Set language environment
 (setq current-language-environment "UTF-8")
-
-;; do not remove new line at the end of buffer
-(setq mode-require-final-newline t)
 
 ;; Prevent creation of backup files
 (setq make-backup-files         nil)
 (setq auto-save-list-file-name  nil)
 (setq auto-save-default         nil)
 (setq create-lockfiles          nil)
-(setq user-emacs-directory      "~/.emacs.d")
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;        Package manager
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(require 'package)
-(setq package-check-signature 'nil)
-(setq package-check-signature nil)
-(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
-(add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/"))
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-(if (version< emacs-version "27.0")
-    (package-initialize))
+;; Load the dependencies if something is missed
+(load "~/.emacscore/dependencies.el")
+(update-packages)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;        Load other extensions
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Load the small libraries first
+(load "~/.emacscore/lisp-utils.el")
+(load "~/.emacscore/lisp/org-bullets.el")
+(load "~/.emacscore/lisp/cmake.el")
+(load "~/.emacscore/lisp/rainbow-mode-1.0.5.el")
+(load "~/.emacscore/lisp/org-bullets.el")
+(load "~/.emacscore/lisp/org-fragtog.el")
+(load "~/.emacscore/lisp/epl.el")
+(load "~/.emacscore/lisp/pkg-info.el")
 
-;;
-;; Load straight.el
-;;
-;; https://github.com/raxod502/straight.el
-;;
-
-(defvar bootstrap-version)
-(let ((bootstrap-file
-       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-      (bootstrap-version 6))
-  (unless (file-exists-p bootstrap-file)
-    (with-current-buffer
-        (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
-         'silent 'inhibit-cookies)
-      (goto-char (point-max))
-      (eval-print-last-sexp)))
-  (load bootstrap-file nil 'nomessage))
-
-;; Install and use packages
-(straight-use-package 'bison-mode)
-(straight-use-package 'bnf-mode)
-(straight-use-package 'company)
-(straight-use-package 'company-c-headers)
-(straight-use-package 'counsel)
-(straight-use-package 'erlang)
-(straight-use-package 'elixir)
-(straight-use-package 'go-mode)
-(straight-use-package 'ivy)
-(straight-use-package 'ivy-posframe)
-(straight-use-package 'julia-mode)
-(straight-use-package 'julia-repl)
-(straight-use-package 'leuven-theme)
-(straight-use-package 'lsp-mode)
-(straight-use-package 'lsp-ui)
-(straight-use-package 'lsp-treemacs)
-(straight-use-package 'lua-mode)
-(straight-use-package 'magit)
-(straight-use-package 'markdown-mode)
-(straight-use-package 'material-theme)
-(straight-use-package 'org-bullets)
-(straight-use-package 'org-fragtog)
-(straight-use-package 'pkg-info)
-(straight-use-package 'rust-mode)
-(straight-use-package 'rustic)
-(straight-use-package
- '(solarized-emacs
-   :type git
-   :host github
-   :repo "bbatsov/solarized-emacs"
-   :branch "master"))
-(straight-use-package 'slime)
-(straight-use-package 'slime-company)
-(straight-use-package 'swiper)
-(straight-use-package 'tabbar)
-(straight-use-package 'vterm)
-(straight-use-package 'yaml-mode)
-(straight-use-package 'yasnippet)
-(straight-use-package 'yasnippet-snippets)
-(straight-use-package 'zig-mode)
-
-;; ui
+;; Emacs UI and utils
 (load "~/.emacscore/system.el")
 (load "~/.emacscore/file-utils.el")
 (load "~/.emacscore/text-utils.el")
@@ -133,7 +76,7 @@
 (load "~/.emacscore/dev/company.el")
 (load "~/.emacscore/dev/c.el")
 (load "~/.emacscore/dev/common-lisp.el")
-(load "~/.emacscore/dev/zig.el")
+;;(load "~/.emacscore/dev/zig.el")
 
 ;; Load miscellaneous things
 (load "~/.emacscore/term.el")
@@ -142,30 +85,16 @@
 (load "~/.emacscore/markups.el")
 (load "~/.emacscore/dotfiles.el")
 
-;; load 1 file things
-(load "~/.emacscore/lisp/cmake.el")
-(load "~/.emacscore/lisp/rainbow-mode-1.0.5.el")
-
 ;; do not use tabs for indentation at all
 (setq-default indent-tabs-mode nil)
 
-;; supress all deprecation warnings
-(setq warning-minimum-level -1)
+;; Hide *async-native-compile* buffer
+(setq warning-minimum-level :error)
 
-;; kill unneded buffers
-(when (get-buffer "*straight-process*")
-  (kill-buffer "*straight-process*"))
-(when (get-buffer "*straight-byte-compilation*")
-  (kill-buffer "*straight-byte-compilation*"))
-
-;; finally loaded everything
-(message "All done, %s%s" (user-login-name) ".")
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(warning-suppress-log-types '((flymake flymake))))
+;; custom-set-faces was added by Custom.
+;; If you edit it by hand, you could mess it up, so be careful.
+;; Your init file should contain only one such instance.
+;; If there is more than one, they won't work right.
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -182,19 +111,65 @@
  '(tabbar-separator ((t (:background "#fdf6e3" :foreground "#fdf6e3"))))
  '(tabbar-unselected ((t (:background "#fdf6e3" :foreground "#93a1a1")))))
 
-;; if you don't use RTL ever, this could improve perf
-(setq-default bidi-display-reordering 'left-to-right
-              bidi-paragraph-direction 'left-to-right
-              bidi-inhibit-bpa t)
-
-;; Improves terminal emulator (vterm/eat) throughput
-(setq read-process-output-max (* 2 1024 1024)
-      process-adaptive-read-buffering nil
-      ;; Improve scrolling and other UI responsiveness
-      fast-but-imprecise-scrolling t
-      redisplay-skip-fontification-on-input t
-      inhibit-compacting-font-caches t
-      idle-update-delay 1.0)
-
-;; Hide *async-native-compile* buffer
-(setq warning-minimum-level :error)
+;; finally loaded everything
+(message "All done, %s%s" (user-login-name) ".")
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages nil)
+ '(package-vc-selected-packages
+   '((with-editor :url "https://github.com/magit/with-editor.git"
+       :lisp-dir "lisp")
+     (emacs-libvterm :vc-backend Git :url
+                     "https://github.com/akermu/emacs-libvterm.git")
+     (yasnippet-snippets :vc-backend Git :url
+                         "https://github.com/AndreaCrotti/yasnippet-snippets")
+     (yasnippet :vc-backend Git :url
+                "https://github.com/joaotavora/yasnippet")
+     (yaml-mode :vc-backend Git :url
+                "https://github.com/yoshiki/yaml-mode")
+     (tabbar :vc-backend Git :url
+             "https://github.com/dholm/tabbar.git")
+     (swiper :vc-backend Git :url
+             "https://github.com/abo-abo/swiper.git")
+     (slime-company :vc-backend Git :url
+                    "https://github.com/anwyn/slime-company.git")
+     (slime :vc-backend Git :url "https://github.com/slime/slime.git")
+     (solarized-emacs :vc-backend Git :url
+                      "https://github.com/bbatsov/solarized-emacs.git")
+     (rustic :vc-backend Git :url
+             "https://github.com/brotzeit/rustic.git")
+     (rust-mode :vc-backend Git :url
+                "https://github.com/rust-lang/rust-mode.git")
+     (markdown-mode :vc-backend Git :url
+                    "https://github.com/jrblevin/markdown-mode.git")
+     (magit :url "https://github.com/magit/magit.git" :lisp-dir "lisp")
+     (lsp-ui :vc-backend Git :url
+             "https://github.com/emacs-lsp/lsp-ui.git")
+     (lsp-treemacs :vc-backend Git :url
+                   "https://github.com/emacs-lsp/lsp-treemacs.git")
+     (lsp-mode :vc-backend Git :url
+               "https://github.com/emacs-lsp/lsp-mode.git")
+     (ivy-posframe :vc-backend Git :url
+                   "https://github.com/tumashu/ivy-posframe.git")
+     (go-mode.el :vc-backend Git :url
+                 "https://github.com/dominikh/go-mode.el.git")
+     (flycheck :vc-backend Git :url
+               "https://github.com/flycheck/flycheck.git")
+     (f.el :vc-backend Git :url "https://github.com/rejeep/f.el.git")
+     (erlang-mode :url "https://github.com/erlang/otp" :lisp-dir
+                  "lib/tools/emacs")
+     (emacs-elixir :vc-backend Git :url
+                   "https://github.com/elixir-editors/emacs-elixir.git")
+     (dash.el :vc-backend Git :url
+              "https://github.com/magnars/dash.el.git")
+     (company-c-headers :vc-backend Git :url
+                        "https://github.com/randomphrase/company-c-headers.git")
+     (company-mode :vc-backend Git :url
+                   "https://github.com/company-mode/company-mode.git")
+     (bnf-mode :vc-backend Git :url
+               "https://github.com/sergeyklay/bnf-mode.git")
+     (bison-mode :vc-backend Git :url
+                 "https://github.com/Wilfred/bison-mode.git"))))

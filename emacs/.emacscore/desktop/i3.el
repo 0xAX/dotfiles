@@ -1,6 +1,8 @@
-;;; i3.el --- Do not conflict with WM keybindings  -*- lexical-binding: t -*-
+;;; i3.el --- Do not conflict with i3 WM keybindings  -*- lexical-binding: t -*-
 
+;;
 ;; exit from i3 passthrough mode on exit
+;;
 (add-hook 'kill-emacs-hook
           (lambda ()
             (shell-command-to-string "i3-msg mode default")))
@@ -9,6 +11,7 @@
 ;; switch to the given workspace.
 ;;
 (defmacro i3-switch-workspace (workspace)
+  "Generate a function to switch to the i3 workspace."
   `(defun ,(intern (concat "go-to-workspace-" workspace)) ()
      (interactive)
      (shell-command-to-string "i3-msg mode default")

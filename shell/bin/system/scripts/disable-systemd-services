@@ -39,6 +39,7 @@ batteries=$(ls -a /sys/class/power_supply/ | wc -l)
 if [[ $(batteries) -eq 2 ]];
 then
     sudo systemctl disable upower.service
+    sudo systemctl disable bluetooth.service
 else
     # Disable everything that is not at laptop
     sudo systemctl disable wpa_supplicant.service
