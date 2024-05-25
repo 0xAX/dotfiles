@@ -1,5 +1,7 @@
 ;;; .emacs --- My init file for GNU Emacs  -*- lexical-binding: t -*-
 
+(setq lsp-log-io t)
+
 ;; Set directory for dependencies and primary configuration
 (setq user-emacs-directory "~/.emacs.d")
 ;; Set directory with secondary configuration
@@ -76,7 +78,6 @@
 (load "~/.emacscore/dev/company.el")
 (load "~/.emacscore/dev/c.el")
 (load "~/.emacscore/dev/common-lisp.el")
-;;(load "~/.emacscore/dev/zig.el")
 
 ;; Load miscellaneous things
 (load "~/.emacscore/term.el")
