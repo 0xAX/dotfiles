@@ -31,7 +31,7 @@
     (when (equal (format "%s" buffer) "*slime-repl sbcl*")
       (progn
 	(switch-to-buffer "*slime-repl sbcl*")
-	(return buffer))))
+	(cl-return buffer))))
   (slime-repl))
 
 (defun slime-keybindings ()
