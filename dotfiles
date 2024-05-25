@@ -7,43 +7,43 @@ if [[ $# -ne 1 ]]; then
     exit -1
 fi
 
-DOTFILES="$HOME/dev/dotfiles"
+DOTFILES=~/dev/dotfiles
 
 case $1 in
 --update-repo)
+    # copy .bashrc and related stuff
+    cp -r ~/bin ~/.bash ~/.bashrc ~/.bash_logout ~/.bash_profile "$DOTFILES"/shell
+    # copy emacs directories
+    cp -r ~/.emacs ~/.emacscore "$DOTFILES"/emacs
+    # copy i3 stuff
+    cp -r ~/.i3/* "$DOTFILES"/i3
+
     # copy lisp/sbcl configuration
     test -r ~/.sbclrc && cp -r ~/.sbclrc "$DOTFILES"/dev/
 
     # copy zig/zls related files
-    cp -r ~/.config/zls.json "$DOTFILES"/.config
+    test -r ~/.config/zls.json && cp -r ~/.config/zls.json "$DOTFILES"/.config
 
     # copy gnupg related files
-    cp -r ~/.gnupg/public.key ~/.gnupg/gpg-agent.conf ~/.gnupg/gpg.conf "$DOTFILES"/.gnupg
-
-    # copy .bashrc and related stuff
-    cp -r ~/bin ~/.bash ~/.bashrc ~/.bash_logout ~/.bash_profile ~/.xinitrc "$DOTFILES"/shell
-
-    # copy emacs directories
-    rm -rf *.session
-    cp -r ~/.emacs ~/.emacscore "$DOTFILES"/emacs
-    test -r ~/.emacs.d/straight/versions/default.el && cp -r ~/.emacs.d/straight/versions/default.el "$DOTFILES"/emacs
-
-    # copy i3 stuff
-    cp -r ~/.i3/* "$DOTFILES"/i3
+    test -r ~/.gnupg/public.key && cp -r ~/.gnupg/public.key "$DOTFILES"/.gnupg
+    test -r ~/.gnupg/gpg-agent.conf && cp -r ~/.gnupg/gpg-agent.conf "$DOTFILES"/.gnupg
+    test -r ~/.gnupg/gpg.conf && cp -r ~/.gnupg/gpg.conf "$DOTFILES"/.gnupg
 
     # copy terminator stuff
-    cp -r ~/.config/terminator/config  "$DOTFILES"/terminator
+    test -r ~/.config/terminator/config && cp -r ~/.config/terminator/config  "$DOTFILES"/terminator
 
-    # copy system (per-user) files
-    cp -r ~/{.Xkbmap,.Xresources} "$DOTFILES"/system/
+    # copy X files
+    test -r ~/.Xkbmap && cp -r ~/.Xkbmap "$DOTFILES"/system/
+    test -r ~/.Xresources && cp -r ~/.Xresources "$DOTFILES"/system/
+    test -r ~/.xinitrc && cp -r ~/.xinitrc "$DOTFILES"/system/
 
     # copy other dotfiles
-    cp -r ~/.gdbinit "$DOTFILES"
-    cp -r ~/.gitconfig "$DOTFILES"/git
-    cp -r ~/.gitignore_global "$DOTFILES"/git
-    cp -r ~/.tmux.conf "$DOTFILES"
-    cp -r ~/.inputrc "$DOTFILES"
-    cp -r ~/.pythonrc  "$DOTFILES"
+    test -r ~/.gdbinit && cp -r ~/.gdbinit "$DOTFILES"
+    test -r ~/.gitconfig && cp -r ~/.gitconfig "$DOTFILES"/git
+    test -r ~/.gitignore_global && cp -r ~/.gitignore_global "$DOTFILES"/git
+    test -r ~/.tmux.conf && cp -r ~/.tmux.conf "$DOTFILES"
+    test -r ~/.inputrc && cp -r ~/.inputrc "$DOTFILES"
+    test -r ~/.pythonrc && cp -r ~/.pythonrc  "$DOTFILES"
     ;;
 --update-system)
     # copy lisp/sbcl configuration
@@ -56,29 +56,26 @@ case $1 in
     cp -r "$DOTFILES"/.gnupg/*.conf "$DOTFILES"/.gnupg/public.key ~/.gnupg/
 
     # copy standard dtofiles
-    cp -r .tmux.conf .gitconfig .gitignore_global .gdbinit .inputrc .pythonrc "$DOTFILES/git/." "$HOME"
+    cp -r .tmux.conf .gitconfig .gitignore_global .gdbinit .inputrc .pythonrc "$DOTFILES/git/." ~/
 
     # copy emacs files
-    rm -rf "$HOME"/{.emacs,.emacscore}
-    cp -r emacs/.emacs emacs/.emacscore "$HOME"
-    rm -rf ~/.emacs.d/straight/versions
-    mkdir -p ~/.emacs.d/straight/versions
-    cp -r "$DOTFILES"/emacs/default.el ~/.emacs.d/straight/versions
+    rm -rf ~/{.emacs,.emacscore}
+    cp -r emacs/.emacs emacs/.emacscore ~/
 
     # copy i3 stuff
-    cp -r "$DOTFILES"/i3/* "$HOME/.i3"
+    cp -r "$DOTFILES"/i3/* ~/.i3
 
     # copy terminator stuff
-    cp -r "$DOTFILES"/terminator/* "$HOME/.config/terminator"
+    mkdir -p ~/.config/terminator && cp -r "$DOTFILES"/terminator/* ~/.config/terminator
 
-    # Copy scripts to $HOME directory
-    cp -r "$DOTFILES"/shell/. "$DOTFILES/shell/bin" $HOME
+    # Copy scripts to home directory
+    cp -r "$DOTFILES"/shell/. "$DOTFILES/shell/bin" ~/
 
     # copy system (per-user) files
-    cp -r "$DOTFILES"/system/{.Xkbmap,.Xresources} ~/
+    cp -r "$DOTFILES"/system/{.Xkbmap,.Xresources,.xinitrc} ~/
 
     # install bin scripts
-    "$HOME/bin/installScripts"
+    "~/bin/installScripts"
     ;;
 *)
     echo "Error: provide command: --update-repo or --update-system"
