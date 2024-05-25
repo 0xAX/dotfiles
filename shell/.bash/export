@@ -3,6 +3,9 @@
 # some additional PATHS
 export PATH=$PATH:$HOME/bin
 
+# Some python tweaks
+PYTHONSTARTUP=~/.pythonrc
+
 # ocaml
 export PATH=$PATH:$HOME/.opam/default/bin
 test -r /home/alex/.opam/opam-init/init.sh && . /home/alex/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
