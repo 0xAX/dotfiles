@@ -1,5 +1,8 @@
 (require 'lsp-mode)
 
+;; pre-load clients
+(add-to-list 'load-path "~/.emacs.d/elpa/lsp-mode/clients")
+
 ;; install dependencies for lsp-mode
 (when (file-exists-p "/etc/fedora-release")
   (when (string= (shell-command-to-string "command -v clangd") "")
