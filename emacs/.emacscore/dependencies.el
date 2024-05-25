@@ -54,6 +54,9 @@
         (:name "markdown-mode"
          :repo "https://github.com/jrblevin/markdown-mode.git"
          :revision "0cdebc833ed9b98baf9f260ed12b1e36b0ca0e89")
+        (:name "meson-mode"
+         :repo "https://github.com/wentasah/meson-mode"
+         :revision "c8f4fbf075bb5db2bc0872afe02af2edac075e4e")
         (:name "rust-mode"
          :repo "https://github.com/rust-lang/rust-mode.git"
          :revision "d00d83d3a207a5b7c2994392b2781f627e3159ce")
