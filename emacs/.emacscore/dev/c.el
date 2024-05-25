@@ -8,4 +8,6 @@
 (setq c-basic-offset 4)
 
 (when (executable-find "clangd")
-  (add-hook 'c-mode-hook 'lsp))
+  (progn
+    (add-hook 'c-mode-hook 'lsp)
+    (add-hook 'c++-mode-hook 'lsp)))
