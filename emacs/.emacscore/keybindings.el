@@ -44,7 +44,7 @@
 (global-set-key (kbd "TAB") 'tab-to-tab-stop)
 
 ;; buffers manipulations
-(global-set-key "\C-k" 'kill-this-buffer)
+(global-set-key "\C-k" (lambda () (interactive) (kill-buffer (current-buffer))))
 (global-set-key "\M-w" 'save-buffers-kill-emacs)
 (global-set-key "\M-d" 'delete-this-buffer-and-file)
 (global-set-key (kbd "M-<left>")  'beginning-of-line)
