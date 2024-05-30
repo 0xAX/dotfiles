@@ -12,10 +12,8 @@ then
     exit 1
 fi
 
-token=$(op signin --raw)
-export OP_SESSION_my="$token"
-eval $(op signin my)
+eval $(op signin)
 
-neomutt -F /home/alex/.neomutrc
+neomutt -F ~/.neomutrc
 
 exit 0;
