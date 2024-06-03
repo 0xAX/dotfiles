@@ -11,6 +11,9 @@ DOTFILES=~/dev/dotfiles
 
 case $1 in
 --update-repo)
+    # copy mail scripts and configuration
+    cp -r ~/.neomutrc ~/.mail ~/.offlineimaprc "$DOTFILES"/mail
+
     # copy .bashrc and related stuff
     cp -r ~/bin ~/.bash ~/.bashrc ~/.bash_logout ~/.bash_profile "$DOTFILES"/shell
     # copy emacs directories
@@ -46,6 +49,12 @@ case $1 in
     test -r ~/.pythonrc && cp -r ~/.pythonrc  "$DOTFILES"
     ;;
 --update-system)
+    # copy mail scripts and configuration
+    cp -r "$DOTFILES"/mail/.mail ~/
+    cp -r "$DOTFILES"/mail/.neomutrc ~/
+    cp -r "$DOTFILES"/mail/.offlineimaprc ~/
+    sudo cp -r "$DOTFILES"/mail/email "$DOTFILES"/mail/sync-email /usr/local/bin
+
     # copy lisp/sbcl configuration
     cp -r "$DOTFILES"/dev/.sbclrc ~/.sbclrc
 
@@ -56,7 +65,7 @@ case $1 in
     cp -r "$DOTFILES"/.gnupg/*.conf "$DOTFILES"/.gnupg/public.key ~/.gnupg/
 
     # copy standard dtofiles
-    cp -r .tmux.conf .gitconfig .gitignore_global .gdbinit .inputrc .pythonrc "$DOTFILES/git/." ~/
+    cp -r .tmux.conf .gdbinit .inputrc .pythonrc "$DOTFILES/git/." ~/
 
     # copy emacs files
     rm -rf ~/{.emacs,.emacscore}
@@ -75,7 +84,7 @@ case $1 in
     cp -r "$DOTFILES"/system/{.Xkbmap,.Xresources,.xinitrc} ~/
 
     # install bin scripts
-    "~/bin/installScripts"
+    ~/bin/installScripts
     ;;
 *)
     echo "Error: provide command: --update-repo or --update-system"
