@@ -20,3 +20,5 @@ emacs/.emacs.d/eshell/history
 *.gpg
 *.kbx
 emacs/.emacs.d
+*.elc
+*.pyc
