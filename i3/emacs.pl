@@ -6,7 +6,6 @@ use warnings;
 my $emacs = `ps -C emacs -o pid=`;
 
 if ($emacs eq "") {
-
     if (-x "/home/alex/disk/dev/emacs/src/emacs") {
         system("/home/alex/disk/dev/emacs/src/emacs &");
     } else {
