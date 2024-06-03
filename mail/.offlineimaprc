@@ -1,0 +1,21 @@
+[general]
+ui = ttyui
+accounts = Gmail
+pythonfile = ~/bin/mail/offlineimap.py
+
+[Account Gmail]
+localrepository = Gmail-Local
+remoterepository = Gmail-Remote
+
+[Repository Gmail-Local]
+type = Maildir
+localfolders = ~/Mail/Gmail
+
+[Repository Gmail-Remote]
+type = Gmail
+remoteuser = kuleshovmail@gmail.com
+remotepasseval = get_pass()
+realdelete = yes
+maxconnections = 10
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+folderfilter = lambda folder: folder not in ['[Gmail]/All Mail','[Gmail]/Important','[Gmail]/Starred', '[Gmail]/Chats']

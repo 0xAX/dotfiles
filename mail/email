@@ -12,6 +12,9 @@ then
     exit 1
 fi
 
+mkdir -p ~/Mail/{cur,new,tmp}
+mkdir -p ~/Mail/Gmail/{cur,new,tmp}
+
 eval $(op signin)
 
 neomutt -F ~/.neomutrc

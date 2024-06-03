@@ -1,96 +1,328 @@
 #
-# Generic settings
+# General options
 #
-set realname="Alexander Kuleshov"
-set from="kuleshovmail@gmail.com"
 
-set sleep_time=0
-set beep=no
-set editor = emacs
-set sort = threads
-set sort_aux = last-date-received
-set index_format = "%4C %Z %{%b %d %R} %-15.15L (%?l?%4l&%4c?) %s"
-set sidebar_visible
-set sidebar_format=" %B%* %F:%N:%S"
-set mail_check_stats
-set delete = yes
-set reply_to = yes
-set reverse_name =  yes
-set fast_reply = yes
-set forward_quote = yes
-set menu_scroll = yes
-set include = yes
-set quit = yes
-set help = yes
-set mail_check = 240
-set pager_index_lines = 5
-set use_from = yes
-set attribution = "On %d, %n wrote:"
-set charset = "utf8"
-set metoo = yes
-set sort_alias = alias
-set askcc = yes
-set alias_file = "~/.mutt/.mutt-alias"
-
-#
-# Generic headers
-#
-my_hdr X-Operating-System: `uname`
-my_hdr X-UTC-Date: `date -u`
-my_hdr X-Date: `date`
-
-#
-# Generic network settings
-#
-set connect_timeout=30
-set imap_keepalive=30
-set timeout=600
+# set mbox_type=Maildir
+# set mbox="/home/alex/olddisk/home/alex/Maildir"
+# set tmpdir = "/home/alex/olddisk/home/alex/Maildir"
+# set folder=/home/alex/olddisk/home/alex/Maildir
 set imap_idle=yes
+
+# Default editor
+set editor = "~/disk/dev/emacs/src/emacs -nw"
+# Set path to the mailcap file to consult MIME
+set mailcap_path = ~/.mail/mailcap
+# Set cache directory
+set message_cachedir = "~/.cache/mail"
+# Path for temporary files
+set tmpdir = /tmp/mail
+
+# Set preffered view modes view html automatically
+auto_view text/html text/calendar application/ics
+auto_view application/zip
+auto_view application/x-gzip
+auto_view application/x-gunzip
+auto_view application/octet-stream
+auto_view application/x-zip-compressed
+auto_view application/x-tar-gz
+auto_view application/msword
+auto_view application/x-perl
+auto_view application/x-sh
+auto_view application/x-tcl
+auto_view application/RTF
+auto_view text/html
+auto_view text/x-vcard
+auto_view image/tiff
+
+# Specify the order of preference used by neomutt to determine which part of a multipart/alternative body to display.
+alternative_order text/plain text/html text/enriched text/*
+
+# Set the envelope sender of the message
+set  use_envelope_from = yes
+# Show heades during composing an e-mail
+set edit_headers
+# Skip some prompts
+set fast_reply
+# Ask for CC
+set askcc
+# save attachments with the body
+set fcc_attach
+# format of subject when forwarding
+set forward_format = "Fwd: %s"
+# Decode complex mime during forwarding
+set forward_decode
+# Quote format
+set attribution = "On %d, %n wrote:"
+# Always reply to the 'Reply to: field'
+set reply_to
+# Proper order of names in reply
+set reverse_name
+# Include quote in replies
+set include
+# Include quote in forwards
+set forward_quote
+# Set "text/plain; format=flowed" header
+set text_flowed
+# Status bar on the top
+set status_on_top
+# Do not ask for confirmation to quit
+set quit
+# Strip headers and eval mimes when piping
+set pipe_decode
+# strip headers and eval mimes before searching
+set thorough_search
+# Do not block for input
+set timeout = 0
+# include me in the new message
+set metoo=yes
+
+# open new imap connection everytime
 unset imap_passive
 unset suspend
 
 #
-# Generic mailbox configuration
+# UI
 #
-set mbox_type=Maildir
-set folder="imaps://imap.gmail.com:993"
-set spoolfile="+INBOX"
-set record="+[Gmail]/Sent Mail"
-set postponed="+[Gmail]/Drafts"
+
+set use_threads = yes
+set status_chars = " *%A"
+set status_format = "[ Folder: %f ] [%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]%>─%?p?( %p postponed )?"
+set date_format = "%d.%m.%Y %H:%M"
+set sort = threads
+set sort_aux = reverse-last-date-received
+set uncollapse_jump
+set pager_index_lines=5
+#set sort_re
+set reply_regexp = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
+set quote_regexp = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
+set send_charset = utf-8
+set charset = utf-8
+set arrow_cursor = "no"
+#set sidebar_visible
+set sidebar_format = "%B%?F? [%F]?%* %?N?%N/?%S"
+set mail_check_stats
 
 #
-# Imap configuration
+# Pager View Options
 #
-set imap_user="kuleshovmail@gmail.com"
-set imap_pass=`op get item qvmlw4o5342mdtofsdpxaorvdi | jq '.details.password'`
-mailboxes =INBOX =[Gmail]/Sent\ Mail =[Gmail]/Drafts =[Gmail]/Spam =[Gmail]/Trash
-mailboxes =Elixir =Emacs =Erlang =Github-Repos =ImportantMail =Interesting
-mailboxes =Kernel =MySQL =NetBSD =OpenBSD =Travelping =xerions
-set sidebar_delim_chars="/"
+set pager_index_lines = 10  # Shows 10 lines of index when pager is active
+set pager_context = 3
+set pager_stop
+set menu_scroll
+set tilde
+unset markers
 
 #
-# SMTP configuration
+# Key bindings
 #
-set smtp_url="smtps://kuleshovmail@gmail.com@smtp.gmail.com:465/"
-set smtp_pass=`op get item qvmlw4o5342mdtofsdpxaorvdi | jq '.details.password'`
 
-#
-# Keybindings
-#
+# basic movements
 bind generic <up>     previous-entry
 bind generic <down>   next-entry
 bind pager   <up>     previous-line
 bind pager   <down>   next-line
-bind pager       g       top
-bind pager       G       bottom
-bind index,pager R       group-reply
-bind index,pager Q       quit
 
-# sidebar keybindings
-bind index,pager <C-Up> sidebar-prev
-bind index,pager <C-Down> sidebar-next
-bind index,pager <C-Right> sidebar-open
-bind index,pager o sidebar-open
+bind attach <return> view-mailcap
+bind attach l view-mailcap
+bind attach h exit
+
+bind editor <space> noop
+
+bind pager c imap-fetch-mail
+bind pager h exit
+bind pager j next-line
+bind pager k previous-line
+bind pager l view-attachments
+#bind pager d half-down
+#bind pager u half-up
+bind pager R group-reply
+bind pager @ compose-to-sender
+bind index D purge-message
+
+bind index G last-entry
+bind index g noop
+bind index gg first-entry
+bind index D delete-message
+bind index U undelete-message
+bind index L limit
+bind index h noop
+bind index l display-message
+#bind index d half-down
+#bind index u half-up
+bind index R group-reply
+bind index <tab> sync-mailbox
+bind index <space> collapse-thread
+bind index @ compose-to-sender
+bind index D purge-message
+
+bind browser h goto-parent
+bind browser l select-entry
+bind browser gg top-page
+bind browser G bottom-page
+# bind browser d half-down
+# bind browser u half-up
+
+bind editor <Tab> complete-query
+bind editor ^T complete
+
+bind index <left> sidebar-prev
+bind index <right> sidebar-next
+bind index o sidebar-open
+#bind index <Esc>S sidebar-toggle
+#set sort_sidebar=unsorted
+
+# bind index,pager \Ck sidebar-prev
+# bind index,pager \Cj sidebar-next
+# bind index,pager \Cr sidebar-open
+# bind index,pager B sidebar-toggle-visible
+
+#
+# Accounts
+#
+
+source "~/.mail/accounts/personal"
+source "~/.mail/ui.rc"
+folder-hook $folder 'source /home/alex/.mail/accounts/personal'
+
+# switch between accounts
+macro index,pager <f2> '<sync-mailbox><enter-command>source ~/.mail/accounts/personal.conf<enter><change-folder>!<enter>'
+
+#
+# Color scheme
+#
+
+# color normal                default default
+# color index                 color2  default ~N
+# color index                 color1  default ~F
+# color index                 color13 default ~T
+# color index                 color1  default ~D
+# color attachment            color5  default
+# color signature             color7  default
+# color search                color4  default
+# color indicator             default color7
+# color error                 color1  default
+# color status                color8  default
+# color tree                  color8  default
+# color tilde                 color8  default
+# color hdrdefault            color13 default
+# color header                color13 default "^From:"
+# color header                color13 default "^Subject:"
+# color quoted                color8  default
+# color quoted1               color0  default
+# color quoted2               color7  default
+# color quoted3               color15 default
+# color quoted4               color15 default
+# color quoted5               color15 default
+# color body                  color2  default [\-\.+_a-zA-Z0-9]+@[\-\.a-zA-Z0-9]+
+# color body                  color2  default (https?|ftp)://[\-\.,/%~_:?&=\#a-zA-Z0-9]+
+# color body                  color4  default (^|[[:space:]])\\*[^[:space:]]+\\*([[:space:]]|$)
+# color body                  color4  default (^|[[:space:]])_[^[:space:]]+_([[:space:]]|$)
+# color body                  color4  default (^|[[:space:]])/[^[:space:]]+/([[:space:]]|$)
+# color sidebar_flagged       color1  default
+# color sidebar_new           color10 default
+
+# # gruvbox dark (contrast dark):
+# # See http://www.mutt.org/doc/manual/#color
+
+# color attachment  color109 color234
+# color bold        color229 color234
+# color error       color167 color234
+# color hdrdefault  color246 color234
+# color indicator   color223 color237
+# color markers     color243 color234
+# color normal      color223 color234
+# color quoted      color250 color234
+# color quoted1     color108 color234
+# color quoted2     color250 color234
+# color quoted3     color108 color234
+# color quoted4     color250 color234
+# color quoted5     color108 color234
+# color search      color234 color208
+# color signature   color108 color234
+# color status      color142 color234 #color234 color250
+# color tilde       color243 color234
+# color tree        color142 color234
+# color underline   color223 color239
+
+# color sidebar_divider    color250 color234
+# color sidebar_new        color142 color234
+
+# color index color142 color234 ~N
+# color index color108 color234 ~O
+# color index color109 color234 ~P
+# color index color214 color234 ~F
+# color index color175 color234 ~Q
+# color index color167 color234 ~=
+# color index color234 color223 ~T
+# color index color234 color167 ~D
+
+# color header color214 color234 #"^(To:|From:)"
+# # color header color142 color234 "^Subject:"
+# # color header color108 color234 "^X-Spam-Status:"
+# # color header color108 color234 "^Received:"
+
+# # Regex magic for URLs and hostnames
+# #
+# # Attention: BSD's regex has RE_DUP_MAX set to 255.
+# #
+# # Examples:
+# #   http://some-service.example.com
+# #   example.com
+# #   a.example.com
+# #   some-service.example.com
+# #   example.com/
+# #   example.com/datenschutz
+# #   file:///tmp/foo
+# #
+# # Non-examples:
+# #   1.1.1900
+# #   14.02.2022/24:00
+# #   23.59
+# #   w.l.o.g
+# #   team.its
+# color body color142 color234 "[a-z]{3,255}://[[:graph:]]*"
+# color body color142 color234 "([-[:alnum:]]+\\.)+([0-9]{1,3}|[-[:alpha:]]+)/[[:graph:]]*"
+# color body color142 color234 "([-[:alnum:]]+\\.){2,255}[-[:alpha:]]{2,10}"
+
+# # IPv4 and IPv6 stolen from https://stackoverflow.com/questions/53497/regular-expression-that-matches-valid-ipv6-addresses
+# color body color142 color234 "((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])"
+# color body color142 color234 "(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))"
+
+# # Mail addresses and mailto URLs
+# color body color208 color234 "[-a-z_0-9.%$]+@[-a-z_0-9.]+\\.[-a-z][-a-z]+"
+# color body color208 color234 "mailto:[-a-z_0-9.]+@[-a-z_0-9.]+"
+
+# # some simleys and stuff
+# color body color234 color214 "[;:]-*[)>(<lt;|]"
+# color body color229 color234 "\\*[- A-Za-z]+\\*"
+
+# color body color214 color234 "^-.*PGP.*-*"
+# color body color142 color234 "^gpg: Good signature from"
+# color body color167 color234 "^gpg: Can't.*$"
+# color body color214 color234 "^gpg: WARNING:.*$"
+# color body color167 color234 "^gpg: BAD signature from"
+# color body color167 color234 "^gpg: Note: This key has expired!"
+# color body color214 color234 "^gpg: There is no indication that the signature belongs to the owner."
+# color body color214 color234 "^gpg: can't handle these multiple signatures"
+# color body color214 color234 "^gpg: signature verification suppressed"
+# color body color214 color234 "^gpg: invalid node with packet of type"
+
+# color body color142 color234 "^Good signature from:"
+# color body color167 color234 "^.?BAD.? signature from:"
+# color body color142 color234 "^Verification successful"
+# color body color167 color234 "^Verification [^s][^[:space:]]*$"
+
+# color compose header            color223 color234
+# color compose security_encrypt  color175 color234
+# color compose security_sign     color109 color234
+# color compose security_both     color142 color234
+# color compose security_none     color208 color234
+
+#
+# Custom headers
+#
+my_hdr X-Operating-System: `uname`
+my_hdr X-Date: `date`
 
 #
 # headers order
@@ -98,62 +330,4 @@ bind index,pager o sidebar-open
 ignore *
 unhdr_order *
 unignore  Date: From: Reply-To: Mail-Followup-To: To: Cc: Subject:
-hdr_order From: To: Cc: Subject: Date: Reply-To:
-
-#
-# header colors
-#
-color header yellow default "^(From|To|Reply-to|Cc|Subject|Date):"
-
-#
-# Sidebar colors
-#
-color sidebar_indicator default color237         # Dark blue background
-color sidebar_highlight default color237        # Grey background
-
-#
-# Default color definitions
-#
-color normal     color6        default
-color quoted     color208      default
-color quoted1    color208      default
-color quoted2    color208      default
-color quoted3    color208      default
-color quoted4    color208      default
-
-# deleted message
-color index red default "~D"
-# related to me
-color index green default "~F"
-
-# status line
-set status_format="-%r-Mutt: [Msgs:%?M?%M/?%m%?n? New:%n?%?d? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p? Inc:%b?]---[%s]-%>------------------[%h]-
-
-#
-# Urls
-#
-color body green default "(http|https|ftp|news|telnet|finger)://[^ \"\t\r\n]*"
-color body green default "[-a-z_0-9.%$]+@[-a-z_0-9.]+\\.[-a-z][-a-z]+"
-mono body bold "(http|https|ftp|news|telnet|finger)://[^ \"\t\r\n]*"
-
-#
-# patch
-#
-color body color39 default "^diff --git.*"
-color body color39 default "^index [a-f0-9].*"
-color body color242 default "^\-\-\- .*"
-color body color242 default "^[\+]{3} .*"
-color body brightblue default "^@@.*"
-color body color40 default "^[\+][^\+]+.*"
-color body red  default "^\-[^\-]+.*"
-
-#
-# index colors
-#
-set date_format="%m-%d-%y"
-set index_format="%2C |%Z| %d %-30.30F %s"
-set quote_regexp="^( {0,4}[>|:#]| {0,4}[a-z0-9]+[>|]+)+"
-
-# TODO
-# gpg
-# multiple accounts
+hdr_order Subject: From: To: Cc: Date: Reply-To:
