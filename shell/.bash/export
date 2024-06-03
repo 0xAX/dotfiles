@@ -4,7 +4,7 @@
 export PATH=$PATH:$HOME/bin
 
 # Some python tweaks
-PYTHONSTARTUP=~/.pythonrc
+export PYTHONSTARTUP=~/.pythonrc
 
 # ocaml
 export PATH=$PATH:$HOME/.opam/default/bin
