@@ -19,6 +19,7 @@
 (global-unset-key "\C-b")
 (global-unset-key "\C-n")
 (global-unset-key "\C-d")
+(global-unset-key "\C-w")
 
 ;; external applications
 (global-set-key (kbd "C-x f")   'ftp)
@@ -32,7 +33,7 @@
 (global-set-key (kbd "C-x m")   'woman)
 (global-set-key (kbd "C-x e")   'eshell)
 
-;; Text manipulation
+;; Text and cursor manipulation
 (global-set-key "\C-a" 'mark-page)
 (global-set-key "\M-u" 'untabify)
 (global-set-key "\M-r" 'replace-all)
@@ -41,6 +42,9 @@
 (global-set-key "\C-g" 'goto-line)
 (global-set-key "\C-s" 'isearch-forward)
 (global-set-key "\C-b" 'isearch-backward)
+(global-set-key (kbd "C-w b") 'backward-word)
+(global-set-key (kbd "C-w d") 'kill-word)
+(global-set-key (kbd "C-w f") 'forward-word)
 (global-set-key (kbd "TAB") 'tab-to-tab-stop)
 
 ;; buffers manipulations
@@ -53,6 +57,7 @@
 (global-set-key (kbd "M-<down>") 'end-of-buffer)
 (global-set-key (kbd "C-c c") 'emacs-config)
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+
 ;; help
 (global-set-key (kbd "C-h m") 'describe-mode)
 (global-set-key (kbd "C-h k") 'describe-key)
