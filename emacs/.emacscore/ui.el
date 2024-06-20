@@ -3,6 +3,9 @@
 ;; yes-or-no-p to y-n
 (defalias 'yes-or-no-p 'y-or-n-p)
 
+;; If we switch to help window, move cursor there
+(setq help-window-keep-selected t)
+
 ;; Enable text wrapping
 (global-visual-line-mode)
 
