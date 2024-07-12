@@ -1,4 +1,4 @@
-;;; tabbar-solarized-style.el --- GNU Emacs tabbar styles for solarized theme  -*- lexical-binding: t -*-
+;;; material.el --- GNU Emacs tabbar styles for catppuccin theme  -*- lexical-binding: t -*-
 
 ;; Tabbar mode
 (require 'tabbar)
@@ -61,17 +61,25 @@
 ;; set up custom tabbar group
 (setq tabbar-buffer-groups-function 'my-tabbar-buffer-groups)
 
-;; tabbar background
-(setq tabbar-background-color "#fdf6e3")
-
-;; use custom faces as default one inherits font-size and other
-;; things from other configuration
-(custom-set-faces
- '(tabbar-default ((t (:background "#fdf6e3" :foreground "#eee8d5" :font "Fira Code-12"))))
- '(tabbar-selected ((t (:background "#fdf6e3" :foreground "#839496"))))
- '(tabbar-unselected ((t (:background "#fdf6e3" :foreground "#93a1a1"))))
- '(tabbar-modified ((t (:background "#fdf6e3" :foreground "#d33682"))))
- '(tabbar-separator ((t (:background "#fdf6e3" :foreground "#fdf6e3")))))
+(cond
+ ((equal catppuccin-flavor 'mocha)
+  (setq tabbar-background-color "#313244")
+  (custom-set-faces
+   '(tabbar-default ((t (:background "#313244" :foreground "#cdd6f4" :font "Fira Code-12"))))
+   '(tabbar-selected ((t (:background "#313244" :foreground "#cdd6f4"))))
+   '(tabbar-unselected ((t (:background "#313244" :foreground "#9399b2"))))
+   '(tabbar-modified ((t (:background "#313244" :foreground "#74c7ec"))))
+   '(tabbar-selected-modified ((t (:background "#313244" :foreground "#74c7ec"))))
+   '(tabbar-separator ((t (:background "#313244" :foreground "#313244"))))))
+ ((equal catppuccin-flavor 'macchiato)
+  (setq tabbar-background-color "#313244")
+  (custom-set-faces
+   '(tabbar-default ((t (:background "#363a4f" :foreground "#cad3f5" :font "Fira Code-12"))))
+   '(tabbar-selected ((t (:background "#363a4f" :foreground "#cad3f5"))))
+   '(tabbar-unselected ((t (:background "#363a4f" :foreground "#8087a2"))))
+   '(tabbar-modified ((t (:background "#363a4f" :foreground "#7dc4e4"))))
+   '(tabbar-selected-modified ((t (:background "#363a4f" :foreground "#7dc4e4"))))
+   '(tabbar-separator ((t (:background "#363a4f" :foreground "#363a4f")))))))
 
 ;;
 ;; Hide tabbar buttons

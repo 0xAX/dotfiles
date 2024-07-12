@@ -19,20 +19,45 @@
                                         (dired-directory dired-directory
                                                          (revert-buffer-function " %b" ("%b – Dir:  " default-directory)))))))
 
-;; set path to solarized theme
-(setq solarized-theme-path
-      (concat user-emacs-directory "/straight/build/solarized-emacs"))
+(setq current-theme 'material)
 
-;; Current theme
-(progn
-  (load (concat solarized-theme-path "/solarized-palettes.el"))
-  (load (concat solarized-theme-path "/solarized-faces.el"))
-  (load (concat solarized-theme-path "/solarized.el"))
-  (load (concat solarized-theme-path "/solarized-theme.el"))
-  (load (concat solarized-theme-path "/solarized-light-theme.el"))
-  (setq x-underline-at-descent-line t)
-  (enable-theme 'solarized-light)
-  (load "~/.emacscore/themes/solarized/tabbar-solarized-light-style.el"))
+(cond
+ ((equal current-theme 'material)
+  (progn
+    (setq material-theme-path
+          (concat user-emacs-directory "/straight/build/material-theme"))
+    (load (concat material-theme-path "/material-light-theme.el"))
+    (load "~/.emacscore/themes/material/tabbar.el")
+    (set-face-attribute 'show-paren-match-expression nil :background "#90A4AE")
+    (enable-theme 'material-light)))
+ ((equal current-theme 'capptuccin-machiato)
+  (progn
+    (setq capptuccin-theme-path
+        (concat user-emacs-directory "/straight/build/catppuccin-theme"))
+    (load (concat capptuccin-theme-path "/catppuccin-theme.el"))
+    (setq catppuccin-flavor 'macchiato)
+    (load "~/.emacscore/themes/catppuccin/tabbar-catppuccin-style.el")
+    (enable-theme 'catppuccin)))
+ ((equal curret-theme 'capptucin-mocha)
+  (progn
+    (setq capptuccin-theme-path
+        (concat user-emacs-directory "/straight/build/catppuccin-theme"))
+    (load (concat capptuccin-theme-path "/catppuccin-theme.el"))
+    (setq catppuccin-flavor 'mocha)
+    (load "~/.emacscore/themes/catppuccin/tabbar-catppuccin-style.el")
+    (enable-theme 'catppuccin)))
+ (t
+  (progn
+    (setq solarized-theme-path
+          (concat user-emacs-directory "/straight/build/solarized-emacs"))
+    (load (concat solarized-theme-path "/solarized-palettes.el"))
+    (load (concat solarized-theme-path "/solarized-faces.el"))
+    (load (concat solarized-theme-path "/solarized.el"))
+    (load (concat solarized-theme-path "/solarized-theme.el"))
+    (load (concat solarized-theme-path "/solarized-light-theme.el"))
+    (setq x-underline-at-descent-line t)
+    (enable-theme 'solarized-light)
+    (load "~/.emacscore/themes/solarized/tabbar-solarized-light-style.el"))))
 
 ;; hide scroll bar
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
@@ -81,6 +106,7 @@
 			    (?\| . ?\|)
                             (?\`  . ?\`)))
 
+;; Set fonts
 (cond ((file-directory-p "/usr/share/fonts/fira-code")
        (progn
          (set-frame-font "Fira Code-13")

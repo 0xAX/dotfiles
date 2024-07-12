@@ -1,4 +1,4 @@
-;;; tabbar-solarized-style.el --- GNU Emacs tabbar styles for solarized theme  -*- lexical-binding: t -*-
+;;; material.el --- GNU Emacs tabbar styles for material theme  -*- lexical-binding: t -*-
 
 ;; Tabbar mode
 (require 'tabbar)
@@ -62,16 +62,17 @@
 (setq tabbar-buffer-groups-function 'my-tabbar-buffer-groups)
 
 ;; tabbar background
-(setq tabbar-background-color "#fdf6e3")
+(setq tabbar-background-color "#FAFAFA")
 
 ;; use custom faces as default one inherits font-size and other
 ;; things from other configuration
 (custom-set-faces
- '(tabbar-default ((t (:background "#fdf6e3" :foreground "#eee8d5" :font "Fira Code-12"))))
- '(tabbar-selected ((t (:background "#fdf6e3" :foreground "#839496"))))
- '(tabbar-unselected ((t (:background "#fdf6e3" :foreground "#93a1a1"))))
- '(tabbar-modified ((t (:background "#fdf6e3" :foreground "#d33682"))))
- '(tabbar-separator ((t (:background "#fdf6e3" :foreground "#fdf6e3")))))
+ '(tabbar-default ((t (:background "#FAFAFA" :foreground "#eee8d5" :font "Fira Code-12"))))
+ '(tabbar-selected ((t (:background "#ECEFF1" :foreground "#000000"))))
+ '(tabbar-unselected ((t (:background "#ECEFF1" :foreground "#93a1a1"))))
+ '(tabbar-modified ((t (:background "#AAAAAA" :foreground "#d33682"))))
+ '(tabbar-separator ((t (:background "#ECEFEA" :foreground "#AAAAAA"))))
+ )
 
 ;;
 ;; Hide tabbar buttons
