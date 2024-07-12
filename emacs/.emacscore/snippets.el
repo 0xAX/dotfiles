@@ -2,12 +2,13 @@
 
 (add-hook 'prog-mode-hook #'yas-minor-mode)
 
-(setq yas-dir
-      (concat user-emacs-directory "/elpa/yasnippet-snippets/snippets"))
+;; Set path to the snippets fetched by straight
+(setq straight-yas-dir
+      (concat user-emacs-directory "/straight/build/yasnippet-snippets/snippets"))
 
 ;; Configure snippets directories
 (setq yas-snippet-dirs
-      '(yas-dir "~/.emacscore/snippets"))
+      '(straight-yas-dir "~/.emacscore/snippets"))
 
 ;; Enable yas for all
 (yas-reload-all)

@@ -21,7 +21,7 @@
 
 ;; set path to solarized theme
 (setq solarized-theme-path
-      (concat user-emacs-directory "/elpa/solarized-emacs"))
+      (concat user-emacs-directory "/straight/build/solarized-emacs"))
 
 ;; Current theme
 (progn

@@ -48,9 +48,61 @@
 (if (version< emacs-version "27.0")
     (package-initialize))
 
-;; Load the dependencies if something is missed
-(load "~/.emacscore/dependencies.el")
-(update-packages)
+;;
+;; Load straight.el
+;;
+;; https://github.com/raxod502/straight.el
+;;
+
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 6))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+
+;; Install and use packages
+(straight-use-package 'bison-mode)
+(straight-use-package 'bnf-mode)
+(straight-use-package 'company)
+(straight-use-package 'company-c-headers)
+(straight-use-package 'counsel)
+(straight-use-package 'erlang)
+(straight-use-package 'elixir)
+(straight-use-package 'go-mode)
+(straight-use-package 'ivy)
+(straight-use-package 'ivy-posframe)
+(straight-use-package 'julia-mode)
+(straight-use-package 'julia-repl)
+(straight-use-package 'leuven-theme)
+(straight-use-package 'lsp-mode)
+(straight-use-package 'lsp-ui)
+(straight-use-package 'lsp-treemacs)
+(straight-use-package 'lua-mode)
+(straight-use-package 'magit)
+(straight-use-package 'markdown-mode)
+(straight-use-package 'material-theme)
+(straight-use-package 'org-bullets)
+(straight-use-package 'org-fragtog)
+(straight-use-package 'pkg-info)
+(straight-use-package 'rust-mode)
+(straight-use-package 'rustic)
+(straight-use-package 'solarized-emacs)
+(straight-use-package 'slime)
+(straight-use-package 'slime-company)
+(straight-use-package 'swiper)
+(straight-use-package 'tabbar)
+(straight-use-package 'vterm)
+(straight-use-package 'yaml-mode)
+(straight-use-package 'yasnippet)
+(straight-use-package 'yasnippet-snippets)
+(straight-use-package 'zig-mode)
 
 ;; Load the small libraries first
 (load "~/.emacscore/lisp-utils.el")
@@ -119,68 +171,11 @@
  '(tabbar-separator ((t (:background "#fdf6e3" :foreground "#fdf6e3"))))
  '(tabbar-unselected ((t (:background "#fdf6e3" :foreground "#93a1a1")))))
 
+;; kill unneded buffers
+(when (get-buffer "*straight-process*")
+  (kill-buffer "*straight-process*"))
+(when (get-buffer "*straight-byte-compilation*")
+  (kill-buffer "*straight-byte-compilation*"))
+
 ;; finally loaded everything
 (message "All done, %s%s" (user-login-name) ".")
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ignored-local-variable-values '((Base . 10) (Syntax . ANSI-Common-Lisp)))
- '(package-selected-packages nil)
- '(package-vc-selected-packages
-   '((with-editor :url "https://github.com/magit/with-editor.git"
-       :lisp-dir "lisp")
-     (emacs-libvterm :vc-backend Git :url
-                     "https://github.com/akermu/emacs-libvterm.git")
-     (yasnippet-snippets :vc-backend Git :url
-                         "https://github.com/AndreaCrotti/yasnippet-snippets")
-     (yasnippet :vc-backend Git :url
-                "https://github.com/joaotavora/yasnippet")
-     (yaml-mode :vc-backend Git :url
-                "https://github.com/yoshiki/yaml-mode")
-     (tabbar :vc-backend Git :url
-             "https://github.com/dholm/tabbar.git")
-     (swiper :vc-backend Git :url
-             "https://github.com/abo-abo/swiper.git")
-     (slime-company :vc-backend Git :url
-                    "https://github.com/anwyn/slime-company.git")
-     (slime :vc-backend Git :url "https://github.com/slime/slime.git")
-     (solarized-emacs :vc-backend Git :url
-                      "https://github.com/bbatsov/solarized-emacs.git")
-     (rustic :vc-backend Git :url
-             "https://github.com/brotzeit/rustic.git")
-     (rust-mode :vc-backend Git :url
-                "https://github.com/rust-lang/rust-mode.git")
-     (meson-mode :vc-backend Git :url
-                 "https://github.com/wentasah/meson-mode")
-     (markdown-mode :vc-backend Git :url
-                    "https://github.com/jrblevin/markdown-mode.git")
-     (magit :url "https://github.com/magit/magit.git" :lisp-dir "lisp")
-     (lsp-ui :vc-backend Git :url
-             "https://github.com/emacs-lsp/lsp-ui.git")
-     (lsp-treemacs :vc-backend Git :url
-                   "https://github.com/emacs-lsp/lsp-treemacs.git")
-     (lsp-mode :vc-backend Git :url
-               "https://github.com/emacs-lsp/lsp-mode.git")
-     (ivy-posframe :vc-backend Git :url
-                   "https://github.com/tumashu/ivy-posframe.git")
-     (go-mode.el :vc-backend Git :url
-                 "https://github.com/dominikh/go-mode.el.git")
-     (flycheck :vc-backend Git :url
-               "https://github.com/flycheck/flycheck.git")
-     (f.el :vc-backend Git :url "https://github.com/rejeep/f.el.git")
-     (erlang-mode :url "https://github.com/erlang/otp" :lisp-dir
-                  "lib/tools/emacs")
-     (emacs-elixir :vc-backend Git :url
-                   "https://github.com/elixir-editors/emacs-elixir.git")
-     (dash.el :vc-backend Git :url
-              "https://github.com/magnars/dash.el.git")
-     (company-c-headers :vc-backend Git :url
-                        "https://github.com/randomphrase/company-c-headers.git")
-     (company-mode :vc-backend Git :url
-                   "https://github.com/company-mode/company-mode.git")
-     (bnf-mode :vc-backend Git :url
-               "https://github.com/sergeyklay/bnf-mode.git")
-     (bison-mode :vc-backend Git :url
-                 "https://github.com/Wilfred/bison-mode.git"))))
