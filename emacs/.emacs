@@ -91,6 +91,7 @@
 (straight-use-package 'material-theme)
 (straight-use-package 'org-bullets)
 (straight-use-package 'org-fragtog)
+(straight-use-package 'pg)
 (straight-use-package 'pkg-info)
 (straight-use-package 'rust-mode)
 (straight-use-package 'rustic)
