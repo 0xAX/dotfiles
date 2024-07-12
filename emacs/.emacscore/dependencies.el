@@ -63,6 +63,9 @@
         (:name "rustic"
          :repo "https://github.com/brotzeit/rustic.git"
          :revision "39423d1cf4fa054c36bf9577356451f4c06ee148")
+	(:name "s.el"
+         :repo "https://github.com/magnars/s.el.git"
+         :revision "dda84d38fffdaf0c9b12837b504b402af910d01d")
         (:name "solarized-emacs"
          :repo "https://github.com/bbatsov/solarized-emacs.git"
          :revision "922b5956a9e2e474f1595bad7b2b35f148b4df3f")

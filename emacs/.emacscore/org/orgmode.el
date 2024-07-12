@@ -4,15 +4,20 @@
 
 ;; set path to org directory
 (when (file-directory-p "~/dev/todo")
-  (setq org-directory "~/dev/todo"))
+  (setq org-directory "~/dev/todo")
+  (setq org-agenda-files '("~/dev/todo")))
 (when (file-directory-p "~/disk/dev/todo")
-  (setq org-directory "~/disk/dev/todo"))
+  (setq org-directory "~/disk/dev/todo")
+  (setq org-agenda-files '("~/disk/dev/todo")))
 
 ;; Add ability to add closing notes to the done items
-(setq org-log-done 'note)
+(setq org-log-done 'time)
 
-;; enable org-mode for *.org files
+;; Enable org-mode for *.org files
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+
+;; Add ability to follow links by pressing RET
+(setq org-return-follows-link  t)
 
 ;; Some good defaults
 (setq-default
@@ -23,11 +28,9 @@
  org-pretty-entities t
  org-startup-with-inline-images t
  org-hide-emphasis-markers t
- ;;org-adapt-indentation nil
  org-src-tab-acts-natively t
  org-src-preserve-indentation 2
  org-edit-src-content-indentation 2)
-
 
 ;; TODO
 (setq org-edit-src-content-indentation 0)

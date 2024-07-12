@@ -39,6 +39,15 @@
 (setq auto-save-default         nil)
 (setq create-lockfiles          nil)
 
+(require 'package)
+(setq package-check-signature 'nil)
+(setq package-check-signature nil)
+(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
+(add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+(if (version< emacs-version "27.0")
+    (package-initialize))
+
 ;; Load the dependencies if something is missed
 (load "~/.emacscore/dependencies.el")
 (update-packages)
@@ -117,6 +126,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ignored-local-variable-values '((Base . 10) (Syntax . ANSI-Common-Lisp)))
  '(package-selected-packages nil)
  '(package-vc-selected-packages
    '((with-editor :url "https://github.com/magit/with-editor.git"
@@ -142,6 +152,8 @@
              "https://github.com/brotzeit/rustic.git")
      (rust-mode :vc-backend Git :url
                 "https://github.com/rust-lang/rust-mode.git")
+     (meson-mode :vc-backend Git :url
+                 "https://github.com/wentasah/meson-mode")
      (markdown-mode :vc-backend Git :url
                     "https://github.com/jrblevin/markdown-mode.git")
      (magit :url "https://github.com/magit/magit.git" :lisp-dir "lisp")
