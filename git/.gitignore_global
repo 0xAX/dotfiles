@@ -26,7 +26,7 @@ build/*
 ############
 *.7z
 *.dmg
-#*.gz
+*.gz
 *.iso
 *.jar
 *.rar
