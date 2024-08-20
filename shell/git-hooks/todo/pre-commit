@@ -1,0 +1,15 @@
+#!/usr/bin/sh
+
+#
+# NOTE:
+#
+# Following should be executed for the pre-commit hook
+#
+# git config --local core.hooksPath .git/hooks
+#
+
+rm -rf notes.zip notes.zip.gpg
+zip notes.zip obisidian
+gpg2 -c notes.zip
+rm -rf notes.zip
+git add notes.zip.gpg
