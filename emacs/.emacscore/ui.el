@@ -19,7 +19,7 @@
                                         (dired-directory dired-directory
                                                          (revert-buffer-function " %b" ("%b – Dir:  " default-directory)))))))
 
-(setq current-theme 'material)
+(setq current-theme 'capptuccin-machiato);;'material)
 
 (cond
  ((equal current-theme 'material)

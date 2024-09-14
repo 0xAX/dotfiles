@@ -56,3 +56,6 @@ export SSL_CERT_FILE=/etc/ssl/certs/ca-bundle.crt
 
 # virtual machines
 export VAGRANT_HOME=/home/alex/disk2/.vagrant.d/
+
+# Path to android sdk
+export ANDROID_SDK_HOME=/home/alex/disk/dev/.android
