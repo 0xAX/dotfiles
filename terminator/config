@@ -1,16 +1,11 @@
 [global_config]
   borderless = True
-  hide_tabbar = True
   scroll_tabbar = True
   always_on_top = True
   use_custom_url_handler = True
   custom_url_handler = urlview
-  title_hide_sizetext = True
-  title_transmit_bg_color = "#585858"
   enabled_plugins = ,
-  suppress_multiple_term_dialog = True
   always_split_with_profile = True
-  title_font = Eeyek Unicode 12
 [keybindings]
   new_tab = <Primary>t
   close_term = <Alt>x
@@ -20,12 +15,10 @@
   prev_tab = <Shift>Left
 [profiles]
   [[default]]
-    cursor_color = "#aaaaaa"
   [[alex]]
     icon_bell = False
     background_color = "#fdf6e3"
     cursor_shape = ibeam
-    cursor_color = "#82cdb9"
     font = Fira Code Medium 14
     foreground_color = "#657b83"
     show_titlebar = False
