@@ -19,7 +19,7 @@
                                         (dired-directory dired-directory
                                                          (revert-buffer-function " %b" ("%b – Dir:  " default-directory)))))))
 
-(setq current-theme 'capptuccin-machiato);;'material)
+(setq current-theme 'capptuccin-machiato)
 
 (cond
  ((equal current-theme 'material)
@@ -38,7 +38,7 @@
     (setq catppuccin-flavor 'macchiato)
     (load "~/.emacscore/themes/catppuccin/tabbar-catppuccin-style.el")
     (enable-theme 'catppuccin)))
- ((equal curret-theme 'capptucin-mocha)
+ ((equal current-theme 'capptucin-mocha)
   (progn
     (setq capptuccin-theme-path
         (concat user-emacs-directory "/straight/build/catppuccin-theme"))
