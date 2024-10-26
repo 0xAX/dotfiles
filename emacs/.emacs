@@ -54,7 +54,6 @@
 ;;
 ;; https://github.com/raxod502/straight.el
 ;;
-
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
@@ -82,7 +81,6 @@
 (straight-use-package 'ivy-posframe)
 (straight-use-package 'julia-mode)
 (straight-use-package 'julia-repl)
-(straight-use-package 'leuven-theme)
 (straight-use-package 'lsp-mode)
 (straight-use-package 'lsp-ui)
 (straight-use-package 'lsp-treemacs)
