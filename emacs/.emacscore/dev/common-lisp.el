@@ -54,3 +54,6 @@
 
 (add-hook 'slime-mode-hook          #'slime-keybindings)
 (add-hook 'slime-repl-mode-hook     #'slime-keybindings)
+
+(custom-set-variables
+ '(ignored-local-variable-values '((Base . 10) (Syntax . ANSI-Common-Lisp))))
