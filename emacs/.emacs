@@ -6,14 +6,15 @@
 (setq user-emacs-configuration-directory "~/.emacscore")
 
 ;; If we are using i3wm, load related configuration.
-(let*
-    ((i3-socket (shell-command-to-string "i3 --get-socketpath"))
-     (i3 (file-exists-p (replace-regexp-in-string "\n$" "" i3-socket))))
-  (if i3
-      (progn
-        (load "~/.emacscore/desktop/i3.el")
-        (setq *i3* "true"))
-    (setq *i3* "false")))
+(when (executable-find "i3")
+  (let*
+      ((i3-socket (shell-command-to-string "i3 --get-socketpath"))
+       (i3 (file-exists-p (replace-regexp-in-string "\n$" "" i3-socket))))
+    (if i3
+        (progn
+          (load "~/.emacscore/desktop/i3.el")
+          (setq *i3* "true"))
+      (setq *i3* "false"))))
 
 ;; do not save sessions
 (desktop-save-mode 0)
@@ -160,3 +161,28 @@
 
 ;; finally loaded everything
 (message "All done, %s%s" (user-login-name) ".")
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ignored-local-variable-values '((Base . 10) (Syntax . ANSI-Common-Lisp))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(org-block ((t (:extend t :background "#24273a" :foreground "#cad3f5"))))
+ '(org-block-begin-line ((t (:extend t :background "#24273a" :foreground "#cad3f5" :box nil))))
+ '(org-block-end-line ((t (:extend t :background "#24273a" :foreground "#cad3f5" :box nil))))
+ '(org-level-1 ((t (:inherit outline-1 :height 0.8))))
+ '(org-level-2 ((t (:inherit outline-2 :height 0.8))))
+ '(org-level-3 ((t (:inherit outline-3 :height 0.799))))
+ '(org-level-4 ((t (:inherit outline-4 :height 0.777))))
+ '(org-level-5 ((t (:inherit outline-5 :height 0.6))))
+ '(tabbar-default ((t (:background "#363a4f" :foreground "#cad3f5" :font "Fira Code-12"))))
+ '(tabbar-modified ((t (:background "#363a4f" :foreground "#7dc4e4"))))
+ '(tabbar-selected ((t (:background "#363a4f" :foreground "#cad3f5"))))
+ '(tabbar-selected-modified ((t (:background "#363a4f" :foreground "#7dc4e4"))))
+ '(tabbar-separator ((t (:background "#363a4f" :foreground "#363a4f"))))
+ '(tabbar-unselected ((t (:background "#363a4f" :foreground "#8087a2")))))
