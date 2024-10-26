@@ -1,0 +1,25 @@
+#!/bin/bash
+
+cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo  \
+      -DLLVM_ENABLE_PROJECTS=all         \
+      -DLLVM_ENABLE_RUNTIMES=all         \
+      -DLLVM_TARGETS_TO_BUILD=X86        \
+      -DLLVM_USE_LINKER=lld              \
+      -DLLVM_BUILD_BENCHMARKS=ON         \
+      -DLLVM_BUILD_TESTS=ON              \
+      -DLLVM_BUILD_TOOLS=ON              \
+      -DLLVM_CCACHE_BUILD=ON             \
+      -DLLVM_ENABLE_EH=ON                \
+      -DLLVM_ENABLE_FFI=ON               \
+      -DLLVM_ENABLE_LIBCXX=ON            \
+      -DLLVM_ENABLE_LLVM_LIBC=OFF        \
+      -DLLVM_ENABLE_PROJECTS=all         \
+      -DLLVM_ENABLE_RUNTIMES=all         \
+      -DLLVM_INCLUDE_TESTS=ON            \
+      -DLLVM_INCLUDE_TOOLS=ON            \
+      -DLLVM_ENABLE_RTTI=ON              \
+      ../llvm-project/llvm
+
+make
+
+exit 0
