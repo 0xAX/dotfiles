@@ -104,7 +104,6 @@
 (straight-use-package 'yaml-mode)
 (straight-use-package 'yasnippet)
 (straight-use-package 'yasnippet-snippets)
-(straight-use-package 'zig-mode)
 
 ;; Load the small libraries first
 (load "~/.emacscore/lisp-utils.el")
