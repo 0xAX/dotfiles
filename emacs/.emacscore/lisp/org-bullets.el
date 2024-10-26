@@ -27,7 +27,7 @@
 
 ;;; Code:
 
-(eval-when-compile (require 'cl))
+(eval-when-compile (require 'cl-lib))
 
 (defgroup org-bullets nil
   "Display bullets as UTF-8 characters"
@@ -78,8 +78,10 @@ Should this be undesirable, one can remove them with
 
 ;;;###autoload
 (define-minor-mode org-bullets-mode
-    "UTF8 Bullets for org-mode"
-  nil nil nil
+  "UTF8 Bullets for org-mode"
+  :int-value nil
+  :lighter nil
+  :keymap nil
   (let* (( keyword
            `(("^\\*+ "
               (0 (let* (( level (- (match-end 0) (match-beginning 0) 1))
