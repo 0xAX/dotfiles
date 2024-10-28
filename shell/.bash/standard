@@ -148,3 +148,7 @@ alias load-test-cluster='export KUBECONFIG=/home/alex/work/tposs/devel/loadtest/
 
 # gnupg aliases
 alias gpg=gpg2
+
+# erlang/kerl aliases
+alias otp-27=". /usr/local/lib/erlang/27.0/activate"
+alias otp-24=". /usr/local/lib/erlang/24.0/activate"
