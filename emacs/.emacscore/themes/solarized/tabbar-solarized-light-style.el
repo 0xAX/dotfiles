@@ -67,11 +67,16 @@
 ;; use custom faces as default one inherits font-size and other
 ;; things from other configuration
 (custom-set-faces
- '(tabbar-default ((t (:background "#fdf6e3" :foreground "#eee8d5" :font "Fira Code-12"))))
+ '(tabbar-default ((t (:background "#fdf6e3" :foreground "#eee8d5")))
  '(tabbar-selected ((t (:background "#fdf6e3" :foreground "#839496"))))
  '(tabbar-unselected ((t (:background "#fdf6e3" :foreground "#93a1a1"))))
  '(tabbar-modified ((t (:background "#fdf6e3" :foreground "#d33682"))))
  '(tabbar-separator ((t (:background "#fdf6e3" :foreground "#fdf6e3")))))
+
+;; Set font for the tabbar
+;; NOTE: we do it here but not in the custom-set-faces above because the custom-set-faces must have already evaluated
+;; value of the font
+(set-face-attribute 'tabbar-default nil :font (plist-get (font-face-attributes (face-attribute 'default :font)) :family))
 
 ;;
 ;; Hide tabbar buttons
