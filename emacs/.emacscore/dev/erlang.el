@@ -30,4 +30,4 @@
 		(setq c-indent-level 4))))
 
 (add-hook 'erlang-mode-hook 'my-erlang-mode-hook)
-(require 'erlang-start)
+(require 'erlang-start nil t)
