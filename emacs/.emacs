@@ -6,7 +6,7 @@
 (setq user-emacs-configuration-directory "~/.emacscore")
 
 ;; If we are using i3wm, load related configuration.
-(when (executable-find "i3")
+(if (executable-find "i3")
   (let*
       ((i3-socket (shell-command-to-string "i3 --get-socketpath"))
        (i3 (file-exists-p (replace-regexp-in-string "\n$" "" i3-socket))))
@@ -14,7 +14,8 @@
         (progn
           (load "~/.emacscore/desktop/i3.el")
           (setq *i3* "true"))
-      (setq *i3* "false"))))
+      (setq *i3* "false")))
+  (setq *i3* "false"))
 
 ;; Kill buffers without asking confirmation about active running processes
 (setq kill-buffer-query-functions
