@@ -127,6 +127,7 @@ source $BASHRC_DIR/export
 source $BASHRC_DIR/docker
 source $BASHRC_DIR/wallpapers
 source $BASHRC_DIR/terminal
+source $BASHRC_DIR/vterm
 source "$HOME/.cargo/env"
 
 # turn off dpms
