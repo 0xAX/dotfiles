@@ -13,6 +13,14 @@
 (setq visible-bell nil)
 (setq ring-bell-function 'ignore)
 
+;; Set fonts
+(cond ((file-directory-p "/usr/share/fonts/fira-code")
+       (progn
+         (set-frame-font "Fira Code-13")
+         (enable-ligatures)))
+      (t
+       (set-frame-font "Monospace-13")))
+
 ;; display file name in title
 (setq-default frame-title-format
 	      (list '((buffer-file-name " %f"
@@ -106,14 +114,6 @@
 			    (?\| . ?\|)
                             (?\`  . ?\`)))
 
-;; Set fonts
-(cond ((file-directory-p "/usr/share/fonts/fira-code")
-       (progn
-         (set-frame-font "Fira Code-13")
-         (enable-ligatures)))
-      (t
-       (set-frame-font "Monospace-13")))
-
 ;; Navigation
 (windmove-default-keybindings)
 
@@ -143,12 +143,6 @@
 ;; Ivy configuration
 (ivy-mode)
 (ivy-posframe-mode)
-
-;; some customization for fonts directories
-(cond ((file-directory-p "/usr/share/fonts/fira-code")
-       (setq ivy-posframe-font "Fira Code-13"))
-      (t
-       (setq ivy-posframe-font "Monospace")))
 
 ;; If we switch to help window, move cursor there
 (setq help-window-keep-selected t)
