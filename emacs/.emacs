@@ -16,6 +16,10 @@
           (setq *i3* "true"))
       (setq *i3* "false"))))
 
+;; Kill buffers without asking confirmation about active running processes
+(setq kill-buffer-query-functions
+      (delq 'process-kill-buffer-query-function kill-buffer-query-functions))
+
 ;; do not save sessions
 (desktop-save-mode 0)
 ;; Delete text in selection mode when typing
