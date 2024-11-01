@@ -143,7 +143,8 @@
 (load "~/.emacscore/dev/common-lisp.el")
 
 ;; Load miscellaneous things
-(load "~/.emacscore/term.el")
+(when (not (string-match-p "microsoft" (shell-command-to-string "uname -a")))
+  (load "~/.emacscore/term.el")) ;; do not load vterm on WSL, does not work anyway
 (load "~/.emacscore/snippets.el")
 (load "~/.emacscore/build/make.el")
 (load "~/.emacscore/markups.el")
