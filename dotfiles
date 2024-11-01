@@ -19,7 +19,7 @@ case $1 in
     # copy emacs directories
     cp -r ~/.emacs ~/.emacscore "$DOTFILES"/emacs
     # copy i3 stuff
-    cp -r ~/.i3/* "$DOTFILES"/i3
+    test -d ~/.i3 && cp -r ~/.i3/* "$DOTFILES"/i3
 
     # copy lisp/sbcl configuration
     test -r ~/.sbclrc && cp -r ~/.sbclrc "$DOTFILES"/dev/
