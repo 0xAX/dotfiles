@@ -1,0 +1,11 @@
+"colors": {
+    "toolbar": "rgb(238, 232, 213)",
+    "background_color": "rgb(238, 232, 213)",
+    "search_bar_color": "rgb(253, 246, 227)",
+    "tab_highlight_color": "rgb(7, 54, 66)",
+    "pop_up_text": "rgb(7, 54, 66)",
+    "toolbar_icons_and_text": "rgb(7, 54, 66)",
+    "background_tab_text_color": "rgb(7, 54, 66)",
+    "search_text": "rgb(7, 54, 66)",
+    "popup_background": "rgb(255, 246, 227)"
+}
