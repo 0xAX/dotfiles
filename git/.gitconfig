@@ -77,7 +77,7 @@
     confirm = always
 
 [sequence]
-    editor = emacs
+    editor = "$EMACS"
 
 [commit]
     signoff = false
@@ -116,3 +116,6 @@
 [cinnabar]
     version-check = 1620808716
     helper = /home/alex/.mozbuild/git-cinnabar/git-cinnabar-helper
+
+[url "ssh://git@github.com/"]
+    insteadOf = https://github.com/
