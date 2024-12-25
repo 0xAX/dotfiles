@@ -5,6 +5,7 @@
   use_custom_url_handler = True
   custom_url_handler = urlview
   enabled_plugins = ,
+  ask_before_closing = never
   always_split_with_profile = True
 [keybindings]
   new_tab = <Primary>t
