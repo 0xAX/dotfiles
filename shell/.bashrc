@@ -141,3 +141,6 @@ NO_AT_BRIDGE=1
 
 # Fix gpg without gdb and other Gnome things
 export GPG_TTY=$(tty)
+
+# Set keyboard layout
+setxkbmap -model pc105 -layout pl,ru -option 'grp:lwin_toggle'

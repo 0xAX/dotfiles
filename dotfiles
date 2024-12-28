@@ -36,7 +36,6 @@ case $1 in
     test -r ~/.config/terminator/config && cp -r ~/.config/terminator/config  "$DOTFILES"/terminator
 
     # copy X files
-    test -r ~/.Xkbmap && cp -r ~/.Xkbmap "$DOTFILES"/system/
     test -r ~/.Xresources && cp -r ~/.Xresources "$DOTFILES"/system/
     test -r ~/.xinitrc && cp -r ~/.xinitrc "$DOTFILES"/system/
 
@@ -81,7 +80,7 @@ case $1 in
     cp -r "$DOTFILES"/shell/. "$DOTFILES/shell/bin" ~/
 
     # copy system (per-user) files
-    cp -r "$DOTFILES"/system/{.Xkbmap,.Xresources,.xinitrc} ~/
+    cp -r "$DOTFILES"/system/{.Xresources,.xinitrc} ~/
 
     # install bin scripts
     ~/bin/installScripts
