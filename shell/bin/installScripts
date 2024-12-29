@@ -5,7 +5,6 @@ shopt -s extglob
 SCRIPTS_DIR="$HOME/bin"
 SCRIPTS_DEST="/usr/bin"
 
-BUILD_DIR="$SCRIPTS_DIR/build/*"
 DEV_DIR="$SCRIPTS_DIR/dev/*"
 FEDORA_DIR="$SCRIPTS_DIR/fedora/*"
 GIT_DIR="$SCRIPTS_DIR/git/*"
@@ -13,8 +12,7 @@ GIT_PROMPT="$SCRIPTS_DIR/git-prompt/*"
 MATH_DIR="$SCRIPTS_DIR/math/*"
 SYSTEM_DIR="$SCRIPTS_DIR/system/scripts/*"
 
-for SCRIPT in $BUILD_DIR  \
-              $DEV_DIR    \
+for SCRIPT in $DEV_DIR    \
 	      $FEDORA_DIR \
 	      $GIT_DIR    \
 	      $GIT_PROMPT \
@@ -24,8 +22,7 @@ for SCRIPT in $BUILD_DIR  \
 done
 
 echo "Copying scripts to $SCRIPTS_DEST"
-sudo cp -r -v $BUILD_DIR   \
-              $DEV_DIR     \
+sudo cp -r -v $DEV_DIR     \
               $FEDORA_DIR  \
               $GIT_DIR     \
               $GIT_PROMPT  \
