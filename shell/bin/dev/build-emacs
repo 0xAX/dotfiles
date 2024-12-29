@@ -1,14 +1,41 @@
 #!/bin/bash
 
-./autogen.sh && \
-./configure --enable-profiling --enable-checking=all \
-            --enable-gtk-deprecation-warnings        \
-            --enable-gcc-warnings=warn-only          \
-            --enable-link-time-optimization          \
-            --with-mailutils --with-pop              \
-            --with-sound=alsa --with-json            \
-            --with-tree-sitter                       \
-            --with-native-compilation=yes            \
-            --with-imagemagick
+./configure --enable-gtk-deprecation-warnings  \
+	    --enable-gcc-warnings=yes          \
+            --enable-acl                       \
+	    --with-pop                         \
+	    --with-sound=alsa                  \
+            --with-x-toolkit=gtk3              \
+	    --with-xpm                         \
+            --with-jpeg                        \
+            --with-tiff                        \
+            --with-gif                         \
+            --with-png                         \
+	    --with-rsvg                        \
+            --with-libsystemd                  \
+            --with-cairo                       \
+            --with-xml2                        \
+	    --with-imagemagick                 \
+            --with-xft                         \
+            --with-libotf                      \
+            --with-m17-flt                     \
+	    --with-toolkit-scroll-bars         \
+            --with-xim                         \
+            --with-xaw3d                       \
+            --with-gpm                         \
+	    --with-dbus                        \
+            --with-gconf                       \
+            --with-gsettings                   \
+            --with-selinux                     \
+	    --with-gnutls                      \
+            --with-zlib                        \
+            --with-modules                     \
+            --with-threads                     \
+	    --with-file-notification=inotify   \
+            --without-makeinfo                 \
+            --with-x                           \
+	    --with-modules                     \
+
+make
 
 exit 0
