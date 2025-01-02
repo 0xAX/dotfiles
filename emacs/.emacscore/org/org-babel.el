@@ -19,6 +19,7 @@ that appears during evaluation."
    (C . t)
    (emacs-lisp . t)
    (lisp . t)
+   (julia . t)
    (plantuml . t)
    (latex . t)
    (octave . t)
