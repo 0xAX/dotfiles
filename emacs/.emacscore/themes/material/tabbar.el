@@ -46,6 +46,7 @@
          ((string-equal "html"     (file-name-extension (buffer-name))) "web")
          ((string-equal "css"      (file-name-extension (buffer-name))) "web")
          ((string-equal "tpl.html" (file-name-extension (buffer-name))) "web")
+         ((string-equal "sys.mjs"  (file-name-extension (buffer-name))) "web")
 
          ;; golang programming
          ((string-equal "go"       (file-name-extension (buffer-name))) "golang")
