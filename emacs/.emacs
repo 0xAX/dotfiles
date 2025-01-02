@@ -142,6 +142,7 @@
 (load "~/.emacscore/dev/company.el")
 (load "~/.emacscore/dev/c.el")
 (load "~/.emacscore/dev/common-lisp.el")
+(load "~/.emacscore/dev/js.el")
 
 ;; Load miscellaneous things
 (when (not (string-match-p "microsoft" (shell-command-to-string "uname -a")))
