@@ -2,7 +2,6 @@
 
 ./configure --enable-gtk-deprecation-warnings  \
 	    --enable-gcc-warnings=yes          \
-            --enable-acl                       \
 	    --with-pop                         \
 	    --with-sound=alsa                  \
             --with-x-toolkit=gtk3              \
@@ -35,6 +34,7 @@
             --without-makeinfo                 \
             --with-x                           \
 	    --with-modules                     \
+            --without-tree-sitter
 
 make
 
