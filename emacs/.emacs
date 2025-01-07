@@ -73,6 +73,7 @@
   (load bootstrap-file nil 'nomessage))
 
 ;; Install and use packages
+(straight-use-package 'auctex)
 (straight-use-package 'bison-mode)
 (straight-use-package 'bnf-mode)
 (straight-use-package 'catppuccin-theme)

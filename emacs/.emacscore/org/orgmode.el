@@ -60,8 +60,26 @@
 ;; Set to nil here, because its incompatible with viewing the agenda
 (setq org-startup-with-latex-preview nil)
 
+(setq org-latex-create-formula-image-program nil)
 (setq org-preview-latex-default-process 'dvisvgm)
 (setq org-latex-create-formula-image-program 'dvisvgm)
+
+(setq org-preview-latex-process-alist
+      '((dvisvgm :programs ("latex" "dvisvgm")
+                 :description "Convert LaTeX to SVG images via dvisvgm"
+                 :message "you need to install the programs: latex and dvisvgm."
+                 :image-input-type "dvi"
+                 :image-output-type "svg"
+                 :image-size-adjust (1.0 . 1.0)
+                 :latex-compiler ("latex -interaction nonstopmode -output-directory %o %f")
+                 :image-converter ("dvisvgm %f -n -b min -c %S -o %O"))))
+
+;; (setq org-preview-latex-default-process 'dvipng)
+;; (setq org-latex-create-formula-image-program 'dvipng)
+
+;; (setq org-preview-latex-default-process 'imagemagick)
+;; (setq org-latex-create-formula-image-program 'imagemagick)
+
 (plist-put org-format-latex-options :scale 2)
 (add-hook 'org-mode-hook 'org-fragtog-mode)
 
