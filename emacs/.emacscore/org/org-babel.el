@@ -26,6 +26,7 @@ that appears during evaluation."
    (julia . t)
    (perl . t)
    (scheme . t)
+   (shell . t)
    (sql . t)))
 
 ;; Do not execute code on C-c C-c by default as it will be re-binded
