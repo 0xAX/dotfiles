@@ -144,3 +144,4 @@ export GPG_TTY=$(tty)
 
 # Set keyboard layout
 setxkbmap -model pc105 -layout pl,ru -option 'grp:lwin_toggle'
+. "$HOME/.cargo/env"

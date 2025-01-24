@@ -22,6 +22,7 @@ test -d /usr/local/mysql/scripts && export PATH=$PATH:/usr/local/mysql/scripts
 test -d ${DEV_DISK}/db/usr/local/mysql/bin && export PATH=$PATH:${DEV_DISK}/db/usr/local/mysql/bin
 test -d ${DEV_DISK}/db/usr/local/mysql/scripts && export PATH=$PATH:${DEV_DISK}/db/usr/local/mysql/scripts
 test -d ${HOME}.local/zed.app/bin && export PATH=$PATH:${HOME}.local/zed.app/bin
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 # add zig and zls to PATH
 test -e ${DEV_DISK}/zig/zig && export PATH=$PATH:${DEV_DISK}/zig

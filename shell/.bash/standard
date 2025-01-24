@@ -145,6 +145,8 @@ alias enable-pcs-cache='export PCS_STORAGE=mysql; export CACHE_SESSIONS=true;'
 alias disable-pcs-cache='unset PCS_STORAGE; unset CACHE_SESSIONS;'
 alias enable-pcs-mysql='export PCS_STORAGE=mysql; unset CACHE_SESSIONS;'
 alias load-test-cluster='export KUBECONFIG=/home/alex/work/tposs/devel/loadtest/kube-config-testcluster.conf'
+alias tmp-cluster-ctx='export KUBECONFIG=/home/alex/work/tposs/devel/loadtest/kube-config-testcluster.conf'
+alias mc-cluster-ctx='export KUBECONFIG=/home/alex/Downloads/cennso-int-mc-1001.yaml'
 
 # gnupg aliases
 alias gpg=gpg2
