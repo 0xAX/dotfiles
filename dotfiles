@@ -12,12 +12,21 @@ DOTFILES=~/dev/dotfiles
 case $1 in
 --update-repo)
     # copy mail scripts and configuration
-    cp -r ~/.neomutrc ~/.mail ~/.offlineimaprc "$DOTFILES"/mail
+    test -r ~/.neomutrc && cp -r ~/.neomutrc "$DOTFILES"/mail
+    test -r ~/.offlineimaprc && cp -r ~/.offlineimaprc "$DOTIFLIES"/mail
+    test -d ~/.mail && cp -r ~/.mail "$DOTFILES"/mail
 
     # copy .bashrc and related stuff
-    cp -r ~/bin ~/.bash ~/.bashrc ~/.bash_logout ~/.bash_profile "$DOTFILES"/shell
+    test -d ~/bin && cp -r ~/bin "$DOTFILES"/shell
+    test -d ~/.bash && cp -r ~/.bash "$DOTFILES"/shell
+    test -f ~/.bashrc && cp -r ~/.bashrc "$DOTFILES"/shell
+    test -f ~/.bash_logout && cp -r ~/.bash_logout "$DOTFILES"/shell
+    test -f ~/.bash_profile && cp -r ~/.bash_profile "$DOTFILES"/shell
+
     # copy emacs directories
-    cp -r ~/.emacs ~/.emacscore "$DOTFILES"/emacs
+    test -d ~/.emacs && cp -r ~/.emacs "$DOTFILES"/emacs
+    test -f ~/.emacscore && cp -r ~/.emacscore "$DOTFILES"/emacs
+
     # copy i3 stuff
     test -d ~/.i3 && cp -r ~/.i3/* "$DOTFILES"/i3
 
