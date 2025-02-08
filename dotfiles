@@ -60,7 +60,7 @@ case $1 in
     cp -r ./zed/* ~/.config/zed
 
     # cypy prettier configuratoin
-    cp -r ~/.prettierrc ~/
+    cp -r .prettierrc ~/
 
     # copy mail scripts and configuration
     cp -r "$DOTFILES"/mail/.mail ~/
