@@ -46,8 +46,15 @@ case $1 in
     test -r ~/.tmux.conf && cp -r ~/.tmux.conf "$DOTFILES"
     test -r ~/.inputrc && cp -r ~/.inputrc "$DOTFILES"
     test -r ~/.pythonrc && cp -r ~/.pythonrc  "$DOTFILES"
+
+    # copy zed cconfiguration
+    test -r ~/.config/zed/settings.json && cp -r ~/.config/zed/settings.json ./zed
+    test -r ~/.config/zed/keymap.json && cp -r ~/.config/zed/keymap.json ./zed
     ;;
 --update-system)
+    # copy zed configuration
+    mkdir -p ~/.config/zed
+    cp -r ./zed/* ~/.config/zed
     # copy mail scripts and configuration
     cp -r "$DOTFILES"/mail/.mail ~/
     cp -r "$DOTFILES"/mail/.neomutrc ~/
