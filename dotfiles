@@ -50,11 +50,18 @@ case $1 in
     # copy zed cconfiguration
     test -r ~/.config/zed/settings.json && cp -r ~/.config/zed/settings.json ./zed
     test -r ~/.config/zed/keymap.json && cp -r ~/.config/zed/keymap.json ./zed
+
+    # copy prettier configuration
+    test -r ~/.prettierrc && cp -r ~/.prettierrc .
     ;;
 --update-system)
     # copy zed configuration
     mkdir -p ~/.config/zed
     cp -r ./zed/* ~/.config/zed
+
+    # cypy prettier configuratoin
+    cp -r ~/.prettierrc ~/
+
     # copy mail scripts and configuration
     cp -r "$DOTFILES"/mail/.mail ~/
     cp -r "$DOTFILES"/mail/.neomutrc ~/
