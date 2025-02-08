@@ -123,3 +123,7 @@ mode "passthrough" {
 bindsym $mod+0 exec "amixer set Master  -q 1%+"
 bindsym $mod+9 exec "amixer set Master -q 1%-"
 bindsym $mod+u exec "amixer -q sset Master toggle"
+
+# brightness
+bindsym XF86MonBrightnessUp exec brightnessctl s 1%-
+bindsym XF86MonBrightnessDown exec brightnessctl s 1%+
