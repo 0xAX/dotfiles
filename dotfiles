@@ -25,7 +25,7 @@ case $1 in
 
     # copy emacs directories
     test -d ~/.emacs && cp -r ~/.emacs "$DOTFILES"/emacs
-    test -f ~/.emacscore && cp -r ~/.emacscore "$DOTFILES"/emacs
+    test -d ~/.emacscore && cp -r ~/.emacscore "$DOTFILES"/emacs
 
     # copy i3 stuff
     test -d ~/.i3 && cp -r ~/.i3/* "$DOTFILES"/i3
