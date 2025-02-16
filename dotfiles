@@ -12,8 +12,8 @@ DOTFILES=~/dev/dotfiles
 case $1 in
 --update-repo)
     # copy mail scripts and configuration
-    test -r ~/.neomutrc && cp -r ~/.neomutrc "$DOTFILES"/mail
-    test -r ~/.offlineimaprc && cp -r ~/.offlineimaprc "$DOTIFLIES"/mail
+    test -f ~/.neomutrc && cp -r ~/.neomutrc "$DOTFILES"/mail
+    test -f ~/.offlineimaprc && cp -r ~/.offlineimaprc "$DOTFILES"/mail
     test -d ~/.mail && cp -r ~/.mail "$DOTFILES"/mail
 
     # copy .bashrc and related stuff
