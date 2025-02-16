@@ -1,4 +1,4 @@
-;;; material.el --- GNU Emacs tabbar styles for catppuccin theme  -*- lexical-binding: t -*-
+;;; material.el --- GNU Emacs tabbar styles for gruvbox theme  -*- lexical-binding: t -*-
 
 ;; Tabbar mode
 (require 'tabbar)
@@ -62,25 +62,20 @@
 ;; set up custom tabbar group
 (setq tabbar-buffer-groups-function 'my-tabbar-buffer-groups)
 
-(cond
- ((equal catppuccin-flavor 'mocha)
-  (setq tabbar-background-color "#313244")
-  (custom-set-faces
-   '(tabbar-default ((t (:background "#313244" :foreground "#cdd6f4"))))
-   '(tabbar-selected ((t (:background "#313244" :foreground "#cdd6f4"))))
-   '(tabbar-unselected ((t (:background "#313244" :foreground "#9399b2"))))
-   '(tabbar-modified ((t (:background "#313244" :foreground "#74c7ec"))))
-   '(tabbar-selected-modified ((t (:background "#313244" :foreground "#74c7ec"))))
-   '(tabbar-separator ((t (:background "#313244" :foreground "#313244"))))))
- ((equal catppuccin-flavor 'macchiato)
-  (setq tabbar-background-color "#313244")
-  (custom-set-faces
-   '(tabbar-default ((t (:background "#363a4f" :foreground "#cad3f5"))))
-   '(tabbar-selected ((t (:background "#363a4f" :foreground "#cad3f5"))))
-   '(tabbar-unselected ((t (:background "#363a4f" :foreground "#8087a2"))))
-   '(tabbar-modified ((t (:background "#363a4f" :foreground "#7dc4e4"))))
-   '(tabbar-selected-modified ((t (:background "#363a4f" :foreground "#7dc4e4"))))
-   '(tabbar-separator ((t (:background "#363a4f" :foreground "#363a4f")))))))
+(setq tabbar-background-color "#1d2021")
+
+(custom-set-faces
+ '(tabbar-default ((t (:background "#1d2021" :foreground "#1d2021" :box (:color "#1d2021")))))
+ '(tabbar-selected ((t (:background "#1d2021" :foreground "#ebdbb2"))))
+ '(tabbar-unselected ((t (:background "#1d2021" :foreground "#bdae93"))))
+ '(tabbar-modified ((t (:background "#1d2021" :foreground "#fe8019" :box (:color "#1d2021")))))
+ '(tabbar-separator ((t (:background "#1d2021" :foreground "#313244"))))
+ '(tabbar-highlight ((t (:background "#1d2021" :foreground "white"))))
+ '(tabbar-selected-modified ((t (:background "#1d2021" :foreground "#fe8019"))))
+
+ ;; line number custom faces
+ '(line-number ((t (:background "#1d2021" :foreground "#666666"))))
+ '(line-number-current-line ((t (:background "#1d2021" :foreground "#ff8000")))))
 
 ;; Set font for the tabbar
 ;; NOTE: we do it here but not in the custom-set-faces above because the custom-set-faces must have already evaluated
@@ -99,3 +94,8 @@
 
 ;; enable tabbar mode
 (tabbar-mode)
+
+;; Set mode-line color for grubvox
+(set-face-attribute 'mode-line nil
+                    :background "#1d2021"
+                    :box nil)

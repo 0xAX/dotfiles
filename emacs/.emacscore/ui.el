@@ -54,6 +54,14 @@
     (setq catppuccin-flavor 'mocha)
     (load "~/.emacscore/themes/catppuccin/tabbar-catppuccin-style.el")
     (enable-theme 'catppuccin)))
+ ((equal current-theme 'gruvbox)
+  (progn
+    (setq gruvbox-theme-path
+        (concat user-emacs-directory "/straight/build/gruvbox-theme"))
+    (load (concat gruvbox-theme-path "/gruvbox-theme.el"))
+    (load (concat gruvbox-theme-path "/gruvbox-dark-hard-theme.el"))
+    (load "~/.emacscore/themes/gruvbox/tabbar-gruvbox-style.el")
+    (enable-theme 'gruvbox-dark-hard)))
  (t
   (progn
     (setq solarized-theme-path
