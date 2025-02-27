@@ -27,7 +27,7 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 # add zig and zls to PATH
 test -e ${DEV_DISK}/zig/zig && export PATH=$PATH:${DEV_DISK}/zig
-test -e ${DEV_DISK}/zls/zig-out/bin/zls && export PATH=$PATH:${DEV_DISK}/zls/zig-out/bin
+test -e ${DEV_DISK}/zls/zls && export PATH=$PATH:${DEV_DISK}/zls
 
 # Linker options
 export LD_LIBRARY_PATH=""
