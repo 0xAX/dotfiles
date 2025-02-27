@@ -94,6 +94,7 @@ case $1 in
     cp -r emacs/.emacs emacs/.emacscore ~/
 
     # copy i3 stuff
+    mkdir -p ~/.i3
     cp -r "$DOTFILES"/i3/* ~/.i3
 
     # copy terminator stuff
