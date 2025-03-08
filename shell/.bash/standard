@@ -156,4 +156,4 @@ alias otp-27=". /usr/local/lib/erlang/27.0/activate"
 alias otp-24=". /usr/local/lib/erlang/24.0/activate"
 
 # zed
-alias delete-zed-conversatoins="rm -rf $HOME.local/share/zed/conversations/*"
+alias delete-zed-conversatoins="rm -rf $HOME/.local/share/zed/conversations/*"
