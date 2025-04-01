@@ -1,0 +1,9 @@
+#!/bin/bash
+
+mkdir -p ${HOME}/dev
+mkdir -p ${HOME}/disk/dev
+mkdir -p ${HOME}/work
+
+sudo dnf update git cmake emacs i3 btop dvisvgm yq jq makeinfo erlang
+
+exit 0
