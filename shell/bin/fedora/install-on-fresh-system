@@ -1,9 +1,19 @@
 #!/bin/bash
 
+# create base directories
 mkdir -p ${HOME}/dev
 mkdir -p ${HOME}/disk/dev
 mkdir -p ${HOME}/work
 
-sudo dnf update git cmake emacs i3 btop dvisvgm yq jq makeinfo erlang
+# install some initial software
+sudo dnf install -y git cmake emacs i3 btop dvisvgm yq jq makeinfo    \
+     erlang libX11-devel clang openssl openssl-devel libXaw-devel     \
+     libjpeg-devel libpng-devel giflib-devel libtiff-devel            \
+     gnutls-devel moby-engine ncurses-devel terminator alsa-lib-devel \
+     ImageMagick ImageMagick-devel gtk3-devel gtk4-devel              \
+     webkit2gtk4.1-devel webkit2gtk3-devel librsvg2-devel libgccjit
+
+# install rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 exit 0

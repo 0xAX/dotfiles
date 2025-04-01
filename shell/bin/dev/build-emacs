@@ -1,7 +1,6 @@
 #!/bin/bash
 
-./configure --enable-gtk-deprecation-warnings  \
-	    --enable-gcc-warnings=yes          \
+./configure --enable-gcc-warnings=yes          \
 	    --with-pop                         \
 	    --with-sound=alsa                  \
             --with-x-toolkit=gtk3              \
@@ -17,7 +16,6 @@
 	    --with-imagemagick                 \
             --with-xft                         \
             --with-libotf                      \
-            --with-m17-flt                     \
 	    --with-toolkit-scroll-bars         \
             --with-xim                         \
             --with-xaw3d                       \
@@ -31,9 +29,10 @@
             --with-modules                     \
             --with-threads                     \
 	    --with-file-notification=inotify   \
-            --without-makeinfo                 \
             --with-x                           \
+            --with-pgtk                        \
 	    --with-modules                     \
+            --with-native-compilation=yes      \
             --without-tree-sitter
 
 make
