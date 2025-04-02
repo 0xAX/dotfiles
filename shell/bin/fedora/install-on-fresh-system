@@ -13,7 +13,7 @@ sudo dnf install -y git cmake emacs i3 btop dvisvgm yq jq makeinfo    \
      gnutls-devel moby-engine ncurses-devel terminator alsa-lib-devel \
      ImageMagick ImageMagick-devel gtk3-devel gtk4-devel              \
      webkit2gtk4.1-devel webkit2gtk3-devel librsvg2-devel libgccjit   \
-     bison libtirpc-devel rpcgen
+     bison libtirpc-devel rpcgen flex
 
 # install rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
