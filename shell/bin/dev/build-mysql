@@ -1,7 +1,19 @@
 #!/bin/bash
 
-cmake -DBUILD_TESTING=OFF -DBUNDLE_MECAB=OFF \
--DCMAKE_INSTALL_PREFIX=/home/alex/disk2/mysql -DENABLE_GCOV=ON -DENABLE_GPROF=ON -DMINIMAL_RELWITHDEBINFO=OFF  -DMYSQL_DATADIR=/home/alex/disk2/mysql/data -DMYSQL_ICU_DATADIR=/home/alex/disk2/mysql/lib/private -DMYSQL_KEYRINGDIR=/home/alex/disk2/mysql/keyring -DROUTER_DATADIR=/home/alex/disk2/mysql/var/lib/mysqlrouter -DWITH_ROUTER=OFF -DWITH_SYSTEMD=ON ../mysql-server 
+cmake -DBUILD_TESTING=OFF                                         \
+      -DBUNDLE_MECAB=OFF                                          \
+      -DCMAKE_INSTALL_PREFIX=/home/alex/disk2/mysql               \
+      -DENABLE_GCOV=OFF                                           \
+      -DENABLE_GPROF=OFF                                          \
+      -DMINIMAL_RELWITHDEBINFO=OFF                                \
+      -DMYSQL_DATADIR=/home/alex/disk2/mysql/data                 \
+      -DMYSQL_ICU_DATADIR=/home/alex/disk2/mysql/lib/private      \
+      -DMYSQL_KEYRINGDIR=/home/alex/disk2/mysql/keyring           \
+      -DROUTER_DATADIR=/home/alex/disk2/mysql/var/lib/mysqlrouter \
+      -DWITH_ROUTER=OFF                                           \
+      -DWITH_SYSTEMD=ON                                           \
+      -DWITH_FIDO=bundled                                         \
+      ../mysql-server 
 
 # ~/disk2/mysql$ sudo ./bin/mysqld --initialize-insecure --user=root --basedir=/home/alex/disk2/mysql --datadir=/home/alex/disk2/mysql/data 
 # ~/disk2/mysql$ sudo ./bin/mysqld --user=root --basedir=/home/alex/disk2/mysql --datadir=/home/alex/disk2/mysql/data 
