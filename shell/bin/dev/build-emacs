@@ -30,7 +30,6 @@
             --with-threads                     \
 	    --with-file-notification=inotify   \
             --with-x                           \
-            --with-pgtk                        \
 	    --with-modules                     \
             --with-native-compilation=yes      \
             --without-tree-sitter
