@@ -94,6 +94,7 @@
 (straight-use-package 'magit)
 (straight-use-package 'markdown-mode)
 (straight-use-package 'material-theme)
+(straight-use-package 'nerd-icons-dired)
 (straight-use-package 'org-bullets)
 (straight-use-package 'org-fragtog)
 (straight-use-package 'pkg-info)
