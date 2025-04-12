@@ -24,7 +24,7 @@ case $1 in
     test -f ~/.bash_profile && cp -r ~/.bash_profile "$DOTFILES"/shell
 
     # copy emacs directories
-    test -d ~/.emacs && cp -r ~/.emacs "$DOTFILES"/emacs
+    test -f ~/.emacs && cp -r ~/.emacs "$DOTFILES"/emacs
     test -d ~/.emacscore && cp -r ~/.emacscore "$DOTFILES"/emacs
 
     # copy i3 stuff
