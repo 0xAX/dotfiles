@@ -29,6 +29,8 @@ case $1 in
 
     # copy i3 stuff
     test -d ~/.i3 && cp -r ~/.i3/* "$DOTFILES"/i3
+    # copy sway stuff
+    test -d ~/.sway && cp -r ~/.sway/* "$DOTFILES"/sway
 
     # copy lisp/sbcl configuration
     test -r ~/.sbclrc && cp -r ~/.sbclrc "$DOTFILES"/dev/
@@ -96,6 +98,10 @@ case $1 in
     # copy i3 stuff
     mkdir -p ~/.i3
     cp -r "$DOTFILES"/i3/* ~/.i3
+
+    # copy sway stuff
+    mkdir -p ~/.sway
+    cp -r "$DOTFILES"/sway/* ~/.sway
 
     # copy terminator stuff
     mkdir -p ~/.config/terminator && cp -r "$DOTFILES"/terminator/* ~/.config/terminator

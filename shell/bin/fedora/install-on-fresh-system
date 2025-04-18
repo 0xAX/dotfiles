@@ -14,7 +14,7 @@ sudo dnf install -y git cmake emacs i3 btop dvisvgm yq jq makeinfo    \
      ImageMagick ImageMagick-devel gtk3-devel gtk4-devel              \
      webkit2gtk4.1-devel webkit2gtk3-devel librsvg2-devel libgccjit   \
      bison libtirpc-devel rpcgen flex elfutils-libelf-devel           \
-     libquadmath-devel wireshark lz4 curl-config patch
+     libquadmath-devel wireshark lz4 curl-config patch sway
 
 # install rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh

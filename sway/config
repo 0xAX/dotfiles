@@ -1,0 +1,135 @@
+#
+# My i3 configuration file
+#
+# Feel free to reuse and enjoy (0xAX)
+#
+
+client.focused          #eee8d5 #fdf6e3 #073642 #8b3626
+client.unfocused        #eee8d5 #eee8d5 #839496 #8b3626
+
+# Let's use Alt for mode key
+set $mod Mod1
+# default font
+font pango:FiraCode, FontAwesome 13
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+bindsym $mod+Shift+f floating toggle
+
+# start a terminal
+bindsym $mod+Return exec terminator --profile alex
+# kill focused window
+bindsym $mod+q kill
+# restart i3
+bindsym $mod+c exec i3-msg restart
+# start dmenu (a program launcher)
+bindsym $mod+d exec dmenu_run -b -fn "Fira Code Retina-14" -nb '#073642' -sb "#073642" -nf '#fdf6e3' -sf '#fdf6e3'
+# go to the next workspace
+bindsym $mod+Tab workspace next
+# go to the prevoious workspace
+bindsym $mod+BackSpace workspace prev
+
+# Exit from i3
+bindsym $mod+Shift+e exit
+
+# Move between i3 windows
+bindsym $mod+Left focus left
+bindsym $mod+Right focus right
+bindsym $mod+Up focus up
+bindsym $mod+Down focus down
+
+# layouts
+bindsym $mod+f fullscreen
+bindsym $mod+s layout stacking
+bindsym $mod+t layout tabbed
+bindsym $mod+v layout splitv
+bindsym $mod+h layout splith
+
+# set default layout to tabbed
+workspace_layout tabbed
+
+# hide borders
+hide_edge_borders both
+
+#
+# workspaces
+#
+set $tag1 "1:&#xf120;"
+set $tag2 "2:&#xf121;"
+set $tag3 "3:&#xf269;"
+set $tag4 "4:&#xf2c6;"
+set $tag5 "5:&#xf0e0;"
+set $tag6 "6:&#xf15b;"
+set $tag7 "7:&#xf1c1;"
+set $tag8 "8:&#xf02d;"
+
+bindsym $mod+1 workspace $tag1
+bindsym $mod+2 exec --no-startup-id /home/alex/.i3/emacs.pl
+for_window [class="^[eE]macs$"] move container to workspace $tag2
+bindsym $mod+3 workspace $tag3
+bindsym $mod+4 workspace $tag4
+bindsym $mod+5 workspace $tag5
+bindsym $mod+6 workspace $tag6
+bindsym $mod+7 workspace $tag7
+bindsym $mod+8 workspace $tag8
+
+bindsym $mod+Shift+1 move container to workspace $tag1
+bindsym $mod+Shift+2 move container to workspace $tag2
+bindsym $mod+Shift+3 move container to workspace $tag3
+bindsym $mod+Shift+4 move container to workspace $tag4
+bindsym $mod+Shift+5 move container to workspace $tag5
+bindsym $mod+Shift+6 move container to workspace $tag6
+bindsym $mod+Shift+7 move container to workspace $tag7
+bindsym $mod+Shift+8 move container to workspace $tag8
+
+bar {
+        colors {
+           background #eee8d5
+           statusline #002b36
+           separator  #eee8d5
+           # Type              border   bg      fg
+           focused_workspace  #eee8d5 #fdf6e3 #002b36
+           active_workspace   #eee8d5 #eee8d5 #ffffff
+           inactive_workspace #eee8d5 #eee8d5 #888888
+           urgent_workspace   #eee8d5 #eee8d5 #888888
+    }
+    tray_output primary
+    position top
+    status_command i3status -c ~/.i3/i3status.conf
+    #swaybar_command i3bar
+    strip_workspace_numbers no
+}
+
+# resizing
+bindsym $mod+r mode "resize"
+mode "resize" {
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
+    bindsym Up resize shrink height 10 px or 10 ppt
+    bindsym Down resize grow height 10 px or 10 ppt
+    bindsym Return mode "default"
+    bindsym Escape    mode "default"
+}
+
+# lock screen
+bindsym $mod+Control+l exec i3-msg workspace number "1" && i3lock --tiling --dpms --color 000000
+
+mode "passthrough" {
+    bindsym $mod+Escape mode "default"
+}
+
+# sound
+bindsym $mod+0 exec "amixer set Master  -q 1%+"
+bindsym $mod+9 exec "amixer set Master -q 1%-"
+bindsym $mod+u exec "amixer -q sset Master toggle"
+
+# brightness
+bindsym XF86MonBrightnessUp exec brightnessctl s 1%-
+bindsym XF86MonBrightnessDown exec brightnessctl s 1%+
+
+# set keyboard layout switching
+input "type:keyboard" {
+    xkb_layout pl,ru
+    xkb_options grp:lwin_toggle
+}

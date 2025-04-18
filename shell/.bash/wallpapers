@@ -2,11 +2,29 @@
 
 # if we're starting system manually via startx the DISPLAY env variable might be
 # not set.
-if [ ! -z "$DISPLAY" ];
-then
-   FEH=$(whereis feh | awk '{print $2}')
-   if [ ! -z "$FEH" ]
-   then
-       $FEH --bg-scale "$HOME/dev/dotfiles/wallpapers/solarized-dark-wallpaper.jpg"
-   fi
+
+if [[ $(loginctl show-session "$XDG_SESSION_ID" -p Type) = "Type=x11" ]] ; then
+    if [ ! -z "$DISPLAY" ];
+    then
+        FEH=$(whereis feh | awk '{print $2}')
+        if [ ! -z "$FEH" ]
+        then
+            $FEH --bg-scale "$HOME/dev/dotfiles/wallpapers/solarized-dark-wallpaper.jpg"
+        fi
+    fi
+fi
+
+if [[ $(loginctl show-session "$XDG_SESSION_ID" -p Type) = "Type=wayland" ]] ; then
+    if [ ! -z "$DISPLAY" ];
+    then
+        SWAYBG=$(whereis swaybg | awk '{print $2}')
+        if [ ! -z "$SWAYBG" ]
+        then
+            if ! pgrep -x "swaybg" > /dev/null
+            then
+                pkill swaybg
+            fi
+            $SWAYBG -o "*" -i "$HOME/dev/dotfiles/wallpapers/solarized-dark-wallpaper.jpg" -m fill > /dev/null 2>&1 &
+        fi
+    fi
 fi

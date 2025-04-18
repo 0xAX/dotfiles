@@ -131,7 +131,10 @@ source $BASHRC_DIR/vterm
 source "$HOME/.cargo/env"
 
 # turn off dpms
-xset s off -dpms
+if [[ $(loginctl show-session "$XDG_SESSION_ID" -p Type) = "Type=x11" ]] ; then
+    xset s off -dpms
+    setxkbmap -model pc105 -layout pl,ru -option 'grp:lwin_toggle'
+fi
 
 # not start gvfsd fs
 export GVFS_DISABLE_FUSE=1
@@ -142,8 +145,15 @@ NO_AT_BRIDGE=1
 # Fix gpg without gdb and other Gnome things
 export GPG_TTY=$(tty)
 
-# Set keyboard layout
-setxkbmap -model pc105 -layout pl,ru -option 'grp:lwin_toggle'
-
 # Add zed to path
 export PATH=$HOME/.local/bin:$PATH
+
+# Add path to ssh-agent socket and run ssh-agent if it is not launched
+if [[ "$GDMSESSION" = "sway" ]]; then
+    export SSH_AUTH_SOCK=~/.ssh/ssh-agent.$HOSTNAME.sock
+
+    ssh-add -l 2>/dev/null >/dev/null
+    if [ $? -ge 2 ]; then
+        ssh-agent -a "$SSH_AUTH_SOCK" >/dev/null
+    fi
+fi
