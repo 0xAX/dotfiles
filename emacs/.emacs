@@ -83,6 +83,7 @@
 (straight-use-package 'erlang)
 (straight-use-package 'elixir)
 (straight-use-package 'go-mode)
+(straight-use-package 'gptel)
 (straight-use-package 'ivy)
 (straight-use-package 'ivy-posframe)
 (straight-use-package 'julia-mode)
