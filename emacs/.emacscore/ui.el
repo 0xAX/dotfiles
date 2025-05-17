@@ -27,15 +27,16 @@
                                         (dired-directory dired-directory
                                                          (revert-buffer-function " %b" ("%b – Dir:  " default-directory)))))))
 
-(setq current-theme 'capptuccin-machiato)
-
+;; Set-up Emacs theme. The choice depends on the `current-theme' variable.
+;; This variable must be defined in the beginning of the .emacs
 (cond
  ((equal current-theme 'material)
   (progn
     (setq material-theme-path
           (concat user-emacs-directory "/straight/build/material-theme"))
     (load (concat material-theme-path "/material-light-theme.el"))
-    (load "~/.emacscore/themes/material/tabbar.el")
+    (when (equal tab-mode 'tabbar)
+      (load "~/.emacscore/themes/material/tabbar.el"))
     (set-face-attribute 'show-paren-match-expression nil :background "#90A4AE")
     (enable-theme 'material-light)))
  ((equal current-theme 'capptuccin-machiato)
@@ -44,7 +45,8 @@
         (concat user-emacs-directory "/straight/build/catppuccin-theme"))
     (load (concat capptuccin-theme-path "/catppuccin-theme.el"))
     (setq catppuccin-flavor 'macchiato)
-    (load "~/.emacscore/themes/catppuccin/tabbar-catppuccin-style.el")
+    (when (equal tab-mode 'tabbar)
+      (load "~/.emacscore/themes/catppuccin/tabbar-catppuccin-style.el"))
     (enable-theme 'catppuccin)))
  ((equal current-theme 'capptucin-mocha)
   (progn
@@ -52,7 +54,8 @@
         (concat user-emacs-directory "/straight/build/catppuccin-theme"))
     (load (concat capptuccin-theme-path "/catppuccin-theme.el"))
     (setq catppuccin-flavor 'mocha)
-    (load "~/.emacscore/themes/catppuccin/tabbar-catppuccin-style.el")
+    (when (equal tab-mode 'tabbar)
+      (load "~/.emacscore/themes/catppuccin/tabbar-catppuccin-style.el"))
     (enable-theme 'catppuccin)))
  ((equal current-theme 'gruvbox)
   (progn
@@ -60,7 +63,8 @@
         (concat user-emacs-directory "/straight/build/gruvbox-theme"))
     (load (concat gruvbox-theme-path "/gruvbox-theme.el"))
     (load (concat gruvbox-theme-path "/gruvbox-dark-hard-theme.el"))
-    (load "~/.emacscore/themes/gruvbox/tabbar-gruvbox-style.el")
+    (when (equal tab-mode 'tabbar)
+      (load "~/.emacscore/themes/gruvbox/tabbar-gruvbox-style.el"))
     (enable-theme 'gruvbox-dark-hard)))
  (t
   (progn
@@ -73,7 +77,12 @@
     (load (concat solarized-theme-path "/solarized-light-theme.el"))
     (setq x-underline-at-descent-line t)
     (enable-theme 'solarized-light)
-    (load "~/.emacscore/themes/solarized/tabbar-solarized-light-style.el"))))
+    (when (equal tab-mode 'tabbar)
+      (load "~/.emacscore/themes/solarized/tabbar-solarized-light-style.el")))))
+
+;; Load tabs based on centaur-tabs if it is enabled
+(when (not (equal tab-mode 'tabbar))
+  (load "~/.emacscore/tabs.el"))
 
 ;; hide scroll bar
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))

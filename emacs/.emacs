@@ -1,5 +1,22 @@
 ;;; .emacs --- My init file for GNU Emacs  -*- lexical-binding: t -*-
 
+;; Choose tab-mode. Supported values:
+;;
+;;  - tabbar
+;;  - centaur-tab
+(setq tab-mode 'centaur-tab)
+
+;; Current theme. Following themes are supported:
+;;
+;; - capptuccin-machiato
+;; - material
+;; - capptucin-mocha
+;; - gruvbox
+;; - solarized
+;;
+;; The configuration of the theme itself is in the .emacscore/ui.el
+(setq current-theme 'solarized)
+
 ;; Set directory for dependencies and primary configuration
 (setq user-emacs-directory "~/.emacs.d")
 ;; Set directory with secondary configuration
@@ -45,6 +62,7 @@
 (setq auto-save-default         nil)
 (setq create-lockfiles          nil)
 
+;; Setup standard packaging
 (require 'package)
 (setq package-check-signature 'nil)
 (setq package-check-signature nil)
@@ -77,6 +95,7 @@
 (straight-use-package 'bison-mode)
 (straight-use-package 'bnf-mode)
 (straight-use-package 'catppuccin-theme)
+(straight-use-package 'centaur-tabs)
 (straight-use-package 'company)
 (straight-use-package 'company-c-headers)
 (straight-use-package 'counsel)
@@ -84,6 +103,7 @@
 (straight-use-package 'elixir)
 (straight-use-package 'go-mode)
 (straight-use-package 'gptel)
+(straight-use-package 'gruvbox-theme)
 (straight-use-package 'ivy)
 (straight-use-package 'ivy-posframe)
 (straight-use-package 'julia-mode)
@@ -146,6 +166,7 @@
 (load "~/.emacscore/dev/c.el")
 (load "~/.emacscore/dev/common-lisp.el")
 (load "~/.emacscore/dev/js.el")
+(load "~/.emacscore/dev/gptel.el")
 
 ;; Load miscellaneous things
 (when (not (string-match-p "microsoft" (shell-command-to-string "uname -a")))
