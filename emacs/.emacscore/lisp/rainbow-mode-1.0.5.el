@@ -1,4 +1,4 @@
-;;; rainbow-mode.el --- Colorize color names in buffers
+;;; rainbow-mode.el --- Colorize color names in buffers -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2010-2020 Free Software Foundation, Inc
 

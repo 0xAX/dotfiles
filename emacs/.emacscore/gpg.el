@@ -1,3 +1,5 @@
+;;; gpg.el --- Configuration for GPG  -*- lexical-binding: t -*-
+
 ;; Use gpg2 always
 (setq epg-gpg-program "gpg2")
 

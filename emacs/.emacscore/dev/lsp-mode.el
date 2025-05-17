@@ -1,3 +1,5 @@
+;;; lsp-mode.el --- LSP configuration -*- lexical-binding: t -*-
+
 (require 'lsp-mode)
 
 ;; pre-load clients

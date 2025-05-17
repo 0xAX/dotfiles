@@ -1,5 +1,8 @@
+;;; snippets.el --- Snippets for GNU emacs -*- lexical-binding: t -*-
+
 (require 'yasnippet)
 
+;; Enable yasnippets for all prog-mode(s)
 (add-hook 'prog-mode-hook #'yas-minor-mode)
 
 ;; Set path to the snippets fetched by straight

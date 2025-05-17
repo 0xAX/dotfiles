@@ -1,4 +1,4 @@
-;;; pkg-info.el --- Information about packages       -*- lexical-binding: t; -*-
+;;; pkg-info.el --- Information about packages -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2013-2015  Sebastian Wiesner <swiesner@lunaryorn.com>
 

@@ -1,4 +1,4 @@
-;;; sed-mode.el --- A major mode for editing sed source code
+;;; sed-mode.el --- A major mode for editing sed source code -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2013-2014 Eric Schulte
 

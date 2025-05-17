@@ -1,3 +1,5 @@
+;;; gptel.el --- Interface to GPT -*- lexical-binding: t -*-
+
 (defun run-gemini-api-key-script ()
   "Run the Gemini API key script, supply password, and return output as string."
   (interactive)

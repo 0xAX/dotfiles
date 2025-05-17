@@ -1,3 +1,5 @@
+;;; magit.el --- My configuration for magit -*- lexical-binding: t -*-
+;;
 ;; Enable additional suffixes
 ;;
 ;; For more information see:
