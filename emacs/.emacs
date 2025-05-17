@@ -15,7 +15,7 @@
 ;; - solarized
 ;;
 ;; The configuration of the theme itself is in the .emacscore/ui.el
-(setq current-theme 'solarized)
+(setq current-theme 'capptuccin-machiato)
 
 ;; Set directory for dependencies and primary configuration
 (setq user-emacs-directory "~/.emacs.d")
