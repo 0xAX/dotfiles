@@ -66,9 +66,15 @@
 (global-set-key (kbd "C-h s") 'describe-symbol)
 
 ;; tabbar keybindings
-(global-set-key [C-left]  'tabbar-backward-tab)
-(global-set-key [C-right] 'tabbar-forward-tab)
-(global-set-key [C-tab]   'tabbar-forward-group)
+(if (equal tab-mode 'tabbar)
+    (progn
+      (global-set-key [C-left]  'tabbar-backward-tab)
+      (global-set-key [C-right] 'tabbar-forward-tab)
+      (global-set-key [C-tab]   'tabbar-forward-group))
+    (progn
+      (global-set-key [C-left]  'centaur-tabs-backward)
+      (global-set-key [C-right] 'centaur-tabs-forward)
+      (global-set-key [C-tab] (lambda () (interactive) (centaur-tabs-forward-group)))))
 
 ;; files manipulation
 (global-set-key "\C-n" 'new-file)
