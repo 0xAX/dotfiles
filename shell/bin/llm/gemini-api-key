@@ -1,0 +1,24 @@
+#!/bin/bash
+
+if ! command -v op &> /dev/null
+then
+    sudo rpm --import https://downloads.1password.com/linux/keys/1password.asc
+    sudo sh -c 'echo -e "[1password]\nname=1Password Stable Channel\nbaseurl=https://downloads.1password.com/linux/rpm/stable/\$basearch\nenabled=1\ngpgcheck=1\nrepo_gpgcheck=1\ngpgkey=\"https://downloads.1password.com/linux/keys/1password.asc\"" > /etc/yum.repos.d/1password.repo'
+    sudo dnf check-update -y 1password-cli && sudo dnf install 1password-cli    
+fi
+
+ACCOUNTS=$(op account list)
+if [[ -z "$ACCOUNTS" ]];
+then
+    if [[ -z "$ONE_PW_EMAIL" || -z "$ONE_PW_PW" || -z "$ONE_PW_SEC_KEY" ]];
+    then
+        echo "Error: One of the environment variables is missing: ONE_PW_EMAIL, ONE_PW_PW, or ONE_PW_SEC_KEY" >&2
+        exit 1
+    else
+        eval $(echo "$ONE_PW_PW" | op account add --address my.1password.com --email "$ONE_PW_EMAIL" --secret-key "$ONE_PW_SEC_KEY")
+    fi
+fi
+
+eval $(op signin --account my.1password.com)
+
+op items get b74il2xj5eggoq62i5ik5uurpq --reveal | awk '/password/ {print $2}'
