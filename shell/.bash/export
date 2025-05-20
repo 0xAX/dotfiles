@@ -11,7 +11,6 @@ export PATH=$PATH:$HOME/.opam/default/bin
 test -r /home/alex/.opam/opam-init/init.sh && . /home/alex/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
 
 export PATH=$PATH:/usr/lib/jvm/java-1.8.0/bin
-export PATH=$PATH:$WORK/rebar3
 export PATH=$PATH:$HOME/.cargo/bin
 export PATH=$PATH:$WORK/elixir/bin
 export PATH=$PATH:/usr/local/pgsql/bin/
@@ -23,6 +22,7 @@ test -d ${DEV_DISK}/db/usr/local/mysql/bin && export PATH=$PATH:${DEV_DISK}/db/u
 test -d ${DEV_DISK}/db/usr/local/mysql/scripts && export PATH=$PATH:${DEV_DISK}/db/usr/local/mysql/scripts
 test -d ${HOME}/.local/zed.app/bin && export PATH=$PATH:${HOME}.local/zed.app/bin
 test -d /snap/k9s && export PATH=$PATH:/snap/k9s/current/bin
+test -d /home/alex/.cache/rebar3/bin && export PATH=$PATH:/home/alex/.cache/rebar3/bin
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 # add zig and zls to PATH
