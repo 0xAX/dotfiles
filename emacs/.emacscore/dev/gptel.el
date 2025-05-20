@@ -30,5 +30,5 @@
   (setq
    gptel-model 'gemini-2.5-flash-preview-04-17
    gptel-backend (gptel-make-gemini "Gemini"
-                   :key gemin-api-key
+                   :key gemini-api-key
                    :stream t)))
