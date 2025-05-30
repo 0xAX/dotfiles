@@ -1,0 +1,4 @@
+ /* Hide sidebar button */
+#sidebar-button {
+  display: none !important;
+}

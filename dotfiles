@@ -25,6 +25,7 @@ case $1 in
 --update-repo)
     # Copy firefox settings
     test -f "$MOZILA_PROFILE_DIR"/user.js && cp -r "$MOZILA_PROFILE_DIR"/user.js "$DOTFILES"/firefox
+    test -f "$MOZILA_PROFILE_CSS_DIR"/userChrome.css && cp -r "$MOZILA_PROFILE_CSS_DIR"/userChrome.css "$DOTFILES"/firefox/css
 
     # Copy mail scripts and configuration
     test -f "$HOME"/.neomutrc && cp -r "$HOME"/.neomutrc "$DOTFILES"/mail
@@ -129,6 +130,7 @@ case $1 in
 
     # Copy firefox settings
     cp -r "$DOTFILES"/firefox/user.js "$MOZILA_PROFILE_DIR"/
+    cp -r "$DOTFILES"/firefox/css/*.css "$MOZILA_PROFILE_CSS_DIR"
 
     # Install bin scripts
     "$HOME"/bin/installScripts
