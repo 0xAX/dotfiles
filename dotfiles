@@ -1,119 +1,137 @@
 #!/bin/bash
 
+set -o errexit
+set -o nounset
+set -o pipefail
+
 shopt -u dotglob
 
+# Check command line arguments
 if [[ $# -ne 1 ]]; then
     echo "Error: provide command: --update-repo or --update-system"
     exit -1
 fi
 
-DOTFILES=~/dev/dotfiles
+# Path to the dotfiles repository
+DOTFILES="$HOME/dev/dotfiles"
+# Path to the Firefox profile directory
+MOZILA_PROFILE_DIR="$HOME/.mozilla/firefox/"$(ls  -l --color=never $HOME/.mozilla/firefox/ | awk '{ print $9 }' | grep "default-release")
+# Path to the Firefox user themes
+MOZILA_PROFILE_CSS_DIR="$MOZILA_PROFILE_DIR"/chrome
+# Path to the Firefox extensions directory
+MOZILA_EXTENSIONS_DIR="$MOZILA_PROFILE_DIR"/extensions
 
 case $1 in
 --update-repo)
-    # copy mail scripts and configuration
-    test -f ~/.neomutrc && cp -r ~/.neomutrc "$DOTFILES"/mail
-    test -f ~/.offlineimaprc && cp -r ~/.offlineimaprc "$DOTFILES"/mail
-    test -d ~/.mail && cp -r ~/.mail "$DOTFILES"/mail
+    # Copy firefox settings
+    test -f "$MOZILA_PROFILE_DIR"/user.js && cp -r "$MOZILA_PROFILE_DIR"/user.js "$DOTFILES"/firefox
 
-    # copy .bashrc and related stuff
-    test -d ~/bin && cp -r ~/bin "$DOTFILES"/shell
-    test -d ~/.bash && cp -r ~/.bash "$DOTFILES"/shell
-    test -f ~/.bashrc && cp -r ~/.bashrc "$DOTFILES"/shell
-    test -f ~/.bash_logout && cp -r ~/.bash_logout "$DOTFILES"/shell
-    test -f ~/.bash_profile && cp -r ~/.bash_profile "$DOTFILES"/shell
+    # Copy mail scripts and configuration
+    test -f "$HOME"/.neomutrc && cp -r "$HOME"/.neomutrc "$DOTFILES"/mail
+    test -f "$HOME"/.offlineimaprc && cp -r "$HOME"/.offlineimaprc "$DOTFILES"/mail
+    test -d "$HOME"/.mail && cp -r "$HOME"/.mail "$DOTFILES"/mail
 
-    # copy emacs directories
-    test -f ~/.emacs && cp -r ~/.emacs "$DOTFILES"/emacs
-    test -d ~/.emacscore && cp -r ~/.emacscore "$DOTFILES"/emacs
+    # Copy .bashrc and related stuff
+    test -d "$HOME"/bin && cp -r "$HOME"/bin "$DOTFILES"/shell
+    test -d "$HOME"/.bash && cp -r "$HOME"/.bash "$DOTFILES"/shell
+    test -f "$HOME"/.bashrc && cp -r "$HOME"/.bashrc "$DOTFILES"/shell
+    test -f "$HOME"/.bash_logout && cp -r "$HOME"/.bash_logout "$DOTFILES"/shell
+    test -f "$HOME"/.bash_profile && cp -r "$HOME"/.bash_profile "$DOTFILES"/shell
 
-    # copy i3 stuff
-    test -d ~/.i3 && cp -r ~/.i3/* "$DOTFILES"/i3
-    # copy sway stuff
-    test -d ~/.sway && cp -r ~/.sway/* "$DOTFILES"/sway
+    # Copy emacs directories
+    test -f "$HOME"/.emacs && cp -r "$HOME"/.emacs "$DOTFILES"/emacs
+    test -d "$HOME"/.emacscore && cp -r "$HOME"/.emacscore "$DOTFILES"/emacs
 
-    # copy lisp/sbcl configuration
-    test -r ~/.sbclrc && cp -r ~/.sbclrc "$DOTFILES"/dev/
+    # Copy i3 stuff
+    test -d "$HOME"/.i3 && cp -r "$HOME"/.i3/* "$DOTFILES"/i3
+    # Copy sway stuff
+    test -d "$HOME"/.sway && cp -r "$HOME"/.sway/* "$DOTFILES"/sway
 
-    # copy zig/zls related files
-    test -r ~/.config/zls.json && cp -r ~/.config/zls.json "$DOTFILES"/.config
+    # Copy lisp/sbcl configuration
+    test -r "$HOME"/.sbclrc && cp -r "$HOME"/.sbclrc "$DOTFILES"/dev/
 
-    # copy gnupg related files
-    test -r ~/.gnupg/public.key && cp -r ~/.gnupg/public.key "$DOTFILES"/.gnupg
-    test -r ~/.gnupg/gpg-agent.conf && cp -r ~/.gnupg/gpg-agent.conf "$DOTFILES"/.gnupg
-    test -r ~/.gnupg/gpg.conf && cp -r ~/.gnupg/gpg.conf "$DOTFILES"/.gnupg
+    # Copy zig/zls related files
+    test -r "$HOME"/.config/zls.json && cp -r "$HOME"/.config/zls.json "$DOTFILES"/.config
 
-    # copy terminator stuff
-    test -r ~/.config/terminator/config && cp -r ~/.config/terminator/config  "$DOTFILES"/terminator
+    # Copy gnupg related files
+    test -r "$HOME"/.gnupg/public.key && cp -r "$HOME"/.gnupg/public.key "$DOTFILES"/.gnupg
+    test -r "$HOME"/.gnupg/gpg-agent.conf && cp -r "$HOME"/.gnupg/gpg-agent.conf "$DOTFILES"/.gnupg
+    test -r "$HOME"/.gnupg/gpg.conf && cp -r "$HOME"/.gnupg/gpg.conf "$DOTFILES"/.gnupg
 
-    # copy X files
-    test -r ~/.Xresources && cp -r ~/.Xresources "$DOTFILES"/system/
-    test -r ~/.xinitrc && cp -r ~/.xinitrc "$DOTFILES"/system/
+    # Copy terminator stuff
+    test -r "$HOME"/.config/terminator/config && cp -r "$HOME"/.config/terminator/config  "$DOTFILES"/terminator
 
-    # copy other dotfiles
-    test -r ~/.gdbinit && cp -r ~/.gdbinit "$DOTFILES"
-    test -r ~/.gitconfig && cp -r ~/.gitconfig "$DOTFILES"/git
-    test -r ~/.gitignore_global && cp -r ~/.gitignore_global "$DOTFILES"/git
-    test -r ~/.tmux.conf && cp -r ~/.tmux.conf "$DOTFILES"
-    test -r ~/.inputrc && cp -r ~/.inputrc "$DOTFILES"
-    test -r ~/.pythonrc && cp -r ~/.pythonrc  "$DOTFILES"
+    # Copy X files
+    test -r "$HOME"/.Xresources && cp -r "$HOME"/.Xresources "$DOTFILES"/system/
+    test -r "$HOME"/.xinitrc && cp -r "$HOME"/.xinitrc "$DOTFILES"/system/
 
-    # copy zed cconfiguration
-    test -r ~/.config/zed/settings.json && cp -r ~/.config/zed/settings.json ./zed
-    test -r ~/.config/zed/keymap.json && cp -r ~/.config/zed/keymap.json ./zed
+    # Copy other dotfiles
+    test -r "$HOME"/.gdbinit && cp -r "$HOME"/.gdbinit "$DOTFILES"
+    test -r "$HOME"/.gitconfig && cp -r "$HOME"/.gitconfig "$DOTFILES"/git
+    test -r "$HOME"/.gitignore_global && cp -r "$HOME"/.gitignore_global "$DOTFILES"/git
+    test -r "$HOME"/.tmux.conf && cp -r "$HOME"/.tmux.conf "$DOTFILES"
+    test -r "$HOME"/.inputrc && cp -r "$HOME"/.inputrc "$DOTFILES"
+    test -r "$HOME"/.pythonrc && cp -r "$HOME"/.pythonrc  "$DOTFILES"
 
-    # copy prettier configuration
-    test -r ~/.prettierrc && cp -r ~/.prettierrc .
+    # Copy zed cconfiguration
+    test -r "$HOME"/.config/zed/settings.json && cp -r "$HOME"/.config/zed/settings.json ./zed
+    test -r "$HOME"/.config/zed/keymap.json && cp -r "$HOME"/.config/zed/keymap.json ./zed
+
+    # Copy prettier configuration
+    test -r "$HOME"/.prettierrc && cp -r "$HOME"/.prettierrc .
     ;;
 --update-system)
-    # copy zed configuration
-    mkdir -p ~/.config/zed
-    cp -r ./zed/* ~/.config/zed
+    # Copy zed configuration
+    mkdir -p "$HOME"/.config/zed
+    cp -r ./zed/* "$HOME"/.config/zed
 
-    # cypy prettier configuratoin
-    cp -r .prettierrc ~/
+    # Copy prettier configuratoin
+    cp -r .prettierrc "$HOME"/
 
-    # copy mail scripts and configuration
-    cp -r "$DOTFILES"/mail/.mail ~/
-    cp -r "$DOTFILES"/mail/.neomutrc ~/
-    cp -r "$DOTFILES"/mail/.offlineimaprc ~/
+    # Copy mail scripts and configuration
+    cp -r "$DOTFILES"/mail/.mail "$HOME"/
+    cp -r "$DOTFILES"/mail/.neomutrc "$HOME"/
+    cp -r "$DOTFILES"/mail/.offlineimaprc "$HOME"/
     sudo cp -r "$DOTFILES"/mail/email "$DOTFILES"/mail/sync-email /usr/local/bin
 
-    # copy lisp/sbcl configuration
-    cp -r "$DOTFILES"/dev/.sbclrc ~/.sbclrc
+    # Copy lisp/sbcl configuration
+    cp -r "$DOTFILES"/dev/.sbclrc "$HOME"/.sbclrc
 
-    # copy zig/zls related files
-    cp -r "$DOTFILES"/.config/zls.json ~/.config/
+    # Copy zig/zls related files
+    cp -r "$DOTFILES"/.config/zls.json "$HOME"/.config/
 
-    # copy gnupg related files
-    cp -r "$DOTFILES"/.gnupg/*.conf "$DOTFILES"/.gnupg/public.key ~/.gnupg/
+    # Copy gnupg related files
+    cp -r "$DOTFILES"/.gnupg/*.conf "$DOTFILES"/.gnupg/public.key "$HOME"/.gnupg/
 
-    # copy standard dtofiles
-    cp -r .tmux.conf .gdbinit .inputrc .pythonrc "$DOTFILES/git/." ~/
+    # Copy standard dtofiles
+    cp -r .tmux.conf .gdbinit .inputrc .pythonrc "$DOTFILES/git/." "$HOME"/
 
-    # copy emacs files
-    rm -rf ~/{.emacs,.emacscore}
-    cp -r emacs/.emacs emacs/.emacscore ~/
+    # Copy emacs files
+    rm -rf "$HOME"/{.emacs,.emacscore}
+    cp -r emacs/.emacs emacs/.emacscore "$HOME"/
 
-    # copy i3 stuff
-    mkdir -p ~/.i3
-    cp -r "$DOTFILES"/i3/* ~/.i3
+    # Copy i3 stuff
+    mkdir -p "$HOME"/.i3
+    cp -r "$DOTFILES"/i3/* "$HOME"/.i3
 
-    # copy sway stuff
-    mkdir -p ~/.sway
-    cp -r "$DOTFILES"/sway/* ~/.sway
+    # Copy sway stuff
+    mkdir -p "$HOME"/.sway
+    cp -r "$DOTFILES"/sway/* "$HOME"/.sway
 
-    # copy terminator stuff
-    mkdir -p ~/.config/terminator && cp -r "$DOTFILES"/terminator/* ~/.config/terminator
+    # Copy terminator stuff
+    mkdir -p "$HOME"/.config/terminator && cp -r "$DOTFILES"/terminator/* "$HOME"/.config/terminator
 
     # Copy scripts to home directory
-    cp -r "$DOTFILES"/shell/. "$DOTFILES/shell/bin" ~/
+    cp -r "$DOTFILES"/shell/. "$DOTFILES/shell/bin" "$HOME"/
 
-    # copy system (per-user) files
-    cp -r "$DOTFILES"/system/{.Xresources,.xinitrc} ~/
+    # Copy system (per-user) files
+    cp -r "$DOTFILES"/system/{.Xresources,.xinitrc} "$HOME"/
 
-    # install bin scripts
-    ~/bin/installScripts
+    # Copy firefox settings
+    cp -r "$DOTFILES"/firefox/user.js "$MOZILA_PROFILE_DIR"/
+
+    # Install bin scripts
+    "$HOME"/bin/installScripts
     ;;
 *)
     echo "Error: provide command: --update-repo or --update-system"
