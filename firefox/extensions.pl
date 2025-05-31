@@ -1,12 +1,12 @@
 #!/usr/bin/env perl
 
-# TODO: For this moment we use firefox manually to install extension.
-#       Look for a way how to do it without clicking `Add`.
 # TODO: check how can we do it without wget
+# TODO: add comments to the script
 
 use strict;
 use warnings FATAL => 'all';
 
+my $firefox_dir = $ENV{"HOME"} . "/.mozilla/firefox/";
 my %extensions = (
     "ublock-origin" => "https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/",
     "zen-fox" => "https://addons.mozilla.org/en-US/firefox/addon/zen-fox/",
@@ -14,7 +14,23 @@ my %extensions = (
     "awesome-screenshot" => "https://addons.mozilla.org/en-US/firefox/addon/screenshot-capture-annotate/"
 );
 
-my $firefox_dir = $ENV{"HOME"} . "/.mozilla/firefox/";
+sub ask_yes_no {
+    my ($prompt, $default) = @_;
+    my $hint = !defined $default ? "[y/n]"
+        : $default ? "[Y/n]"
+        : "[y/N]";
+
+    while (1) {
+        print "$prompt $hint ";
+        chomp(my $ans = lc <STDIN> // "");
+
+        return $default if $ans eq "" && defined $default;
+        return 1 if $ans eq "y"  || $ans eq "yes";
+        return 0 if $ans eq "n"  || $ans eq "no";
+
+        print "Please answer yes or no.\n";
+    }
+}
 
 opendir(my $DIR, $firefox_dir);
 while (my $entry = readdir $DIR) {
@@ -26,10 +42,12 @@ while (my $entry = readdir $DIR) {
             my $download_ext_page_path = "/tmp/$extension";
             my $download_ext_path = "/tmp/$extension" . ".xpi";
 
+            next unless ask_yes_no("Install $extension?", 0);
+
             unlink($download_ext_page_path);
             unlink($download_ext_path);
 
-            print("Downloading $download_ext_page_path page\n");
+            print("Downloading $extension page\n");
             `wget --output-document=$download_ext_page_path $extension_url`;
 
             open my $fh, "<", $download_ext_page_path or die "Error: Can't open $download_ext_page_path file. Error: $!";
