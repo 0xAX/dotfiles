@@ -45,8 +45,8 @@ while (my $entry = readdir $DIR) {
             if (! -e $download_ext_path) {
                 die "Error: Can not download extension - $download_ext_url\n";
             }
-            `firefox -new-window $download_ext_path`;
-            unlink($download_ext_page_path);
+
+            `firefox --new-window $download_ext_path`;
         }
 
         # We have found default firefox profile. Use it.
