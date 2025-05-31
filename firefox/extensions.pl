@@ -15,7 +15,6 @@ my %extensions = (
 );
 
 my $firefox_dir = $ENV{"HOME"} . "/.mozilla/firefox/";
-my $http = HTTP::Tiny->new();
 
 opendir(my $DIR, $firefox_dir);
 while (my $entry = readdir $DIR) {
@@ -28,7 +27,7 @@ while (my $entry = readdir $DIR) {
             my $download_ext_path = "/tmp/$extension" . ".xpi";
 
             unlink($download_ext_page_path);
-            unlink($$download_ext_path);
+            unlink($download_ext_path);
 
             print("Downloading $download_ext_page_path page\n");
             `wget --output-document=$download_ext_page_path $extension_url`;
