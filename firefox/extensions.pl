@@ -1,6 +1,5 @@
 #!/usr/bin/env perl
 
-
 # TODO: For this moment we use firefox manually to install extension.
 #       Look for a way how to do it without clicking `Add`.
 # TODO: check how can we do it without wget
