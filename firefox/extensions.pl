@@ -27,8 +27,10 @@ while (my $entry = readdir $DIR) {
             my $download_ext_page_path = "/tmp/$extension";
             my $download_ext_path = "/tmp/$extension" . ".xpi";
 
-            print("Downloading $download_ext_page_path page\n");
             unlink($download_ext_page_path);
+            unlink($$download_ext_path);
+
+            print("Downloading $download_ext_page_path page\n");
             `wget --output-document=$download_ext_page_path $extension_url`;
 
             open my $fh, "<", $download_ext_page_path or die "Error: Can't open $download_ext_page_path file. Error: $!";
@@ -41,10 +43,16 @@ while (my $entry = readdir $DIR) {
             print("Downloading $extension extension\n");
             my $download_ext_url = $xpi_urls[0];
             `wget --output-document=$download_ext_path $download_ext_url`;
+            if (! -e $download_ext_path) {
+                die "Error: Can not download extension - $download_ext_url\n";
+            }
             `firefox -new-window $download_ext_path`;
             unlink($download_ext_page_path);
         }
 
+        # We have found default firefox profile. Use it.
         last;
     }
 }
+
+exit(0);
