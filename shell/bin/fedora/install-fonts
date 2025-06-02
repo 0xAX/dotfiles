@@ -1,0 +1,30 @@
+#!/bin/bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+shopt -u dotglob
+
+# Check that fonts archive was given
+if [[ $# -ne 1 ]]; then
+    echo "Error: pass the path of the archive with fonts." 1>&2
+    exit 1
+fi
+
+# Check that path to fonts given correctly
+if [[ ! -f "$1" ]]; then
+    echo "Error: archive with the fonts do not exist." 1>&2
+    exit 1
+fi
+
+# Go to the directory with local fonts
+cd ~/.local/share/fonts
+
+# Extract the fonts
+unzip "$1"
+
+# Update the fonts cache
+fc-cache -fv
+
+exit 0
