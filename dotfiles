@@ -14,8 +14,14 @@ fi
 
 # Path to the dotfiles repository
 DOTFILES="$HOME/dev/dotfiles"
+
 # Path to the Firefox profile directory
-MOZILA_PROFILE_DIR="$HOME/.mozilla/firefox/"$(ls  -l --color=never $HOME/.mozilla/firefox/ | awk '{ print $9 }' | grep "default-release")
+MOZILA_PROFILE_DIR=$(
+    awk '/^\[Profile[0-9]+\]$/ { section = $0 }
+         /^Default=1$/ { print section }
+         /^Path=/ && section { path = $0 }
+         /^Default=1$/ && path { print path; exit }' ~/.mozilla/firefox/profiles.ini | grep '^Path=' | cut -d= -f2)
+MOZILA_PROFILE_DIR="$HOME/.mozilla/firefox/$MOZILA_PROFILE_DIR"
 # Path to the Firefox user themes
 MOZILA_PROFILE_CSS_DIR="$MOZILA_PROFILE_DIR"/chrome
 # Path to the Firefox extensions directory
@@ -130,7 +136,7 @@ case $1 in
 
     # Copy firefox settings
     cp -r "$DOTFILES"/firefox/user.js "$MOZILA_PROFILE_DIR"/
-    cp -r "$DOTFILES"/firefox/css/*.css "$MOZILA_PROFILE_CSS_DIR"
+    mkdir -p "$MOZILA_PROFILE_CSS_DIR"/ && cp -r "$DOTFILES"/firefox/css/*.css "$MOZILA_PROFILE_CSS_DIR"/
 
     # Install bin scripts
     "$HOME"/bin/installScripts
