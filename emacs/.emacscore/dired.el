@@ -12,7 +12,10 @@
 (put 'dired-find-alternate-file 'disabled nil)
 
 ;; Use nerd fonts in dired if possible
-(when (file-exists-p "/usr/share/fonts/fira-code/FiraCodeNerdFont-Regular.ttf")
+(when
+    (or
+     (file-exists-p "/usr/share/fonts/fira-code/FiraCodeNerdFont-Regular.ttf")
+     (file-exists-p "~/.local/share/fonts/FiraCodeNerdFont-Regular.ttf"))
   (require 'nerd-icons)
   (require 'nerd-icons-dired)
   (add-hook 'dired-mode-hook #'nerd-icons-dired-mode))
