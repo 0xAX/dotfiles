@@ -56,6 +56,7 @@
 (load "~/.emacscore/org/org-babel.el")
 (load "~/.emacscore/org/org-ui.el")
 (load "~/.emacscore/org/org-keybindings.el")
+(load "~/.emacscore/org/org-markdown.el")
 
 ;; Set to nil here, because its incompatible with viewing the agenda
 (setq org-startup-with-latex-preview nil)
