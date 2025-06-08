@@ -136,6 +136,7 @@
 ;; Load the small libraries first
 (load "~/.emacscore/lisp-utils.el")
 (load "~/.emacscore/lisp/org-bullets.el")
+(load "~/.emacscore/lisp/ox-gfm.el")
 (load "~/.emacscore/lisp/cmake.el")
 (load "~/.emacscore/lisp/rainbow-mode-1.0.5.el")
 (load "~/.emacscore/lisp/org-bullets.el")
