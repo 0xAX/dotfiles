@@ -58,8 +58,6 @@ that appears during evaluation."
       (when result-pos
         (goto-char result-pos)
         (beginning-of-line)
-        ;; Insert prefix before the #+RESULTS: line
         (insert "The result:\n\n")))))
 
 (add-hook 'org-babel-after-execute-hook 'my/add-prefix-before-results)
-
