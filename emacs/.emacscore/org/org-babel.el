@@ -49,3 +49,17 @@ that appears during evaluation."
 ;; Default flags passed to each C code block
 (defvar org-babel-default-header-args:C
   '((:flags . "-Wall -Wextra -Werror -Wstrict-prototypes  -Wcast-qual -Wconversion -Wpedantic -std=c17")))
+
+;; Add prefix before the "RESULTS" of the org-babel code execution
+(defun add-prefix-before-results ()
+  "Add prefix text before the #+RESULTS: line of the most recently executed code block."
+  (save-excursion
+    (let ((result-pos (org-babel-where-is-src-block-result)))
+      (when result-pos
+        (goto-char result-pos)
+        (beginning-of-line)
+        ;; Insert prefix before the #+RESULTS: line
+        (insert "The result:\n\n")))))
+
+(add-hook 'org-babel-after-execute-hook 'my/add-prefix-before-results)
+
