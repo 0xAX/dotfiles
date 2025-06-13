@@ -60,4 +60,4 @@ that appears during evaluation."
         (beginning-of-line)
         (insert "The result:\n\n")))))
 
-(add-hook 'org-babel-after-execute-hook 'my/add-prefix-before-results)
+(add-hook 'org-babel-after-execute-hook 'add-prefix-before-results)
