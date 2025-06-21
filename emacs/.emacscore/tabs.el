@@ -21,6 +21,9 @@
  ;; Set modified marker
  centaur-tabs-modified-marker "*")
 
+;; Font-size
+(centaur-tabs-change-fonts (face-attribute 'default :font) 130)
+
 (defun centaur-tabs-buffer-groups ()
   "`centaur-tabs-buffer-groups' control buffers' group rules."
   (list

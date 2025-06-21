@@ -13,9 +13,10 @@
 ;; - capptucin-mocha
 ;; - gruvbox
 ;; - solarized
+;; - nord
 ;;
 ;; The configuration of the theme itself is in the .emacscore/ui.el
-(setq current-theme 'solarized)
+(setq current-theme 'nord)
 
 ;; Set directory for dependencies and primary configuration
 (setq user-emacs-directory "~/.emacs.d")
@@ -116,6 +117,7 @@
 (straight-use-package 'magit)
 (straight-use-package 'markdown-mode)
 (straight-use-package 'material-theme)
+(straight-use-package 'modus-themes)
 (straight-use-package 'nerd-icons-dired)
 (straight-use-package 'org-bullets)
 (straight-use-package 'org-fragtog)

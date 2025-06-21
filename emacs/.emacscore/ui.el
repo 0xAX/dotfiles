@@ -66,6 +66,10 @@
     (when (equal tab-mode 'tabbar)
       (load "~/.emacscore/themes/gruvbox/tabbar-gruvbox-style.el"))
     (enable-theme 'gruvbox-dark-hard)))
+ ((equal current-theme 'nord)
+  (progn
+    (load "~/.emacscore/lisp/nord-theme.el")
+    (enable-theme 'nord)))
  (t
   (progn
     (setq solarized-theme-path
@@ -79,10 +83,6 @@
     (enable-theme 'solarized-light)
     (when (equal tab-mode 'tabbar)
       (load "~/.emacscore/themes/solarized/tabbar-solarized-light-style.el")))))
-
-;; Load tabs based on centaur-tabs if it is enabled
-(when (not (equal tab-mode 'tabbar))
-  (load "~/.emacscore/tabs.el"))
 
 ;; hide scroll bar
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
@@ -163,3 +163,19 @@
 
 ;; If we switch to help window, move cursor there
 (setq help-window-keep-selected t)
+
+;; Customize colors of  centaur-tabs
+(when (and (not (equal tab-mode 'tabbar)) (equal current-theme 'nord))
+  (custom-theme-set-faces 'nord
+                          `(centaur-tabs-default ((t (:background ,"#434c5e" :foreground ,"#eceff4" :box nil))))
+                          `(centaur-tabs-selected ((t (:background ,"#434c5e" :foreground ,"#d8dee9" :box nil))))
+                          `(centaur-tabs-unselected ((t (:background ,"#2e3440" :foreground ,"#d8dee9" :box nil))))
+                          `(centaur-tabs-selected-modified ((t (:background ,"#434c5e" :foreground ,"#eceff4" :box nil))))
+                          `(centaur-tabs-unselected-modified ((t (:background ,"#434c5e" :foreground ,"#eceff4" :box nil))))
+                          `(centaur-tabs-modified-marker-selected ((t (:inherit 'centaur-tabs-selected-modified :foreground ,"#d8dee9" :box nil))))
+                          `(centaur-tabs-active-bar-face ((t (:background ,"#88c0d0" :foreground ,"#88c0d0"))))
+                          `(centaur-tabs-modified-marker-unselected ((t (:inherit 'centaur-tabs-unselected-modified :background "#434c5e" :foreground ,"#d8dee9" :box nil))))))
+
+;; Load tabs based on centaur-tabs if it is enabled
+(when (not (equal tab-mode 'tabbar))
+  (load "~/.emacscore/tabs.el"))
