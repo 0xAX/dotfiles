@@ -57,6 +57,7 @@
 (global-set-key (kbd "M-<down>") 'end-of-buffer)
 (global-set-key (kbd "C-c c") 'emacs-config)
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+
 ;; help
 (global-set-key (kbd "C-h m") 'describe-mode)
 (global-set-key (kbd "C-h k") 'describe-key)
@@ -116,6 +117,9 @@
 
 ;; magit keybindings
 (global-set-key (kbd "C-x C-l") 'magit-log-buffer-file)
+
+;; treemacs keybindings
+(global-set-key "\C-t" 'treemacs)
 
 ;;
 ;; mode local keybindings
