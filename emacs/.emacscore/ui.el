@@ -164,17 +164,19 @@
 ;; If we switch to help window, move cursor there
 (setq help-window-keep-selected t)
 
+(load-theme 'nord t)
+
 ;; Customize colors of  centaur-tabs
 (when (and (not (equal tab-mode 'tabbar)) (equal current-theme 'nord))
-  (custom-theme-set-faces 'nord
-                          `(centaur-tabs-default ((t (:background ,"#434c5e" :foreground ,"#eceff4" :box nil))))
-                          `(centaur-tabs-selected ((t (:background ,"#434c5e" :foreground ,"#d8dee9" :box nil))))
-                          `(centaur-tabs-unselected ((t (:background ,"#2e3440" :foreground ,"#d8dee9" :box nil))))
-                          `(centaur-tabs-selected-modified ((t (:background ,"#434c5e" :foreground ,"#eceff4" :box nil))))
-                          `(centaur-tabs-unselected-modified ((t (:background ,"#434c5e" :foreground ,"#eceff4" :box nil))))
-                          `(centaur-tabs-modified-marker-selected ((t (:inherit 'centaur-tabs-selected-modified :foreground ,"#d8dee9" :box nil))))
-                          `(centaur-tabs-active-bar-face ((t (:background ,"#88c0d0" :foreground ,"#88c0d0"))))
-                          `(centaur-tabs-modified-marker-unselected ((t (:inherit 'centaur-tabs-unselected-modified :background "#434c5e" :foreground ,"#d8dee9" :box nil))))))
+  (custom-set-faces
+   `(centaur-tabs-default ((t (:background ,"#434c5e" :foreground ,"#eceff4" :box nil))))
+   `(centaur-tabs-selected ((t (:background ,"#434c5e" :foreground ,"#d8dee9" :box nil))))
+   `(centaur-tabs-unselected ((t (:background ,"#2e3440" :foreground ,"#d8dee9" :box nil))))
+   `(centaur-tabs-selected-modified ((t (:background ,"#434c5e" :foreground ,"#eceff4" :box nil))))
+   `(centaur-tabs-unselected-modified ((t (:background ,"#434c5e" :foreground ,"#eceff4" :box nil))))
+   `(centaur-tabs-modified-marker-selected ((t (:inherit 'centaur-tabs-selected-modified :foreground ,"#d8dee9" :box nil))))
+   `(centaur-tabs-active-bar-face ((t (:background ,"#88c0d0" :foreground ,"#88c0d0"))))
+   `(centaur-tabs-modified-marker-unselected ((t (:inherit 'centaur-tabs-unselected-modified :background "#434c5e" :foreground ,"#d8dee9" :box nil))))))
 
 ;; Load tabs based on centaur-tabs if it is enabled
 (when (not (equal tab-mode 'tabbar))
