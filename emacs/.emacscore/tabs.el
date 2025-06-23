@@ -10,16 +10,23 @@
  centaur-tabs-height 34
  ;; Set form of the tabs
  centaur-tabs-style "box"
- ;; Enable icons in the tabs
- centaur-tabs-set-icons t
- ;; Set the icons style in the tabs
- centaur-tabs-icon-type 'nerd-icons
  ;; Set the position of the mark for an active bar
  centaur-tabs-set-bar 'left
  ;; Enable modified marker
  centaur-tabs-set-modified-marker t
  ;; Set modified marker
  centaur-tabs-modified-marker "*")
+
+;; Enable icons in tabs if we have suitable fonts
+(when
+    (or
+     (file-exists-p "/usr/share/fonts/fira-code/FiraCodeNerdFont-Regular.ttf")
+     (file-exists-p "~/.local/share/fonts/FiraCodeNerdFont-Regular.ttf"))
+  (setq
+   ;; Enable icons in the tabs
+   centaur-tabs-set-icons t
+   ;; Set the icons style in the tabs
+   centaur-tabs-icon-type 'nerd-icons))
 
 ;; Font-size
 (centaur-tabs-change-fonts (face-attribute 'default :font) 130)
