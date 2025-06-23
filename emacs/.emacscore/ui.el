@@ -164,8 +164,6 @@
 ;; If we switch to help window, move cursor there
 (setq help-window-keep-selected t)
 
-(load-theme 'nord t)
-
 ;; Customize colors of  centaur-tabs
 (when (and (not (equal tab-mode 'tabbar)) (equal current-theme 'nord))
   (custom-set-faces
