@@ -171,6 +171,7 @@
 (load "~/.emacscore/dev/common-lisp.el")
 (load "~/.emacscore/dev/js.el")
 (load "~/.emacscore/dev/gptel.el")
+(load "~/.emacscore/dev/python.el")
 
 ;; Load miscellaneous things
 (when (not (string-match-p "microsoft" (shell-command-to-string "uname -a")))
