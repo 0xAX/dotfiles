@@ -14,8 +14,24 @@
  centaur-tabs-set-bar 'left
  ;; Enable modified marker
  centaur-tabs-set-modified-marker t
+ ;; Navigate through the all tabs that are displayed now
+ centaur-tabs-cycle-scope 'default
  ;; Set modified marker
- centaur-tabs-modified-marker "*")
+ centaur-tabs-modified-marker "*"
+ ;; Remove any margin from the left side
+ centaur-tabs-left-edge-margin nil
+ ;; Remove any margin from the right side
+ centaur-tabs-right-edge-margin nil
+ ;; Hide navigation buttons
+ centaur-tabs-show-navigation-buttons nil
+ ;; Set the bottom line of an icon equal to the text
+ centaur-tabs-icon-v-adjust 0.01
+ ;; Hide plain icons
+ centaur-tabs-plain-icons nil
+ ;; Hide close button
+ centaur-tabs-set-close-button nil
+ ;; Set suffix string after icon
+ centaur-tabs-icons-suffix " ")
 
 ;; Enable icons in tabs if we have suitable fonts
 (when

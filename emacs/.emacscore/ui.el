@@ -176,6 +176,14 @@
    `(centaur-tabs-active-bar-face ((t (:background ,"#88c0d0" :foreground ,"#88c0d0"))))
    `(centaur-tabs-modified-marker-unselected ((t (:inherit 'centaur-tabs-unselected-modified :background "#434c5e" :foreground ,"#d8dee9" :box nil))))))
 
+;; Change foreground for mode-line if theme is set to nord
+(when (equal current-theme 'nord)
+  (custom-set-faces
+   `(mode-line ((t (:foreground ,"#D8DEE9" :background ,"#4C566A"))))
+   `(font-lock-comment-face ((,t (:foreground ,"#72809a"))))
+   `(font-lock-comment-delimiter-face ((,t (:foreground ,"#72809a"))))
+   `(line-number ((,t (:foreground ,"#72809a"))))))
+
 ;; Load tabs based on centaur-tabs if it is enabled
 (when (not (equal tab-mode 'tabbar))
   (load "~/.emacscore/tabs.el"))
