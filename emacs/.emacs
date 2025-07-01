@@ -129,6 +129,7 @@
 (straight-use-package 'slime-company)
 (straight-use-package 'swiper)
 (straight-use-package 'tabbar)
+(straight-use-package 'typescript-mode)
 (straight-use-package 'vterm)
 (straight-use-package 'yaml-mode)
 (straight-use-package 'yasnippet)
