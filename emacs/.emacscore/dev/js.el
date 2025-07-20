@@ -18,9 +18,9 @@ are globally installed."
       (let ((npm-list-output (shell-command-to-string "npm list -g --depth=0 --parseable")))
         (and
          (seq-filter (lambda (package) (string= (file-name-base package) "typescript"))
-                     (string-split test-ts-var "\n"))
+                     (string-split npm-list-output "\n"))
          (seq-filter (lambda (package) (string= (file-name-base package) "typescript-language-server"))
-                     (string-split test-ts-var "\n")))))))
+                     (string-split npm-list-output "\n")))))))
 
 ;; Enable LSP for javascript/typescript
 (when (npm-and-typescript-ls-installed)
