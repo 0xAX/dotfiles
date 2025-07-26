@@ -176,3 +176,6 @@ alias gd="git diff"
 alias gr="git restore"
 alias gp="git push"
 alias gu="git pull"
+
+# kubectl/k8s aliases
+alias k="kubectl"
