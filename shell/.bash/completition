@@ -1,8 +1,13 @@
 #!/bin/bash
 
+# Enable bash completion for git
 if [[ -f /etc/bash_completion.d/git-completion.bash ]];
 then
     source /usr/share/bash-completion/completions/git
 fi
 
-source <(kubectl completion bash)
+# Enable bash completion for kubectl
+if command -v kubectl &> /dev/null
+then
+    source <(kubectl completion bash)
+fi
