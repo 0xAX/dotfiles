@@ -160,3 +160,17 @@ alias otp-24=". /usr/local/lib/erlang/24.0/activate"
 
 # zed
 alias zed-delete-conversatoins="rm -rf $HOME/.local/share/zed/conversations/*"
+
+# git aliases
+alias gs="git status"
+alias gss="git status --short"
+alias gc="git commit"
+alias gcs="git commit -s -S -v"
+alias gi="git init"
+alias gcl="git clone"
+alias ga="git add"
+alias gap="git add --patch"
+alias gd="git diff"
+alias gr="git restore"
+alias gp="git push"
+alias gu="git pull"
