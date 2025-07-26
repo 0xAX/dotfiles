@@ -82,6 +82,7 @@
 [commit]
     signoff = false
     gpgsign = true
+    verbose = true
 
 [gpg]
     program = /usr/bin/gpg2
