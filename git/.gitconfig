@@ -6,6 +6,7 @@
         checkstat = default
         quotepath = false
         eol = native
+        whitespace = trailing-space
 
 [credential]
         helper = cache
