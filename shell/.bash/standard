@@ -164,6 +164,8 @@ alias zed-delete-conversatoins="rm -rf $HOME/.local/share/zed/conversations/*"
 # git aliases
 alias gs="git status"
 alias gss="git status --short"
+alias gca="git commit --amend"
+alias gcane="git commit --amend --date=now --no-edit"
 alias gc="git commit"
 alias gcs="git commit -s -S -v"
 alias gi="git init"
