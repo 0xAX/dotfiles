@@ -1,8 +1,18 @@
+[core]
+        editor = "$EMACS"
+        filemode = false
+        trustctime = false
+        excludesfile = /home/alex/.gitignore_global
+        checkstat = default
+        quotepath = false
+        eol = native
+
 [credential]
         helper = cache
 
 [diff]
         renameLimit = 4096
+        renames = true
 
 [color]
         ui = auto
@@ -27,18 +37,6 @@
         changed = yellow bold
         untracked = red bold
         unmerged = magenta bold
-
-[core]
-        editor = "$EMACS"
-        filemode = false
-        trustctime = false
-        excludesfile = /home/alex/.gitignore_global
-        checkstat = default
-        quotepath = false
-        eol = native
-
-[diff]
-        renames = true
 
 [gc]
         auto = 5000

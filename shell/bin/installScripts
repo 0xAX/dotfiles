@@ -11,23 +11,30 @@ GIT_DIR="$SCRIPTS_DIR/git/*"
 GIT_PROMPT="$SCRIPTS_DIR/git-prompt/*"
 MATH_DIR="$SCRIPTS_DIR/math/*"
 SYSTEM_DIR="$SCRIPTS_DIR/system/scripts/*"
+EXTERNAL_DIR="$SCRIPTS_DIR/external/*"
+LIB_DIR="$SCRIPTS_DIR/lib"
 
-for SCRIPT in $DEV_DIR    \
-	      $FEDORA_DIR \
-	      $GIT_DIR    \
-	      $GIT_PROMPT \
-	      $MATH_DIR   \
-	      $SYSTEM_DIR; do
+for SCRIPT in $DEV_DIR      \
+              $FEDORA_DIR   \
+              $GIT_DIR      \
+              $GIT_PROMPT   \
+              $MATH_DIR     \
+              $EXTERNAL_DIR \
+              $SYSTEM_DIR; do
         chmod +x $SCRIPT
 done
 
 echo "Copying scripts to $SCRIPTS_DEST"
-sudo cp -r -v $DEV_DIR     \
-              $FEDORA_DIR  \
-              $GIT_DIR     \
-              $GIT_PROMPT  \
-              $SYSTEM_DIR  \
-              $MATH_DIR    \
+sudo cp -r -v $DEV_DIR      \
+              $FEDORA_DIR   \
+              $GIT_DIR      \
+              $GIT_PROMPT   \
+              $SYSTEM_DIR   \
+              $MATH_DIR     \
+              $EXTERNAL_DIR \
               $SCRIPTS_DEST
+
+echo "Installing libraries"
+sudo cp -r -v "$LIB_DIR/DiffHighlight.pm" /usr/lib64/perl5/
 
 exit 0
