@@ -39,7 +39,7 @@ set trash = "+/Gmail/[Gmail].Trash"
 set smtp_url = "smtp://kuleshovmail@smtp.gmail.com:587"
 # for G Suite with own domain
 # set smtp_url = "smtps://yourusername@yourdomain.ext@smtp.gmail.com:587"
-set smtp_pass = "`op item get qvmlw4o5342mdtofsdpxaorvdi | grep password | sed -e "s/  password:    //"`"
+set smtp_pass = "`op item get qvmlw4o5342mdtofsdpxaorvdi --reveal | grep password | sed -e "s/  password:    //"`"
 
 set sidebar_short_path
 set sidebar_delim_chars="/"
