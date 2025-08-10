@@ -20,7 +20,7 @@
   (setq mu4e-maildir-shortcuts
         '( (:maildir "/INBOX"               :key ?i)
            (:maildir "/Elixir"              :key ?e)
-           (:maildir "/Elixir"              :key ?E)
+           (:maildir "/Erlang"              :key ?E)
            (:maildir "/Erlang"              :key ?o)
            (:maildir "/Github-Repos"        :key ?g)
            (:maildir "/NetBSD"              :key ?N)
