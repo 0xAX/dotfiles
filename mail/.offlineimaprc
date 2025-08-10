@@ -9,7 +9,7 @@ remoterepository = Gmail-Remote
 
 [Repository Gmail-Local]
 type = Maildir
-localfolders = ~/Mail/Gmail
+localfolders = ~/Mail
 
 [Repository Gmail-Remote]
 type = Gmail
