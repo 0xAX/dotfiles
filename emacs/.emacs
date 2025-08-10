@@ -181,6 +181,7 @@
 (load "~/.emacscore/build/make.el")
 (load "~/.emacscore/markups.el")
 (load "~/.emacscore/dotfiles.el")
+(load "~/.emacscore/mail.el")
 
 ;; do not use tabs for indentation at all
 (setq-default indent-tabs-mode nil)
