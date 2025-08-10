@@ -30,7 +30,7 @@
 (global-set-key (kbd "C-x b")   'browse-url)
 (global-set-key (kbd "C-x p")   'ping)
 (global-set-key (kbd "C-x l")   'list-colors-display)
-(global-set-key (kbd "C-x m")   'woman)
+(global-set-key (kbd "C-x m")   'mu4e)
 (global-set-key (kbd "C-x e")   'eshell)
 
 ;; Text manipulation and cursor manipulation
