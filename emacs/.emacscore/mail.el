@@ -20,11 +20,13 @@
   (setq mu4e-maildir-shortcuts
         '( (:maildir "/INBOX"               :key ?i)
            (:maildir "/Elixir"              :key ?e)
+           (:maildir "/Emacs"               :key ?E)
            (:maildir "/Erlang"              :key ?o)
            (:maildir "/Github-Repos"        :key ?g)
            (:maildir "/NetBSD"              :key ?N)
            (:maildir "/OpenBSD"             :key ?O)           
            (:maildir "/Kernel"              :key ?k)
+           (:maildir "/Postgresql"          :key ?p)
            (:maildir "/Travelping"          :key ?w)           
            (:maildir "/[Gmail].Spam"        :key ?S)           
            (:maildir "/[Gmail].Sent Mail"   :key ?s)
