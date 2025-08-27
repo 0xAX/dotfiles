@@ -56,9 +56,6 @@
 (setq locale-coding-system   'utf-8)
 ;; Set language environment
 (setq current-language-environment "UTF-8")
-;; Set encoding for .gpg files
-(add-to-list 'file-coding-system-alist '("\\.gpg\\'" . utf-8))
-(add-to-list 'auto-coding-alist '("\\.gpg\\'" . utf-8))
 
 ;; Prevent creation of backup files
 (setq make-backup-files         nil)

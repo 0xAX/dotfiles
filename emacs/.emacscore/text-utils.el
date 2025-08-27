@@ -34,3 +34,8 @@
             (push '(">=" . ?≥) prettify-symbols-alist)
             (push '("!=" . ?≠) prettify-symbols-alist)
             (push '("->" . ?→) prettify-symbols-alist))))
+
+(defun revert-buffer-utf8 ()
+  "Revert current buffer using UTF-8."
+  (interactive)
+  (revert-buffer-with-coding-system 'utf-8))

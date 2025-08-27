@@ -67,7 +67,7 @@
 (global-set-key (kbd "C-h s") 'describe-symbol)
 
 ;; Encoding
-(global-set-key (kbd "C-c r e") #'revert-buffer-with-coding-system)
+(global-set-key (kbd "C-c r e") #'revert-buffer-utf8)
 
 ;; tabbar keybindings
 (if (equal tab-mode 'tabbar)
