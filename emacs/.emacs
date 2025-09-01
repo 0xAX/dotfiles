@@ -119,6 +119,7 @@
 (straight-use-package 'material-theme)
 (straight-use-package 'modus-themes)
 (straight-use-package 'nerd-icons-dired)
+(straight-use-package 'nix-mode)
 (straight-use-package 'org-bullets)
 (straight-use-package 'org-fragtog)
 (straight-use-package 'pkg-info)
