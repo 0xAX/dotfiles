@@ -1,0 +1,35 @@
+* {
+  font-family: "FiraCode", "Font Awesome 6 Free", "Font Awesome 6 Brands", monospace;
+  font-size: 13px;
+}
+
+window#waybar {
+  background: #eee8d5;
+  color: #002b36;
+}
+
+#workspaces button {
+  background: #eee8d5;
+  color: #888888;
+  border: none;
+  padding: 0 8px;
+}
+
+#workspaces button.focused {
+  background: #fdf6e3;
+  color: #002b36;
+}
+
+#workspaces button.active {
+  background: #eee8d5;
+  color: #ffffff;
+}
+
+#tray, #clock, #pulseaudio, #backlight {
+  padding: 0 10px;
+  color: #002b36;
+}
+
+#separator {
+  color: #eee8d5;
+}

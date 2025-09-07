@@ -1,0 +1,16 @@
+window {
+  background-color: #073642;
+  color: #fdf6e3;
+  font-family: "Fira Code Retina";
+  font-size: 14px;
+}
+
+#input {
+  background-color: #073642;
+  color: #fdf6e3;
+}
+
+#entry:selected, #entry:hover {
+  background-color: #073642;
+  color: #fdf6e3;
+}
