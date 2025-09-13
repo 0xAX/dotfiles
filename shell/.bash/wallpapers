@@ -3,7 +3,9 @@
 # if we're starting system manually via startx the DISPLAY env variable might be
 # not set.
 
-if [[ $(loginctl show-session "$XDG_SESSION_ID" -p Type) = "Type=x11" ]] ; then
+XDG_SESSION_VAL=$(loginctl show-session "$XDG_SESSION_ID" -p Type)
+
+if [[ "$XDG_SESSION_VAL"  = "Type=x11" ]] ; then
     if [ ! -z "$DISPLAY" ];
     then
         FEH=$(whereis feh | awk '{print $2}')
@@ -14,7 +16,7 @@ if [[ $(loginctl show-session "$XDG_SESSION_ID" -p Type) = "Type=x11" ]] ; then
     fi
 fi
 
-if [[ $(loginctl show-session "$XDG_SESSION_ID" -p Type) = "Type=wayland" ]] ; then
+if [[ "$XDG_SESSION_VAL" = "Type=wayland" ]] ; then
     if [ ! -z "$DISPLAY" ];
     then
         SWAYBG=$(whereis swaybg | awk '{print $2}')
@@ -23,7 +25,7 @@ if [[ $(loginctl show-session "$XDG_SESSION_ID" -p Type) = "Type=wayland" ]] ; t
         then
             if pgrep -x "swaybg" > /dev/null
             then
-                pkill swaybg
+                pkill swaybg > /dev/null
             fi
             $SWAYBG -o "*" -i "$HOME/dev/dotfiles/wallpapers/solarized-dark-wallpaper.jpg" -m fill > /dev/null 2>&1 &
         fi
