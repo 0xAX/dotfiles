@@ -149,15 +149,17 @@ export GPG_TTY=$(tty)
 export PATH=$HOME/.local/bin:$PATH
 
 # Add path to ssh-agent socket and run ssh-agent if it is not launched
-if [[ "$GDMSESSION" = "sway" ]]; then
+if [[ "$GDMSESSION" = "sway" ]] ; then
     export SSH_AUTH_SOCK=~/.ssh/ssh-agent.$HOSTNAME.sock
 
     ssh-add -l 2>/dev/null >/dev/null
-    if [ $? -ge 2 ]; then
+    if [[ "$?" -ge 2 ]] ; then
         ssh-agent -a "$SSH_AUTH_SOCK" >/dev/null
     fi
 fi
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"

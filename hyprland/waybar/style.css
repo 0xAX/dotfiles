@@ -20,13 +20,18 @@ window#waybar {
   color: #002b36;
 }
 
-#workspaces button.active {
-  background: #eee8d5;
-  color: #ffffff;
+#workspaces button.visible {
+  background: #fdf6e3;
+  color: #002b36;
 }
 
-#tray, #clock, #pulseaudio, #backlight {
-  padding: 0 10px;
+#workspaces button.active {
+  background: #eee8d5;
+  color: #b58900;
+}
+
+#tray, #clock.local, #clock.utc, #pulseaudio {
+  padding: 0 2px;
   color: #002b36;
 }
 

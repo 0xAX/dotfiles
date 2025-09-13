@@ -3,10 +3,12 @@
   "position": "top",
   "modules-left": ["hyprland/workspaces"],
   "modules-center": [],
-  "modules-right": ["tray", "pulseaudio", "backlight", "clock"],
+  "modules-right": ["custom/ip", "tray", "pulseaudio", "clock#local", "clock#utc"],
 
   "hyprland/workspaces": {
     "format": "{icon}",
+    "on-scroll-up": "hyprctl dispatch workspace e-1",
+    "on-scroll-down": "hyprctl dispatch workspace e+1",
     "format-icons": {
       "1": "",
       "2": "",
@@ -16,26 +18,38 @@
       "6": "",
       "7": "",
       "8": "",
-      "default": ""
     },
     "disable-scroll": false,
     "persistent-workspaces": {
-      "*": 8
+      "*": [1, 2, 3, 4, 5, 6, 7, 8]
     }
   },
 
   "tray": { "spacing": 6 },
 
   "pulseaudio": {
-    "format": "{volume}% {icon}",
-    "format-muted": "muted {icon}",
+    "format": "{volume}% 🔈",
+    "format-muted": "muted 🔇",
     "scroll-step": 1
   },
 
-  "backlight": { "format": "{percent}%" },
+  "clock#local": {
+    "format": "| {:%a %Y-%m-%d %H:%M:%S} |",
+    "tooltip-format": "{:%A, %d %B %Y}",
+    "interval": 5
+  },
 
-  "clock": {
-    "format": "{:%a %Y-%m-%d %H:%M}",
-    "tooltip-format": "{:%A, %d %B %Y}"
+  "clock#utc": {
+    "format": "UTC {:%H:%M:%S}",
+    "tooltip-format": "{:%Y-%m-%d %H:%M:%S %Z}",
+    "interval": 5,
+    "timezone": "UTC"
+  },
+
+  "custom/ip": {
+    "format": "IP: {} |",
+    "tooltip": false,
+    "interval": 10,
+    "exec": "ip -4 addr show dev $(ip route get 1.1.1.1 | grep -o 'dev [^ ]*' | cut -d' ' -f2) | grep -oP '(?<=inet\\s)\\d+(\\.\\d+){3}' | head -n1"
   }
 }

@@ -15,7 +15,7 @@ fi
 SSH_AGENT_PID=$(pidof ssh-agent)
 if [ -z "$SSH_AGENT_PID" ];
 then
-    eval `ssh-agent -s`
+    eval "$(ssh-agent -s)"
 fi
 
 # start gpg agent if it is not

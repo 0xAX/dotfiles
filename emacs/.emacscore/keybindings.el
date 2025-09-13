@@ -112,7 +112,12 @@
 (global-set-key (kbd "RET") 'newline-and-indent)
 
 ;; i3 keybindings
-(global-set-key (kbd "<M-tab>") 'switch-to-next-i3-workspace)
+(when (string= *i3* "true")
+  (global-set-key (kbd "<M-tab>") 'switch-to-next-i3-workspace))
+
+;; hyprland keybindings
+(when (string= *hyprland* "true")
+  (global-set-key (kbd "<M-tab>") 'switch-to-next-hyprland-workspace))
 
 ;; dotfiles repo
 (global-set-key (kbd "C-d C-u") 'update-dotfiles-repo)

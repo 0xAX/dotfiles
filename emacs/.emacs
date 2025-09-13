@@ -6,6 +6,17 @@
 ;;  - centaur-tab
 (setq tab-mode 'centaur-tab)
 
+;; Ensure Emacs can talk to the same SSH agent as the shell.
+;; Some GUI Emacs sessions don't inherit SSH_AUTH_SOCK, which breaks
+;; `ssh` and Git over SSH inside Emacs. We fix it by:
+;; 1. If SSH_AUTH_SOCK is already set, leave it alone.
+;; 2. Otherwise, assume ssh-agent is running with its socket in
+;;    $XDG_RUNTIME_DIR/ssh-agent.socket (the common setup on Wayland/systemd).
+(setenv "SSH_AUTH_SOCK"
+        (or (getenv "SSH_AUTH_SOCK")
+            (concat (or (getenv "XDG_RUNTIME_DIR") "/run/user/1000")
+                    "/ssh-agent.socket")))
+
 ;; Current theme. Following themes are supported:
 ;;
 ;; - capptuccin-machiato
@@ -34,6 +45,14 @@
           (setq *i3* "true"))
       (setq *i3* "false")))
   (setq *i3* "false"))
+
+(if (and
+     (string= (string-trim (or (getenv "XDG_SESSION_TYPE") "")) "wayland")
+     (getenv "HYPRLAND_INSTANCE_SIGNATURE"))
+    (progn
+      (load "~/.emacscore/desktop/hyprland.el")
+      (setq *hyprland* "true"))
+  (setq *hyprland* "false"))
 
 ;; Kill buffers without asking confirmation about active running processes
 (setq kill-buffer-query-functions

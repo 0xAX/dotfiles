@@ -53,6 +53,10 @@ case $1 in
     test -d "$HOME"/.i3 && cp -r "$HOME"/.i3/* "$DOTFILES"/i3
     # Copy sway stuff
     test -d "$HOME"/.sway && cp -r "$HOME"/.sway/* "$DOTFILES"/sway
+    # Copy hyprland stuff
+    test -d "$HOME"/.config/hypr && cp -r "$HOME"/.config/hypr "$DOTFILES"/hyprland
+    test -d "$HOME"/.config/wofi && cp -r "$HOME"/.config/wofi "$DOTFILES"/hyprland
+    test -d "$HOME"/.config/waybar && cp -r "$HOME"/.config/waybar "$DOTFILES"/hyprland
 
     # Copy lisp/sbcl configuration
     test -r "$HOME"/.sbclrc && cp -r "$HOME"/.sbclrc "$DOTFILES"/dev/
@@ -124,6 +128,12 @@ case $1 in
     # Copy sway stuff
     mkdir -p "$HOME"/.sway
     cp -r "$DOTFILES"/sway/* "$HOME"/.sway
+
+    # Copy hyprland stuff
+    mkdir -p "$HOME"/.config/{hypr,wofi/waybar}
+    cp -r "$DOTFILES"/hyprland/hypr/* "$HOME"/.config/hypr/
+    cp -r "$DOTFILES"/hyprland/wofi/* "$HOME"/.config/wofi/
+    cp -r "$DOTFILES"/hyprland/waybar/* "$HOME"/.config/waybar/
 
     # Copy terminator stuff
     mkdir -p "$HOME"/.config/terminator && cp -r "$DOTFILES"/terminator/* "$HOME"/.config/terminator

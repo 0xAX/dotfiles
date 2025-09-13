@@ -18,9 +18,10 @@ if [[ $(loginctl show-session "$XDG_SESSION_ID" -p Type) = "Type=wayland" ]] ; t
     if [ ! -z "$DISPLAY" ];
     then
         SWAYBG=$(whereis swaybg | awk '{print $2}')
-        if [ ! -z "$SWAYBG" ]
+
+        if [[ ! -z "$SWAYBG" ]] ;
         then
-            if ! pgrep -x "swaybg" > /dev/null
+            if pgrep -x "swaybg" > /dev/null
             then
                 pkill swaybg
             fi

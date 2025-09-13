@@ -1,5 +1,21 @@
 ;;; ui.el --- UI configuration of GNU Emacs  -*- lexical-binding: t -*-
 
+(defun get-font-size ()
+  "Return an integer font height (1/10pt) based on focused Hyprland monitor width.
+Falls back to 1920 if anything fails."
+  (if (and
+       (string= (string-trim (or (getenv "XDG_SESSION_TYPE") "")) "wayland")
+       (getenv "HYPRLAND_INSTANCE_SIGNATURE"))
+      (let
+	  ((screen-res (gethash
+			"res"
+			(json-parse-string
+			 (shell-command-to-string "hyprctl monitors -j | jq '.[] | select(.focused==true) | {name: .name, res: .width, height: .height, scale: .scale}'")) 1920)))
+	(if (> screen-res 1920)
+	    "22"
+	  "13"))
+    "13"))
+
 ;; yes-or-no-p to y-n
 (defalias 'yes-or-no-p 'y-or-n-p)
 
@@ -16,10 +32,10 @@
 ;; Set fonts
 (cond ((file-directory-p "/usr/share/fonts/fira-code")
        (progn
-         (set-frame-font "Fira Code-13")
+         (set-frame-font (concat "Fira Code-" (get-font-size)))
          (enable-ligatures)))
       (t
-       (set-frame-font "Monospace-13")))
+       (set-frame-font (concat "Monospace-" (get-font-size)))))
 
 ;; display file name in title
 (setq-default frame-title-format
