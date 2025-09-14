@@ -130,7 +130,7 @@ case $1 in
     cp -r "$DOTFILES"/sway/* "$HOME"/.sway
 
     # Copy hyprland stuff
-    mkdir -p "$HOME"/.config/{hypr,wofi/waybar}
+    mkdir -p "$HOME"/.config/{hypr,wofi,waybar}
     cp -r "$DOTFILES"/hyprland/hypr/* "$HOME"/.config/hypr/
     cp -r "$DOTFILES"/hyprland/wofi/* "$HOME"/.config/wofi/
     cp -r "$DOTFILES"/hyprland/waybar/* "$HOME"/.config/waybar/
