@@ -40,8 +40,7 @@ export PATH=$PATH:$KERNEL_DEV/tools/perf/
 export PATH=$PATH:/usr/lib/systemd/
 
 # golang
-export GOPATH=$DEV/golang
-export PATH=$PATH:$GOROOT/bin
+export GOPATH=/usr/local/bin/go
 export PATH=$PATH:$GOPATH/bin
 
 # less
