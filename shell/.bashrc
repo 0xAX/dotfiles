@@ -163,3 +163,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+
+if [[ $(loginctl show-session "$XDG_SESSION_ID" -p Type) = "Type=Wayland" ]] ; then
+    export GSK_RENDERER=ngl
+fi
