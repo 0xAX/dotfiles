@@ -28,6 +28,7 @@ if [[ "$XDG_SESSION_VAL" = "Type=wayland" ]] ; then
                 kill -9 $(pgrep -x "swaybg")
             fi
             $SWAYBG -o "*" -i "$HOME/dev/dotfiles/wallpapers/solarized-dark-wallpaper.jpg" -m fill > /dev/null 2>&1 &
+            disown $(pgrep -x "swaybg")
         fi
     fi
 fi
