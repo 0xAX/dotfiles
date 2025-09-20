@@ -148,22 +148,19 @@ export GPG_TTY=$(tty)
 # Add zed to path
 export PATH=$HOME/.local/bin:$PATH
 
-# Add path to ssh-agent socket and run ssh-agent if it is not launched
-if [[ "$GDMSESSION" = "sway" ]] ; then
-    export SSH_AUTH_SOCK=~/.ssh/ssh-agent.$HOSTNAME.sock
-
-    ssh-add -l 2>/dev/null >/dev/null
-    if [[ "$?" -ge 2 ]] ; then
-        ssh-agent -a "$SSH_AUTH_SOCK" >/dev/null
-    fi
-fi
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-
-export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
-
 if [[ $(loginctl show-session "$XDG_SESSION_ID" -p Type) = "Type=Wayland" ]] ; then
     export GSK_RENDERER=ngl
+fi
+
+SSH_AGENT_PID=$(pidof ssh-agent)
+if [[ -z "$SSH_AGENT_PID" ]] ; then
+   if ! ssh-add -l >/dev/null 2>&1; then
+       eval "$(ssh-agent -s)" >/dev/null
+   fi
+fi
+
+GPG_AGENT_PID=$(pidof gpg-agent)
+if [[ -z "$GPG_AGENT_PID" ]];
+then
+    eval "$(gpg-agent --daemon)"
 fi

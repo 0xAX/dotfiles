@@ -22,8 +22,11 @@ test -d ${DEV_DISK}/db/usr/local/mysql/bin && export PATH=$PATH:${DEV_DISK}/db/u
 test -d ${DEV_DISK}/db/usr/local/mysql/scripts && export PATH=$PATH:${DEV_DISK}/db/usr/local/mysql/scripts
 test -d ${HOME}/.local/zed.app/bin && export PATH=$PATH:${HOME}.local/zed.app/bin
 test -d /snap/k9s && export PATH=$PATH:/snap/k9s/current/bin
-test -d /home/alex/.cache/rebar3/bin && export PATH=$PATH:/home/alex/.cache/rebar3/bin
-export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+test -d $HOME/.cache/rebar3/bin && export PATH=$PATH:/home/alex/.cache/rebar3/bin
+test -d $HOME/.krew/bin && export PATH=$HOME/.krew/bin:$PATH
+test -d $HOME/.nvm && export NVM_DIR="$HOME/.nvm"
+test -s $NVM_DIR/nvm.sh && \. "$NVM_DIR/nvm.sh"
+test -s $NVM_DIR/bash_completion && \. "$NVM_DIR/bash_completion"
 
 # add zig and zls to PATH
 test -e ${DEV_DISK}/zig/zig && export PATH=$PATH:${DEV_DISK}/zig
