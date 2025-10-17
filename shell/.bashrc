@@ -155,10 +155,10 @@ fi
 SSH_AGENT_PID=$(pidof ssh-agent)
 if [[ -z "$SSH_AGENT_PID" ]] ; then
    if ! ssh-add -l >/dev/null 2>&1; then
-       eval "$(ssh-agent -s)" >/dev/null
+       eval "$(ssh-agent -a /run/user/1000/ssh-agent.socket -s)" >/dev/null
    fi
 fi
-if [[ -z "$SSH_AUTH_SOCK" ]] ; then
+if [[ -z "$SSH_AUTH_SOCK" ]] && [[ -f "/run/user/1000/ssh-agent.socket" ]] ; then
     export SSH_AUTH_SOCK=/run/user/1000/ssh-agent.socket
 fi
 
