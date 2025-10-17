@@ -158,7 +158,9 @@ if [[ -z "$SSH_AGENT_PID" ]] ; then
        eval "$(ssh-agent -s)" >/dev/null
    fi
 fi
-export SSH_AUTH_SOCK=/run/user/1000/ssh-agent.socket
+if [[ -z "$SSH_AUTH_SOCK" ]] ; then
+    export SSH_AUTH_SOCK=/run/user/1000/ssh-agent.socket
+fi
 
 GPG_AGENT_PID=$(pidof gpg-agent)
 if [[ -z "$GPG_AGENT_PID" ]];
