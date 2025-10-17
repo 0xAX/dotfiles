@@ -158,7 +158,8 @@ if [[ -z "$SSH_AGENT_PID" ]] ; then
        eval "$(ssh-agent -a /run/user/1000/ssh-agent.socket -s)" >/dev/null
    fi
 fi
-if [[ -z "$SSH_AUTH_SOCK" ]] && [[ -f "/run/user/1000/ssh-agent.socket" ]] ; then
+
+if [[ -z "$SSH_AUTH_SOCK" ]] && [[ -S "/run/user/1000/ssh-agent.socket" ]] ; then
     export SSH_AUTH_SOCK=/run/user/1000/ssh-agent.socket
 fi
 
