@@ -61,3 +61,8 @@ that appears during evaluation."
         (insert "The result:\n\n")))))
 
 (add-hook 'org-babel-after-execute-hook 'add-prefix-before-results)
+
+;; Add env variable to determine that we are in babel code block
+(with-eval-after-load 'ob-python
+  (add-to-list 'org-babel-default-header-args:python
+               '(:prologue . "import os; os.environ['ORG_BABEL']='1'")))
