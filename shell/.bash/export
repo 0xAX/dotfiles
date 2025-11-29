@@ -43,8 +43,8 @@ export PATH=$PATH:$KERNEL_DEV/tools/perf/
 export PATH=$PATH:/usr/lib/systemd/
 
 # golang
-export GOPATH=/usr/local/bin/go
-export PATH=$PATH:$GOPATH/bin
+export GOARCH=amd64
+export GOOS=linux
 
 # less
 export LESSHISTFILE="/dev/null"
