@@ -150,6 +150,10 @@ alias load-test-cluster='export KUBECONFIG=/home/alex/work/tposs/devel/loadtest/
 alias tmp-cluster-ctx='export KUBECONFIG=/home/alex/work/tposs/devel/loadtest/kube-config-testcluster.conf'
 alias mc-cluster-ctx='export KUBECONFIG=/home/alex/Downloads/cennso-int-mc-1002.yaml'
 alias nodeUsage='kubectl get nodes --no-headers | awk '\''{print $1}'\'' | xargs -I {} sh -c '\''echo {} ; kubectl describe node {} | grep Allocated -A 5 | grep -ve Event -ve Allocated -ve percent -ve -- ; echo '\'''
+alias get-xcore-clusters='kubectl -n cennso-infra get xcorecluster'
+alias get-core-clusters='kubectl -n cennso-infra get corecluster'
+alias describe-xcore-cluster='kubectl describe xcorecluster -ncennso-infra'
+alias describe-core-cluster='kubectl describe corecluster -ncennso-infra'
 
 # gnupg aliases
 alias gpg=gpg2
