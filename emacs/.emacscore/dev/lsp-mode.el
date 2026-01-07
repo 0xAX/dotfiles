@@ -77,3 +77,5 @@
   (add-hook 'go-mode-hook #'lsp-deferred)
   (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
   (add-hook 'go-mode-hook #'company-mode))
+
+(setq lsp-completion-enable-additional-text-edit t)
