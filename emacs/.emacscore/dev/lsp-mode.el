@@ -73,9 +73,13 @@
   (add-hook 'before-save-hook #'lsp-format-buffer t t)
   (add-hook 'before-save-hook #'lsp-organize-imports t t))
 
+(setq exec-path (cons "/home/alex/go/bin" exec-path))
 (when (executable-find "gopls")
   (add-hook 'go-mode-hook #'lsp-deferred)
   (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
   (add-hook 'go-mode-hook #'company-mode))
 
 (setq lsp-completion-enable-additional-text-edit t)
+
+;; disable copilot
+(setq lsp-copilot-enabled nil)
