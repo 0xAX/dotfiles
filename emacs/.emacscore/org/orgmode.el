@@ -57,16 +57,6 @@
 (load "~/.emacscore/org/org-ui.el")
 (load "~/.emacscore/org/org-keybindings.el")
 (load "~/.emacscore/org/org-markdown.el")
+(load "~/.emacscore/org/org-latex.el")
 
-;; Set to nil here, because its incompatible with viewing the agenda
-(setq org-startup-with-latex-preview nil)
-
-;; Set latex live preview backend
-(setq org-preview-latex-default-process 'dvisvgm)
-(setq org-latex-create-formula-image-program 'dvisvgm)
-
-(plist-put org-format-latex-options :scale 2)
 (add-hook 'org-mode-hook 'org-fragtog-mode)
-
-(plist-put org-format-latex-options :foreground nil)
-(plist-put org-format-latex-options :background nil)

@@ -38,8 +38,3 @@
           (lambda () (progn
                        (electric-indent-mode -1)
                        (org-bullets-mode 1))))
-
-;; Set foreground for latex fragments to white
-(when (equal current-theme 'nord)
-  (setq org-format-latex-options
-      (plist-put org-format-latex-options :foreground "White")))
