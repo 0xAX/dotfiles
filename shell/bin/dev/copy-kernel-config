@@ -1,0 +1,10 @@
+#!/bin/bash
+
+KERNEL_CONFIG="${HOME}"/disk/dev/linux/.config
+MACHINE_ID=$(hostnamectl | grep "Hardware Model" | awk '{print $6}' | sed -e "s/_.*//")
+
+if [[ -f "$KERNEL_CONFIG" ]]; then
+    cp -r "$KERNEL_CONFIG" "$DOTFILES"/linux/"$MACHINE_ID"/
+fi
+
+exit 0
