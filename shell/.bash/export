@@ -16,6 +16,7 @@ export PATH=$PATH:$WORK/elixir/bin
 export PATH=$PATH:/usr/local/pgsql/bin/
 export PATH=$PATH:/home/alex/disk2/mysql/bin
 test -d ${HOME}/go/bin && export PATH=$PATH:${HOME}/go/bin
+test -d /usr/local/go/bin && export PATH=$PATH:/usr/local/go/bin
 test -d ${DEV_DISK}/etcd/bin && export PATH=$PATH:$DEV_DISK/etcd/bin
 test -d /usr/local/mysql/bin && export PATH=$PATH:/usr/local/mysql/bin
 test -d /usr/local/mysql/scripts && export PATH=$PATH:/usr/local/mysql/scripts
