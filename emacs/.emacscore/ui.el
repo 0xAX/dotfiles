@@ -55,20 +55,20 @@ Falls back to 1920 if anything fails."
       (load "~/.emacscore/themes/material/tabbar.el"))
     (set-face-attribute 'show-paren-match-expression nil :background "#90A4AE")
     (enable-theme 'material-light)))
- ((equal current-theme 'capptuccin-machiato)
+ ((equal current-theme 'catppuccin-macchiato)
   (progn
-    (setq capptuccin-theme-path
+    (setq catppuccin-theme-path
         (concat user-emacs-directory "/straight/build/catppuccin-theme"))
-    (load (concat capptuccin-theme-path "/catppuccin-theme.el"))
+    (load (concat catppuccin-theme-path "/catppuccin-theme.el"))
     (setq catppuccin-flavor 'macchiato)
     (when (equal tab-mode 'tabbar)
       (load "~/.emacscore/themes/catppuccin/tabbar-catppuccin-style.el"))
     (enable-theme 'catppuccin)))
- ((equal current-theme 'capptucin-mocha)
+ ((equal current-theme 'catppuccin-mocha)
   (progn
-    (setq capptuccin-theme-path
+    (setq catppuccin-theme-path
         (concat user-emacs-directory "/straight/build/catppuccin-theme"))
-    (load (concat capptuccin-theme-path "/catppuccin-theme.el"))
+    (load (concat catppuccin-theme-path "/catppuccin-theme.el"))
     (setq catppuccin-flavor 'mocha)
     (when (equal tab-mode 'tabbar)
       (load "~/.emacscore/themes/catppuccin/tabbar-catppuccin-style.el"))
