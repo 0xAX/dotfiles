@@ -1,6 +1,4 @@
-;;; material.el --- GNU Emacs tabbar styles for gruvbox theme  -*- lexical-binding: t -*-
-
-;; Tabbar mode
+;;; tabbar-gruvbox-style.el --- GNU Emacs tabbar/centaur-tabs styles for gruvbox theme  -*- lexical-binding: t -*-
 (require 'tabbar)
 
 ;; Group similar files together in tabbar
@@ -32,7 +30,7 @@
          ;; lisp programming
          ((string-equal "el"       (file-name-extension (buffer-name))) "lisp")
          ((string-equal "lisp"     (file-name-extension (buffer-name))) "lisp")
-         ((string-equal "emacs"    (buffer-name)) "lisp")
+         ((string-equal ".emacs"    (buffer-name)) "lisp")
 
          ;; erlang programming
          ((string-equal "erl"      (file-name-extension (buffer-name))) "erlang")
@@ -59,33 +57,29 @@
          ;; everything else
          (t "user"))))
 
-;; set up custom tabbar group
+;; set custom tabbar group
 (setq tabbar-buffer-groups-function 'my-tabbar-buffer-groups)
-
+;; set tabbar background color 
 (setq tabbar-background-color "#1d2021")
 
+;; Tabbar faces
 (custom-set-faces
- '(tabbar-default ((t (:background "#1d2021" :foreground "#1d2021" :box (:color "#1d2021")))))
- '(tabbar-selected ((t (:background "#1d2021" :foreground "#ebdbb2"))))
- '(tabbar-unselected ((t (:background "#1d2021" :foreground "#bdae93"))))
- '(tabbar-modified ((t (:background "#1d2021" :foreground "#fe8019" :box (:color "#1d2021")))))
- '(tabbar-separator ((t (:background "#1d2021" :foreground "#313244"))))
- '(tabbar-highlight ((t (:background "#1d2021" :foreground "white"))))
- '(tabbar-selected-modified ((t (:background "#1d2021" :foreground "#fe8019"))))
-
- ;; line number custom faces
- '(line-number ((t (:background "#1d2021" :foreground "#666666"))))
- '(line-number-current-line ((t (:background "#1d2021" :foreground "#ff8000")))))
+ '(tabbar-default ((t (:background "#1d2021" :foreground "#1d2021" :box nil))))
+ '(tabbar-selected ((t (:background "#504945" :foreground "#fbf1c7" :weight bold :box (:line-width 2 :color "#d65d0e" :style nil)))))
+ '(tabbar-unselected ((t (:background "#32302f" :foreground "#928374" :box (:line-width 1 :color "#1d2021" :style nil)))))
+ '(tabbar-modified ((t (:background "#504945" :foreground "#d65d0e" :weight bold :box (:line-width 2 :color "#d65d0e" :style nil)))))
+ '(tabbar-separator ((t (:background "#1d2021" :foreground "#1d2021" :height 0.8))))
+ '(tabbar-highlight ((t (:background "#665c54" :foreground "#fbf1c7" :underline nil))))
+ '(tabbar-selected-modified ((t (:background "#504945" :foreground "#d65d0e" :weight bold :box (:line-width 2 :color "#d65d0e" :style nil))))))
 
 ;; Set font for the tabbar
-;; NOTE: we do it here but not in the custom-set-faces above because the custom-set-faces must have already evaluated
-;; value of the font
+;; NOTE: we do it here but not in the custom-set-faces above because
+;; the custom-set-faces must have already evaluated value of the font
 (set-face-attribute 'tabbar-default nil :font (plist-get (font-face-attributes (face-attribute 'default :font)) :family))
 
-;;
 ;; Hide tabbar buttons
-;;
 (setq tabbar-hide-header-button t)
+;; Hide tabbar icons
 (setq tabbar-use-images nil)
 
 (customize-set-variable 'tabbar-scroll-right-button '(("") ""))
@@ -94,8 +88,3 @@
 
 ;; enable tabbar mode
 (tabbar-mode)
-
-;; Set mode-line color for grubvox
-(set-face-attribute 'mode-line nil
-                    :background "#1d2021"
-                    :box nil)

@@ -32,7 +32,7 @@
          ;; lisp programming
          ((string-equal "el"       (file-name-extension (buffer-name))) "lisp")
          ((string-equal "lisp"     (file-name-extension (buffer-name))) "lisp")
-         ((string-equal "emacs"    (buffer-name)) "lisp")
+         ((string-equal ".emacs"    (buffer-name)) "lisp")
 
          ;; erlang programming
          ((string-equal "erl"      (file-name-extension (buffer-name))) "erlang")
