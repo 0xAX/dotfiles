@@ -37,9 +37,23 @@
           (lambda (frame _w)
             (set-face-attribute 'default frame :font "Firacode" :height 150)))
 
+;;
 ;; lsp ui configuration
+;;
+
+;; Enable header for the splash window with LSP documentation
 (setq lsp-ui-doc-header t)
-(setq lsp-ui-doc-show-with-cursor t)
+
+;; Enable LSP documentation window but disable it during isearch to prevent interrupting search
+(progn
+  (setq lsp-ui-doc-show-with-cursor t)
+  (add-hook 'isearch-mode-hook
+            (lambda ()
+              (setq-local lsp-ui-doc-show-with-cursor nil)))
+  (add-hook 'isearch-mode-end-hook
+            (lambda ()
+              (setq-local lsp-ui-doc-show-with-cursor t))))
+
 (setq lsp-ui-doc-include-signature t)
 (setq lsp-ui-doc-use-childframe t)
 
