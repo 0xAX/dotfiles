@@ -162,7 +162,6 @@
 (load "~/.emacscore/lisp/ox-gfm.el")
 (load "~/.emacscore/lisp/cmake.el")
 (load "~/.emacscore/lisp/rainbow-mode-1.0.5.el")
-(load "~/.emacscore/lisp/org-bullets.el")
 (load "~/.emacscore/lisp/org-fragtog.el")
 (load "~/.emacscore/lisp/epl.el")
 (load "~/.emacscore/lisp/pkg-info.el")
