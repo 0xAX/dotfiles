@@ -124,6 +124,7 @@
 (global-set-key (kbd "C-d C-s") 'update-system-dotfiles)
 
 ;; magit keybindings
+(global-set-key (kbd "C-x C-g") 'magit-status)
 (global-set-key (kbd "C-x C-l") 'magit-log-buffer-file)
 
 ;; treemacs keybindings
