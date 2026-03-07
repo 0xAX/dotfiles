@@ -19,15 +19,15 @@
 
 ;; Current theme. Following themes are supported:
 ;;
-;; - capptuccin-machiato
+;; - catppuccin-macchiato
 ;; - material
-;; - capptucin-mocha
+;; - catppuccin-mocha
 ;; - gruvbox
 ;; - solarized
 ;; - nord
 ;;
 ;; The configuration of the theme itself is in the .emacscore/ui.el
-(setq current-theme 'nord)
+(setq current-theme 'catppuccin-macchiato)
 
 ;; Set directory for dependencies and primary configuration
 (setq user-emacs-directory "~/.emacs.d")
