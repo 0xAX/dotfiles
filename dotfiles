@@ -84,20 +84,20 @@ case $1 in
     test -r "$HOME"/.inputrc && cp -r "$HOME"/.inputrc "$DOTFILES"
     test -r "$HOME"/.pythonrc && cp -r "$HOME"/.pythonrc  "$DOTFILES"
 
-    # Copy zed cconfiguration
-    test -r "$HOME"/.config/zed/settings.json && cp -r "$HOME"/.config/zed/settings.json ./zed
-    test -r "$HOME"/.config/zed/keymap.json && cp -r "$HOME"/.config/zed/keymap.json ./zed
+    # Copy zed configuration
+    test -r "$HOME"/.config/zed/settings.json && cp -r "$HOME"/.config/zed/settings.json "$DOTFILES"/zed
+    test -r "$HOME"/.config/zed/keymap.json && cp -r "$HOME"/.config/zed/keymap.json "$DOTFILES"/zed
 
     # Copy prettier configuration
-    test -r "$HOME"/.prettierrc && cp -r "$HOME"/.prettierrc .
+    test -r "$HOME"/.prettierrc && cp -r "$HOME"/.prettierrc "$DOTFILES"
     ;;
 --update-system)
     # Copy zed configuration
     mkdir -p "$HOME"/.config/zed
-    cp -r ./zed/* "$HOME"/.config/zed
+    cp -r "$DOTFILES"/zed/* "$HOME"/.config/zed
 
-    # Copy prettier configuratoin
-    cp -r .prettierrc "$HOME"/
+    # Copy prettier configuration
+    cp -r "$DOTFILES"/.prettierrc "$HOME"/
 
     # Copy mail scripts and configuration
     cp -r "$DOTFILES"/mail/.mail "$HOME"/
