@@ -1,4 +1,4 @@
-;;; ui.el --- UI configuration of GNU Emacs  -*- lexical-binding: t -*-
+;; ui.el --- UI configuration of GNU Emacs  -*- lexical-binding: t -*-
 
 (defun get-font-size ()
   "Return an integer font height (1/10pt) based on focused Hyprland monitor width.
@@ -15,6 +15,17 @@ Falls back to 1920 if anything fails."
 	    "22"
 	  "13"))
     "13"))
+
+;; Set up line numbers
+(if (< emacs-major-version 29)
+    (progn
+      (require 'linum)
+      (global-linum-mode 1)
+      (setq linum-format " %d "))
+    (global-display-line-numbers-mode 1))
+
+;; Highlight current line
+(global-hl-line-mode 1)
 
 ;; yes-or-no-p to y-n
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -47,58 +58,20 @@ Falls back to 1920 if anything fails."
 ;; This variable must be defined in the beginning of the .emacs
 (cond
  ((equal current-theme 'material)
-  (progn
-    (setq material-theme-path
-          (concat user-emacs-directory "/straight/build/material-theme"))
-    (load (concat material-theme-path "/material-light-theme.el"))
-    (when (equal tab-mode 'tabbar)
-      (load "~/.emacscore/themes/material/tabbar.el"))
-    (set-face-attribute 'show-paren-match-expression nil :background "#90A4AE")
-    (enable-theme 'material-light)))
+  (load "~/.emacscore/themes/material/material.el"))
  ((equal current-theme 'catppuccin-macchiato)
-  (progn
-    (setq catppuccin-theme-path
-        (concat user-emacs-directory "/straight/build/catppuccin-theme"))
-    (load (concat catppuccin-theme-path "/catppuccin-theme.el"))
-    (setq catppuccin-flavor 'macchiato)
-    (when (equal tab-mode 'tabbar)
-      (load "~/.emacscore/themes/catppuccin/tabbar-catppuccin-style.el"))
-    (enable-theme 'catppuccin)))
+  (load "~/.emacscore/themes/catppuccin/macchiato.el"))
  ((equal current-theme 'catppuccin-mocha)
-  (progn
-    (setq catppuccin-theme-path
-        (concat user-emacs-directory "/straight/build/catppuccin-theme"))
-    (load (concat catppuccin-theme-path "/catppuccin-theme.el"))
-    (setq catppuccin-flavor 'mocha)
-    (when (equal tab-mode 'tabbar)
-      (load "~/.emacscore/themes/catppuccin/tabbar-catppuccin-style.el"))
-    (enable-theme 'catppuccin)))
+  (load "~/.emacscore/themes/catppuccin/mocha.el"))
  ((equal current-theme 'gruvbox)
-  (progn
-    (setq gruvbox-theme-path
-        (concat user-emacs-directory "/straight/build/gruvbox-theme"))
-    (load (concat gruvbox-theme-path "/gruvbox-theme.el"))
-    (load (concat gruvbox-theme-path "/gruvbox-dark-hard-theme.el"))
-    (when (equal tab-mode 'tabbar)
-      (load "~/.emacscore/themes/gruvbox/tabbar-gruvbox-style.el"))
-    (enable-theme 'gruvbox-dark-hard)))
+  (load "~/.emacscore/themes/gruvbox/gruvbox.el"))
  ((equal current-theme 'nord)
-  (progn
-    (load "~/.emacscore/lisp/nord-theme.el")
-    (enable-theme 'nord)))
+  (load "~/.emacscore/themes/nord/nord.el"))
  (t
-  (progn
-    (setq solarized-theme-path
-          (concat user-emacs-directory "/straight/build/solarized-emacs"))
-    (load (concat solarized-theme-path "/solarized-palettes.el"))
-    (load (concat solarized-theme-path "/solarized-faces.el"))
-    (load (concat solarized-theme-path "/solarized.el"))
-    (load (concat solarized-theme-path "/solarized-theme.el"))
-    (load (concat solarized-theme-path "/solarized-light-theme.el"))
-    (setq x-underline-at-descent-line t)
-    (enable-theme 'solarized-light)
-    (when (equal tab-mode 'tabbar)
-      (load "~/.emacscore/themes/solarized/tabbar-solarized-light-style.el")))))
+  (load "~/.emacscore/themes/solarized/solarized.el")))
+
+;; draws the underline at the font's descent line (bottom) rather than the default baseline
+(setq x-underline-at-descent-line t)
 
 ;; hide scroll bar
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
@@ -114,17 +87,6 @@ Falls back to 1920 if anything fails."
 ;; Set up cursor type and cursor color
 (blink-cursor-mode 0)
 (setq-default cursor-type 'bar)
-
-;; Set up line numbers
-(if (< emacs-major-version 29)
-    (progn
-      (require 'linum)
-      (global-linum-mode 1)
-      (setq linum-format " %d "))
-    (global-display-line-numbers-mode 1))
-
-;; Highlight current line
-(global-hl-line-mode 1)
 
 ;; highlight search
 (setq search-highlight t)
@@ -179,26 +141,6 @@ Falls back to 1920 if anything fails."
 
 ;; If we switch to help window, move cursor there
 (setq help-window-keep-selected t)
-
-;; Customize colors of  centaur-tabs
-(when (and (not (equal tab-mode 'tabbar)) (equal current-theme 'nord))
-  (custom-set-faces
-   `(centaur-tabs-default ((t (:background ,"#434c5e" :foreground ,"#eceff4" :box nil))))
-   `(centaur-tabs-selected ((t (:background ,"#434c5e" :foreground ,"#d8dee9" :box nil))))
-   `(centaur-tabs-unselected ((t (:background ,"#2e3440" :foreground ,"#d8dee9" :box nil))))
-   `(centaur-tabs-selected-modified ((t (:background ,"#434c5e" :foreground ,"#eceff4" :box nil))))
-   `(centaur-tabs-unselected-modified ((t (:background ,"#434c5e" :foreground ,"#eceff4" :box nil))))
-   `(centaur-tabs-modified-marker-selected ((t (:inherit 'centaur-tabs-selected-modified :foreground ,"#d8dee9" :box nil))))
-   `(centaur-tabs-active-bar-face ((t (:background ,"#88c0d0" :foreground ,"#88c0d0"))))
-   `(centaur-tabs-modified-marker-unselected ((t (:inherit 'centaur-tabs-unselected-modified :background "#434c5e" :foreground ,"#d8dee9" :box nil))))))
-
-;; Change foreground for mode-line if theme is set to nord
-(when (equal current-theme 'nord)
-  (custom-set-faces
-   `(mode-line ((t (:foreground ,"#D8DEE9" :background ,"#4C566A"))))
-   `(font-lock-comment-face ((,t (:foreground ,"#72809a"))))
-   `(font-lock-comment-delimiter-face ((,t (:foreground ,"#72809a"))))
-   `(line-number ((,t (:foreground ,"#72809a"))))))
 
 ;; Load tabs based on centaur-tabs if it is enabled
 (when (not (equal tab-mode 'tabbar))
