@@ -18,6 +18,7 @@
 ;; Change foreground for mode-line if theme is set to nord
 (custom-set-faces
  `(mode-line ((t (:foreground ,"#D8DEE9" :background ,"#4C566A"))))
- `(font-lock-comment-face ((,t (:foreground ,"#72809a"))))
- `(font-lock-comment-delimiter-face ((,t (:foreground ,"#72809a"))))
- `(line-number ((,t (:foreground ,"#72809a")))))
+ `(font-lock-comment-face ((t (:foreground ,"#72809a"))))
+ `(font-lock-comment-delimiter-face ((t (:foreground ,"#72809a"))))
+ `(line-number ((t (:foreground ,"#72809a"))))
+ `(button ((t (:foreground ,"#A3BE8C" :box nil)))))
