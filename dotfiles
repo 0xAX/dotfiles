@@ -56,9 +56,9 @@ case $1 in
     test -d "$HOME"/.sway && cp -r "$HOME"/.sway/* "$DOTFILES"/sway
 
     # Copy hyprland stuff
-    test -d "$HOME"/.config/hypr && cp -r "$HOME"/.config/hypr "$DOTFILES"/.config/hypr
-    test -d "$HOME"/.config/wofi && cp -r "$HOME"/.config/wofi "$DOTFILES"/.config/wofi
-    test -d "$HOME"/.config/waybar && cp -r "$HOME"/.config/waybar "$DOTFILES"/.config/waybar
+    test -d "$HOME"/.config/hypr && cp -r "$HOME"/.config/hypr/* "$DOTFILES"/.config/hypr
+    test -d "$HOME"/.config/wofi && cp -r "$HOME"/.config/wofi/* "$DOTFILES"/.config/wofi
+    test -d "$HOME"/.config/waybar && cp -r "$HOME"/.config/waybar/* "$DOTFILES"/.config/waybar
 
     # Copy lisp/sbcl configuration
     test -r "$HOME"/.sbclrc && cp -r "$HOME"/.sbclrc "$DOTFILES"/dev/
