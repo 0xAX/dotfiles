@@ -1,5 +1,5 @@
 [core]
-        editor = "$EMACS"
+	editor = "$EMACS -nw -q -l ~/.emacscore/git-init.el"
         filemode = false
         trustctime = false
         excludesfile = /home/alex/.gitignore_global
@@ -76,7 +76,7 @@
     confirm = always
 
 [sequence]
-    editor = "$EMACS"
+    editor = "$EMACS -nw -q -l ~/.emacscore/git-init.el"
 
 [commit]
     signoff = false
