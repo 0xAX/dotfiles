@@ -33,9 +33,12 @@
 (setq user-emacs-directory "~/.emacs.d")
 ;; Set directory with secondary configuration
 (setq user-emacs-configuration-directory "~/.emacscore")
+
 ;; Set history for transient
-(setq transient-history-file (concat user-emacs-configuration-directory "/transient/" "transient-history.el"))
-(setq transient-values-file (concat user-emacs-configuration-directory "/transient/" "transient-values.el"))
+(setq transient-history-file
+      (concat user-emacs-configuration-directory "/transient/" "transient-history.el"))
+(setq transient-values-file
+      (concat user-emacs-configuration-directory "/transient/" "transient-values.el"))
 
 ;; If we are using i3wm, load related configuration.
 (if (executable-find "i3")
