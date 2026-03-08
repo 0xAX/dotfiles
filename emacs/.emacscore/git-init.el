@@ -66,6 +66,8 @@
 
 ;; Load magit
 (straight-use-package 'magit)
+;; Disable auto-revert to avoid the void variable error
+(setq magit-auto-revert-mode nil)
 (require 'magit)
 
 ;; Magit settings (from your main config)
