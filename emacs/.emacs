@@ -40,26 +40,6 @@
 (setq transient-values-file
       (concat user-emacs-configuration-directory "/transient/" "transient-values.el"))
 
-;; If we are using i3wm, load related configuration.
-(if (executable-find "i3")
-  (let*
-      ((i3-socket (shell-command-to-string "i3 --get-socketpath"))
-       (i3 (file-exists-p (replace-regexp-in-string "\n$" "" i3-socket))))
-    (if i3
-        (progn
-          (load "~/.emacscore/desktop/i3.el")
-          (setq *i3* "true"))
-      (setq *i3* "false")))
-  (setq *i3* "false"))
-
-(if (and
-     (string= (string-trim (or (getenv "XDG_SESSION_TYPE") "")) "wayland")
-     (getenv "HYPRLAND_INSTANCE_SIGNATURE"))
-    (progn
-      (load "~/.emacscore/desktop/hyprland.el")
-      (setq *hyprland* "true"))
-  (setq *hyprland* "false"))
-
 ;; Kill buffers without asking confirmation about active running processes
 (setq kill-buffer-query-functions
       (delq 'process-kill-buffer-query-function kill-buffer-query-functions))
@@ -162,7 +142,10 @@
 (straight-use-package 'yasnippet-snippets)
 (straight-use-package 'zig-mode)
 
-;; Load the small libraries first
+;; Load desktop/WM settings
+(load '~/.emacscore/desktop/desktop.el')
+
+;; Load the small libraries
 (load "~/.emacscore/lisp-utils.el")
 (load "~/.emacscore/lisp/org-bullets.el")
 (load "~/.emacscore/lisp/ox-gfm.el")
