@@ -14,6 +14,9 @@
 ;; Increase the number of the commits shown on the main panel
 (setq magit-log-section-commit-count 50)
 
+;; Don't auto-display the magit process buffer
+(setq magit-process-popup-time -1)
+
 ;; unbind magit-section keybindings as they are used to navigate
 ;; in my i3 setup
 (with-eval-after-load "magit"
