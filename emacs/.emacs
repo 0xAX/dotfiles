@@ -1,11 +1,5 @@
 ;;; .emacs --- My init file for GNU Emacs  -*- lexical-binding: t -*-
 
-;; Choose tab-mode. Supported values:
-;;
-;;  - tabbar
-;;  - centaur-tab
-(setq tab-mode 'centaur-tab)
-
 ;; Ensure Emacs can talk to the same SSH agent as the shell.
 ;; Some GUI Emacs sessions don't inherit SSH_AUTH_SOCK, which breaks
 ;; `ssh` and Git over SSH inside Emacs. We fix it by:
@@ -16,6 +10,12 @@
         (or (getenv "SSH_AUTH_SOCK")
             (concat (or (getenv "XDG_RUNTIME_DIR") "/run/user/1000")
                     "/ssh-agent.socket")))
+
+;; Choose tab-mode. Supported values:
+;;
+;;  - tabbar
+;;  - centaur-tab
+(setq tab-mode 'centaur-tab)
 
 ;; Current theme. Following themes are supported:
 ;;
