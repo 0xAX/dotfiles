@@ -86,12 +86,15 @@
 ;; disable copilot
 (setq lsp-copilot-enabled nil)
 
-;; Add golang to exec-path
+;; Add golang to exec-path and PATH environment variable
+;; exec-path is for Emacs finding executables, PATH is for subprocesses like gopls
 (when (file-directory-p "/home/alex/go/bin")
-  (setq exec-path (cons "/home/alex/go/bin" exec-path)))
+  (setq exec-path (cons "/home/alex/go/bin" exec-path))
+  (setenv "PATH" (concat "/home/alex/go/bin:" (getenv "PATH"))))
 
 (when (file-directory-p "/usr/local/go/bin")
-  (setq exec-path (cons "/usr/local/go/bin" exec-path)))
+  (setq exec-path (cons "/usr/local/go/bin" exec-path))
+  (setenv "PATH" (concat "/usr/local/go/bin:" (getenv "PATH"))))
 
 (defun lsp-go-install-save-hooks ()
   (add-hook 'before-save-hook #'lsp-format-buffer t t)
