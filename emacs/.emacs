@@ -186,13 +186,15 @@
 (load "~/.emacscore/dev/python.el")
 
 ;; Load miscellaneous things
-(when (not (string-match-p "microsoft" (shell-command-to-string "uname -a")))
-  (load "~/.emacscore/term.el")) ;; do not load vterm on WSL, does not work anyway
 (load "~/.emacscore/snippets.el")
 (load "~/.emacscore/build/make.el")
 (load "~/.emacscore/markups.el")
 (load "~/.emacscore/dotfiles.el")
 (load "~/.emacscore/mail.el")
+
+;; do not load vterm on WSL, does not work anyway
+(when (not (string-match-p "microsoft" (shell-command-to-string "uname -a")))
+  (load "~/.emacscore/term.el")) 
 
 ;; do not use tabs for indentation at all
 (setq-default indent-tabs-mode nil)
