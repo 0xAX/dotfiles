@@ -11,3 +11,18 @@
           (lambda () (progn
                        (cua-mode nil)
                        (cua-mode t))))
+
+;; Change the color of extra spaces in makefiles
+(cond
+ ((equal current-theme 'material)
+  (set-face-attribute 'makefile-space nil :background "#ECEFF1"))
+ ((equal current-theme 'catppuccin-macchiato)
+  (set-face-attribute 'makefile-space nil :background "#363a4f"))
+ ((equal current-theme 'catppuccin-mocha)
+  (set-face-attribute 'makefile-space nil :background "#313244"))
+ ((equal current-theme 'gruvbox)
+  (set-face-attribute 'makefile-space nil :background "#3c3836"))
+ ((equal current-theme 'nord)
+  (set-face-attribute 'makefile-space nil :background "#434c5e"))
+ (t
+  (set-face-attribute 'makefile-space nil :background "#eee8d5")))
