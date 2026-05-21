@@ -66,3 +66,6 @@ export VAGRANT_HOME=/home/alex/disk2/.vagrant.d/
 
 # Path to android sdk
 export ANDROID_SDK_HOME=/home/alex/disk/dev/.android
+
+# Use "lightweight" emacs for kubectl edit interactions
+export KUBE_EDITOR="$EMACS -nw -q -l ~/.emacscore/git-init.el"
