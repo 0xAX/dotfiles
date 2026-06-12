@@ -7,8 +7,12 @@
 ;; Load catppuccin-macchiato theme
 (setq catppuccin-flavor 'macchiato)
 (load (concat catppuccin-theme-path "/catppuccin-theme.el"))
-(enable-theme 'catppuccin))
+(enable-theme 'catppuccin)
 
 ;; Load custom catppuccin-macchiato faces for tabbar if it is enabled
 (when (equal tab-mode 'tabbar)
   (load "~/.emacscore/themes/catppuccin/tabbar-catppuccin-style.el"))
+
+;; Load custom catppuccin-macchiato faces for centaur-tabs if it is enabled
+(when (equal tab-mode 'centaur-tab)
+  (load "~/.emacscore/themes/catppuccin/centaur-tab-catppuccin-style.el"))

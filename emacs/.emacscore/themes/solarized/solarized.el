@@ -15,3 +15,7 @@
 ;; Load custom solarized-light faces for tabbar if it is enabled
 (when (equal tab-mode 'tabbar)
   (load "~/.emacscore/themes/solarized/tabbar-solarized-light-style.el"))
+
+;; Load custom solarized-light faces for centaur-tabs if it is enabled
+(when (equal tab-mode 'centaur-tab)
+  (load "~/.emacscore/themes/solarized/centaur-tab-solarized-light-style.el"))

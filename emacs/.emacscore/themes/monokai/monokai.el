@@ -23,10 +23,6 @@
  '(line-number-current-line ((t (:foreground "#FD971F" :background "#272822" :weight bold))))
  ;; Fix fringe (the area where line numbers appear)
  '(fringe ((t (:background "#272822"))))
- ;; The monokai theme scales `tab-line' to :height 1.5, which makes the
- ;; centaur-tabs bar look huge (centaur-tabs renders on `tab-line').
- ;; Bring it down so the tabs match the size used by the other themes.
- '(tab-line ((t (:height 0.8))))
  ;; Improve mode-line colors
  '(mode-line ((t (:foreground "#F8F8F2" :background "#49483E" :box nil))))
  '(mode-line-inactive ((t (:foreground "#75715E" :background "#3E3D31" :box nil))))
@@ -43,4 +39,9 @@
  ;; in the auto-complete popup, which shows up as underscored text on the
  ;; non-selected candidates. Remove the underline.
  '(company-tooltip-common ((t (:foreground "#66D9EF" :underline nil))))
- '(company-preview-common ((t (:foreground "#66D9EF" :underline nil)))))
+ '(company-preview-common ((t (:foreground "#66D9EF" :underline nil))))
+ ;; The monokai theme styles `show-paren-match' with `:inverse-video t', which
+ ;; turns the matched expression (we use `show-paren-style' = expression) into a
+ ;; glaring green block. Use a subtle dark highlight instead, no inverse-video.
+ '(show-paren-match ((t (:foreground "#FD971F" :background "#6b6450" :inverse-video nil :weight bold))))
+ '(show-paren-match-expression ((t (:foreground unspecified :background "#514c3b" :inverse-video nil)))))

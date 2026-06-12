@@ -26,9 +26,10 @@
 ;; - solarized
 ;; - nord
 ;; - monokai
+;; - ef-day
 ;;
 ;; The configuration of the theme itself is in the .emacscore/ui.el
-(setq current-theme 'monokai)
+(setq current-theme 'ef-day)
 
 ;; Set directory for dependencies and primary configuration
 (setq user-emacs-directory "~/.emacs.d")

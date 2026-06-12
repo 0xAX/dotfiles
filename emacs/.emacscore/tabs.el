@@ -47,6 +47,22 @@
 ;; Font-size
 (centaur-tabs-change-fonts (face-attribute 'default :font) 130)
 
+;; Keep the tab bar font/size under our control for *every* theme.
+;; centaur-tabs renders on the `tab-line' face, and several themes ship their
+;; own `tab-line' :height multiplier (e.g. monokai 1.5, ef-themes 0.95) and even
+;; a variable-pitch font. We load after the theme, so we reset that here.
+;;
+;; The multiplier that gives a pleasant tab size differs a little per theme, so
+;; it is tuned per-theme below. Bump a value up for bigger tabs, down for
+;; smaller. `:inherit nil' drops any variable-pitch font some themes set.
+;; We tune this per-theme, one theme at a time. Anything not listed uses the
+;; default (0.8). Add a line for a theme once we've dialed in its size.
+(set-face-attribute
+ 'tab-line nil :inherit nil
+ :height (pcase current-theme
+           ('material 1.0)
+           (_         1.0)))
+
 (defun centaur-tabs-buffer-groups ()
   "`centaur-tabs-buffer-groups' control buffers' group rules."
   (list

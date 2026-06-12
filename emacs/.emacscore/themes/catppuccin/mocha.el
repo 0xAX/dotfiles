@@ -12,3 +12,7 @@
 ;; Load custom catppuccin-mocha faces for tabbar if it is enabled
 (when (equal tab-mode 'tabbar)
   (load "~/.emacscore/themes/catppuccin/tabbar-catppuccin-style.el"))
+
+;; Load custom catppuccin-mocha faces for centaur-tabs if it is enabled
+(when (equal tab-mode 'centaur-tab)
+  (load "~/.emacscore/themes/catppuccin/centaur-tab-catppuccin-style.el"))
