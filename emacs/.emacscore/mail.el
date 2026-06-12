@@ -55,7 +55,7 @@
         smtpmail-smtp-service 587)
 
   (setq smtpmail-queue-mail nil 
-        smtpmail-queue-dir   "~/Maildir/queue/cur")
+        smtpmail-queue-dir   "~/Mail/queue/cur")
 
   ;; don't keep message buffers around
   (setq message-kill-buffer-on-exit t)
