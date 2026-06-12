@@ -67,6 +67,8 @@ Falls back to 1920 if anything fails."
   (load "~/.emacscore/themes/gruvbox/gruvbox.el"))
  ((equal current-theme 'nord)
   (load "~/.emacscore/themes/nord/nord.el"))
+ ((equal current-theme 'monokai)
+  (load "~/.emacscore/themes/monokai/monokai.el"))
  (t
   (load "~/.emacscore/themes/solarized/solarized.el")))
 
