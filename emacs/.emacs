@@ -188,6 +188,7 @@
 (load "~/.emacscore/dev/js.el")
 (load "~/.emacscore/dev/gptel.el")
 (load "~/.emacscore/dev/python.el")
+(load "~/.emacscore/dev/rust.el")
 
 ;; Load miscellaneous things
 (load "~/.emacscore/snippets.el")
