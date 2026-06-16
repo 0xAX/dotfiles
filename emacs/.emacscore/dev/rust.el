@@ -1,4 +1,9 @@
 (require 'rust-mode)
+(require 'rustic)
+
+;; Add rust binaries to exec-path
+(add-to-list 'exec-path "/home/alex/.cargo/bin")
+(setenv "PATH" (concat "/home/alex/.cargo/bin:" (getenv "PATH")))
 
 ;; Rust style-guide recommends to use spaces:
 ;; https://doc.rust-lang.org/1.0.0/style/style/whitespace.html
