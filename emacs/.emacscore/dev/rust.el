@@ -1,3 +1,4 @@
+;;; rust.el --- Rust for GNU Emacs  -*- lexical-binding: t -*-
 (require 'rust-mode)
 (require 'rustic)
 
