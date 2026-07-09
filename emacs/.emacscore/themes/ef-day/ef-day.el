@@ -17,3 +17,7 @@
 ;; Load custom ef-day faces for centaur-tabs if it is enabled
 (when (equal tab-mode 'centaur-tab)
  (load "~/.emacscore/themes/ef-day/centaur-tab-ef-day-style.el"))
+
+;; Load custom ef-day faces for lsp-ui (doc childframe, sideline, peek) which
+;; ef-themes does not cover
+(load "~/.emacscore/themes/ef-day/lsp-ui-ef-day-style.el")
