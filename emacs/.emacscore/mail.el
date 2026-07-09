@@ -42,6 +42,34 @@
   (add-to-list 'mu4e-bookmarks
                '(:query "maildir:/inbox" :name "Inbox" :key ?i :favorite t))
 
+  ;; Mark all messages in the headers view whose subject matches a regexp
+  ;; for trash, in one go. Bound to 'D' below; execute with 'x' as usual.
+  ;; (This shadows the default 'D' = permanent delete mark, which is still
+  ;; reachable via '%' or '&'.)
+  (defun trash-all-by-subject (pattern)
+    "Mark all visible messages whose subject matches PATTERN for trash.
+Messages that are already in the trash folder are marked for
+permanent deletion instead, mirroring how deleting from Trash
+works in the Gmail web UI."
+    (interactive
+     (list (read-string (mu4e-format "Trash all with subject matching: ")
+                        nil 'mu4e~headers-regexp-hist)))
+    (let ((count 0)
+          (case-fold-search t))
+      (mu4e-headers-for-each
+       (lambda (msg)
+         (let ((subject (mu4e-message-field msg :subject)))
+           (when (and subject (string-match-p pattern subject))
+             (mu4e-mark-at-point
+              (if (string= (mu4e-message-field msg :maildir) mu4e-trash-folder)
+                  'delete
+                'trash)
+              nil)
+             (cl-incf count)))))
+      (message "%d message(s) marked" count)))
+
+  (define-key mu4e-headers-mode-map (kbd "D") #'trash-all-by-subject)
+
   ;; allow for updating mail using 'U' in the main view:
   (setq mu4e-get-mail-command "sync-email")
 
