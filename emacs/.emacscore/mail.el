@@ -17,6 +17,13 @@
   ;; don't save message to Sent Messages, Gmail/IMAP takes care of this
   (setq mu4e-sent-messages-behavior 'delete)
 
+  ;; Make 'd' (trash) behave like delete in the Gmail web UI: just move the
+  ;; message to the Trash folder. Without this, mu4e also adds the maildir
+  ;; +T (trashed) flag, which offlineimap syncs to Gmail as \Deleted -- and
+  ;; Gmail then expunges the message entirely instead of keeping it in Trash
+  ;; for 30 days.
+  (setq mu4e-trash-without-flag t)
+
   (setq mu4e-maildir-shortcuts
         '( (:maildir "/INBOX"               :key ?i)
            (:maildir "/Elixir"              :key ?e)
