@@ -17,11 +17,11 @@
   ;; don't save message to Sent Messages, Gmail/IMAP takes care of this
   (setq mu4e-sent-messages-behavior 'delete)
 
-  ;; Make 'd' (trash) behave like delete in the Gmail web UI: just move the
-  ;; message to the Trash folder. Without this, mu4e also adds the maildir
-  ;; +T (trashed) flag, which offlineimap syncs to Gmail as \Deleted -- and
-  ;; Gmail then expunges the message entirely instead of keeping it in Trash
-  ;; for 30 days.
+  ;; If the trash mark is ever used ('d' is rebound to delete below): just
+  ;; move the message to the Trash folder. Without this, mu4e also adds the
+  ;; maildir +T (trashed) flag, which offlineimap syncs to Gmail as \Deleted
+  ;; -- and Gmail then expunges the message entirely instead of keeping it
+  ;; in Trash for 30 days.
   (setq mu4e-trash-without-flag t)
 
   (setq mu4e-maildir-shortcuts
@@ -42,17 +42,20 @@
   (add-to-list 'mu4e-bookmarks
                '(:query "maildir:/inbox" :name "Inbox" :key ?i :favorite t))
 
+  ;; Delete instead of trash: moving messages into the local Trash maildir
+  ;; forces offlineimap to re-upload each one to [Gmail]/Trash with a slow
+  ;; serial APPEND + CHECK per message. The delete mark removes the local
+  ;; file on the spot, and offlineimap propagates the whole batch to Gmail
+  ;; as a single STORE \Deleted + EXPUNGE.
+  (define-key mu4e-headers-mode-map (kbd "d") #'mu4e-headers-mark-for-delete)
+  (define-key mu4e-view-mode-map    (kbd "d") #'mu4e-view-mark-for-delete)
+
   ;; Mark all messages in the headers view whose subject matches a regexp
-  ;; for trash, in one go. Bound to 'D' below; execute with 'x' as usual.
-  ;; (This shadows the default 'D' = permanent delete mark, which is still
-  ;; reachable via '%' or '&'.)
-  (defun trash-all-by-subject (pattern)
-    "Mark all visible messages whose subject matches PATTERN for trash.
-Messages that are already in the trash folder are marked for
-permanent deletion instead, mirroring how deleting from Trash
-works in the Gmail web UI."
+  ;; for deletion, in one go. Bound to 'D' below; execute with 'x' as usual.
+  (defun delete-all-by-subject (pattern)
+    "Mark all visible messages whose subject matches PATTERN for deletion."
     (interactive
-     (list (read-string (mu4e-format "Trash all with subject matching: ")
+     (list (read-string (mu4e-format "Delete all with subject matching: ")
                         nil 'mu4e~headers-regexp-hist)))
     (let ((count 0)
           (case-fold-search t))
@@ -60,15 +63,11 @@ works in the Gmail web UI."
        (lambda (msg)
          (let ((subject (mu4e-message-field msg :subject)))
            (when (and subject (string-match-p pattern subject))
-             (mu4e-mark-at-point
-              (if (string= (mu4e-message-field msg :maildir) mu4e-trash-folder)
-                  'delete
-                'trash)
-              nil)
+             (mu4e-mark-at-point 'delete nil)
              (cl-incf count)))))
       (message "%d message(s) marked" count)))
 
-  (define-key mu4e-headers-mode-map (kbd "D") #'trash-all-by-subject)
+  (define-key mu4e-headers-mode-map (kbd "D") #'delete-all-by-subject)
 
   ;; allow for updating mail using 'U' in the main view:
   (setq mu4e-get-mail-command "sync-email")
