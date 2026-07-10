@@ -1,24 +1,24 @@
 #!/bin/bash
 
-cmake -DCMAKE_BUILD_TYPE=Release                           \
-      -DLLVM_ENABLE_PROJECTS=all                           \
-      -DLLVM_ENABLE_RUNTIMES=all                           \
-      -DLLVM_TARGETS_TO_BUILD="X86"                        \
-      -DLLVM_USE_LINKER=lld                                \
-      -DLLVM_BUILD_BENCHMARKS=ON                           \
-      -DLLVM_BUILD_TESTS=OFF                               \
-      -DLLVM_BUILD_TOOLS=ON                                \
-      -DLLVM_CCACHE_BUILD=ON                               \
-      -DLLVM_ENABLE_EH=ON                                  \
-      -DLLVM_ENABLE_FFI=ON                                 \
-      -DLLVM_ENABLE_LIBCXX=OFF                             \
-      -DLLVM_ENABLE_LLVM_LIBC=ON                           \
-      -DLLVM_ENABLE_PROJECTS="clang;lld;clang-tools-extra" \
-      -DLLVM_INCLUDE_TESTS=OFF                             \
-      -DLIBCXXABI_USE_LLVM_UNWINDER=OFF                    \
-      -DLLVM_ENABLE_THREADS=ON                             \
-      -DLLVM_ENABLE_RTTI=ON ../llvm-project/llvm
+cmake -S ../llvm-project/llvm -B . -G Ninja \
+  -DCMAKE_BUILD_TYPE=Release \
+  -DLLVM_ENABLE_ASSERTIONS=ON \
+  -DCMAKE_C_COMPILER=clang \
+  -DCMAKE_CXX_COMPILER=clang++ \
+  -DLLVM_USE_LINKER=lld \
+  -DLLVM_ENABLE_PROJECTS="clang;lldb" \
+  -DLLVM_TARGETS_TO_BUILD='X86;WebAssembly' \
+  -DLLVM_BUILD_LLVM_DYLIB=ON \
+  -DLLVM_LINK_LLVM_DYLIB=ON \
+  -DCLANG_LINK_CLANG_DYLIB=ON \
+  -DLLVM_PARALLEL_LINK_JOBS=1 \
+  -DLLVM_INCLUDE_TESTS=ON \
+  -DLLVM_INCLUDE_EXAMPLES=OFF \
+  -DLLVM_INCLUDE_BENCHMARKS=OFF \
+  -DLLVM_INCLUDE_DOCS=OFF \
+  -DLLDB_ENABLE_PYTHON=OFF \
+  -DLLDB_ENABLE_LIBEDIT=ON
 
-make
+ninja
 
 exit 0
