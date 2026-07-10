@@ -127,4 +127,3 @@ tools/xz-include/obj
 tools/xz-lib/obj
 tools/yacc/obj
 tools/zic/obj
-sys/arch/amd64/conf/MY_KERNEL
