@@ -114,6 +114,8 @@
 (straight-use-package 'ef-themes)
 (straight-use-package 'erlang)
 (straight-use-package 'elixir)
+(straight-use-package 'git-gutter)
+(straight-use-package 'git-gutter-fringe)
 (straight-use-package 'go-mode)
 (straight-use-package 'gptel)
 (straight-use-package 'gruvbox-theme)
