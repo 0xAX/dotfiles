@@ -24,7 +24,7 @@ sync-fork () {
         fi
 
         git -C "$dir" pull origin "$branch"
-        git -C "$dir" pull github "$branch"
+        git -C "$dir" push github "$branch"
     fi
 }
 
