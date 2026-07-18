@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+#
+# sync-github-forks - keep local checkouts in sync with upstream and my fork.
+#
+# For each repository listed at the bottom, pulls the given branch from
+# `origin` (upstream) and from `github` (my fork at github.com/0xAX).
+# Repositories that are not checked out locally are silently skipped.
+
+# Sync a single repository with its upstream and fork.
+#
+#   $1 - path to the local checkout
+#   $2 - branch to pull
+#   $3 - repository name on GitHub (used for the fork URL and output)
+sync-fork () {
+    local dir="$1" branch="$2" name="$3"
+
+    # Skip repositories that are not checked out on this machine.
+    if [[ -d "$dir" ]] ; then
+        echo "Updating $name"
+
+        # Add the `github` remote (my fork) on first run.
+        if ! git -C "$dir" remote get-url github &>/dev/null ; then
+            git -C "$dir" remote add github git@github.com:0xAX/"${name}".git
+        fi
+
+        git -C "$dir" pull origin "$branch"
+        git -C "$dir" pull github "$branch"
+    fi
+}
+
+sync-fork "$HOME/disk/dev/emacs"          master   "emacs"
+sync-fork "$HOME/disk/dev/linux"          master   "linux"
+sync-fork "$HOME/disk/dev/llvm-project"   main     "llvm"
+sync-fork "$HOME/disk/dev/otp"            master   "otp"
+sync-fork "$HOME/disk/dev/scikit-learn"   main     "scikit-learn"
+
+exit 0
