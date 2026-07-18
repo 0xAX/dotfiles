@@ -31,6 +31,15 @@
 ;; The configuration of the theme itself is in the .emacscore/ui.el
 (setq current-theme 'ef-day)
 
+;; Current font. Following fonts are supported:
+;;
+;; - fira-code
+;; - jetbrains-mono
+;; - monospace
+;;
+;; The configuration of the font itself is in the .emacscore/ui.el
+(setq current-font 'jetbrains-mono)
+
 ;; Set directory for dependencies and primary configuration
 (setq user-emacs-directory "~/.emacs.d")
 ;; Set directory with secondary configuration

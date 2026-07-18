@@ -40,13 +40,19 @@ Falls back to 1920 if anything fails."
 (setq visible-bell nil)
 (setq ring-bell-function 'ignore)
 
-;; Set fonts
-(cond ((file-directory-p "/usr/share/fonts/fira-code")
-       (progn
-         (set-frame-font (concat "Fira Code-" (get-font-size)))
-         (enable-ligatures)))
-      (t
-       (set-frame-font (concat "Monospace-" (get-font-size)))))
+;; Set fonts. The choice depends on the `current-font' variable.
+;; This variable must be defined in the beginning of the .emacs
+(cond
+ ((and (equal current-font 'fira-code)
+       (find-font (font-spec :family "Fira Code")))
+  (set-frame-font (concat "Fira Code-" (get-font-size)))
+  (enable-ligatures))
+ ((and (equal current-font 'jetbrains-mono)
+       (find-font (font-spec :family "JetBrains Mono")))
+  (set-frame-font (concat "JetBrains Mono-" (get-font-size)))
+  (enable-ligatures))
+ (t
+  (set-frame-font (concat "Monospace-" (get-font-size)))))
 
 ;; display file name in title
 (setq-default frame-title-format
