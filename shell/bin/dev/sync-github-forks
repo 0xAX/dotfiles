@@ -33,5 +33,7 @@ sync-fork "$HOME/disk/dev/linux"          master   "linux"
 sync-fork "$HOME/disk/dev/llvm-project"   main     "llvm"
 sync-fork "$HOME/disk/dev/otp"            master   "otp"
 sync-fork "$HOME/disk/dev/scikit-learn"   main     "scikit-learn"
+sync-fork "$HOME/disk/dev/systemd"        main     "systemd"
+sync-fork "$HOME/disk/dev/util-linux"     master   "util-linux"
 
 exit 0
