@@ -38,7 +38,7 @@
 ;; - monospace
 ;;
 ;; The configuration of the font itself is in the .emacscore/ui.el
-(setq current-font 'jetbrains-mono)
+(setq current-font 'fira-code)
 
 ;; Set directory for dependencies and primary configuration
 (setq user-emacs-directory "~/.emacs.d")
