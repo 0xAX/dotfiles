@@ -32,8 +32,16 @@
 ;; (git-gutter--turn-on)
 (require 'git-gutter-fringe)
 
-;; Enable it in the text mode and as a result in all modes
-(add-hook 'text-mode-hook #'git-gutter-mode)
+;; Enable it in the text mode and as a result in all modes.
+;; Skip epa-encrypted files: git stores the encrypted blob, so the
+;; diff is meaningless, and live-update would write the decrypted
+;; plaintext to /tmp.
+(add-hook 'text-mode-hook
+          (lambda ()
+            (unless (and buffer-file-name
+                         (string-match-p epa-file-name-regexp
+                                         buffer-file-name))
+              (git-gutter-mode 1))))
 
 ;; Configure git-gutter
 (setq
