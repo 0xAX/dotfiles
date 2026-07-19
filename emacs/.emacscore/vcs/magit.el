@@ -29,7 +29,6 @@
 
 ;; Load the git-gutter and fringe
 (require 'git-gutter)
-;; (git-gutter--turn-on)
 (require 'git-gutter-fringe)
 
 ;; Enable it in the text mode and as a result in all modes.
