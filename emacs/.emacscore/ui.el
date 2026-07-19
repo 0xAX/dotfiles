@@ -107,6 +107,13 @@ Falls back to 1920 if anything fails."
 ;;
 (require 'paren)
 (setq show-paren-style 'expression)
+;; The expression highlight overlay has a higher priority than the region
+;; overlay and would cover the selection color, so skip paren highlighting
+;; while the region is active.
+(setq show-paren-data-function
+      (lambda ()
+        (unless (use-region-p)
+          (show-paren--default))))
 (show-paren-mode t)
 
 ;; auto complete
