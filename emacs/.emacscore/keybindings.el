@@ -58,6 +58,9 @@
 (global-set-key (kbd "C-c c") 'emacs-config)
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
+;; org-mode keybindings
+(global-set-key (kbd "C-c o a") #'org-agenda)
+
 ;; help
 (global-set-key (kbd "C-h m") 'describe-mode)
 (global-set-key (kbd "C-h k") 'describe-key)
