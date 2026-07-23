@@ -47,6 +47,21 @@
   ;; serial APPEND + CHECK per message. The delete mark removes the local
   ;; file on the spot, and offlineimap propagates the whole batch to Gmail
   ;; as a single STORE \Deleted + EXPUNGE.
+  ;;
+  ;; NOTE: for the expunge to actually delete on the Gmail side (instead of
+  ;; silently archiving the message to All Mail), the Gmail web settings
+  ;; must be (set 2026-07-23):
+  ;;   Settings -> Forwarding and POP/IMAP:
+  ;;     - Auto-Expunge: OFF ("Wait for the client to update the server")
+  ;;     - "When a message is ... expunged from the last visible IMAP
+  ;;        folder": Move the message to the Trash (auto-purged after 30
+  ;;        days)
+  ;;   Settings -> Labels:
+  ;;     - "All Mail": "Show in IMAP" UNCHECKED. Crucial: while All Mail is
+  ;;       IMAP-visible, no folder is ever "the last visible" one (every
+  ;;       message is also in All Mail), so Gmail archives instead of
+  ;;       deleting. Same logic applies to any other IMAP-visible label on
+  ;;       a message.
   (define-key mu4e-headers-mode-map (kbd "d") #'mu4e-headers-mark-for-delete)
   (define-key mu4e-view-mode-map    (kbd "d") #'mu4e-view-mark-for-delete)
 
