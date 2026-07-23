@@ -144,6 +144,7 @@
 (straight-use-package 'org-bullets)
 (straight-use-package 'org-fragtog)
 (straight-use-package 'pkg-info)
+(straight-use-package 'rfc-mode)
 (straight-use-package 'rust-mode)
 (straight-use-package 'rustic)
 (straight-use-package 'solarized-emacs)
