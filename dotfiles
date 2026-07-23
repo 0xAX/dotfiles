@@ -103,7 +103,7 @@ case $1 in
     cp -r "$DOTFILES"/dev/.sbclrc "$HOME"/.sbclrc
 
     # Copy zig/zls related files
-    cp -r "$DOTFILES"/.config/zls.json "$HOME"/.config/
+    test -x "~/disk/dev/zig/zig" && cp -r "$DOTFILES"/.config/zls.json "$HOME"/.config/
 
     # Copy gnupg related files
     cp -r "$DOTFILES"/.gnupg/*.conf "$DOTFILES"/.gnupg/public.key "$HOME"/.gnupg/
