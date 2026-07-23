@@ -75,9 +75,6 @@
     multiedit = true
     confirm = always
 
-[sequence]
-    editor = "$EMACS -nw -q -l ~/.emacscore/git-init.el"
-
 [commit]
     signoff = false
     gpgsign = true
