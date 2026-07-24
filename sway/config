@@ -65,7 +65,7 @@ set $tag7 "7:&#xf1c1;"
 set $tag8 "8:&#xf02d;"
 
 bindsym $mod+1 workspace $tag1
-bindsym $mod+2 exec --no-startup-id /home/alex/.sway/emacs.pl
+bindsym $mod+2 exec --no-startup-id ~/.config/sway/emacs.pl
 for_window [class="^[eE]macs$"] move container to workspace $tag2
 bindsym $mod+3 workspace $tag3
 bindsym $mod+4 workspace $tag4
@@ -96,7 +96,7 @@ bar {
     }
     tray_output primary
     position top
-    status_command i3status -c ~/.sway/swaystatus.conf
+    status_command i3status -c ~/.config/sway/swaystatus.conf
     strip_workspace_numbers no
 }
 
