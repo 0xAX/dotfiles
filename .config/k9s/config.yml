@@ -3,36 +3,42 @@ k9s:
   maxConnRetry: 5
   enableMouse: false
   headless: false
+  logoless: false
   crumbsless: false
   readOnly: false
+  noExitOnCtrlC: false
   noIcons: false
+  skipLatestRevCheck: false
   logger:
     tail: 100
     buffer: 5000
-    sinceSeconds: -1
+    sinceSeconds: 300
     fullScreenLogs: false
     textWrap: false
     showTime: false
-  currentContext: cennso-int-mc-1002
-  currentCluster: cennso-int-mc-1002
+  currentContext: tposs-metrics-test-2
+  currentCluster: tposs-metrics-test-2
   clusters:
-    cennso-int-mc-1002:
+    tposs-metrics-test-2:
       namespace:
-        active: cennso-infra
+        active: testing
+        lockFavorites: false
         favorites:
-        - cennso-system
-        - cennso-infra
+        - testing
         - default
       view:
-        active: devdbi
+        active: pods
       featureGates:
         nodeShell: false
       shellPod:
-        image: busybox:1.31
+        image: busybox:1.35.0
+        command: []
+        args: []
         namespace: default
         limits:
           cpu: 100m
           memory: 100Mi
+        labels: {}
       portForwardAddress: localhost
   thresholds:
     cpu:
@@ -41,3 +47,4 @@ k9s:
     memory:
       critical: 90
       warn: 70
+  screenDumpDir: /tmp/k9s-screens-alex

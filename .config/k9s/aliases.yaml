@@ -1,10 +1,23 @@
-alias:
+aliases:
+  dp: deployments
+  sec: v1/secrets
+  jo: jobs
+  cr: clusterroles
+  crb: clusterrolebindings
+  ro: roles
+  rb: rolebindings
+  np: networkpolicies
+
   dbo: "db.contrib.cennso.com/v1alpha1/dboperators"
   dbi: "db.contrib.cennso.com/v1alpha1/dbinstances"
   dbtls: "db.contrib.cennso.com/v1alpha1/dbtlscertificates"
   dbbackup: "db.contrib.cennso.com/v1alpha1/dbbackups"
+  dbschemas: "db.contrib.cennso.com/v1alpha1/dbschemas"
+  dbusers: "db.contrib.cennso.com/v1alpha1/dbusers"
 
   devdbo: "db-dev.contrib.cennso.com/v1alpha1/dboperators"
   devdbi: "db-dev.contrib.cennso.com/v1alpha1/dbinstances"
   devdbtls: "db-dev.contrib.cennso.com/v1alpha1/dbtlscertificates"
   devdbbackup: "db-dev.contrib.cennso.com/v1alpha1/dbbackups"
+  devdbschemas: "db-dev.contrib.cennso.com/v1alpha1/dbschemas"
+  devdbusers: "db-dev.contrib.cennso.com/v1alpha1/dbusers"

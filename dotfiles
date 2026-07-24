@@ -49,6 +49,9 @@ case $1 in
     test -f "$HOME"/.emacs && cp -r "$HOME"/.emacs "$DOTFILES"/emacs
     test -d "$HOME"/.emacscore && cp -r "$HOME"/.emacscore "$DOTFILES"/emacs
 
+    # Copy k9s configuration
+    test -d "$HOME"/.config/k9s && cp -r "$HOME"/.config/k9s* "$DOTFILES"/.config/k9s
+
     # Copy i3 stuff
     test -d "$HOME"/.config/i3 && cp -r "$HOME"/.config/i3/* "$DOTFILES"/.config/i3
 
@@ -115,6 +118,10 @@ case $1 in
     rm -rf "$HOME"/{.emacs,.emacscore}
     cp -r emacs/.emacs emacs/.emacscore "$HOME"/
 
+    # Copy k9s configurations
+    mkdir -p "$HOME"/.config/k9s
+    cp -r "$DOTFILES"/.config/k9s/* "$HOME"/.config/k9s
+    
     # Copy i3 stuff
     mkdir -p "$HOME"/.config/i3
     cp -r "$DOTFILES"/.config/i3/* "$HOME"/.config/i3
