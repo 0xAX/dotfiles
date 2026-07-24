@@ -15,7 +15,7 @@ if ($emacs eq "") {
     sleep 1;
 }
 
-system("i3-msg", "mode", "passthrough");
-system("i3-msg", "workspace", "number", "2");
+system("swaymsg", "mode", "passthrough");
+system("swaymsg", "workspace", "number", "2");
 
 exit 0;
