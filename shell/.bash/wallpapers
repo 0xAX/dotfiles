@@ -9,26 +9,10 @@ if [[ "$XDG_SESSION_VAL"  = "Type=x11" ]] ; then
     if [ ! -z "$DISPLAY" ];
     then
         FEH=$(whereis feh | awk '{print $2}')
+
         if [ ! -z "$FEH" ]
         then
             $FEH --bg-scale "$HOME/dev/dotfiles/wallpapers/solarized-dark-wallpaper.jpg"
-        fi
-    fi
-fi
-
-if [[ "$XDG_SESSION_VAL" = "Type=wayland" ]] ; then
-    if [ ! -z "$DISPLAY" ];
-    then
-        SWAYBG=$(whereis swaybg | awk '{print $2}')
-
-        if [[ ! -z "$SWAYBG" ]] ;
-        then
-            if pgrep -x "swaybg" >/dev/null
-            then
-                kill -9 $(pgrep -x "swaybg")
-            fi
-            $SWAYBG -o "*" -i "$HOME/dev/dotfiles/wallpapers/solarized-dark-wallpaper.jpg" -m fill > /dev/null 2>&1 &
-            disown $(pgrep -x "swaybg")
         fi
     fi
 fi

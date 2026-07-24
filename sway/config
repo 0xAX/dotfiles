@@ -133,3 +133,6 @@ input "type:keyboard" {
     xkb_layout pl,ru
     xkb_options grp:lwin_toggle
 }
+
+# Set wallpapers
+output "*" bg ~/dev/dotfiles/wallpapers/solarized-dark-wallpaper.jpg fill
