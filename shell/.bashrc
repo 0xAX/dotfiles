@@ -33,6 +33,7 @@ XDG_PICTURES_DIR="$HOME/Pictures"
 XDG_PUBLICSHARE_DIR="$HOME/Public"
 XDG_TEMPLATES_DIR="$HOME/.Templates"
 XDG_VIDEOS_DIR="$HOME/Videos"
+XDG_CONFIG_HOME="$HOME/.config"
 
 # OS dependend
 OS=$(uname)
