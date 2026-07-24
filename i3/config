@@ -65,7 +65,7 @@ set $tag7 "7:&#xf1c1;"
 set $tag8 "8:&#xf02d;"
 
 bindsym $mod+1 workspace $tag1
-bindsym $mod+2 exec --no-startup-id /home/alex/.i3/emacs.pl
+bindsym $mod+2 exec --no-startup-id ~/.config/i3/emacs.pl
 for_window [class="^[eE]macs$"] move container to workspace $tag2
 bindsym $mod+3 workspace $tag3
 bindsym $mod+4 workspace $tag4
@@ -96,7 +96,7 @@ bar {
     }
     tray_output primary
     position top
-    status_command i3status -c ~/.i3/i3status.conf
+    status_command i3status -c ~/.config/i3/i3status.conf
     i3bar_command i3bar
     strip_workspace_numbers no
 }
