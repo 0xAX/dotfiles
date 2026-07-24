@@ -169,3 +169,6 @@ if [[ -z "$GPG_AGENT_PID" ]];
 then
     eval "$(gpg-agent --daemon)"
 fi
+
+# Disable golang telenery
+command -v go 1>/dev/null && go telemetry off
