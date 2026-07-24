@@ -50,7 +50,7 @@ case $1 in
     test -d "$HOME"/.emacscore && cp -r "$HOME"/.emacscore "$DOTFILES"/emacs
 
     # Copy i3 stuff
-    test -d "$HOME"/.config/i3 && cp -r "$HOME"/.config/i3/* "$DOTFILES"/i3
+    test -d "$HOME"/.config/i3 && cp -r "$HOME"/.config/i3/* "$DOTFILES"/.config/i3
 
     # Copy sway stuff
     test -d "$HOME"/.config/sway && cp -r "$HOME"/.config/sway/* "$DOTFILES"/sway
@@ -117,7 +117,7 @@ case $1 in
 
     # Copy i3 stuff
     mkdir -p "$HOME"/.config/i3
-    cp -r "$DOTFILES"/i3/* "$HOME"/.config/i3
+    cp -r "$DOTFILES"/.config/i3/* "$HOME"/.config/i3
 
     # Copy sway stuff
     mkdir -p "$HOME"/.config/sway
