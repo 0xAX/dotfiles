@@ -113,7 +113,7 @@ mode "resize" {
 }
 
 # lock screen
-bindsym $mod+Control+l exec i3-msg workspace number "1" && i3lock --tiling --dpms --color 000000
+bindsym $mod+Control+l exec i3-msg workspace number "1" && i3lock --tiling --color 000000
 
 mode "passthrough" {
     bindsym $mod+Escape mode "default"
