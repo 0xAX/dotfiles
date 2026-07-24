@@ -53,7 +53,7 @@ case $1 in
     test -d "$HOME"/.i3 && cp -r "$HOME"/.i3/* "$DOTFILES"/i3
 
     # Copy sway stuff
-    test -d "$HOME"/.sway && cp -r "$HOME"/.sway/* "$DOTFILES"/sway
+    test -d "$HOME"/.config/.sway && cp -r "$HOME"/.config/.sway/* "$DOTFILES"/sway
 
     # Copy hyprland stuff
     test -d "$HOME"/.config/hypr && cp -r "$HOME"/.config/hypr/* "$DOTFILES"/.config/hypr
@@ -120,8 +120,8 @@ case $1 in
     cp -r "$DOTFILES"/i3/* "$HOME"/.i3
 
     # Copy sway stuff
-    mkdir -p "$HOME"/.sway
-    cp -r "$DOTFILES"/sway/* "$HOME"/.sway
+    mkdir -p "$HOME"/.config/.sway
+    cp -r "$DOTFILES"/sway/* "$HOME"/./config/.sway
 
     # Copy hyprland stuff
     mkdir -p "$HOME"/.config/{hypr,wofi,waybar}
