@@ -223,5 +223,13 @@
 (when (get-buffer "*straight-byte-compilation*")
   (kill-buffer "*straight-byte-compilation*"))
 
+;; Helper functions
+
+(defun update-package (package-name)
+  "Fetch the latest version of the `package-name' using straight and re-build it"
+  (interactive "sPackage name: ")
+  (straight-pull-package-and-deps package-name)
+  (straight-rebuild-package package-name))
+
 ;; finally loaded everything
 (message "All done, %s%s" (user-login-name) ".")
