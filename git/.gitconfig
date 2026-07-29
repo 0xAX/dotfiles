@@ -1,61 +1,61 @@
 [core]
-	editor = "$EMACS -nw -q -l ~/.emacscore/git-init.el"
-        filemode = false
-        trustctime = false
-        excludesfile = /home/alex/.gitignore_global
-        checkstat = default
-        quotepath = false
-        eol = native
-        whitespace = trailing-space
+    editor = "$EMACS -nw -q -l ~/.emacscore/git-init.el"
+    filemode = false
+    trustctime = false
+    excludesfile = /home/alex/.gitignore_global
+    checkstat = default
+    quotepath = false
+    eol = native
+    whitespace = trailing-space
 
 [credential]
-        helper = cache
+    helper = cache
 
 [diff]
-        renameLimit = 4096
-        renames = true
+    renameLimit = 4096
+    renames = true
 
 [color]
-        ui = auto
-        interactive = always
-        grep = always
-        showbranch = always
+    ui = auto
+    interactive = always
+    grep = always
+    showbranch = always
 
 [color "branch"]
-        current = green bold
-        local   = yellow bold
-        remote  = magenta bold
+    current = green bold
+    local   = yellow bold
+    remote  = magenta bold
 
 [color "diff"]
-        meta = white bold
-        frag = magenta bold
-        old = red bold
-        new = green bold
-        whitespace = red reverse
+    meta = white bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
+    whitespace = red reverse
 
 [color "status"]
-        added = green bold
-        changed = yellow bold
-        untracked = red bold
-        unmerged = magenta bold
+    added = green bold
+    changed = yellow bold
+    untracked = red bold
+    unmerged = magenta bold
 
 [gc]
-        auto = 5000
+    auto = 5000
 
 [grep]
-        lineNumber = true
-        patternType = extended
-        extendedRegexp = true
+    lineNumber = true
+    patternType = extended
+    extendedRegexp = true
 
 [help]
-        format = man
-        autocorrect = 1
+    format = man
+    autocorrect = 1
 
 [log]
-        date = rfc
+    date = rfc
 
 [man]
-        viewer = man
+    viewer = man
 
 [push]
     default = current
