@@ -87,6 +87,10 @@ case $1 in
     test -r "$HOME"/.gdbinit && cp -r "$HOME"/.gdbinit "$DOTFILES"/dev
     test -r "$HOME"/.pythonrc && cp -r "$HOME"/.pythonrc "$DOTFILES"/dev
 
+    # Copy prettier configuration. Prettier looks for it next to the file it
+    # formats and walks up to $HOME, so it has to be installed there.
+    test -r "$HOME"/.prettierrc && cp -r "$HOME"/.prettierrc "$DOTFILES"/dev
+
     # Copy git configuration
     test -r "$HOME"/.gitconfig && cp -r "$HOME"/.gitconfig "$DOTFILES"/git
     test -r "$HOME"/.gitignore_global && cp -r "$HOME"/.gitignore_global "$DOTFILES"/git
@@ -98,13 +102,8 @@ case $1 in
     # everything linked against readline, so bash, gdb, the python REPL etc.
     test -r "$HOME"/.inputrc && cp -r "$HOME"/.inputrc "$DOTFILES"
 
-    # Copy prettier configuration
-    test -r "$HOME"/.prettierrc && cp -r "$HOME"/.prettierrc "$DOTFILES"
     ;;
 --update-system)
-    # Copy prettier configuration
-    cp -r "$DOTFILES"/.prettierrc "$HOME"/
-
     # Copy mail scripts and configuration
     cp -r "$DOTFILES"/mail/.mail "$HOME"/
     cp -r "$DOTFILES"/mail/.neomutrc "$HOME"/
@@ -125,6 +124,10 @@ case $1 in
     # Copy init files of the development tools. Unlike .sbclrc above these
     # are copied unconditionally, gdb and python are always around.
     cp -r "$DOTFILES"/dev/{.gdbinit,.pythonrc} "$HOME"/
+
+    # Copy prettier configuration. Prettier looks for it next to the file it
+    # formats and walks up to $HOME, so it has to be installed there.
+    cp -r "$DOTFILES"/dev/.prettierrc "$HOME"/
 
     # Copy git configuration. The trailing dot copies the directory content
     # instead of the directory itself, so both .gitconfig and .gitignore_global.
