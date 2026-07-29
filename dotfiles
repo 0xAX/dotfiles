@@ -75,7 +75,7 @@ case $1 in
     test -r "$HOME"/.gnupg/gpg.conf && cp -r "$HOME"/.gnupg/gpg.conf "$DOTFILES"/.gnupg
 
     # Copy terminator stuff
-    test -r "$HOME"/.config/terminator/config && cp -r "$HOME"/.config/terminator/config  "$DOTFILES"/terminator
+    test -r "$HOME"/.config/terminator/config && cp -r "$HOME"/.config/terminator/config  "$DOTFILES"/.config/terminator
 
     # Copy X files
     test -r "$HOME"/.Xresources && cp -r "$HOME"/.Xresources "$DOTFILES"/system/
@@ -137,7 +137,7 @@ case $1 in
     cp -r "$DOTFILES"/.config/waybar/* "$HOME"/.config/waybar/
 
     # Copy terminator stuff
-    mkdir -p "$HOME"/.config/terminator && cp -r "$DOTFILES"/terminator/* "$HOME"/.config/terminator
+    mkdir -p "$HOME"/.config/terminator && cp -r "$DOTFILES"/.config/terminator/* "$HOME"/.config/terminator
 
     # Copy scripts to home directory
     cp -r "$DOTFILES"/shell/. "$DOTFILES/shell/bin" "$HOME"/
