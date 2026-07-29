@@ -21,8 +21,8 @@ GnuPG is not a single program but a set of utilities:
 
 Each with its own job and its own configuration file:
 
-| File             | Usual path                | Description                                                                                                            |
-| ---------------- | ------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| File             | Path                      | Description                                                                                                             |
+| ---------------- | ------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
 | `gpg.conf`       | `~/.gnupg/gpg.conf`       | Options for the `gpg` command itself, read on every single invocation - from a shell, from `git commit`, from Emacs.    |
 | `gpg-agent.conf` | `~/.gnupg/gpg-agent.conf` | Options for the agent that keeps unlocked keys in memory and decides how long a passphrase stays cached.                |
 | `dirmngr.conf`   | `~/.gnupg/dirmngr.conf`   | Options for the daemon that does the networking: which keyserver `--recv-keys`, `--send-keys` and WKD lookups talk to.  |
