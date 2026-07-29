@@ -104,7 +104,7 @@ case $1 in
     sudo cp -r "$DOTFILES"/mail/email "$DOTFILES"/mail/sync-email /usr/local/bin
 
     # Copy lisp/sbcl configuration
-    cp -r "$DOTFILES"/dev/.sbclrc "$HOME"/.sbclrc
+    command -v sbcl && cp -r "$DOTFILES"/dev/.sbclrc "$HOME"/.sbclrc
 
     # Copy zig/zls related files
     test -x "$HOME/disk/dev/zig/zig" && cp -r "$DOTFILES"/.config/zls.json "$HOME"/.config/
