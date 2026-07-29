@@ -96,7 +96,7 @@ case $1 in
     test -r "$HOME"/.gitignore_global && cp -r "$HOME"/.gitignore_global "$DOTFILES"/git
 
     # Copy tmux configuration
-    test -r "$HOME"/.tmux.conf && cp -r "$HOME"/.tmux.conf "$DOTFILES"
+    test -r "$HOME"/.tmux.conf && cp -r "$HOME"/.tmux.conf "$DOTFILES"/tmux
 
     # Copy readline configuration. Not shell specific: it is picked up by
     # everything linked against readline, so bash, gdb, the python REPL etc.
@@ -134,7 +134,7 @@ case $1 in
     cp -r "$DOTFILES"/git/. "$HOME"/
 
     # Copy tmux configuration
-    cp -r "$DOTFILES"/.tmux.conf "$HOME"/
+    cp -r "$DOTFILES"/tmux/.tmux.conf "$HOME"/
 
     # Copy readline configuration. Not shell specific: it is picked up by
     # everything linked against readline, so bash, gdb, the python REPL etc.
