@@ -83,7 +83,7 @@ case $1 in
     test -r "$HOME"/.xinitrc && cp -r "$HOME"/.xinitrc "$DOTFILES"/system/
 
     # Copy other dotfiles
-    test -r "$HOME"/.gdbinit && cp -r "$HOME"/.gdbinit "$DOTFILES"
+    test -r "$HOME"/.gdbinit && cp -r "$HOME"/.gdbinit "$DOTFILES"/dev
     test -r "$HOME"/.gitconfig && cp -r "$HOME"/.gitconfig "$DOTFILES"/git
     test -r "$HOME"/.gitignore_global && cp -r "$HOME"/.gitignore_global "$DOTFILES"/git
     test -r "$HOME"/.tmux.conf && cp -r "$HOME"/.tmux.conf "$DOTFILES"
@@ -115,7 +115,7 @@ case $1 in
     cp -r "$DOTFILES"/.gnupg/*.conf "$DOTFILES"/.gnupg/public.key "$HOME"/.gnupg/
 
     # Copy standard dtofiles
-    cp -r .tmux.conf .gdbinit .inputrc .pythonrc "$DOTFILES/git/." "$HOME"/
+    cp -r .tmux.conf "$DOTFILES"/dev/.gdbinit .inputrc .pythonrc "$DOTFILES/git/." "$HOME"/
 
     # Copy emacs files
     rm -rf "$HOME"/{.emacs,.emacscore}
