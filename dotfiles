@@ -82,13 +82,21 @@ case $1 in
     test -r "$HOME"/.Xresources && cp -r "$HOME"/.Xresources "$DOTFILES"/system/
     test -r "$HOME"/.xinitrc && cp -r "$HOME"/.xinitrc "$DOTFILES"/system/
 
-    # Copy other dotfiles
+    # Copy init files of the development tools. Both are read by the tool
+    # itself on startup, so they live in dev/ next to .sbclrc.
     test -r "$HOME"/.gdbinit && cp -r "$HOME"/.gdbinit "$DOTFILES"/dev
+    test -r "$HOME"/.pythonrc && cp -r "$HOME"/.pythonrc "$DOTFILES"/dev
+
+    # Copy git configuration
     test -r "$HOME"/.gitconfig && cp -r "$HOME"/.gitconfig "$DOTFILES"/git
     test -r "$HOME"/.gitignore_global && cp -r "$HOME"/.gitignore_global "$DOTFILES"/git
+
+    # Copy tmux configuration
     test -r "$HOME"/.tmux.conf && cp -r "$HOME"/.tmux.conf "$DOTFILES"
+
+    # Copy readline configuration. Not shell specific: it is picked up by
+    # everything linked against readline, so bash, gdb, the python REPL etc.
     test -r "$HOME"/.inputrc && cp -r "$HOME"/.inputrc "$DOTFILES"
-    test -r "$HOME"/.pythonrc && cp -r "$HOME"/.pythonrc  "$DOTFILES"
 
     # Copy prettier configuration
     test -r "$HOME"/.prettierrc && cp -r "$HOME"/.prettierrc "$DOTFILES"
@@ -114,8 +122,20 @@ case $1 in
     mkdir -p "$HOME"/.gnupg && chmod 700 "$HOME"/.gnupg
     cp -r "$DOTFILES"/.gnupg/*.conf "$DOTFILES"/.gnupg/public.key "$HOME"/.gnupg/
 
-    # Copy standard dtofiles
-    cp -r .tmux.conf "$DOTFILES"/dev/.gdbinit .inputrc .pythonrc "$DOTFILES/git/." "$HOME"/
+    # Copy init files of the development tools. Unlike .sbclrc above these
+    # are copied unconditionally, gdb and python are always around.
+    cp -r "$DOTFILES"/dev/{.gdbinit,.pythonrc} "$HOME"/
+
+    # Copy git configuration. The trailing dot copies the directory content
+    # instead of the directory itself, so both .gitconfig and .gitignore_global.
+    cp -r "$DOTFILES"/git/. "$HOME"/
+
+    # Copy tmux configuration
+    cp -r "$DOTFILES"/.tmux.conf "$HOME"/
+
+    # Copy readline configuration. Not shell specific: it is picked up by
+    # everything linked against readline, so bash, gdb, the python REPL etc.
+    cp -r "$DOTFILES"/.inputrc "$HOME"/
 
     # Copy emacs files
     rm -rf "$HOME"/{.emacs,.emacscore}
