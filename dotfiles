@@ -73,6 +73,7 @@ case $1 in
     test -r "$HOME"/.gnupg/public.key && cp -r "$HOME"/.gnupg/public.key "$DOTFILES"/.gnupg
     test -r "$HOME"/.gnupg/gpg-agent.conf && cp -r "$HOME"/.gnupg/gpg-agent.conf "$DOTFILES"/.gnupg
     test -r "$HOME"/.gnupg/gpg.conf && cp -r "$HOME"/.gnupg/gpg.conf "$DOTFILES"/.gnupg
+    test -r "$HOME"/.gnupg/dirmngr.conf && cp -r "$HOME"/.gnupg/dirmngr.conf "$DOTFILES"/.gnupg
 
     # Copy terminator stuff
     test -r "$HOME"/.config/terminator/config && cp -r "$HOME"/.config/terminator/config  "$DOTFILES"/.config/terminator
@@ -108,7 +109,9 @@ case $1 in
     # Copy zig/zls related files
     test -x "$HOME/disk/dev/zig/zig" && cp -r "$DOTFILES"/.config/zls.json "$HOME"/.config/
 
-    # Copy gnupg related files
+    # Copy gnupg related files. gpg insists on 700 on its home directory,
+    # otherwise it warns about unsafe permissions on every invocation.
+    mkdir -p "$HOME"/.gnupg && chmod 700 "$HOME"/.gnupg
     cp -r "$DOTFILES"/.gnupg/*.conf "$DOTFILES"/.gnupg/public.key "$HOME"/.gnupg/
 
     # Copy standard dtofiles
