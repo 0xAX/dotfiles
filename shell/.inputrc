@@ -1,5 +1,14 @@
 # Allow UTF-8 input and output, instead of showing stuff like $'\0123\0456'
+
+# Accept the 8th bit as part of a character instead of stripping it, so typing
+# a non-ASCII character reaches the line as itself.
 set input-meta on
+# Display such characters directly instead of as an escape sequence, which is
+# where the $'\0123' above comes from.
 set output-meta on
+# Do not turn a high-bit byte into ESC + the low seven bits. That conversion is
+# how a meta key is emulated on a terminal that has none, and it destroys the
+# lead byte of every UTF-8 sequence.
 set convert-meta off
+# No audible or visible bell on an ambiguous completion.
 set bell-style off
