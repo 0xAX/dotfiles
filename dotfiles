@@ -45,6 +45,11 @@ case $1 in
     test -f "$HOME"/.bash_logout && cp -r "$HOME"/.bash_logout "$DOTFILES"/shell
     test -f "$HOME"/.bash_profile && cp -r "$HOME"/.bash_profile "$DOTFILES"/shell
 
+    # Copy readline configuration. Not bash specific: it is picked up by
+    # everything linked against readline, but what it configures is how a
+    # prompt reads input, so it lives next to the shell files.
+    test -r "$HOME"/.inputrc && cp -r "$HOME"/.inputrc "$DOTFILES"/shell
+
     # Copy emacs directories
     test -f "$HOME"/.emacs && cp -r "$HOME"/.emacs "$DOTFILES"/emacs
     test -d "$HOME"/.emacscore && cp -r "$HOME"/.emacscore "$DOTFILES"/emacs
@@ -98,10 +103,6 @@ case $1 in
     # Copy tmux configuration
     test -r "$HOME"/.tmux.conf && cp -r "$HOME"/.tmux.conf "$DOTFILES"/tmux
 
-    # Copy readline configuration. Not shell specific: it is picked up by
-    # everything linked against readline, so bash, gdb, the python REPL etc.
-    test -r "$HOME"/.inputrc && cp -r "$HOME"/.inputrc "$DOTFILES"
-
     ;;
 --update-system)
     # Copy mail scripts and configuration
@@ -136,10 +137,6 @@ case $1 in
     # Copy tmux configuration
     cp -r "$DOTFILES"/tmux/.tmux.conf "$HOME"/
 
-    # Copy readline configuration. Not shell specific: it is picked up by
-    # everything linked against readline, so bash, gdb, the python REPL etc.
-    cp -r "$DOTFILES"/.inputrc "$HOME"/
-
     # Copy emacs files
     rm -rf "$HOME"/{.emacs,.emacscore}
     cp -r emacs/.emacs emacs/.emacscore "$HOME"/
@@ -165,7 +162,9 @@ case $1 in
     # Copy terminator stuff
     mkdir -p "$HOME"/.config/terminator && cp -r "$DOTFILES"/.config/terminator/* "$HOME"/.config/terminator
 
-    # Copy scripts to home directory
+    # Copy the shell files to the home directory. The trailing dot copies the
+    # directory content instead of the directory itself, so .bashrc, .bash/,
+    # .bash_profile, .bash_logout and .inputrc all go in one command.
     cp -r "$DOTFILES"/shell/. "$DOTFILES/shell/bin" "$HOME"/
 
     # Copy system (per-user) files
