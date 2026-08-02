@@ -56,3 +56,10 @@ function docker-postgres-start() {
 function docker-postgres-stop() {
     docker stop postgres-server
 }
+
+function docker-prune() {
+    docker container prune -f
+    docker image prune -a -f --filter "until=24h"
+    docker volume prune -f
+    docker network prune -f
+}
