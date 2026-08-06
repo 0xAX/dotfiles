@@ -189,7 +189,15 @@ alias gru="git status --porcelain | grep ? | sed -e "s/??\s//" | xargs rm -rf"
 # kubectl/k8s aliases
 alias k="kubectl"
 
-# Error utility
-err() {
+#######################################
+# Print a data and arguments to stderr
+#
+# Arguments:
+#   - $*
+#
+# Outputs:
+#   Writes arguments to stderr
+#######################################
+function err() {
   echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $*" >&2
 }
