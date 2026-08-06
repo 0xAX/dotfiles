@@ -190,7 +190,8 @@ alias gru="git status --porcelain | grep ? | sed -e "s/??\s//" | xargs rm -rf"
 alias k="kubectl"
 
 #######################################
-# Print a data and arguments to stderr
+# Description:
+#   Print a data and arguments to stderr
 #
 # Arguments:
 #   - $*
@@ -200,4 +201,21 @@ alias k="kubectl"
 #######################################
 function err() {
   echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $*" >&2
+}
+
+#######################################
+# Description:
+#   Generate random file name using /dev/urandom
+#
+# Arguments:
+#   - Optional integer number specifies length of the generated file name
+#######################################
+function rand_file_name() {
+    local FILE_NAME_LENGTH=10
+
+    if [[ -n "$1" ]] ; then
+        FILE_NAME_LENGTH="$1"
+    fi
+
+    cat /dev/urandom | tr -cd 'a-f0-9' | head -c "$FILE_NAME_LENGTH"
 }
