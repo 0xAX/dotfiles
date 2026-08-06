@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: prop-custom-id
+# key: <p-cid
+# --
+:PROPERTIES:
+:CUSTOM_ID: $0
+:END:

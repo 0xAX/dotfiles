@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: bash
+# key: <bash
+# --
+#+BEGIN_SRC bash :shebang #!/usr/bin/env bash :results output
+$0
+#+END_SRC
