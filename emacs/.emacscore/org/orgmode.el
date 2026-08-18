@@ -13,6 +13,69 @@
   (setq org-directory "~/disk/dev/todo")
   (setq org-agenda-files '("~/disk/dev/todo/agenda.org.gpg")))
 
+;; set path to reading dir
+(defvar org-reading-directory
+  (expand-file-name "reading/" org-directory))
+
+(defun org-reading-files ()
+  "Return every Org file under `org-reading-directory', recursively.
+Putting the directory itself into `org-agenda-files' is not enough: org
+expands a directory with `directory-files', which is not recursive and
+which uses `org-agenda-file-regexp', so it would miss both the notes in
+subdirectories (essays/, notes/, posts/, tech/) and the encrypted
+`.org.gpg' ones."
+  (directory-files-recursively org-reading-directory
+                               "\\.org\\(\\.gpg\\)?\\'"))
+
+;; Needed for `epa-file-passphrase-alist' and
+;; `epa-file-cache-passphrase-for-symmetric-encryption' below: without epa-file
+;; loaded neither symbol is special, so under `lexical-binding' the `let' in
+;; `org-reading-call' would bind them lexically and epa would never see them.
+(require 'epa-file)
+
+(defvar org-reading-passphrase nil
+  "Passphrase for the symmetrically encrypted reading notes.
+Kept in memory for this Emacs session only; drop it with
+`org-reading-forget-passphrase'.")
+
+(defun org-reading-forget-passphrase ()
+  "Drop the cached passphrase for the reading notes."
+  (interactive)
+  (setq org-reading-passphrase nil)
+  (message "Reading-notes passphrase forgotten"))
+
+(defun org-reading-passphrase-alist ()
+  "Return an `epa-file-passphrase-alist' covering every encrypted reading note.
+The notes are encrypted symmetrically, so each file carries its own
+random S2K salt.  That defeats both caches: gpg-agent keys its symkey
+cache by that salt, and `epa-file-passphrase-callback-function' keys
+`epa-file-passphrase-alist' by `file-truename'.  Neither key can be
+shared between files, so a tags search over the reading tree asks for a
+passphrase once per file.  The files do share a single passphrase, so
+asking for it one time and pre-filling an entry for every file collapses
+those prompts into one."
+  (unless org-reading-passphrase
+    (setq org-reading-passphrase
+          (read-passwd "Passphrase for reading notes: ")))
+  (mapcar (lambda (file)
+            (cons (file-truename file)
+                  (copy-sequence org-reading-passphrase)))
+          (seq-filter (lambda (file) (string-suffix-p ".gpg" file))
+                      (org-reading-files))))
+
+(defun org-reading-call (fn)
+  "Call FN with the reading notes bound to `org-agenda-files'.
+Asks for their passphrase once instead of once per encrypted file."
+  (let ((epa-file-cache-passphrase-for-symmetric-encryption t)
+        (epa-file-passphrase-alist (org-reading-passphrase-alist))
+        (org-agenda-files (org-reading-files)))
+    (condition-case err
+        (funcall fn)
+      ;; A rejected passphrase must not stay cached for the rest of the session.
+      (error
+       (setq org-reading-passphrase nil)
+       (signal (car err) (cdr err))))))
+
 ;; Org-agenda settings
 (setq
  ;; the default agenda starts tomorrow
@@ -33,7 +96,13 @@
  ;; Custom agenda views, available via C-c o a followed by d/3/w/m/q
  ;; (look forward) or -1/-3 (look back one/three months)
  org-agenda-custom-commands
- '(;; today only
+ `(("r" "Reading notes by tag"
+   tags
+   ""
+   ((org-agenda-files (org-reading-files))
+    (epa-file-cache-passphrase-for-symmetric-encryption t)
+    (epa-file-passphrase-alist (org-reading-passphrase-alist))))
+   ;; today only
    ("d" "Today" agenda ""
     ((org-agenda-span 'day)
      (org-agenda-start-day nil)))
@@ -93,16 +162,13 @@
  org-hide-emphasis-markers t
  org-src-tab-acts-natively t
  org-src-preserve-indentation 2
- org-edit-src-content-indentation 2)
-
-;; TODO
-(setq org-edit-src-content-indentation 0)
-(setq org-src-fontify-natively t
-      org-src-window-setup 'current-window ;; edit in current window
-      org-src-strip-leading-and-trailing-blank-lines t
-      org-src-preserve-indentation t ;; do not put two spaces on the left
-      org-src-tab-acts-natively t)
-
+ org-edit-src-content-indentation 2
+ org-edit-src-content-indentation 0
+ org-src-fontify-natively t
+ org-src-window-setup 'current-window
+ org-src-strip-leading-and-trailing-blank-lines t
+ org-src-preserve-indentation t
+ org-src-tab-acts-natively t)
 
 ;; Enable auto-search in org-mode so any non-standard keypress in C-x C-j
 ;; mode will lead to search according to pressed keys
@@ -113,6 +179,12 @@
 
 ;; Enable support for org-tables everywhere
 (add-hook 'message-mode-hook 'turn-on-orgtbl)
+
+(defun my-reading-tags ()
+  "Search reading notes by Org tags."
+  (interactive)
+  (org-reading-call
+   (lambda () (call-interactively #'org-tags-view))))
 
 ;; load additional org-mode helpers
 (load "~/.emacscore/org/org-api.el")
