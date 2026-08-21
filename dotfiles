@@ -15,6 +15,33 @@ fi
 # Path to the dotfiles repository
 DOTFILES="$HOME/dev/dotfiles"
 
+# Models of all connected screens, one per line, read from their EDID. This
+# comes straight from DRM, so it works with or without a compositor running.
+connected_screens() {
+    local f
+    for f in /sys/class/drm/card*-*/edid; do
+        strings "$f" 2>/dev/null
+    done
+}
+
+# Are we on the two-screen desktop: 32" 4K on the left, 27" FHD on the right?
+# Screens are matched by model, not by connector name, because the same panel
+# is HDMI-A-1 or HDMI-A-3 depending on the port it sits in.
+is_multiscreen() {
+    local screens
+    screens=$(connected_screens)
+    grep -q U32G3X <<< "$screens" && grep -q 2757 <<< "$screens"
+}
+
+# Where the sway config lives in the repo. The two-screen setup keeps its own
+# copy, because that config names both screens, places them and gives one of
+# them to emacs - all of which is wrong on a one-screen machine.
+if is_multiscreen; then
+    SWAY_DIR="$DOTFILES"/.config/sway-multiscreen
+else
+    SWAY_DIR="$DOTFILES"/.config/sway
+fi
+
 # Path to the Firefox profile directory
 MOZILA_PROFILE_DIR=$(
     awk '/^\[Profile[0-9]+\]$/ { section = $0 }
@@ -61,7 +88,8 @@ case $1 in
     test -d "$HOME"/.config/i3 && cp -r "$HOME"/.config/i3/* "$DOTFILES"/.config/i3
 
     # Copy sway stuff
-    test -d "$HOME"/.config/sway && cp -r "$HOME"/.config/sway/* "$DOTFILES"/.config/sway
+    mkdir -p "$SWAY_DIR"
+    test -d "$HOME"/.config/sway && cp -r "$HOME"/.config/sway/* "$SWAY_DIR"
 
     # Copy hyprland stuff
     test -d "$HOME"/.config/hypr && cp -r "$HOME"/.config/hypr/* "$DOTFILES"/.config/hypr
@@ -149,9 +177,11 @@ case $1 in
     mkdir -p "$HOME"/.config/i3
     cp -r "$DOTFILES"/.config/i3/* "$HOME"/.config/i3
 
-    # Copy sway stuff
+    # Copy sway stuff. Fall back to the shared config when this machine has no
+    # copy of its own in the repo yet, so the first run does not fail.
+    test -d "$SWAY_DIR" || SWAY_DIR="$DOTFILES"/.config/sway
     mkdir -p "$HOME"/.config/sway
-    cp -r "$DOTFILES"/.config/sway/* "$HOME"/.config/sway
+    cp -r "$SWAY_DIR"/* "$HOME"/.config/sway
 
     # Copy hyprland stuff
     mkdir -p "$HOME"/.config/{hypr,wofi,waybar}
