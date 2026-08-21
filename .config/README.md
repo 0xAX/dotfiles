@@ -5,8 +5,7 @@ This directory holds the configuration files for different software, but unioned
 I am using different computers with different Linux distribution and hardware. Thus, I am using different (but similar) window managers. Here you can find configuration for:
 
 - [i3](https://i3wm.org/) on X11
-- [sway](https://swaywm.org/) on Wayland 
-- [Hyprland](https://hypr.land/) which I am using as WM that works stable with multiple monitors. Might be, somewhen, I will get managed working sway for this setup.
+- [sway](https://swaywm.org/) on Wayland, in two flavours: one for a laptop with a single screen, and one for the desktop with two monitors
 
 Despite I am using different window managers, the keybindings and other behavioral flows should be the same (or almost the same) around all of them. For example:
 
@@ -21,26 +20,39 @@ Feel free to take any of it. Nothing here is generated, every file is hand-writt
 
 | Path                                            | Path                              | Description                                                                                |
 | ----------------------------------------------- | --------------------------------- | -------------------------------------------------------------------------------------------|
-| [`hypr/`](hypr)                                 | `~/.config/hypr/`                 | Hyprland: the compositor I use now, plus two Perl helpers it needs.                        |
-| [`sway/`](sway)                                 | `~/.config/sway/`                 | Sway: the same desktop on Wayland, kept as the fallback that still has i3's layout engine. |
+| [`sway/`](sway)                                 | `~/.config/sway/`                 | Sway on Wayland: the compositor I use now, for machines with one screen.                    |
+| [`sway-multiscreen/`](sway-multiscreen)         | `~/.config/sway/`                 | The same sway, on the two-monitor desktop. Installed to the same place, see below.          |
 | [`i3/`](i3)                                     | `~/.config/i3/`                   | i3: the same desktop on X11, kept for the days when Wayland is not an option.              |
-| [`waybar/`](waybar)                             | `~/.config/waybar/`               | The status bar for Hyprland, which - unlike i3 and sway - does not ship one.               |
-| [`wofi/`](wofi)                                 | `~/.config/wofi/`                 | The application launcher on Hyprland, standing in for `dmenu`.                             |
 | [`terminator/config`](terminator/config)        | `~/.config/terminator/config`     | The terminal every `Alt+Return` opens, with the one profile named `alex`.                  |
 | [`k9s/`](k9s)                                   | `~/.config/k9s/`                  | [k9s](https://k9scli.io/) - resource aliases for the Kubernetes CRDs I work with daily.    |
 | [`zls.json`](zls.json)                          | `~/.config/zls.json`              | The Zig language server, pointed at a self-built compiler.                                 |
 
 The next sections go through what is set in these files and why.
 
+## Two sway configurations, one destination
+
+Both [`sway/`](sway) and [`sway-multiscreen/`](sway-multiscreen) are installed to `~/.config/sway/`, and only one of them at a time. The [`dotfiles`](../dotfiles) script picks:
+
+```sh
+is_multiscreen() {
+    local screens
+    screens=$(connected_screens)
+    grep -q U32G3X <<< "$screens" && grep -q 2757 <<< "$screens"
+}
+```
+
+The screens are matched by **model**, read out of the EDID in `/sys/class/drm/card*-*/edid`, not by connector name - the same panel is `HDMI-A-1` or `HDMI-A-3` depending on which port it sits in, and the EDID comes straight from DRM so this works with or without a compositor running. If both the 32" 4K and the 27" FHD panel are attached, `sway-multiscreen/` is the config; otherwise `sway/`.
+
+The consequence worth remembering: inside the config files every path is `~/.config/sway/...` even in the multiscreen copy. `exec_always --no-startup-id ~/.config/sway/layout.py` refers to [`sway-multiscreen/layout.py`](sway-multiscreen/layout.py) after installation, and `$mod+2` runs [`sway-multiscreen/emacs.pl`](sway-multiscreen/emacs.pl) under the same name. The directory name in this repository only says which machine the copy is for.
+
+Everything below applies to both unless a section says otherwise. [`swaystatus.conf`](sway/swaystatus.conf) is byte-identical in the two, and the rest differs only in what the second screen makes necessary.
+
 ## Alt is the modifier
 
-All three configurations set the modifier to `Alt`:
+All configurations set the modifier to `Alt`:
 
 ```conf
-# i3 and sway
 set $mod Mod1
-# hyprland
-$mod = ALT
 ```
 
 That is deliberate just because I get used to it. Feel free to re-bind it. 
@@ -49,20 +61,12 @@ That is deliberate just because I get used to it. Feel free to re-bind it.
 
 ## Emacs on workspace 2, and passthrough mode
 
-Emacs wants `Alt` for itself - `M-x`, `M-w`, `M-b`, `M-f` and a hundred others - and a window manager holding `Alt` swallows them before the application ever sees them. Every one of the three configurations therefore has a mode in which the WM binds nothing at all:
+Emacs wants `Alt` for itself - `M-x`, `M-w`, `M-b`, `M-f` and a hundred others - and a window manager holding `Alt` swallows them before the application ever sees them. Every configuration therefore has a mode in which the WM binds nothing at all:
 
 ```conf
-# i3, sway
 mode "passthrough" {
     bindsym $mod+Escape mode "default"
 }
-
-# hyprland
-bind = $mod, I, submap, passthrough
-submap = passthrough
-  bind = , escape, submap, reset
-  bind = $mod, I, submap, reset
-submap = reset
 ```
 
 While that mode is active the only key the WM listens for is the one that leaves it again. Everything else goes to the application.
@@ -74,94 +78,119 @@ The interesting part is that entering the mode is not something I do by hand. `$
 bindsym $mod+2 exec --no-startup-id ~/.config/i3/emacs.pl
 # sway
 bindsym $mod+2 exec --no-startup-id ~/.config/sway/emacs.pl
-# hypr
-bind = $mod, 2, exec, bash -lc 'hyprctl dispatch workspace 2; ~/.config/hypr/emacs.pl'
 ```
 
-The `emacs.pl` script exists once per window manager, in three copies that differ only in which IPC command they speak: 
+The `emacs.pl` script exists once per window manager, differing in which IPC command it speaks - `i3-msg` or `swaymsg`. Each does the same three things: start Emacs if none running, switch to workspace 2, and enter the passthrough mode. So one key gets me to Emacs, starts it if needed, and hands it the keyboard. Leaving with `Escape` gives the keyboard back.
 
-- `i3-msg`
-- `swaymsg`
-- `hyprctl dispatch`
-
-Each does the same three things: start Emacs if none running, switch to workspace 2, and enter the passthrough mode. So one key gets me to Emacs, starts it if needed, and hands it the keyboard. Leaving with `Escape` gives the keyboard back.
+The other half of that deal lives in Emacs, in [`emacs/.emacscore/desktop/`](../emacs/.emacscore/desktop) - `i3.el` and `sway.el`, loaded by `desktop.el` depending on which one is running. They bind `M-1`..`M-9` and `M-tab` to functions that leave passthrough mode first and then ask the WM to switch workspace, so the same keys work from inside Emacs, and a `kill-emacs-hook` leaves the mode when Emacs exits - otherwise closing Emacs would strand the keyboard in a mode nothing binds.
 
 The script prefers a self-built Emacs from `~/disk/dev/emacs/src/emacs` and falls back to whatever `emacs` is on `PATH`, which is why it is a script and not a one-line `exec`.
 
+[`sway-multiscreen/emacs.pl`](sway-multiscreen/emacs.pl) is the one that grew past that. `sleep 1` after starting Emacs is a guess, and a wrong one on a cold start: the workspace switch happens before the frame exists, so the frame lands wherever sway had the focus. It polls the tree instead, up to 25 seconds in 100ms steps:
+
+```perl
+for (1 .. 250) {
+    last if `swaymsg -t get_tree` =~ /"class":\s*"[eE]macs"/;
+    select(undef, undef, undef, 0.1);
+}
+```
+
+and only then focuses the window, drops its border and sets the layout. It also asks `$HOME` (falling back to the passwd entry) rather than spelling out `/home/alex`.
+
 Perl rather than shell is not a strong opinion. These started as one-liners, grew a branch and a `sleep`, and Perl is the language I reach for when a shell script starts needing more than a pipeline.
 
-## Grouped windows, and what Hyprland does not have
+## Tabs, not tiles
 
-Under i3 and sway one line gives every new workspace tabs:
+One line gives every new workspace tabs:
 
 ```conf
 workspace_layout tabbed
 hide_edge_borders both
 ```
 
-Tabs, not tiles, are the default here. Splitting is something I ask for explicitly with `$mod+v` and `$mod+h`. The normal case is a stack of full-size windows I move through with `Shift+Left`/`Shift+Right`-style flicks. With `hide_edge_borders both` on top of it, a single window fills the screen with no decoration at all.
+Splitting is something I ask for explicitly with `$mod+v` and `$mod+h`. The normal case is a stack of full-size windows I move through with `$mod+Left`/`$mod+Right`. With `hide_edge_borders both` on top of it, a single window fills the screen with no decoration at all.
 
-Hyprland has no equivalent setting. Its `dwindle` layout always tiles, and the closest thing to a tabbed container is a **group**, which has to be created per window:
-
-```conf
-bind = $mod, G, togglegroup
-bind = $mod, BRACKETLEFT,  changegroupactive, b
-bind = $mod, BRACKETRIGHT, changegroupactive, f
-```
-
-That difference is what the [`move-focus.pl`](hypr/move-focus.pl) script is for. The `hyprctl dispatch movefocus r` command moves to the next **window**, treating a whole group as one thing to jump over - so arrow keys stop working the moment a group exists. The script sits between the arrow keys and the dispatcher:
+The multiscreen config adds one line to that:
 
 ```conf
-bind = $mod, LEFT,  exec, /home/alex/.config/hypr/move-focus.pl l
-bind = $mod, RIGHT, exec, /home/alex/.config/hypr/move-focus.pl r
+focus_wrapping workspace
 ```
 
-It asks `hyprctl activewindow` whether the focused window is grouped. If not, it forwards `movefocus` unchanged. If it is, moving right walks to the next tab within the group with `changegroupactive f` - unless the focused window is already the last one in that group, in which case it leaves the group with `movefocus r`. Moving left always walks back through the tabs. The effect is that arrow keys traverse tabs and tiles alike, which is how i3 behaved without being asked.
+Without it, `$mod+Right` on the rightmost window of the small screen walks off the screen and onto the Emacs one. With it, focus rotates inside the current workspace and the two screens stay separate places.
 
-`$mod+v` and `$mod+h` are both bound to `layoutmsg togglesplit` on Hyprland. Two keys, one action: dwindle has a single split direction to flip rather than i3's separate `splitv` and `splith`, and it was easier to keep both keys alive than to retrain a reflex.
+## The two-screen desktop
 
-## Monitors and HiDPI
-
-The Hyprland configuration is the only one that describes the hardware, because it is the only one that has to:
+This is the only configuration that describes the hardware, because it is the only one that has to. A 32" 4K panel physically on the left, a 27" FHD on the right:
 
 ```conf
-monitor = DP-1, 3840x2160@60, 0x0, 2.0
-monitor = HDMI-A-1, 1920x1080@60, 2160x0, 1.0
+# AOC U32G3X 32" 4K, physically on the LEFT  -> emacs only
+set $big   DP-1
+# AOC 2757   27" FHD, physically on the RIGHT -> everything else
+set $small HDMI-A-3
 
-xwayland {
-    force_zero_scaling = true
-}
+output $big position 0 0
+output $small position 3840 540
 ```
 
-A 4K panel at scale `2.0` next to a 1080p panel at `1.0`. The position matters and is easy to get wrong, because Hyprland lays monitors out in **logical**, already-scaled coordinates: at scale `2.0` the 4K screen occupies 1920x1080 of layout space, not 3840x2160, so the second monitor's x offset should be `1920x0`. The `2160x0` here leaves 240 logical pixels of dead space between the two - the pointer crosses it, no window ever lives there.
+`position` is the x,y of a screen's top-left corner on one shared desktop, y growing downward. `540` is not a magic number: `540 + 1080 + 540 = 2160`, so the small screen sits vertically centred against the big one, the way the two really stand on the desk.
 
-`force_zero_scaling` is the fix for blurry X11 applications. XWayland has no idea about fractional or per-output scaling, so a compositor scaling it up renders the client at low resolution and stretches the bitmap. With zero scaling, XWayland clients are handed the real pixel grid and made responsible for their own sizing: text comes out sharp, at the cost of any toolkit that ignores DPI drawing itself half-size.
+There is deliberately no `mode` line, and no `scale`. Both panels already come up at what I want, 4K@60 and FHD@60, and setting the mode explicitly is what segfaulted sway 1.11 here. No scaling means the 4K screen runs 1:1, so the only application that has to care about the pixel density is the one living on it - Emacs, which measures the widest attached output through `swaymsg -t get_outputs` and picks 22pt instead of 13pt (see [`emacs/.emacscore/ui.el`](../emacs/.emacscore/ui.el)). Cheaper than teaching a compositor and XWayland about two different scales.
 
-Workspaces are pinned so that Emacs always lands on the big screen:
+### Why layout.py exists
+
+The `output ... position` lines above are correct and sway does remember them, but applying both outputs in a single atomic DRM commit fails on this machine:
+
+```
+[sway/config/output.c] Backend commit failed
+[wlr] connector DP-1: drmModePageFlip failed: Device or resource busy
+```
+
+so on a fresh start the screens can end up in sway's default left-to-right packing - small screen on the left - even though the config says otherwise. [`layout.py`](sway-multiscreen/layout.py) re-asserts the same positions **one output at a time**, with half a second in between, and that commit succeeds:
 
 ```conf
-workspace = 1, monitor:HDMI-A-1
-workspace = 2, monitor:DP-1
-workspace = 3, monitor:HDMI-A-1
+exec_always --no-startup-id ~/.config/sway/layout.py
 ```
 
-...and so on, everything except workspace 2 on the smaller panel. The `windowrule` block enforces the other half of the same idea, so an Emacs frame started from anywhere - a shell, a launcher, a desktop file - still ends up on workspace 2:
+`exec_always` rather than `exec`, so a config reload fixes things up too. The script moves the small screen first - it is the one sway parks at `0,0` by default, and getting it out of the way lets the big screen take its configured `0,0`. It then walks the workspaces and moves any that are on the wrong output. If either screen is missing it does nothing at all and leaves sway's own arrangement alone, which is what makes the same file safe when the desktop is docked somewhere else.
+
+It never issues `mode`, for the reason above.
+
+### Emacs owns the big screen
+
+Workspace pinning does most of the work:
 
 ```conf
-windowrule {
-      name = emacs-on-ws2
-      match:class = ^(?i)(emacs)$
-      workspace = 2
-}
+workspace $tag2 output $big
+workspace $tag1 output $small
+workspace $tag3 output $small
+...
 ```
 
-The commented-out `windowrulev2` line above it is the old syntax for exactly this, kept as a note: `windowrulev2` is deprecated in current Hyprland, and the block form replaces it.
+Workspace 2 is the Emacs workspace and lives alone on the big screen, every other workspace is pinned to the small one. Then a window rule puts Emacs on workspace 2 no matter where it was started from - a shell, a launcher, a desktop file:
 
-The rest of the `general`, `decoration` and `animations` blocks are all subtraction: `border_size = 0`, `gaps_in`/`gaps_out` at 1, `rounding = 2`, opacity flat at `1.0` for focused and unfocused alike, `animations { enabled = false }`, `disable_hyprland_logo`. This is the same austerity as `hide_edge_borders both` on i3, reached by turning off defaults instead of by setting one option.
+```conf
+for_window [class="^[eE]macs$"] move container to workspace $tag2
+for_window [app_id="^[eE]macs$"] move container to workspace $tag2
+```
+
+Both `class` and `app_id`, because the first matches an XWayland Emacs and the second a native Wayland one, and which of the two I am running depends on how that particular build was configured. A rule for `border none` follows for the same two selectors.
+
+Because every other workspace is pinned to `$small`, nothing else needs a rule to stay off the Emacs screen.
+
+The bar is pinned too:
+
+```conf
+    # keep the status bar off the emacs screen
+    output $small
+```
+
+By default sway draws the bar on every output; the big screen is for one full-height Emacs frame and nothing else. That change is what made the bar's `active_workspace` colour matter: a workspace still visible on an output but without focus is `active`, which is exactly what the small screen's workspace becomes the moment focus moves to Emacs. The colour used to be `#ffffff` - white text on the `#eee8d5` cream background - so the label simply vanished. It is `#586e75` (base01) now: readable, and still distinct from focused (base03, darker) and inactive (grey, lighter).
+
+`$mod+d` is the last difference. The single-screen config calls `dmenu_run` directly; here it runs a `~/.local/bin/dmenu-right` wrapper, so the launcher always opens on the small screen instead of following the focus onto the Emacs panel. That script is not part of this repository.
 
 ## The bar
 
-i3 and sway share not just a configuration format but a status generator - the `bar` block in each config file is byte-identical apart from `status_command`, and [`i3/i3status.conf`](i3/i3status.conf) and [`sway/swaystatus.conf`](sway/swaystatus.conf) are the same file under two names, both fed to [`i3status`](https://i3wm.org/i3status/):
+i3 and sway share not just a configuration format but a status generator - the `bar` block in each config file is byte-identical apart from `status_command` and the multiscreen `output` line, and [`i3/i3status.conf`](i3/i3status.conf) and [`sway/swaystatus.conf`](sway/swaystatus.conf) are the same file under two names, both fed to [`i3status`](https://i3wm.org/i3status/):
 
 ```conf
 order += "ethernet enp3s0"
@@ -174,33 +203,20 @@ order += "tztime utc"
 
 Two clocks, local and UTC, because most of the people I work with are not in my timezone.
 
-Hyprland ships no bar at all, so that job goes to [waybar](https://github.com/Alexays/Waybar), configured in [`waybar/config`](waybar/config) with the styling split out into [`waybar/style.css`](waybar/style.css) - it is a GTK application, so its appearance is CSS rather than config keys. The modules line up with the i3status list above, with one deliberate improvement:
-
-```json
-"custom/ip": {
-  "format": "IP: {} |",
-  "interval": 10,
-  "exec": "ip -4 addr show dev $(ip route get 1.1.1.1 | grep -o 'dev [^ ]*' | cut -d' ' -f2) | ..."
-}
-```
-
 ## Volume and brightness
 
-Same keys everywhere, different plumbing underneath:
-
 ```conf
-# i3, sway - ALSA
 bindsym $mod+0 exec "amixer set Master -q 1%+"
+bindsym $mod+9 exec "amixer set Master -q 1%-"
 bindsym $mod+u exec "amixer -q sset Master toggle"
 
-# hyprland - PipeWire, through WirePlumber
-bind = $mod, 0, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%+
-bind = $mod, U, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+bindsym XF86MonBrightnessUp exec brightnessctl s 1%-
+bindsym XF86MonBrightnessDown exec brightnessctl s 1%+
 ```
 
-`amixer` talks to an ALSA mixer control called `Master`, which on a PipeWire system is at best a shim and at worst absent. `wpctl` asks WirePlumber for whatever the default sink currently is, which survives plugging in headphones. The `1%` steps in both are on purpose: I would rather hold a key than overshoot.
+The `1%` steps are on purpose: I would rather hold a key than overshoot. `amixer` talks to an ALSA mixer control called `Master`, which on a PipeWire system is at best a shim - `wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%+` is the replacement when it turns out to be missing.
 
-Brightness goes through `brightnessctl` in all three. The i3 and sway bindings have the two directions crossed - `XF86MonBrightnessUp` runs `brightnessctl s 1%-` - which the Hyprland ones get right. Left as it is here rather than quietly corrected, because that is what those files actually contain.
+The two brightness directions are crossed - `XF86MonBrightnessUp` runs `brightnessctl s 1%-` - in every one of these files. Left as it is here rather than quietly corrected, because that is what the files actually contain.
 
 ## Locking
 
@@ -209,24 +225,22 @@ Brightness goes through `brightnessctl` in all three. The i3 and sway bindings h
 bindsym $mod+Control+l exec i3-msg workspace number "1" && i3lock --tiling --color 000000
 # sway
 bindsym $mod+Control+l exec swaylock --tiling --color 000000
-# hyprland
-bind = $mod CTRL, L, exec, hyprctl dispatch workspace 1 && swaylock --screenshots --effect-blur 7x5 --clock --indicator
 ```
 
 ## Colours and fonts
 
-Everything is [solarized light](https://ethanschoonover.com/solarized/), spelled out by hand in four different syntaxes because no two of these programs agree on how to be themed - i3's `client.*` and `bar { colors { … } }`, waybar's CSS, wofi's CSS, terminator's INI. The same handful of values recurs:
+Everything is [solarized light](https://ethanschoonover.com/solarized/), spelled out by hand in three different syntaxes because no two of these programs agree on how to be themed - i3's and sway's `client.*` and `bar { colors { … } }`, dmenu's command-line flags, terminator's INI. The same handful of values recurs:
 
-| Colour    | Solarized name | Used for                                     |
-| --------- | -------------- | -------------------------------------------- |
-| `#eee8d5` | base2          | bar background, unfocused window borders      |
+| Colour    | Solarized name | Used for                                       |
+| --------- | -------------- | ---------------------------------------------- |
+| `#eee8d5` | base2          | bar background, unfocused window borders       |
 | `#fdf6e3` | base3          | focused window background, terminal background |
-| `#002b36` | base03         | bar text                                      |
-| `#073642` | base02         | wofi and dmenu background                     |
-| `#657b83` | base00         | terminal foreground                           |
-| `#b58900` | yellow         | the current workspace's label in waybar        |
+| `#002b36` | base03         | bar text, the focused workspace's label        |
+| `#586e75` | base01         | a visible but unfocused workspace's label      |
+| `#073642` | base02         | dmenu background                               |
+| `#657b83` | base00         | terminal foreground                            |
 
-Two fonts are assumed and neither is optional. [Fira Code](https://github.com/tonsky/FiraCode) is the text everywhere - `pango:FiraCode, FontAwesome 13` for i3 and sway, `font-family: "FiraCode"` in the CSS files, `Fira Code Medium 14` in terminator. And [Font Awesome](https://fontawesome.com/) supplies the workspace labels, which are not names but codepoints:
+Two fonts are assumed and neither is optional. [Fira Code](https://github.com/tonsky/FiraCode) is the text everywhere - `pango:FiraCode, FontAwesome 13` for i3 and sway, `Fira Code Retina-14` for dmenu, `Fira Code Medium 14` in terminator. And [Font Awesome](https://fontawesome.com/) supplies the workspace labels, which are not names but codepoints:
 
 ```conf
 set $tag1 "1:&#xf120;"   # terminal
@@ -235,11 +249,11 @@ set $tag3 "3:&#xf269;"   # firefox
 set $tag5 "5:&#xf0e0;"   # mail
 ```
 
-The same icons appear again in waybar's `format-icons`, mapped per workspace number. Without Font Awesome installed all of them render as boxes, in every one of the three window managers.
+Without Font Awesome installed all of them render as boxes, in every one of these configurations.
 
 ## The terminal
 
-I am using [terminator](https://gnome-terminator.org/) as a terminal emulator, so [`terminator/config`](terminator/config) defines one profile, `alex`, which is the profile all three window managers name explicitly in their `Alt+Return` binding. A few things in it are more than taste:
+I am using [terminator](https://gnome-terminator.org/) as a terminal emulator, so [`terminator/config`](terminator/config) defines one profile, `alex`, which is the profile every `Alt+Return` binding names explicitly. A few things in it are more than taste:
 
 ```ini
 scrollback_lines = 200000
@@ -289,9 +303,11 @@ The install script only copies this file if `~/disk/dev/zig/zig` is actually exe
 
 If you copy these files, these are the lines that are about my machine and not about yours:
 
-- **Absolute home paths.** `hyprland.conf` calls `/home/alex/.config/hypr/move-focus.pl` and `emacs.pl` with full paths; both Perl scripts look for `/home/alex/disk/dev/emacs/src/emacs`; `zls.json` points at `/home/alex/disk/dev/zig/zig`. Hyprland does not expand `~` in every context, which is why they are spelled out.
-- **Monitor names and modes.** `DP-1` and `HDMI-A-1` with their resolutions, scales and positions, plus the eight `workspace = N, monitor:…` lines that depend on them. `hyprctl monitors` tells you yours.
-- **Network interfaces.** `enp3s0` and `wlp2s0` in the i3status configuration. The waybar `custom/ip` module needs no such edit.
+- **Absolute home paths.** `i3/emacs.pl` and `sway/emacs.pl` look for `/home/alex/disk/dev/emacs/src/emacs` spelled out; `sway-multiscreen/emacs.pl` reads `$HOME` instead and needs no edit. `zls.json` points at `/home/alex/disk/dev/zig/zig`.
+- **Screen models.** `U32G3X` and `2757` in the `is_multiscreen()` check in [`dotfiles`](../dotfiles) are the two panels on my desk. `strings /sys/class/drm/card*-*/edid` tells you yours.
+- **Monitor names and positions.** `DP-1` and `HDMI-A-3`, their `output ... position` lines and the eight `workspace $tagN output ...` lines, in `sway-multiscreen/config` - and the same two names again at the top of `sway-multiscreen/layout.py`, which has to agree with the config. `swaymsg -t get_outputs` tells you yours.
+- **Network interfaces.** `enp3s0` and `wlp2s0` in the i3status configuration.
 - **The k9s aliases** name CRDs from the Kubernetes clusters I work on. Harmless if the resources do not exist - k9s just reports an unknown resource - but useless.
-- **Keyboard layouts.** `pl, ru` with `grp:lwin_toggle`, in `hyprland.conf` and `sway/config`.
-- **The wallpaper path** in `sway/config` points into this repository at `~/dev/dotfiles/wallpapers`.
+- **Keyboard layouts.** `pl, ru` with `grp:lwin_toggle`, in the `input "type:keyboard"` block of both sway configs. The i3 configuration sets no layout at all - that is X11's business, through `setxkbmap` outside of these files.
+- **The wallpaper path** in the sway configs points into this repository at `~/dev/dotfiles/wallpapers`.
+- **`~/.local/bin/dmenu-right`**, called by `$mod+d` in `sway-multiscreen/config`, is not part of this repository. Replace it with plain `dmenu_run` as in `sway/config` if you do not have your own.

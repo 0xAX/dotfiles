@@ -12,11 +12,11 @@
       (setq *i3* "false")))
   (setq *i3* "false"))
 
-;; If we are using hyprland, load related configuration
-(if (and
-     (string= (string-trim (or (getenv "XDG_SESSION_TYPE") "")) "wayland")
-     (getenv "HYPRLAND_INSTANCE_SIGNATURE"))
+;; If we are using sway, load related configuration. SWAYSOCK is the socket
+;; sway itself exports, so it is set only inside a running sway session - no
+;; need to look for a binary the way the i3 branch above has to.
+(if (getenv "SWAYSOCK")
     (progn
-      (load "~/.emacscore/desktop/hyprland.el")
-      (setq *hyprland* "true"))
-  (setq *hyprland* "false"))
+      (load "~/.emacscore/desktop/sway.el")
+      (setq *sway* "true"))
+  (setq *sway* "false"))

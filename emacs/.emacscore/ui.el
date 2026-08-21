@@ -3,21 +3,18 @@
 (defun emacs-output-width ()
   "Width in pixels of the screen emacs lives on, or nil if it cannot be told.
 Emacs always ends up on the big panel: workspace 2 is pinned to it and a
-window rule moves emacs there, in both the sway and the Hyprland config.  So
-the screen to measure is the widest one attached - not the focused one, which
-at startup is still whichever screen the launcher was invoked from.
+window rule moves emacs there in the sway config.  So the screen to measure is
+the widest one attached - not the focused one, which at startup is still
+whichever screen the launcher was invoked from.
 
-Asks whichever wayland compositor is running - sway via swaymsg, Hyprland via
-hyprctl -- and parses the JSON here rather than shelling out to jq."
-  (let ((cmd (cond ((getenv "SWAYSOCK") "swaymsg -t get_outputs -r")
-		   ((getenv "HYPRLAND_INSTANCE_SIGNATURE") "hyprctl monitors -j"))))
+Asks sway via swaymsg and parses the JSON here rather than shelling out to jq."
+  (let ((cmd (when (getenv "SWAYSOCK") "swaymsg -t get_outputs -r")))
     (when cmd
       (ignore-errors
 	(let ((widths (mapcar
 		       (lambda (o)
-			 ;; sway nests the geometry in `rect', hyprland keeps it flat
+			 ;; sway nests the geometry in `rect'
 			 (or (alist-get 'width (alist-get 'rect o))
-			     (alist-get 'width o)
 			     0))
 		       (append (json-parse-string (shell-command-to-string cmd)
 						  :object-type 'alist)
@@ -28,9 +25,8 @@ hyprctl -- and parses the JSON here rather than shelling out to jq."
 (defun get-font-size ()
   "Return the font size, in points, as a string.
 13pt is unreadable on the 32\" 4K panel emacs opens on, so pick the size from
-how wide that screen is.  This used to be gated on HYPRLAND_INSTANCE_SIGNATURE,
-which is why sway sessions were always stuck at 13pt.  Falls back to 13
-whenever no compositor can be asked."
+how wide that screen is.  Falls back to 13 whenever no compositor can be
+asked - a tty, an X11 session, or sway not exporting SWAYSOCK."
   (let ((width (emacs-output-width)))
     (if (and width (> width 1920))
 	"22"
