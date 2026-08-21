@@ -89,7 +89,9 @@ case $1 in
 
     # Copy sway stuff
     mkdir -p "$SWAY_DIR"
+    mkdir -p ".local/bin"
     test -d "$HOME"/.config/sway && cp -r "$HOME"/.config/sway/* "$SWAY_DIR"
+    test -f "$HOME"/.local/bin/dmenu-right && cp -r "$HOME"/.local/bin/dmenu-right "$DOTFILES"/.local/bin
 
     # Copy lisp/sbcl configuration
     test -r "$HOME"/.sbclrc && cp -r "$HOME"/.sbclrc "$DOTFILES"/dev/
@@ -177,6 +179,7 @@ case $1 in
     test -d "$SWAY_DIR" || SWAY_DIR="$DOTFILES"/.config/sway
     mkdir -p "$HOME"/.config/sway
     cp -r "$SWAY_DIR"/* "$HOME"/.config/sway
+    cp -r "$DOTFILES"/.local/bin/dmenu-right "$HOME"/.local/bin/dmenu-right
 
     # Copy terminator stuff
     mkdir -p "$HOME"/.config/terminator && cp -r "$DOTFILES"/.config/terminator/* "$HOME"/.config/terminator
