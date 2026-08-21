@@ -1,20 +1,40 @@
 ;; ui.el --- UI configuration of GNU Emacs  -*- lexical-binding: t -*-
 
+(defun emacs-output-width ()
+  "Width in pixels of the screen emacs lives on, or nil if it cannot be told.
+Emacs always ends up on the big panel: workspace 2 is pinned to it and a
+window rule moves emacs there, in both the sway and the Hyprland config.  So
+the screen to measure is the widest one attached - not the focused one, which
+at startup is still whichever screen the launcher was invoked from.
+
+Asks whichever wayland compositor is running - sway via swaymsg, Hyprland via
+hyprctl -- and parses the JSON here rather than shelling out to jq."
+  (let ((cmd (cond ((getenv "SWAYSOCK") "swaymsg -t get_outputs -r")
+		   ((getenv "HYPRLAND_INSTANCE_SIGNATURE") "hyprctl monitors -j"))))
+    (when cmd
+      (ignore-errors
+	(let ((widths (mapcar
+		       (lambda (o)
+			 ;; sway nests the geometry in `rect', hyprland keeps it flat
+			 (or (alist-get 'width (alist-get 'rect o))
+			     (alist-get 'width o)
+			     0))
+		       (append (json-parse-string (shell-command-to-string cmd)
+						  :object-type 'alist)
+			       nil))))
+	  (when widths
+	    (apply #'max widths)))))))
+
 (defun get-font-size ()
-  "Return an integer font height (1/10pt) based on focused Hyprland monitor width.
-Falls back to 1920 if anything fails."
-  (if (and
-       (string= (string-trim (or (getenv "XDG_SESSION_TYPE") "")) "wayland")
-       (getenv "HYPRLAND_INSTANCE_SIGNATURE"))
-      (let
-	  ((screen-res (gethash
-			"res"
-			(json-parse-string
-			 (shell-command-to-string "hyprctl monitors -j | jq '.[] | select(.focused==true) | {name: .name, res: .width, height: .height, scale: .scale}'")) 1920)))
-	(if (> screen-res 1920)
-	    "22"
-	  "13"))
-    "13"))
+  "Return the font size, in points, as a string.
+13pt is unreadable on the 32\" 4K panel emacs opens on, so pick the size from
+how wide that screen is.  This used to be gated on HYPRLAND_INSTANCE_SIGNATURE,
+which is why sway sessions were always stuck at 13pt.  Falls back to 13
+whenever no compositor can be asked."
+  (let ((width (emacs-output-width)))
+    (if (and width (> width 1920))
+	"22"
+      "13")))
 
 ;; Set up line numbers
 (if (< emacs-major-version 29)
