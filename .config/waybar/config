@@ -3,8 +3,40 @@
   "position": "top",
   "modules-left": ["hyprland/workspaces"],
   "modules-center": [],
-  "modules-right": ["custom/ip", "tray", "pulseaudio", "clock#local", "clock#utc"],
+  "debug": true,
+  "modules-right": ["custom/ip", "tray", "pulseaudio", "clock#local", "clock#utc", "cffi/waybar-eyes"],
+  "cffi/waybar-eyes": {
+	"eye":	{
+		"iris_color":	"#4C7FCC",
+		"outline_color":	"#666666"
+	},
+        "laser": {
+		"cutout_enabled":	true
+	},
 
+	"effects":	{
+		"interval":	3,
+		"blink":	75,
+		"stare":	5,
+		"glasses_wiggle":	3,
+		"raise_brows":	5,
+		"brow_wiggle":	3,
+		"roll_eyes":	4,
+		"look_silly":	5
+	},
+	"targets":	{
+		"enabled":	true,
+		"spawn_rate":	0.65,
+		"max_alive":	6,
+		"mosquito":	70,
+		"balloon":	25,
+		"moon":	3,
+		"ufo":	15
+	},
+	"search":	3,
+
+      "module_path": "/home/alex/Downloads/bareyes/bin/bareyes.so",
+  },
   "hyprland/workspaces": {
     "format": "{icon}",
     "on-scroll-up": "hyprctl dispatch workspace e-1",
