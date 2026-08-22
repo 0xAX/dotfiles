@@ -1,3 +1,9 @@
 {
-  "zig_exe_path": "/home/alex/disk/dev/zig/zig"
+  "$schema": "https://raw.githubusercontent.com/zigtools/zls/refs/heads/master/schema.json",
+  "zig_exe_path": "/home/alex/disk/dev/zig/zig",
+  "semantic_tokens": "partial",
+  "enable_build_on_save": true,
+  "warn_style": true,
+  "inlay_hints_hide_redundant_param_names": true,
+  "inlay_hints_hide_redundant_param_names_last_token": true
 }
