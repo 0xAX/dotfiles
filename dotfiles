@@ -100,7 +100,7 @@ case $1 in
     test -r "$HOME"/.sbclrc && cp -r "$HOME"/.sbclrc "$DOTFILES"/dev/
 
     # Copy zig/zls related files
-    test -r "$HOME"/.config/zls.json && cp -r "$HOME"/.config/zls.json "$DOTFILES"/.config
+    test -x "$HOME/disk/dev/zig/zig" && test -r "$HOME"/.config/zls.json && cp -r "$HOME"/.config/zls.json "$DOTFILES"/.config
 
     # Copy gnupg related files
     test -r "$HOME"/.gnupg/public.key && cp -r "$HOME"/.gnupg/public.key "$DOTFILES"/.gnupg
