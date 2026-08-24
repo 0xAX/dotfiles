@@ -1,0 +1,39 @@
+#!/bin/sh
+#
+# Run dmenu on the small right-hand screen (AOC 2757, FHD), never on the big
+# 4K panel that emacs owns.
+#
+# dmenu picks its screen from the focused window, so with emacs focused the
+# prompt opens on the big screen. `-m' pins it to one Xinerama head, but the
+# head order under XWayland follows output creation order rather than geometry,
+# so a hardcoded index breaks on the next restart -- today the small panel is
+# head #0, tomorrow it need not be. Ask the X server every time instead: of the
+# two panels, the small one is the one with fewer pixels.
+#
+# Bound to $mod+d in ~/.config/sway/config.
+
+# sway hands its exec children a bare PATH -- /usr/local/sbin:/usr/local/bin:
+# /usr/sbin:/usr/bin -- and dmenu_run pipes the chosen name into a
+# non-interactive shell, which never reads ~/.bashrc. So without this neither
+# dmenu_path nor the shell that runs the choice can see ~/bin or ~/.local/bin.
+PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+export PATH
+
+mon=$(xdpyinfo -ext XINERAMA 2>/dev/null | awk '
+    /head #/ {
+        idx = $2; gsub(/[#:]/, "", idx)
+        split($3, wh, "x")
+        area = wh[1] * wh[2]
+        if (pick == "" || area < best) { best = area; pick = idx }
+    }
+    END { if (pick != "") print pick }')
+
+# No Xinerama, or a single screen: let dmenu decide for itself.
+if [ -n "$mon" ]; then
+    set -- -m "$mon" "$@"
+fi
+
+exec dmenu_run -b \
+    -fn "Fira Code Retina-14" \
+    -nb '#073642' -sb '#073642' -nf '#fdf6e3' -sf '#fdf6e3' \
+    "$@"
