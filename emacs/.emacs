@@ -131,6 +131,13 @@
 (straight-use-package 'ivy-posframe)
 (straight-use-package 'julia-mode)
 (straight-use-package 'julia-repl)
+;; Lean 4, not the archived Lean 3 `lean-mode'. Not on MELPA, and the
+;; recipe has to ship data/ as well: that is where the abbreviations
+;; driving the "Lean" input method (\alpha -> α) live.
+(straight-use-package
+ '(lean4-mode :type git :host github
+              :repo "leanprover-community/lean4-mode"
+              :files ("*.el" "data")))
 (straight-use-package 'lsp-mode)
 (straight-use-package 'lsp-ui)
 (straight-use-package 'lsp-treemacs)
@@ -199,6 +206,7 @@
 (load "~/.emacscore/dev/gptel.el")
 (load "~/.emacscore/dev/python.el")
 (load "~/.emacscore/dev/rust.el")
+(load "~/.emacscore/dev/lean.el")
 
 ;; Load miscellaneous things
 (load "~/.emacscore/snippets.el")

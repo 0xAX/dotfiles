@@ -29,6 +29,7 @@ test -d $HOME/.krew/bin && export PATH=$HOME/.krew/bin:$PATH
 test -d $HOME/.nvm && export NVM_DIR="$HOME/.nvm"
 test -s $NVM_DIR/nvm.sh && \. "$NVM_DIR/nvm.sh"
 test -s $NVM_DIR/bash_completion && \. "$NVM_DIR/bash_completion"
+test -d "$HOME"/.elan/bin && export PATH="$PATH:$HOME"/.elan/bin
 
 # add zig and zls to PATH
 test -e ${DEV_DISK}/zig/zig && export PATH=$PATH:${DEV_DISK}/zig
