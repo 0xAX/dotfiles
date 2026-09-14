@@ -5,7 +5,8 @@
 ;; Author: Alex Kuleshov <kuleshovmail@gmail.com>
 ;; URL: https://github.com/0xAX/ob-lean
 ;; Keywords: lisp
-;; Version: 0
+;; Version: 0.1.0
+;; Package-Requires: ((emacs "27.1"))
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -24,17 +25,17 @@
 
 ;; Org does not ship an `ob-' backend for Lean, so this file provides one
 ;; for Lean 4. A block is compiled by writing it to a temporary file and
-;; running `lean --json' over it. The JSON messages Lean emits (the results
+;; running `lean --json' over it.  The JSON messages Lean emits (the results
 ;; of `#eval' and `#check', plus warnings and errors) become the result of
 ;; the block.
 ;;
-;; Lean 4 has no REPL, so a session is not a live process. `:session' is
+;; Lean 4 has no REPL, so a session is not a live process.  `:session' is
 ;; supported anyway, in the only way it can be: the blocks already run in
 ;; a named session are compiled again in front of the block being run, so
 ;; that what they defined is in scope.  Only the messages the current
-;; block produced become its result. The `#eval' output of the blocks
+;; block produced become its result.  The `#eval' output of the blocks
 ;; replayed in front of it is dropped, since it was already reported when
-;; they were run. `org-babel-lean4-clear-session' forgets a session.
+;; they were run.  `org-babel-lean4-clear-session' forgets a session.
 ;;
 ;; Imports can simply be written at the top of the block, the way they are
 ;; in a Lean file.  Lean insists on seeing them before anything else, so
@@ -45,7 +46,7 @@
 ;;
 ;;   :imports  - space or comma separated module names turned into `import'
 ;;               lines.  Convenient when the same modules are wanted by
-;;               many blocks, or from a `#+PROPERTY:' line. Writing the
+;;               many blocks, or from a `#+PROPERTY:' line.  Writing the
 ;;               `import' in the block does the same thing.
 ;;   :lake     - "yes" runs the block as `lake env lean' instead of `lean',
 ;;               which makes the dependencies of a Lake project (Mathlib,
@@ -61,7 +62,7 @@
 ;;               body, so whatever `:imports' and `:var' added is not
 ;;               counted.
 ;;   :session  - name of a session whose blocks are compiled in front of
-;;               this one. A block only joins its session once it compiles
+;;               this one.  A block only joins its session once it compiles
 ;;               without errors, and running it again replaces what it
 ;;               contributed rather than adding a second copy.
 ;;
@@ -105,6 +106,21 @@ output, so `output' is the only meaningful `:results' type.")
     (information . "info"))
   "How Lean's message severities are spelled in the result.")
 
+;;; Header arguments
+
+(defun org-babel-lean4--header (params key default)
+  "Return the value of the KEY header argument in PARAMS, or DEFAULT.
+
+Org hands a header argument over as whatever was written after it, so the
+value can arrive as a string or, from a `:var' or a default set in Lisp,
+as a symbol.  It is normalised to a downcased string here, so that the
+rest of the file can compare it with `equal' and `:messages Diag' means
+what it says."
+  (let ((value (cdr (assq key params))))
+    (if (or (null value) (equal value ""))
+        default
+      (downcase (format "%s" value)))))
+
 ;;; Locating the toolchain
 
 (defun org-babel-lean4--executable (name)
@@ -119,7 +135,8 @@ the language server always run the same toolchain."
    ((and (boundp 'lean4-rootdir) (stringp lean4-rootdir))
     (expand-file-name name (expand-file-name "bin" lean4-rootdir)))
    ((executable-find name))
-   (t (error "ob-lean4: cannot find `%s'; set `lean4-rootdir'" name))))
+   (t (error "Cannot find the Lean toolchain executable `%s'; set `lean4-rootdir'"
+             name))))
 
 ;;; Expanding the block
 
@@ -157,7 +174,7 @@ the language server always run the same toolchain."
   "Split BODY into a cons (HEAD . REST) around its own `import' lines.
 
 HEAD is the run of `import' lines BODY opens with, together with any
-blank lines and comments among them. REST is everything below.  Lean
+blank lines and comments among them.  REST is everything below.  Lean
 only accepts `import' at the very top of a file, so anything this file
 generates has to go after HEAD rather than in front of it."
   (let ((lines (split-string body "\n"))
@@ -178,7 +195,7 @@ generates has to go after HEAD rather than in front of it."
             (mapconcat #'identity (seq-drop lines (1+ last-import)) "\n")))))
 
 (defun org-babel-lean4--pieces (body params)
-  "Take BODY apart into the pieces the compiled file is built from.
+  "Take BODY apart into the pieces the compiled file is built from, per PARAMS.
 
 Return a list (IMPORTS HEAD-LINES GENERATED CHUNK).  IMPORTS are the
 lines that have to sit at the very top of the file, because Lean accepts
@@ -207,7 +224,7 @@ of it were generated rather than written in the block."
 
 (defun org-babel-expand-body:lean4 (body params)
   "Expand BODY into the Lean 4 file that will be compiled, per PARAMS.
-The other blocks of a `:session' are not part of the expansion. They are
+The other blocks of a `:session' are not part of the expansion.  They are
 put in front of the block when it is run, and repeating them here would
 copy them into everything the block is tangled into."
   (pcase-let ((`(,imports ,_head-lines ,_generated ,chunk)
@@ -219,7 +236,7 @@ copy them into everything the block is tangled into."
 (defun org-babel-lean4--body-line (line layout)
   "Map LINE of the compiled file back onto the block body.
 
-LAYOUT says where in the file the block ended up. It is the plist
+LAYOUT says where in the file the block ended up.  It is the plist
 `org-babel-execute:lean4' builds while assembling the file.  The answer
 is the line within the block body, 0 for a line generated from
 `:imports', `:prologue' or `:var', and nil for a line that belongs to
@@ -337,10 +354,11 @@ was run, and Lean will refuse a definition that arrives twice."
 
 (defun org-babel-lean4--run (file params)
   "Run Lean over FILE according to PARAMS.
-Return a cons cell (EXIT-CODE . OUTPUT). Lean writes its diagnostics to
+Return a cons cell (EXIT-CODE . OUTPUT).  Lean writes its diagnostics to
 standard output, and standard error is merged into it so that a crash or
 a Lake failure is not silently dropped."
-  (let* ((lake (equal "yes" (cdr (assq :lake params))))
+  (let* ((lake (member (org-babel-lean4--header params :lake "no")
+                       '("yes" "t" "true")))
          (program (org-babel-lean4--executable
                    (if lake org-babel-lean4-lake-name
                      org-babel-lean4-command-name)))
@@ -404,8 +422,8 @@ MODE is the value of the `:positions' header argument."
 
 (defun org-babel-lean4--render (messages params)
   "Render MESSAGES as the result text of a src block, honouring PARAMS."
-  (let ((filter (or (cdr (assq :messages params)) "all"))
-        (positions (or (cdr (assq :positions params)) "diag"))
+  (let ((filter (org-babel-lean4--header params :messages "all"))
+        (positions (org-babel-lean4--header params :positions "diag"))
         lines)
     (pcase-dolist (`(,severity ,line ,column ,text) messages)
       (when (and (org-babel-lean4--keep-p severity filter)
@@ -508,9 +526,9 @@ Called by `org-babel-execute-src-block'."
 (defun org-babel-prep-session:lean4 (_session _params)
   "Signal that there is no Lean 4 session to prepare.
 A session here is the blocks that have already been run in it, which is
-made of whatever the document says. There is no process to load anything
+made of whatever the document says.  There is no process to load anything
 into ahead of time."
-  (user-error "ob-lean4: a Lean 4 session has no process to prepare"))
+  (user-error "A Lean 4 session has no process to prepare"))
 
 (defun org-babel-lean4-initiate-session (&optional _session _params)
   "Return nil: a Lean 4 session has no process to switch to."
