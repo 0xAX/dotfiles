@@ -12,8 +12,10 @@
 ;; Set Latex formatting options
 (setq org-format-latex-options
         (plist-put org-format-latex-options :background nil))
+  ;; Effective dvisvgm scale is this times the backend's :image-size-adjust
+  ;; (1.7 for dvisvgm), so 1.0 here matches Org's default sizing.
   (setq org-format-latex-options
-        (plist-put org-format-latex-options :scale 2.0))
+        (plist-put org-format-latex-options :scale 1.0))
 (when (equal current-theme 'nord)
   (setq org-format-latex-options
         (plist-put org-format-latex-options :foreground "White")))
