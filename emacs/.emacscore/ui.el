@@ -1,9 +1,9 @@
 ;; ui.el --- UI configuration of GNU Emacs  -*- lexical-binding: t -*-
 
-(defun emacs-output-width ()
-  "Width in pixels of the screen emacs lives on, or nil if it cannot be told.
+(defun emacs-output ()
+  "The sway output emacs lives on, as an alist, or nil if it cannot be told.
 Emacs always ends up on the big panel: workspace 2 is pinned to it and a
-window rule moves emacs there in the sway config.  So the screen to measure is
+window rule moves emacs there in the sway config.  So the output to pick is
 the widest one attached - not the focused one, which at startup is still
 whichever screen the launcher was invoked from.
 
@@ -11,16 +11,24 @@ Asks sway via swaymsg and parses the JSON here rather than shelling out to jq."
   (let ((cmd (when (getenv "SWAYSOCK") "swaymsg -t get_outputs -r")))
     (when cmd
       (ignore-errors
-	(let ((widths (mapcar
-		       (lambda (o)
-			 ;; sway nests the geometry in `rect'
-			 (or (alist-get 'width (alist-get 'rect o))
-			     0))
-		       (append (json-parse-string (shell-command-to-string cmd)
-						  :object-type 'alist)
-			       nil))))
-	  (when widths
-	    (apply #'max widths)))))))
+	(let (widest)
+	  (dolist (o (append (json-parse-string (shell-command-to-string cmd)
+					       :object-type 'alist)
+			     nil)
+		     widest)
+	    ;; sway nests the geometry in `rect'
+	    (when (> (or (alist-get 'width (alist-get 'rect o)) 0)
+		     (or (alist-get 'width (alist-get 'rect widest)) 0))
+	      (setq widest o))))))))
+
+(defun emacs-output-width ()
+  "Width in pixels of the screen emacs lives on, or nil if it cannot be told."
+  (alist-get 'width (alist-get 'rect (emacs-output))))
+
+(defun emacs-output-model ()
+  "EDID model string of the screen emacs lives on, or nil if it cannot be told.
+Hostnames are all `fedora', so the panel model is what tells machines apart."
+  (alist-get 'model (emacs-output)))
 
 (defun get-font-size ()
   "Return the font size, in points, as a string.
