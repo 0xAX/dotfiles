@@ -32,6 +32,31 @@ the \"Lean\" input method) and leave the server alone."
 (add-hook 'lean4-mode-hook #'lean4-maybe-start-lsp)
 (add-hook 'lean4-mode-hook #'company-mode)
 
+;; `lean4-mode' has no indentation function of its own, so the global
+;; `newline-and-indent' falls back to `indent-relative' and only copies the
+;; previous line's indentation.  Indent one step further after a line that
+;; opens a block (`:=', `by', `do', `where', `=>', ...).
+(defconst lean4-block-opener-regexp
+  (rx (or ":=" "=>" "←" "<-" "λ" "(" "[" "{" "⟨"
+          (seq symbol-start
+               (or "by" "do" "where" "then" "else" "from" "with" "fun")))
+      (* blank) eos)
+  "Matches the text of a Lean line after which the next line is indented.")
+
+(defun lean4-newline-and-indent ()
+  "Insert a newline, indenting further after a line that opens a block."
+  (interactive)
+  (let ((indent (current-indentation))
+        (opens (string-match-p lean4-block-opener-regexp
+                               (buffer-substring-no-properties
+                                (line-beginning-position) (point)))))
+    (delete-horizontal-space t)
+    (newline)
+    (indent-to (if opens (+ indent 2) indent))))
+
+;; RET - newline, indented for whatever the previous line opened
+(define-key lean4-mode-map (kbd "RET") #'lean4-newline-and-indent)
+
 ;; C-x C-e - run the current file through `lean'.  Globally this is
 ;; `eval-last-sexp', which means nothing in a Lean buffer.  Bound to
 ;; `lean4-std-exe' rather than `lean4-execute', which prompts for extra
