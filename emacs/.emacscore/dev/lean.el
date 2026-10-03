@@ -32,6 +32,12 @@ the \"Lean\" input method) and leave the server alone."
 (add-hook 'lean4-mode-hook #'lean4-maybe-start-lsp)
 (add-hook 'lean4-mode-hook #'company-mode)
 
+;; C-x C-e - run the current file through `lean'.  Globally this is
+;; `eval-last-sexp', which means nothing in a Lean buffer.  Bound to
+;; `lean4-std-exe' rather than `lean4-execute', which prompts for extra
+;; `lean' arguments whenever it is called interactively.
+(define-key lean4-mode-map (kbd "C-x C-e") #'lean4-std-exe)
+
 ;; Lean source is close to unwritable without the \alpha -> α translations,
 ;; and `set-input-method' in `lean4-mode' only covers Lean buffers.  Typing
 ;; a block directly in the Org buffer, rather than through `C-c '', needs
