@@ -43,13 +43,22 @@ the \"Lean\" input method) and leave the server alone."
       (* blank) eos)
   "Matches the text of a Lean line after which the next line is indented.")
 
+;; A `·' tactic block runs on for as long as the lines below it are
+;; indented past the dot, so the line after `· intro h' belongs under
+;; `intro', two columns in.
+(defconst lean4-bullet-regexp
+  (rx bos (* blank) "·")
+  "Matches a Lean line that starts a `·' tactic block.")
+
 (defun lean4-newline-and-indent ()
-  "Insert a newline, indenting further after a line that opens a block."
+  "Insert a newline, indenting further after a line that opens a block.
+A line that starts with `·' counts as opening one."
   (interactive)
-  (let ((indent (current-indentation))
-        (opens (string-match-p lean4-block-opener-regexp
-                               (buffer-substring-no-properties
-                                (line-beginning-position) (point)))))
+  (let* ((line (buffer-substring-no-properties
+                (line-beginning-position) (point)))
+         (indent (+ (current-indentation)
+                    (if (string-match-p lean4-bullet-regexp line) 2 0)))
+         (opens (string-match-p lean4-block-opener-regexp line)))
     (delete-horizontal-space t)
     (newline)
     (indent-to (if opens (+ indent 2) indent))))
@@ -74,6 +83,12 @@ the \"Lean\" input method) and leave the server alone."
   (if current-input-method
       (deactivate-input-method)
     (set-input-method "Lean")))
+
+;; \. - only `·' (the tactic block dot).  The TeX translations that
+;; lean4-input copies add more dots to the same key, so Emacs shows a
+;; numbered list instead of inserting it.
+(with-eval-after-load 'lean4-input
+  (quail-defrule "\\." "·" "Lean"))
 
 (with-eval-after-load 'org
   ;; C-c C-x i - switch the Lean input method on and off
