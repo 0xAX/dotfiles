@@ -134,7 +134,7 @@
   },
   "model": "opus[1m]",
   "enabledPlugins": {
-    "docs@cennso-ai": true,
+    "docs@cennso-ai": false,
     "docs-private@cennso-ai": true,
     "gopls-lsp@claude-plugins-official": true
   },
