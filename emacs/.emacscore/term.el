@@ -13,7 +13,7 @@
       fast-but-imprecise-scrolling t
       redisplay-skip-fontification-on-input t
       inhibit-compacting-font-caches t
-      idle-update-delay 1.0)
+      which-func-update-delay 1.0)
 
 (defun open-terminal (terminal-name)
   "Open terminal with custom buffer name"

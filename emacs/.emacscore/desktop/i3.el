@@ -32,8 +32,3 @@
   (interactive)
   (shell-command-to-string "i3-msg mode default")
   (shell-command-to-string "i3-msg workspace next"))
-
-;;
-;; go to the default namespace if we're in emacs window
-;;
-(i3-switch-workspace "2")

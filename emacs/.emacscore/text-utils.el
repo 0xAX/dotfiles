@@ -13,11 +13,17 @@
    (list
         (read-string "Find: ")
         (read-string "Replace with: ")))
-  (setq cursor-position (point))
-  (beginning-of-buffer)
-  (replace-string find replace)
-  (goto-char cursor-position)
-  (message "done"))
+  ;; Same case rules as `replace-string': an upper-case letter in FIND
+  ;; makes the search case-sensitive.
+  (let ((case-fold-search (and case-fold-search
+                               (isearch-no-upper-case-p find nil)))
+        (count 0))
+    (save-excursion
+      (goto-char (point-min))
+      (while (search-forward find nil t)
+        (replace-match replace nil t)
+        (setq count (1+ count))))
+    (message "Replaced %d occurrence%s" count (if (= count 1) "" "s"))))
 
 (defun kill-full-line()
   "Kill line from the beginnig of line"  

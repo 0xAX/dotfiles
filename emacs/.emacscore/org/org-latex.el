@@ -7,7 +7,6 @@
 
 ;; Set latex live preview backend
 (setq org-preview-latex-default-process 'dvisvgm)
-(setq org-latex-create-formula-image-program 'dvisvgm)
 
 ;; Set Latex formatting options
 (setq org-format-latex-options

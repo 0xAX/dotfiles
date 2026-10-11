@@ -42,7 +42,6 @@ or anything with `:results none' - because there is nowhere to jump."
    (plantuml . t)
    (latex . t)
    (octave . t)
-   (julia . t)
    (perl . t)
    (scheme . t)
    (shell . t)

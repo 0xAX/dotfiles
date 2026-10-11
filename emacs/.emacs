@@ -81,10 +81,7 @@
 
 ;; Setup standard packaging
 (require 'package)
-(setq package-check-signature 'nil)
 (setq package-check-signature nil)
-(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
-(add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 (if (version< emacs-version "27.0")
     (package-initialize))
