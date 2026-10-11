@@ -58,7 +58,13 @@ case $1 in
 --update-repo)
     # Copy claude settings
     test -d "$HOME"/.claude && cp -r "$HOME"/.claude/settings.json "$DOTFILES"/.claude/
-    test -d "$HOME"/.claude/skills && cp -r "$HOME"/.claude/skills "$DOTFILES"/.claude/
+    if test -d "$HOME"/.claude/skills; then
+        mkdir -p "$DOTFILES"/.claude/skills
+        for f in "$HOME"/.claude/skills/* "$HOME"/.claude/skills/.[!.]*; do
+            case "${f##*/}" in synced|.trash) continue ;; esac
+            [ -e "$f" ] && cp -r "$f" "$DOTFILES"/.claude/skills/
+        done
+    fi
 
     # Copy firefox settings
     test -f "$MOZILA_PROFILE_DIR"/user.js && cp -r "$MOZILA_PROFILE_DIR"/user.js "$DOTFILES"/firefox
