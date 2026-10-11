@@ -60,28 +60,17 @@
 ;; TODO lsp-ui-doc-focus-frame
 ;; TODO lsp-ui-doc-unfocus-frame
 
-(setq lsp-file-watch-ignored
-      '(".idea"
-        ".ensime_cache"
-        ".eunit"
-        "node_modules"
-        ".git"
-        ".hg"
-        ".fslckout"
-        "_FOSSIL_"
-        ".bzr"
-        "_darcs"
-        ".tox"
-        ".svn"
-        ".stack-work"
-        "vendor"
-        "doc"
-        "build"
-        "_build"
-        "deps"
-        "postgres-data"
-        "/home/alex/work/tposs/dia"
-        "/home/alex/work/tposs/src"))
+;; Directories that lsp-mode should not watch, in addition to its defaults
+;; (.git, node_modules, _build, ...).  The entries are regexps matched
+;; against the full directory path.
+(dolist (dir '("[/\\\\]vendor\\'"
+               "[/\\\\]doc\\'"
+               "[/\\\\]build\\'"
+               "[/\\\\]deps\\'"
+               "[/\\\\]postgres-data\\'"
+               "[/\\\\]dia\\'"
+               "[/\\\\]tposs[/\\\\]src\\'"))
+  (add-to-list 'lsp-file-watch-ignored-directories dir t))
 
 ;; disable copilot
 (setq lsp-copilot-enabled nil)
