@@ -14,20 +14,14 @@
   (setq inferior-erlang-machine-options '("-sname" "emacs"))
   (imenu-add-to-menubar "imenu")
   (local-set-key [return] 'newline-and-indent)
-  (set-frame-height (selected-frame) 20))
+  (setq indent-tabs-mode t)
+  (setq tab-width 8))
 
 (defun erl-shell (flags)
    "Start an erlang shell with FLAGS."
    (interactive (list (read-string "Flags: ")))
-   (set 'inferior-erlang-machine-options (split-string flags))
-   (set-frame-height  5)
+   (setq inferior-erlang-machine-options (split-string flags))
    (erlang-shell))
-
-(setq erlang-mode-hook
-    (function (lambda ()
-		(setq indent-tabs-mode t)
-		(setq tab-width 8)
-		(setq c-indent-level 4))))
 
 (add-hook 'erlang-mode-hook 'my-erlang-mode-hook)
 (require 'erlang-start nil t)
