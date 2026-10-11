@@ -54,11 +54,8 @@ or anything with `:results none' - because there is nowhere to jump."
 ;; If we are in i3 environment add special hooks for code block
 ;; execution to avoid dances with i3 modes
 (when (string= *i3* "true")
-  (progn
-    (add-hook 'org-babel-execute-src-block-hook
-              #'(lambda () (org-execute-code-block)))
-    (add-hook 'org-babel-after-execute-hook
-              #'(lambda () (shell-command-to-string "i3-msg mode passthrough")))))
+  (add-hook 'org-babel-after-execute-hook
+            #'(lambda () (shell-command-to-string "i3-msg mode passthrough"))))
 
 ;; Remove confirmation for code execution,
 (setq org-confirm-babel-evaluate nil)
