@@ -23,3 +23,5 @@ emacs/.emacs.d/eshell/history
 emacs/.emacs.d
 *.elc
 *.pyc
+.claude/skills/.trash
+.claude/skills/synced
