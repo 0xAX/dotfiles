@@ -1,6 +1,5 @@
 ;;; company.el --- C/C++ for GNU Emacs  -*- lexical-binding: t -*-
 
-(require 'cc-mode)
 (require 'company)
 
 ;; enable company mode
@@ -41,6 +40,7 @@
 (setq company-c-headers-path-system
       '("/usr/include/c++/8" "/usr/include" "/usr/local/include"))
 
-;; company mode keybindings for C/C++
-(define-key c-mode-map  [(tab)] 'company-complete)
-(define-key c++-mode-map  [(tab)] 'company-complete)
+;; company mode keybindings for C/C++, set when cc-mode is loaded
+(with-eval-after-load 'cc-mode
+  (define-key c-mode-map  [(tab)] 'company-complete)
+  (define-key c++-mode-map  [(tab)] 'company-complete))

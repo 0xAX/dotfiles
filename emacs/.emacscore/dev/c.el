@@ -1,8 +1,9 @@
 ;;; c.el --- C/C++ for GNU Emacs  -*- lexical-binding: t -*-
-(require 'cc-mode)
 
-;; disable wrong indentation in C++ namespaces
-(c-set-offset 'innamespace 0)
+;; cc-mode is loaded on the first C/C++ file, not at startup
+(with-eval-after-load 'cc-mode
+  ;; disable wrong indentation in C++ namespaces
+  (c-set-offset 'innamespace 0))
 
 ;; Indentation for C/C++ code
 (setq c-basic-offset 4)

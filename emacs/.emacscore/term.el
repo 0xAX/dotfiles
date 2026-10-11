@@ -1,7 +1,5 @@
 ;;; term.el --- terminal emulator configuration in GNU Emacs  -*- lexical-binding: t -*-
 
-(require 'vterm)
-
 ;; bash is a standard shell
 (setq explicit-shell-file-name "/bin/bash")
 (setq shell-file-name "/bin/bash")
@@ -20,8 +18,10 @@
     (interactive "sTerminal name: ")
     (vterm (concat "term-" terminal-name)))
 
-;; vterm custom keybindings
-(define-key vterm-mode-map (kbd "C-c C-v") #'vterm-yank)
+;; vterm custom keybindings.  vterm itself is loaded on the first
+;; `open-terminal' / `M-x vterm' instead of at startup.
+(with-eval-after-load 'vterm
+  (define-key vterm-mode-map (kbd "C-c C-v") #'vterm-yank))
 
 ;; unset some common keybindings for vterm
 (add-hook 'vterm-mode-hook

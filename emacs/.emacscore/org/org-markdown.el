@@ -1,9 +1,9 @@
 ;;; org-markdown.el --- Auxiliary functions to export org to markdown  -*- lexical-binding: t -*-
 
-(require 'ox-gfm)
-
 (defun export-org-directory-to-gfm (src-dir out-dir)
   "Export all .org files in SRC-DIR to .md in OUT-DIR, preserving relative structure."
+  ;; Loading the export engine also loads ox-gfm, see ~/.emacs.
+  (require 'ox)
   (let ((files (directory-files-recursively src-dir "\\.org$")))
     (dolist (org-file files)
       (let* ((rel-path (file-relative-name org-file src-dir))

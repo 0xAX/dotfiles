@@ -1,7 +1,5 @@
 ;;; snippets.el --- Snippets for GNU emacs -*- lexical-binding: t -*-
 
-(require 'yasnippet)
-
 ;; Enable yasnippets for all prog-mode(s)
 (add-hook 'prog-mode-hook #'yas-minor-mode)
 
@@ -13,6 +11,10 @@
 (setq yas-snippet-dirs
       '(straight-yas-dir "~/.emacscore/snippets"))
 
-;; Enable yas for all
-(yas-reload-all)
-(yas-global-mode 1)
+;; Enable yas for all.  Loading yasnippet and all snippet collections takes
+;; over a second, so do it right after startup instead of during it.
+(run-with-idle-timer 0.5 nil
+                     (lambda ()
+                       (require 'yasnippet)
+                       (yas-reload-all)
+                       (yas-global-mode 1)))

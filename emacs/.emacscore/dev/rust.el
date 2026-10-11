@@ -1,6 +1,10 @@
 ;;; rust.el --- Rust for GNU Emacs  -*- lexical-binding: t -*-
-(require 'rust-mode)
-(require 'rustic)
+
+;; rust-mode and rustic are loaded when the first .rs file is opened
+;; (rustic also pulls in org for its babel support, so loading it at
+;; startup would load org too).  Make sure .rs files open in rustic-mode,
+;; which is what loading rustic used to arrange.
+(add-to-list 'auto-mode-alist '("\\.rs\\'" . rustic-mode))
 
 ;; Add rust binaries to exec-path
 (add-to-list 'exec-path "/home/alex/.cargo/bin")
@@ -23,9 +27,10 @@
             (prettify-symbols-mode)))
 
 ;; rust-mode keybindings
-(define-key rustic-mode-map (kbd "C-c b") 'rustic-cargo-bench)
-(define-key rustic-mode-map (kbd "C-c c") 'rustic-compile)
-(define-key rustic-mode-map (kbd "C-c t") 'rustic-cargo-test-run)
+(with-eval-after-load 'rustic
+  (define-key rustic-mode-map (kbd "C-c b") 'rustic-cargo-bench)
+  (define-key rustic-mode-map (kbd "C-c c") 'rustic-compile)
+  (define-key rustic-mode-map (kbd "C-c t") 'rustic-cargo-test-run))
 
 ;; enable LSP for rust if we have rust-analyzer
 ;; cover both major modes: rust-mode buffers and rustic-mode buffers

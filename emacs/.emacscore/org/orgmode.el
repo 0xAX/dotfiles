@@ -1,9 +1,15 @@
 ;;; .emacs --- My org-mode configuration  -*- lexical-binding: t -*-
 
-(require 'org)
+;; org itself is not loaded here: it is loaded on the first .org file,
+;; `C-c a' or `C-c c'.  This file only sets variables and defines
+;; commands; everything that needs org loaded is at the end of this file
+;; in `with-eval-after-load'.
+
 ;; show a consistency graph in the agenda for repeating tasks
-;; that have the :STYLE: habit property
-(require 'org-habit)
+;; that have the :STYLE: habit property.  org-habit requires org-agenda,
+;; so load it after org-agenda rather than after org.
+(with-eval-after-load 'org-agenda
+  (require 'org-habit))
 
 ;; set path to org directory
 (when (file-directory-p "~/dev/todo")
@@ -66,6 +72,9 @@ those prompts into one."
 (defun org-reading-call (fn)
   "Call FN with the reading notes bound to `org-agenda-files'.
 Asks for their passphrase once instead of once per encrypted file."
+  ;; Load org-agenda first, so that `org-agenda-files' is a special
+  ;; variable and the `let' below binds it dynamically.
+  (require 'org-agenda)
   (let ((epa-file-cache-passphrase-for-symmetric-encryption t)
         (epa-file-passphrase-alist (org-reading-passphrase-alist))
         (org-agenda-files (org-reading-files)))
@@ -174,9 +183,6 @@ Asks for their passphrase once instead of once per encrypted file."
 ;; mode will lead to search according to pressed keys
 (setq org-goto-auto-isearch t)
 
-;; Enable pretty printing of special symbols
-(org-toggle-pretty-entities)
-
 ;; Enable support for org-tables everywhere
 (add-hook 'message-mode-hook 'turn-on-orgtbl)
 
@@ -188,10 +194,13 @@ Asks for their passphrase once instead of once per encrypted file."
 
 ;; load additional org-mode helpers
 (load "~/.emacscore/org/org-api.el")
-(load "~/.emacscore/org/org-babel.el")
-(load "~/.emacscore/org/org-ui.el")
 (load "~/.emacscore/org/org-keybindings.el")
 (load "~/.emacscore/org/org-markdown.el")
-(load "~/.emacscore/org/org-latex.el")
+
+;; these need org itself
+(with-eval-after-load 'org
+  (load "~/.emacscore/org/org-babel.el")
+  (load "~/.emacscore/org/org-ui.el")
+  (load "~/.emacscore/org/org-latex.el"))
 
 (add-hook 'org-mode-hook 'org-fragtog-mode)

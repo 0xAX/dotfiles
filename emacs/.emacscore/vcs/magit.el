@@ -6,7 +6,8 @@
 ;;  * https://magit.vc/manual/transient/Enabling-and-Disabling-Suffixes.html
 ;;  * https://emacsair.me/2019/02/14/transient-0.1/
 
-(require 'magit)
+;; magit is not required here: its commands (magit-status, ...) are
+;; autoloaded, so it loads on first use instead of at startup.
 
 ;; Enable more suffixes
 (setq transient-default-level 7)
@@ -19,7 +20,9 @@
 
 ;; unbind magit-section keybindings as they are used to navigate
 ;; in my i3 setup
-(with-eval-after-load "magit"
+;; Use the feature symbol: the string "magit" would also match this file
+;; (vcs/magit.el) and run the body before magit is loaded.
+(with-eval-after-load 'magit-section
   (define-key magit-section-mode-map (kbd "M-1") nil)
   (define-key magit-section-mode-map (kbd "M-2") nil)
   (define-key magit-section-mode-map (kbd "M-3") nil)

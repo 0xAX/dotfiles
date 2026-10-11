@@ -1,5 +1,13 @@
 ;;; .emacs --- My init file for GNU Emacs  -*- lexical-binding: t -*-
 
+;; Do not collect garbage during startup: with the default threshold
+;; loading the configuration triggers ~50 collections (~1.4s).  Once
+;; startup is done, use the 100MB that dev/lsp-mode.el also sets.
+(setq gc-cons-threshold most-positive-fixnum)
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (setq gc-cons-threshold (* 100 1024 1024))))
+
 ;; Ensure Emacs can talk to the same SSH agent as the shell.
 ;; Some GUI Emacs sessions don't inherit SSH_AUTH_SOCK, which breaks
 ;; `ssh` and Git over SSH inside Emacs. We fix it by:
@@ -91,6 +99,14 @@
 ;;
 ;; https://github.com/raxod502/straight.el
 ;;
+;; Do not scan all package repos for changes at every startup (~1s).
+;; Instead straight records a change when a file inside
+;; ~/.emacs.d/straight/repos/ is saved from Emacs, and rebuilds that
+;; package on the next start.  After `straight-pull-all' (or a manual git
+;; pull in repos/) run `M-x straight-check-all' to rebuild what changed.
+;; `update-package' below rebuilds on its own.
+(setq straight-check-for-modifications '(check-on-save find-when-checking))
+
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name
@@ -147,7 +163,6 @@
 (straight-use-package 'nix-mode)
 (straight-use-package 'org-bullets)
 (straight-use-package 'org-fragtog)
-(straight-use-package 'pkg-info)
 (straight-use-package 'rfc-mode)
 (straight-use-package 'rust-mode)
 (straight-use-package 'rustic)
@@ -169,12 +184,19 @@
 ;; Load the small libraries
 (load "~/.emacscore/lisp-utils.el")
 (load "~/.emacscore/lisp/org-bullets.el")
-(load "~/.emacscore/lisp/ox-gfm.el")
-(load "~/.emacscore/lisp/cmake.el")
+;; The GFM exporter pulls in all of org's export engine, so load it
+;; together with the engine (C-c C-e or org-markdown.el) instead of at
+;; startup.
+(with-eval-after-load 'ox
+  (load "~/.emacscore/lisp/ox-gfm.el"))
+;; cmake-mode is loaded on the first CMakeLists.txt or .cmake file
+(autoload 'cmake-mode "~/.emacscore/lisp/cmake" "Major mode for editing CMake files." t)
+(add-to-list 'auto-mode-alist '("CMakeLists\\.txt\\'" . cmake-mode))
+(add-to-list 'auto-mode-alist '("\\.cmake\\'" . cmake-mode))
 (load "~/.emacscore/lisp/rainbow-mode-1.0.5.el")
-(load "~/.emacscore/lisp/org-fragtog.el")
-(load "~/.emacscore/lisp/epl.el")
-(load "~/.emacscore/lisp/pkg-info.el")
+;; org-fragtog requires org, so load it together with org
+(with-eval-after-load 'org
+  (load "~/.emacscore/lisp/org-fragtog.el"))
 
 ;; Emacs UI and utils
 (load "~/.emacscore/system.el")
