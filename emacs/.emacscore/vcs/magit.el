@@ -8,6 +8,12 @@
 
 ;; magit is not required here: its commands (magit-status, ...) are
 ;; autoloaded, so it loads on first use instead of at startup.
+;;
+;; With straight's cached autoloads `magit-auto-revert-mode' stays
+;; unbound until magit-autorevert is loaded, and when that happens after
+;; init the file reads the variable before initializing it ("void
+;; variable").  Bind it up front to magit's own default.
+(defvar magit-auto-revert-mode (not (or global-auto-revert-mode noninteractive)))
 
 ;; Enable more suffixes
 (setq transient-default-level 7)
