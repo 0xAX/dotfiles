@@ -90,6 +90,127 @@ A line that starts with `·' counts as opening one."
 (with-eval-after-load 'lean4-input
   (quail-defrule "\\." "·" "Lean"))
 
+;; LaTeX previews in comments.  doc-gen4 renders `$...$' and `$$...$$' in
+;; docstrings with KaTeX, so the same fragments are drawn here as images,
+;; through Org's renderer and `org-format-latex-options' (org/org-latex.el)
+;; so they look like the previews in Org buffers.  Fragments are looked
+;; for only inside comments, and a fragment must sit inside one comment:
+;; `$$' split over several `--' lines is left alone.
+(defconst lean4-latex-fragment-regexp
+  (rx (or (seq "$$" (+? anything) "$$")
+          (seq "\\[" (+? anything) "\\]")
+          (seq "\\(" (+? (not (any "\n"))) "\\)")
+          ;; pandoc's rule: no blank right inside the dollars
+          (seq "$" (not (any "$ \t\n"))
+               (? (*? (not (any "$\n"))) (not (any "$ \t\n")))
+               "$")))
+  "Matches a LaTeX fragment in a Lean comment.")
+
+(defvar lean4-latex-cache-directory
+  (locate-user-emacs-file "lean-latex-cache/")
+  "Where rendered fragments are kept, named by a hash of their source.")
+
+(defvar lean4-latex-scale 0.75
+  "Size of comment math relative to Org's previews.
+Org's :scale suits display math in prose; next to code it looks too big.")
+
+(defun lean4-latex--color (pos)
+  "Foreground of the comment text at POS, as a colour Org can parse."
+  (let* ((face (get-text-property pos 'face))
+         (face (if (consp face) (car face) face)))
+    (or (face-foreground (if (facep face) face 'font-lock-comment-face)
+                         nil '(font-lock-comment-face default))
+        (face-foreground 'default))))
+
+(defun lean4-latex--image (fragment color)
+  "Return the SVG file for FRAGMENT drawn in COLOR, rendering on a cache miss."
+  (require 'org)
+  (let* ((options (copy-sequence org-format-latex-options))
+         (options (plist-put options :foreground color))
+         (options (plist-put options :scale
+                             (* lean4-latex-scale
+                                (or (plist-get org-format-latex-options :scale)
+                                    1.0))))
+         (file (expand-file-name
+                (concat (sha1 (format "%s%S%s" fragment options
+                                      org-preview-latex-default-process))
+                        ".svg")
+                lean4-latex-cache-directory)))
+    (unless (file-exists-p file)
+      (make-directory lean4-latex-cache-directory t)
+      ;; The preamble is built from the buffer's #+LATEX_HEADER lines, which
+      ;; only means something in an Org buffer.
+      (with-temp-buffer
+        (delay-mode-hooks (org-mode))
+        (org-create-formula-image fragment file options (current-buffer))))
+    file))
+
+(defun lean4-latex--overlays (&optional beg end)
+  (seq-filter (lambda (ov) (overlay-get ov 'lean4-latex))
+              (overlays-in (or beg (point-min)) (or end (point-max)))))
+
+(defun lean4-latex-clear ()
+  "Remove the LaTeX previews in the current buffer."
+  (mapc #'delete-overlay (lean4-latex--overlays)))
+
+(defun lean4-latex-render ()
+  "Show every LaTeX fragment in the comments of this buffer as an image."
+  (interactive)
+  (lean4-latex-clear)
+  ;; The colour is read off the comment's face, so fontify first.
+  (font-lock-ensure)
+  (save-excursion
+    (goto-char (point-min))
+    (while (re-search-forward lean4-latex-fragment-regexp nil t)
+      (let* ((beg (match-beginning 0))
+             (end (match-end 0))
+             (start (nth 8 (save-excursion (syntax-ppss beg)))))
+        (if (not (and (nth 4 (save-excursion (syntax-ppss beg)))
+                      (eq start (nth 8 (save-excursion (syntax-ppss end))))))
+            ;; Not in a comment: retry from the next character, a `$'
+            ;; that closed nothing may still open a fragment.
+            (goto-char (1+ beg))
+          (condition-case err
+              (let ((ov (make-overlay beg end nil t nil))
+                    (image (create-image
+                            (lean4-latex--image (match-string-no-properties 0)
+                                                (lean4-latex--color beg))
+                            'svg nil :ascent 'center)))
+                (overlay-put ov 'lean4-latex image)
+                (overlay-put ov 'display image)
+                (overlay-put ov 'evaporate t)
+                ;; Editing the source drops the image; saving draws it again.
+                (overlay-put ov 'modification-hooks
+                             (list (lambda (o after &rest _)
+                                     (when after (delete-overlay o))))))
+            (error (message "LaTeX preview failed at %d: %s"
+                            beg (error-message-string err)))))))))
+
+(defun lean4-latex--reveal ()
+  "Show the source of the fragment at point, and the image of all others."
+  (dolist (ov (lean4-latex--overlays))
+    (overlay-put ov 'display
+                 (unless (and (>= (point) (overlay-start ov))
+                              (<= (point) (overlay-end ov)))
+                   (overlay-get ov 'lean4-latex)))))
+
+(define-minor-mode lean4-latex-preview-mode
+  "Draw the LaTeX in comments as images.
+Moving into a fragment shows its source; saving redraws the buffer."
+  :lighter " TeX"
+  (if lean4-latex-preview-mode
+      (progn
+        (lean4-latex-render)
+        (add-hook 'post-command-hook #'lean4-latex--reveal nil t)
+        (add-hook 'after-save-hook #'lean4-latex-render nil t))
+    (remove-hook 'post-command-hook #'lean4-latex--reveal t)
+    (remove-hook 'after-save-hook #'lean4-latex-render t)
+    (lean4-latex-clear)))
+
+;; C-c C-t - toggle the LaTeX previews.  Org's `C-c C-x C-l' is out of
+;; reach: `C-c C-x' alone already runs the file.
+(define-key lean4-mode-map (kbd "C-c C-t") #'lean4-latex-preview-mode)
+
 (with-eval-after-load 'org
   ;; C-c C-x i - switch the Lean input method on and off
   (define-key org-mode-map (kbd "C-c C-x i") #'lean4-toggle-input-method)
