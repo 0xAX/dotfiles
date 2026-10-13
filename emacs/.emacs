@@ -23,7 +23,8 @@
 ;;
 ;;  - tabbar
 ;;  - centaur-tab
-(setq tab-mode 'centaur-tab)
+(defvar tab-mode 'centaur-tab
+  "Tab implementation to use: `tabbar' or `centaur-tab'.")
 
 ;; Current theme. Following themes are supported:
 ;;
@@ -37,7 +38,8 @@
 ;; - ef-day
 ;;
 ;; The configuration of the theme itself is in the .emacscore/ui.el
-(setq current-theme 'ef-day)
+(defvar current-theme 'ef-day
+  "Color theme to use, see .emacscore/ui.el.")
 
 ;; Current font. Following fonts are supported:
 ;;
@@ -46,7 +48,8 @@
 ;; - monospace
 ;;
 ;; The configuration of the font itself is in the .emacscore/ui.el
-(setq current-font 'fira-code)
+(defvar current-font 'fira-code
+  "Font to use, see .emacscore/ui.el.")
 
 ;; Set directory for dependencies and primary configuration
 (setq user-emacs-directory "~/.emacs.d")
