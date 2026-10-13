@@ -242,8 +242,9 @@
 ;; do not use tabs for indentation at all
 (setq-default indent-tabs-mode nil)
 
-;; Hide *async-native-compile* buffer
-(setq warning-minimum-level :error)
+;; Do not pop up *Warnings* for async native compilation, but keep
+;; showing other warnings
+(setq native-comp-async-report-warnings-errors 'silent)
 
 ;; kill unneded buffers
 (when (get-buffer "*straight-process*")
