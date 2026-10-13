@@ -68,18 +68,19 @@
 ;; Delete text in selection mode when typing
 (delete-selection-mode 1)
 
+;; Set language environment.  This resets coding system priorities, so
+;; it has to come before the settings below.
+(set-language-environment "UTF-8")
 ;; Set character sets
 (prefer-coding-system        'utf-8)
 ;; Set coding system of terminal output
 (set-terminal-coding-system  'utf-8)
-;; Set codign system for keyboard input
+;; Set coding system for keyboard input
 (set-keyboard-coding-system  'utf-8)
 ;; Set coding system to communicate with other X systems
 (set-selection-coding-system 'utf-8)
 ;; Set coding system to use with system messages
 (setq locale-coding-system   'utf-8)
-;; Set language environment
-(setq current-language-environment "UTF-8")
 
 ;; Prevent creation of backup files
 (setq make-backup-files         nil)
