@@ -161,8 +161,14 @@
 (straight-use-package 'monokai-theme)
 (straight-use-package 'nerd-icons-dired)
 (straight-use-package 'nix-mode)
+;; Its repo is nordtheme/emacs, same name as catppuccin/emacs, so give it
+;; its own directory under straight/repos/ instead of sharing "emacs".
+(straight-use-package
+ '(nord-theme :type git :host github :repo "nordtheme/emacs"
+              :local-repo "nord-emacs"))
 (straight-use-package 'org-bullets)
 (straight-use-package 'org-fragtog)
+(straight-use-package 'rainbow-mode)
 (straight-use-package 'rfc-mode)
 (straight-use-package 'rust-mode)
 (straight-use-package 'rustic)
@@ -183,7 +189,6 @@
 
 ;; Load the small libraries
 (load "~/.emacscore/lisp-utils.el")
-(load "~/.emacscore/lisp/org-bullets.el")
 ;; The GFM exporter pulls in all of org's export engine, so load it
 ;; together with the engine (C-c C-e or org-markdown.el) instead of at
 ;; startup.
@@ -193,10 +198,6 @@
 (autoload 'cmake-mode "~/.emacscore/lisp/cmake" "Major mode for editing CMake files." t)
 (add-to-list 'auto-mode-alist '("CMakeLists\\.txt\\'" . cmake-mode))
 (add-to-list 'auto-mode-alist '("\\.cmake\\'" . cmake-mode))
-(load "~/.emacscore/lisp/rainbow-mode-1.0.5.el")
-;; org-fragtog requires org, so load it together with org
-(with-eval-after-load 'org
-  (load "~/.emacscore/lisp/org-fragtog.el"))
 
 ;; Emacs UI and utils
 (load "~/.emacscore/system.el")

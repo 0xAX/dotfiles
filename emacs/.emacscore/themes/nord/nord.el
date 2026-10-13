@@ -1,8 +1,7 @@
 ;; nord.el --- GNU Emacs styling for nord theme  -*- lexical-binding: t -*-
 
 ;; Load nord theme
-(load "~/.emacscore/lisp/nord-theme.el")
-(enable-theme 'nord)
+(load-theme 'nord t)
 
 ;; Customize colors of  centaur-tabs for nord
 (custom-set-faces
