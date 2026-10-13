@@ -170,9 +170,6 @@ asked - a tty, an X11 session, or sway not exporting SWAYSOCK."
 ;; Enable column number in mode-line
 (setq column-number-mode t)
 
-;; set standard tab width
-(setq tab-width 8)
-
 ;; Ivy configuration
 ;; ido (see ido.el) handles file and buffer prompts, ivy everything else
 (ivy-mode)
