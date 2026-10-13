@@ -69,6 +69,26 @@
                "[/\\\\]tposs[/\\\\]src\\'"))
   (add-to-list 'lsp-file-watch-ignored-directories dir t))
 
+;; The Lean server sends workspace/inlayHint/refresh even though lsp-mode
+;; never claims refreshSupport, and `lsp--on-request' has no case for it:
+;; it answers nil but warns on every request.  Answer it here instead and
+;; redraw the hints in the workspace's buffers that show them.
+(defun my-lsp-on-inlay-hint-refresh (workspace request)
+  "Handle a workspace/inlayHint/refresh REQUEST from WORKSPACE.
+Return non-nil when REQUEST was handled, so `lsp--on-request' is skipped."
+  (when (equal (lsp:json-request-method request) "workspace/inlayHint/refresh")
+    (lsp--send-request-response workspace (current-time) request nil)
+    (dolist (buf (lsp--workspace-buffers workspace))
+      (when (lsp-buffer-live-p buf)
+        (lsp-with-current-buffer buf
+          (when (and (bound-and-true-p lsp-inlay-hints-mode)
+                     (get-buffer-window (current-buffer)))
+            (with-selected-window (get-buffer-window (current-buffer))
+              (lsp--update-inlay-hints))))))
+    t))
+
+(advice-add 'lsp--on-request :before-until #'my-lsp-on-inlay-hint-refresh)
+
 ;; disable copilot
 (setq lsp-copilot-enabled nil)
 
