@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(awk '/^xic_string_conversion_callback/,/^}/' src/xfns.c)"
+    ]
+  }
+}

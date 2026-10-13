@@ -88,12 +88,10 @@
 (setq auto-save-default         nil)
 (setq create-lockfiles          nil)
 
-;; Setup standard packaging
-(require 'package)
-(setq package-check-signature nil)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-(if (version< emacs-version "27.0")
-    (package-initialize))
+;; Packages are installed by straight; package.el is only used to browse
+;; the archives (C-p l), so add MELPA once it is loaded.
+(with-eval-after-load 'package
+  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/")))
 
 ;;
 ;; Load straight.el
