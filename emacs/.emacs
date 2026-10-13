@@ -250,11 +250,7 @@
 ;; do not use tabs for indentation at all
 (setq-default indent-tabs-mode nil)
 
-;; Do not pop up *Warnings* for async native compilation, but keep
-;; showing other warnings
-(setq native-comp-async-report-warnings-errors 'silent)
-
-;; kill unneded buffers
+;; kill unneeded buffers
 (when (get-buffer "*straight-process*")
   (kill-buffer "*straight-process*"))
 (when (get-buffer "*straight-byte-compilation*")
@@ -263,7 +259,7 @@
 ;; Helper functions
 
 (defun update-package (package-name)
-  "Fetch the latest version of the `package-name' using straight and re-build it"
+  "Fetch the latest version of PACKAGE-NAME using straight and rebuild it."
   (interactive "sPackage name: ")
   (straight-pull-package-and-deps package-name)
   (straight-rebuild-package package-name))
