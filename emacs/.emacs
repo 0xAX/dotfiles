@@ -8,6 +8,10 @@
           (lambda ()
             (setq gc-cons-threshold (* 100 1024 1024))))
 
+;; Do not pop up *Warnings* for async native compilation, but keep
+;; showing other warnings.  Set it before straight starts building.
+(setq native-comp-async-report-warnings-errors 'silent)
+
 ;; Ensure Emacs can talk to the same SSH agent as the shell.
 ;; Some GUI Emacs sessions don't inherit SSH_AUTH_SOCK, which breaks
 ;; `ssh` and Git over SSH inside Emacs. We fix it by:
