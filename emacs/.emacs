@@ -56,7 +56,8 @@
 ;; Set directory for dependencies and primary configuration
 (setq user-emacs-directory "~/.emacs.d")
 ;; Set directory with secondary configuration
-(setq user-emacs-configuration-directory "~/.emacscore")
+(defvar user-emacs-configuration-directory "~/.emacscore"
+  "Directory with the secondary configuration.")
 
 ;; Set history for transient
 (setq transient-history-file
