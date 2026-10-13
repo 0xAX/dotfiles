@@ -12,12 +12,14 @@
 ;; Some GUI Emacs sessions don't inherit SSH_AUTH_SOCK, which breaks
 ;; `ssh` and Git over SSH inside Emacs. We fix it by:
 ;; 1. If SSH_AUTH_SOCK is already set, leave it alone.
-;; 2. Otherwise, assume ssh-agent is running with its socket in
-;;    $XDG_RUNTIME_DIR/ssh-agent.socket (the common setup on Wayland/systemd).
-(setenv "SSH_AUTH_SOCK"
-        (or (getenv "SSH_AUTH_SOCK")
-            (concat (or (getenv "XDG_RUNTIME_DIR") "/run/user/1000")
-                    "/ssh-agent.socket")))
+;; 2. Otherwise, use $XDG_RUNTIME_DIR/ssh-agent.socket (the common setup
+;;    on Wayland/systemd), but only if the agent's socket is really there.
+(unless (getenv "SSH_AUTH_SOCK")
+  (let ((sock (expand-file-name "ssh-agent.socket"
+                                (or (getenv "XDG_RUNTIME_DIR")
+                                    (format "/run/user/%d" (user-uid))))))
+    (when (file-exists-p sock)
+      (setenv "SSH_AUTH_SOCK" sock))))
 
 ;; Choose tab-mode. Supported values:
 ;;
