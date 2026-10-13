@@ -92,3 +92,36 @@
   (add-hook 'go-mode-hook #'company-mode))
 
 (setq lsp-completion-enable-additional-text-edit t)
+
+;; Every rebuild of Emacs gets a new `comp-native-version-dir', so the
+;; user eln-cache collects a full copy of the compiled packages per build,
+;; and only the directory of the running build is ever loaded from.
+(defun my-eln-cache-clean (&optional all-versions)
+  "Delete the eln-cache directories of Emacs builds other than this one.
+Only directories of builds of the same Emacs version are deleted, so the
+cache of another installed Emacs (e.g. the system one) stays.  With a
+prefix argument ALL-VERSIONS, delete every directory but the current."
+  (interactive "P")
+  (unless (featurep 'native-compile)
+    (user-error "This Emacs is built without native compilation"))
+  (let* ((cache (car native-comp-eln-load-path))
+         (version (concat (regexp-quote emacs-version) "-"))
+         (stale (seq-filter
+                 (lambda (dir)
+                   (and (file-directory-p dir)
+                        (not (string= (file-name-nondirectory dir)
+                                      comp-native-version-dir))
+                        (or all-versions
+                            (string-match-p
+                             (concat "\\`" version)
+                             (file-name-nondirectory dir)))))
+                 (directory-files cache t directory-files-no-dot-files-regexp))))
+    (cond
+     ((null stale)
+      (message "No stale eln-cache directories in %s" cache))
+     ((yes-or-no-p (format "Delete %d eln-cache dirs in %s (keeping %s): %s? "
+                           (length stale) cache comp-native-version-dir
+                           (mapconcat #'file-name-nondirectory stale " ")))
+      (dolist (dir stale)
+        (delete-directory dir t))
+      (message "Deleted %d eln-cache directories" (length stale))))))
