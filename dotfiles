@@ -176,9 +176,13 @@ case $1 in
     # Copy tmux configuration
     cp -r "$DOTFILES"/tmux/.tmux.conf "$HOME"/
 
-    # Copy emacs files
-    rm -rf "$HOME"/{.emacs,.emacscore}
-    cp -r emacs/.emacs emacs/.emacscore "$HOME"/
+    # Copy emacs files. The new .emacscore is copied aside first and the old
+    # one is removed only once that copy succeeded.
+    rm -rf "$HOME"/.emacscore.new
+    cp -r "$DOTFILES"/emacs/.emacscore "$HOME"/.emacscore.new
+    rm -rf "$HOME"/.emacscore
+    mv "$HOME"/.emacscore.new "$HOME"/.emacscore
+    cp "$DOTFILES"/emacs/.emacs "$HOME"/.emacs
 
     # Copy k9s configurations
     mkdir -p "$HOME"/.config/k9s
