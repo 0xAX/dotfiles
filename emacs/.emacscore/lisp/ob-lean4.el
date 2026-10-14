@@ -69,10 +69,16 @@
 ;; A block that compiles cleanly and says nothing produces no result at
 ;; all, so definition-only blocks do not litter the document with empty
 ;; `#+RESULTS:' drawers.
+;;
+;; `org-babel-lean4-edit' edits a block in a real `.lean' file, with what
+;; it is compiled with written around it, so that the language server can
+;; show goals and errors while the block is being written.
 
 ;;; Code:
 
 (require 'ob)
+(require 'org-element)
+(require 'org-src)
 (require 'seq)
 (require 'subr-x)
 
@@ -194,6 +200,13 @@ generates has to go after HEAD rather than in front of it."
       (cons (mapconcat #'identity (seq-take lines (1+ last-import)) "\n")
             (mapconcat #'identity (seq-drop lines (1+ last-import)) "\n")))))
 
+(defun org-babel-lean4--generated-lines (params)
+  "Return the lines `:prologue' and `:var' in PARAMS put in front of a block."
+  (append (let ((prologue (cdr (assq :prologue params))))
+            (when (org-string-nw-p prologue)
+              (split-string prologue "\n")))
+          (org-babel-lean4--var-lines params)))
+
 (defun org-babel-lean4--pieces (body params)
   "Take BODY apart into the pieces the compiled file is built from, per PARAMS.
 
@@ -207,11 +220,7 @@ of it were generated rather than written in the block."
   (pcase-let* ((`(,head . ,rest) (org-babel-lean4--split-imports body))
                (head-lines (when (org-string-nw-p head)
                              (split-string head "\n")))
-               (generated (append
-                           (let ((prologue (cdr (assq :prologue params))))
-                             (when (org-string-nw-p prologue)
-                               (split-string prologue "\n")))
-                           (org-babel-lean4--var-lines params)))
+               (generated (org-babel-lean4--generated-lines params))
                (epilogue (cdr (assq :epilogue params))))
     (list (append head-lines (org-babel-lean4--import-lines params))
           (length head-lines)
@@ -322,6 +331,16 @@ them."
       (setq chunks (append chunks (list (cons key chunk)))))
     (puthash session (cons imports chunks) org-babel-lean4--sessions)))
 
+(defun org-babel-lean4--session-prelude (state key)
+  "Return the chunks of the session STATE that the block KEY comes after.
+
+Those are the blocks that joined the session before it did.  Its own
+earlier version is left out, since Lean would reject everything it
+declares arriving a second time, and so is whatever joined after it,
+which may well be built on top of it."
+  (mapcar #'cdr (seq-take-while (lambda (cell) (not (equal (car cell) key)))
+                                (cdr state))))
+
 (defun org-babel-lean4--import-section (prior own)
   "Merge the OWN import lines of a block with the PRIOR ones of its session.
 
@@ -352,13 +371,16 @@ was run, and Lean will refuse a definition that arrives twice."
 
 ;;; Running Lean
 
+(defun org-babel-lean4--lake-p (params)
+  "Return non-nil if PARAMS ask for the block to be run through Lake."
+  (member (org-babel-lean4--header params :lake "no") '("yes" "t" "true")))
+
 (defun org-babel-lean4--run (file params)
   "Run Lean over FILE according to PARAMS.
 Return a cons cell (EXIT-CODE . OUTPUT).  Lean writes its diagnostics to
 standard output, and standard error is merged into it so that a crash or
 a Lake failure is not silently dropped."
-  (let* ((lake (member (org-babel-lean4--header params :lake "no")
-                       '("yes" "t" "true")))
+  (let* ((lake (org-babel-lean4--lake-p params))
          (program (org-babel-lean4--executable
                    (if lake org-babel-lean4-lake-name
                      org-babel-lean4-command-name)))
@@ -472,6 +494,7 @@ defines things - most of them, in a Lean document."
 Called by `org-babel-execute-src-block'."
   (setq org-babel-lean4--silence-result nil)
   (pcase-let* ((session (org-babel-lean4--session-name params))
+               (key (and session (org-babel-lean4--block-key)))
                (state (if session
                           (org-babel-lean4--session-state session)
                         (cons nil nil)))
@@ -481,7 +504,9 @@ Called by `org-babel-execute-src-block'."
                 (org-babel-lean4--import-section (car state) own-imports))
                ;; The blocks of the session, compiled again so that what
                ;; they defined is in scope for this one.
-               (prelude (mapconcat #'cdr (cdr state) "\n"))
+               (prelude (mapconcat #'identity
+                                   (org-babel-lean4--session-prelude state key)
+                                   "\n"))
                (prelude-lines (if (string-empty-p prelude)
                                   0
                                 (length (split-string prelude "\n"))))
@@ -507,8 +532,7 @@ Called by `org-babel-execute-src-block'."
                  (zerop exit)
                  (not (seq-some (lambda (message) (eq (car message) 'error))
                                 messages)))
-        (org-babel-lean4--session-record
-         session (org-babel-lean4--block-key) imports chunk))
+        (org-babel-lean4--session-record session key imports chunk))
       (cond
        ;; Something went wrong and Lean said nothing we could parse: report
        ;; the status rather than pretending the block succeeded.
@@ -520,6 +544,347 @@ Called by `org-babel-execute-src-block'."
         (setq org-babel-lean4--silence-result t)
         nil)
        (t rendered)))))
+
+;;; Editing with the language server
+
+;; `C-c '' edits a block in a buffer that is not visiting a file, and the
+;; Lean server has nothing to work with in such a buffer: no goals, no
+;; infoview, no completion.  `org-babel-lean4-edit' gives the block a real
+;; file instead.  What the block is compiled with - its session, `:imports',
+;; `:var', `:prologue' and `:epilogue' - is written around it in regions
+;; marked as generated, so that the server sees the block the way
+;; `org-babel-execute:lean4' compiles it.  Those regions are read-only and
+;; are dropped again when the block is written back.
+
+(defcustom org-babel-lean4-edit-directory
+  (expand-file-name "ob-lean4" temporary-file-directory)
+  "Directory the files `org-babel-lean4-edit' opens are written to.
+A `lean-toolchain' file is kept there, which is what makes the server
+treat the directory as a project.  Blocks run with `:lake yes' are not
+edited here but inside their own project, under its `.lake' directory,
+so that the server can see the dependencies of the project."
+  :group 'org-babel
+  :type 'directory)
+
+(defconst org-babel-lean4--generated-begin
+  "-- ob-lean4: generated, not part of the block {{{"
+  "The line a region of generated code opens with in an edit buffer.")
+
+(defconst org-babel-lean4--generated-end "-- ob-lean4: }}}"
+  "The line a region of generated code closes with in an edit buffer.")
+
+(defvar-local org-babel-lean4--edit-origin nil
+  "Marker at the beginning of the src block an edit buffer belongs to.")
+
+(defun org-babel-lean4--generated-region (lines)
+  "Return LINES wrapped in the generated region markers, or nil if empty."
+  (when lines
+    (append (list org-babel-lean4--generated-begin)
+            lines
+            (list org-babel-lean4--generated-end))))
+
+(defun org-babel-lean4--toolchain ()
+  "Return the toolchain `lean' runs, spelled as in a `lean-toolchain' file.
+Return nil if Lean cannot be run or its version cannot be made out."
+  ;; Away from any project, whose own `lean-toolchain' elan would follow.
+  (let ((default-directory (expand-file-name "~/")))
+    (with-temp-buffer
+      (when (ignore-errors
+              (zerop (process-file (org-babel-lean4--executable
+                                    org-babel-lean4-command-name)
+                                   nil t nil "--version")))
+        (goto-char (point-min))
+        (when (re-search-forward "version \\([0-9][^ ,)]*\\)" nil t)
+          (format "leanprover/lean4:v%s" (match-string 1)))))))
+
+(defun org-babel-lean4--edit-directory (params)
+  "Return the directory a block with PARAMS is edited in, creating it."
+  (let ((dir (if (org-babel-lean4--lake-p params)
+                 (expand-file-name ".lake/ob-lean4"
+                                   (expand-file-name
+                                    (or (cdr (assq :dir params)) ".")))
+               org-babel-lean4-edit-directory)))
+    (make-directory dir t)
+    (unless (org-babel-lean4--lake-p params)
+      (let ((toolchain (org-babel-lean4--toolchain))
+            (file (expand-file-name "lean-toolchain" dir)))
+        (when (and toolchain
+                   (not (equal (ignore-errors
+                                 (with-temp-buffer
+                                   (insert-file-contents file)
+                                   (string-trim (buffer-string))))
+                               toolchain)))
+          (write-region (concat toolchain "\n") nil file nil 'silent))))
+    dir))
+
+(defun org-babel-lean4--edit-file-name (key)
+  "Return the name of the file the block KEY of this buffer is edited in.
+It is told apart from the files of other blocks by a hash, and named
+after the Org file so that it can be recognised in a buffer list."
+  (let ((source (or (buffer-file-name) (buffer-name))))
+    (format "%s_%s.lean"
+            (replace-regexp-in-string "[^[:alnum:]_]" "_"
+                                      (file-name-base source))
+            (substring (md5 (concat source "\0" key)) 0 8))))
+
+(defun org-babel-lean4--contents-area (element)
+  "Return (BEG . END) of the lines between the delimiters of ELEMENT."
+  (save-excursion
+    (goto-char (org-element-property :post-affiliated element))
+    (let ((beg (line-beginning-position 2)))
+      (goto-char (org-element-property :end element))
+      (skip-chars-backward " \t\n")
+      (cons beg (max beg (line-beginning-position))))))
+
+(defun org-babel-lean4--body-indentation (element)
+  "Return how far Org indents the body of the src block ELEMENT.
+That is how far a body written back into ELEMENT is indented, the way
+`org-edit-src-exit' does it."
+  (if (or org-src-preserve-indentation
+          (org-element-property :preserve-indent element))
+      0
+    (save-excursion
+      (goto-char (org-element-property :post-affiliated element))
+      (+ (current-indentation)
+         ;; Org 9.8 renamed the variable and made the old name an alias.
+         (symbol-value (if (boundp 'org-src-content-indentation)
+                           'org-src-content-indentation
+                         'org-edit-src-content-indentation))))))
+
+(defun org-babel-lean4--common-indentation (element beg end)
+  "Return how far the lines from BEG to END of ELEMENT are indented in common.
+This is what Org strips from the body of the src block ELEMENT, unless
+it preserves indentation."
+  (if (or org-src-preserve-indentation
+          (org-element-property :preserve-indent element))
+      0
+    (save-excursion
+      (goto-char beg)
+      (let (indent)
+        (while (< (point) end)
+          (unless (looking-at-p "[ \t]*$")
+            (setq indent (min (or indent most-positive-fixnum)
+                              (current-indentation))))
+          (forward-line 1))
+        (or indent 0)))))
+
+(defun org-babel-lean4--protect-generated ()
+  "Make the generated regions of the current buffer read-only."
+  (with-silent-modifications
+    (save-excursion
+      (goto-char (point-min))
+      (while (re-search-forward
+              (concat "^" (regexp-quote org-babel-lean4--generated-begin) "$")
+              nil t)
+        (let ((start (line-beginning-position)))
+          (when (re-search-forward
+                 (concat "^" (regexp-quote org-babel-lean4--generated-end) "$")
+                 nil t)
+            (let ((end (min (point-max) (1+ (point)))))
+              (put-text-property start end 'read-only
+                                 "Generated by ob-lean4, not part of the block")
+              ;; Text inherits `read-only' from the character before it, so
+              ;; everything inside the region is protected.  Only its last
+              ;; character lets go, so that text can still be typed below.
+              (put-text-property (1- end) end 'rear-nonsticky t))))))))
+
+(defun org-babel-lean4--edit-body ()
+  "Return the block body in the current edit buffer.
+That is the buffer without its generated regions."
+  (let (lines skipping)
+    (dolist (line (split-string (buffer-substring-no-properties
+                                 (point-min) (point-max))
+                                "\n"))
+      (cond
+       ((equal line org-babel-lean4--generated-begin) (setq skipping t))
+       ((and skipping (equal line org-babel-lean4--generated-end))
+        (setq skipping nil))
+       ((not skipping) (push line lines))))
+    (replace-regexp-in-string "\n+\\'" ""
+                              (mapconcat #'identity (nreverse lines) "\n"))))
+
+(defun org-babel-lean4--edit-write-back ()
+  "Replace the body of the block the current edit buffer belongs to.
+Return non-nil if the block changed."
+  (let ((body (org-babel-lean4--edit-body))
+        (origin org-babel-lean4--edit-origin))
+    (unless (buffer-live-p (marker-buffer origin))
+      (user-error "The Org buffer this block came from is gone"))
+    (with-current-buffer (marker-buffer origin)
+      (save-excursion
+        (goto-char origin)
+        (let ((element (org-element-at-point)))
+          (unless (eq (org-element-type element) 'src-block)
+            (user-error "The block being edited is no longer there"))
+          (pcase-let* ((`(,beg . ,end) (org-babel-lean4--contents-area element))
+                       (indent (org-babel-lean4--body-indentation element))
+                       (text (if (string-empty-p body)
+                                 ""
+                               (concat
+                                (mapconcat
+                                 (lambda (line)
+                                   (if (string-empty-p line)
+                                       line
+                                     (concat (make-string indent ?\s) line)))
+                                 (split-string (org-escape-code-in-string body)
+                                               "\n")
+                                 "\n")
+                                "\n"))))
+            (unless (equal text (buffer-substring-no-properties beg end))
+              (goto-char beg)
+              (delete-region beg end)
+              (insert text)
+              t)))))))
+
+(defun org-babel-lean4--edit-close ()
+  "Go back to the block of the current edit buffer and get rid of the buffer."
+  (let ((origin org-babel-lean4--edit-origin)
+        (buffer (current-buffer))
+        (file (buffer-file-name)))
+    (set-buffer-modified-p nil)
+    (when (buffer-live-p (marker-buffer origin))
+      (org-src-switch-to-buffer (marker-buffer origin) 'exit))
+    (kill-buffer buffer)
+    (when file
+      (ignore-errors (delete-file file)))
+    (when (buffer-live-p (marker-buffer origin))
+      (goto-char origin))))
+
+(defun org-babel-lean4-edit-save ()
+  "Write the edit buffer back into its block, and save both."
+  (interactive)
+  (org-babel-lean4--edit-write-back)
+  ;; The server reads the buffer rather than the file, but a saved buffer
+  ;; does not nag about being modified when it is left.  A `before-save-hook'
+  ;; tidying whitespace must not trip over the generated regions.
+  (let ((inhibit-read-only t))
+    (save-buffer))
+  (with-current-buffer (marker-buffer org-babel-lean4--edit-origin)
+    (when (buffer-file-name)
+      (save-buffer))))
+
+(defun org-babel-lean4-edit-exit ()
+  "Write the edit buffer back into its block and return to it."
+  (interactive)
+  (org-babel-lean4--edit-write-back)
+  (org-babel-lean4--edit-close))
+
+(defun org-babel-lean4-edit-abort ()
+  "Return to the block without writing the edit buffer back."
+  (interactive)
+  (org-babel-lean4--edit-close))
+
+(defvar org-babel-lean4-edit-mode-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "C-c '") #'org-babel-lean4-edit-exit)
+    ;; Not `C-c C-k' as in an Org src buffer: in a Lean buffer that shows
+    ;; how to type the symbol at point.
+    (define-key map (kbd "C-c C-q") #'org-babel-lean4-edit-abort)
+    (define-key map [remap save-buffer] #'org-babel-lean4-edit-save)
+    map)
+  "Keymap of `org-babel-lean4-edit-mode'.")
+
+(define-minor-mode org-babel-lean4-edit-mode
+  "Minor mode of the buffers `org-babel-lean4-edit' opens.
+\\<org-babel-lean4-edit-mode-map>
+\\[org-babel-lean4-edit-exit] writes the buffer back into its block and
+returns to it, \\[org-babel-lean4-edit-abort] returns without writing it
+back, and \\[org-babel-lean4-edit-save] writes it back and saves the Org
+file."
+  :lighter " Org-Lean"
+  (setq header-line-format
+        (when org-babel-lean4-edit-mode
+          (substitute-command-keys
+           "\\<org-babel-lean4-edit-mode-map>Edit Lean block: \
+\\[org-babel-lean4-edit-exit] to finish, \\[org-babel-lean4-edit-abort] to abort"))))
+
+(defun org-babel-lean4-edit ()
+  "Edit the Lean src block at point in a file the Lean server can check.
+
+Unlike `org-edit-special', this gives the block a real file, so the
+language server starts and goals, the infoview and completion work.
+What the block is compiled with - the blocks of its session that were
+run before it, `:imports', `:var', `:prologue' and `:epilogue' - is
+written around it as read-only generated regions.  The blocks of a
+session only count once they have been run in this Emacs."
+  (interactive)
+  (let* ((element (org-element-at-point))
+         (info (and (eq (org-element-type element) 'src-block)
+                    (org-babel-get-src-block-info))))
+    (unless (member (nth 0 info) '("lean4" "lean"))
+      (user-error "Not in a Lean src block"))
+    (pcase-let* ((body (nth 1 info))
+                 (params (nth 2 info))
+                 (key (org-babel-lean4--block-key))
+                 (session (org-babel-lean4--session-name params))
+                 (state (if session
+                            (org-babel-lean4--session-state session)
+                          (cons nil nil)))
+                 (`(,head . ,rest) (org-babel-lean4--split-imports body))
+                 (head-lines (when (org-string-nw-p head)
+                               (split-string head "\n")))
+                 ;; Imports have to come first, so the ones the block does
+                 ;; not write itself go right underneath its own.
+                 (imports (seq-remove
+                           (lambda (line) (member line head-lines))
+                           (delete-dups
+                            (seq-filter
+                             (lambda (line)
+                               (string-match-p "\\`[ \t]*import\\b" line))
+                             (append (car state)
+                                     (org-babel-lean4--import-lines params))))))
+                 (top (org-babel-lean4--generated-region
+                       (append imports
+                               (org-babel-lean4--session-prelude state key)
+                               (org-babel-lean4--generated-lines params))))
+                 (top-lines (if top
+                                (length (split-string
+                                         (mapconcat #'identity top "\n") "\n"))
+                              0))
+                 (bottom (org-babel-lean4--generated-region
+                          (let ((epilogue (cdr (assq :epilogue params))))
+                            (when (org-string-nw-p epilogue)
+                              (list epilogue)))))
+                 ;; Where point is in the body, to put it in the same place.
+                 (`(,beg . ,end) (org-babel-lean4--contents-area element))
+                 (`(,line . ,column)
+                  (if (and (>= (point) beg) (< (point) end))
+                      (cons (count-lines beg (line-beginning-position))
+                            (max 0 (- (current-column)
+                                      (org-babel-lean4--common-indentation
+                                       element beg end))))
+                    (cons 0 0)))
+                 (file (expand-file-name
+                        (org-babel-lean4--edit-file-name key)
+                        (org-babel-lean4--edit-directory params)))
+                 (origin (copy-marker
+                          (org-element-property :post-affiliated element)))
+                 (existing (get-file-buffer file)))
+      (if (and existing
+               (y-or-n-p "This block already has an edit buffer.  Return to it? "))
+          (org-src-switch-to-buffer existing 'edit)
+        (when existing
+          (with-current-buffer existing
+            (set-buffer-modified-p nil)
+            (kill-buffer)))
+        (let ((coding-system-for-write 'utf-8))
+          (write-region (concat (mapconcat #'identity
+                                           (append head-lines top (list rest)
+                                                   bottom)
+                                           "\n")
+                                "\n")
+                        nil file nil 'silent))
+        (let ((buffer (find-file-noselect file)))
+          (with-current-buffer buffer
+            (setq org-babel-lean4--edit-origin origin)
+            (org-babel-lean4--protect-generated)
+            (org-babel-lean4-edit-mode 1)
+            (goto-char (point-min))
+            (forward-line (if (< line (length head-lines))
+                              line
+                            (+ line top-lines)))
+            (move-to-column column))
+          (org-src-switch-to-buffer buffer 'edit))))))
 
 ;;; Tangling
 

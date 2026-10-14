@@ -20,8 +20,8 @@
   "Start `lsp' in Lean buffers that the language server can actually open.
 
 `lean4-mode' enables `lsp' unconditionally, but the buffer behind an
-org-babel block - the one `C-c '' (`org-edit-special') puts you in - is
-not visiting a file, so there is no document for the server to open and
+org-babel block - the one `org-edit-special' puts you in (Lean blocks get
+a real file from `lean4-org-edit-special' instead) - is not visiting a file, so there is no document for the server to open and
 no project root to anchor the workspace to.  In those buffers we keep
 everything `lean4-mode' gives us offline (syntax table, font locking and
 the \"Lean\" input method) and leave the server alone."
@@ -211,7 +211,18 @@ Moving into a fragment shows its source; saving redraws the buffer."
 ;; reach: `C-c C-x' alone already runs the file.
 (define-key lean4-mode-map (kbd "C-c C-t") #'lean4-latex-preview-mode)
 
+(defun lean4-org-edit-special ()
+  "Edit a Lean src block with the language server, anything else as usual.
+`org-babel-lean4-edit' gives the block a real file, so goals and the
+infoview work; C-c ' there writes it back, C-c C-q aborts."
+  (interactive)
+  (if (member (car (org-babel-get-src-block-info 'light)) '("lean4" "lean"))
+      (org-babel-lean4-edit)
+    (call-interactively #'org-edit-special)))
+
 (with-eval-after-load 'org
+  ;; C-c ' - edit a Lean block in a file the language server can check
+  (define-key org-mode-map (kbd "C-c '") #'lean4-org-edit-special)
   ;; C-c C-x i - switch the Lean input method on and off
   (define-key org-mode-map (kbd "C-c C-x i") #'lean4-toggle-input-method)
   ;; C-c C-x k - how do I type the symbol at point?  This is `C-c C-k' in a
