@@ -99,7 +99,7 @@ case $1 in
 
     # Copy sway stuff
     mkdir -p "$SWAY_DIR"
-    mkdir -p ".local/bin"
+    mkdir -p "$DOTFILES"/.local/bin
     test -d "$HOME"/.config/sway && cp -r "$HOME"/.config/sway/* "$SWAY_DIR"
     test -f "$HOME"/.local/bin/dmenu-right && cp -r "$HOME"/.local/bin/dmenu-right "$DOTFILES"/.local/bin
 
@@ -197,6 +197,7 @@ case $1 in
     test -d "$SWAY_DIR" || SWAY_DIR="$DOTFILES"/.config/sway
     mkdir -p "$HOME"/.config/sway
     cp -r "$SWAY_DIR"/* "$HOME"/.config/sway
+    mkdir -p "$HOME"/.local/bin
     cp -r "$DOTFILES"/.local/bin/dmenu-right "$HOME"/.local/bin/dmenu-right
 
     # Copy terminator stuff
