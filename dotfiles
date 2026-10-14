@@ -42,13 +42,25 @@ else
     SWAY_DIR="$DOTFILES"/.config/sway
 fi
 
-# Path to the Firefox profile directory
-MOZILA_PROFILE_DIR=$(
-    awk '/^\[Profile[0-9]+\]$/ { section = $0 }
-         /^Default=1$/ { print section }
-         /^Path=/ && section { path = $0 }
-         /^Default=1$/ && path { print path; exit }' ~/.mozilla/firefox/profiles.ini | grep '^Path=' | cut -d= -f2)
-MOZILA_PROFILE_DIR="$HOME/.mozilla/firefox/$MOZILA_PROFILE_DIR"
+# Path of the default Firefox profile, the one marked with Default=1. Path and
+# Default may come in any order within a profile section, so both are tracked
+# per section. Prints nothing when there is no profile, e.g. on a fresh system.
+firefox_profile_dir() {
+    local ini="$HOME"/.mozilla/firefox/profiles.ini
+    test -r "$ini" || return 0
+    awk -F= '/^\[/                      { path = ""; dflt = 0 }
+             $1 == "Path"               { path = $2 }
+             $1 == "Default" && $2 == 1 { dflt = 1 }
+             path && dflt               { print path; exit }' "$ini"
+}
+
+# Path to the Firefox profile directory, empty when there is none. Path is
+# relative to the Firefox directory unless the profile has IsRelative=0.
+MOZILA_PROFILE_DIR=$(firefox_profile_dir)
+case $MOZILA_PROFILE_DIR in
+"" | /*) ;;
+*) MOZILA_PROFILE_DIR="$HOME/.mozilla/firefox/$MOZILA_PROFILE_DIR" ;;
+esac
 # Path to the Firefox user themes
 MOZILA_PROFILE_CSS_DIR="$MOZILA_PROFILE_DIR"/chrome
 # Path to the Firefox extensions directory
@@ -67,8 +79,10 @@ case $1 in
     fi
 
     # Copy firefox settings
-    test -f "$MOZILA_PROFILE_DIR"/user.js && cp -r "$MOZILA_PROFILE_DIR"/user.js "$DOTFILES"/firefox
-    test -f "$MOZILA_PROFILE_CSS_DIR"/userChrome.css && cp -r "$MOZILA_PROFILE_CSS_DIR"/userChrome.css "$DOTFILES"/firefox/css
+    if test -n "$MOZILA_PROFILE_DIR"; then
+        test -f "$MOZILA_PROFILE_DIR"/user.js && cp -r "$MOZILA_PROFILE_DIR"/user.js "$DOTFILES"/firefox
+        test -f "$MOZILA_PROFILE_CSS_DIR"/userChrome.css && cp -r "$MOZILA_PROFILE_CSS_DIR"/userChrome.css "$DOTFILES"/firefox/css
+    fi
 
     # Copy mail scripts and configuration
     test -f "$HOME"/.neomutrc && cp -r "$HOME"/.neomutrc "$DOTFILES"/mail
@@ -141,6 +155,7 @@ case $1 in
     ;;
 --update-system)
     # Copy claude settings
+    mkdir -p "$HOME"/.claude
     cp -r "$DOTFILES"/.claude/settings.json "$HOME"/.claude
     cp -r "$DOTFILES"/.claude/skills "$HOME"/.claude
 
@@ -211,9 +226,14 @@ case $1 in
     # Copy system (per-user) files
     cp -r "$DOTFILES"/system/{.Xresources,.xinitrc} "$HOME"/
 
-    # Copy firefox settings
-    cp -r "$DOTFILES"/firefox/user.js "$MOZILA_PROFILE_DIR"/
-    mkdir -p "$MOZILA_PROFILE_CSS_DIR"/ && cp -r "$DOTFILES"/firefox/css/*.css "$MOZILA_PROFILE_CSS_DIR"/
+    # Copy firefox settings. A profile only exists once firefox has been
+    # started, so on a fresh system this is skipped until the next run.
+    if test -n "$MOZILA_PROFILE_DIR"; then
+        cp -r "$DOTFILES"/firefox/user.js "$MOZILA_PROFILE_DIR"/
+        mkdir -p "$MOZILA_PROFILE_CSS_DIR"/ && cp -r "$DOTFILES"/firefox/css/*.css "$MOZILA_PROFILE_CSS_DIR"/
+    else
+        echo "No firefox profile found, skipping firefox settings"
+    fi
 
     # Install bin scripts
     "$HOME"/bin/installScripts
