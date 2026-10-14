@@ -32,3 +32,8 @@ size: 1.0 matched 13pt text, 22pt on the 4K panel gives ~1.7."
 (when (equal current-theme 'nord)
   (setq org-format-latex-options
         (plist-put org-format-latex-options :foreground "White")))
+
+;; \qed entity for the end of proofs: shown as ∎ with `org-pretty-entities',
+;; exported as $\blacksquare$ to LaTeX (safe for pdflatex) and ∎ elsewhere
+(add-to-list 'org-entities-user
+             '("qed" "\\blacksquare" t "&#8718;" "[]" "[]" "∎"))
