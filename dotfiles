@@ -219,9 +219,9 @@ case $1 in
     mkdir -p "$HOME"/.config/terminator && cp -r "$DOTFILES"/.config/terminator/* "$HOME"/.config/terminator
 
     # Copy the shell files to the home directory. The trailing dot copies the
-    # directory content instead of the directory itself, so .bashrc, .bash/,
-    # .bash_profile, .bash_logout and .inputrc all go in one command.
-    cp -r "$DOTFILES"/shell/. "$DOTFILES/shell/bin" "$HOME"/
+    # directory content instead of the directory itself, so bin/, .bashrc,
+    # .bash/, .bash_profile, .bash_logout and .inputrc all go in one command.
+    cp -r "$DOTFILES"/shell/. "$HOME"/
 
     # Copy system (per-user) files
     cp -r "$DOTFILES"/system/{.Xresources,.xinitrc} "$HOME"/
