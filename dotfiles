@@ -6,11 +6,13 @@ set -o pipefail
 
 shopt -u dotglob
 
+usage() {
+    echo "Error: provide command: --update-repo or --update-system" >&2
+    exit 1
+}
+
 # Check command line arguments
-if [[ $# -ne 1 ]]; then
-    echo "Error: provide command: --update-repo or --update-system"
-    exit -1
-fi
+[[ $# -eq 1 ]] || usage
 
 # Path to the dotfiles repository
 DOTFILES="$HOME/dev/dotfiles"
@@ -239,8 +241,7 @@ case $1 in
     "$HOME"/bin/installScripts
     ;;
 *)
-    echo "Error: provide command: --update-repo or --update-system"
-    exit -1
+    usage
     ;;
 esac
 
