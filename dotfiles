@@ -58,15 +58,13 @@ firefox_profile_dir() {
 
 # Path to the Firefox profile directory, empty when there is none. Path is
 # relative to the Firefox directory unless the profile has IsRelative=0.
-MOZILA_PROFILE_DIR=$(firefox_profile_dir)
-case $MOZILA_PROFILE_DIR in
+MOZILLA_PROFILE_DIR=$(firefox_profile_dir)
+case $MOZILLA_PROFILE_DIR in
 "" | /*) ;;
-*) MOZILA_PROFILE_DIR="$HOME/.mozilla/firefox/$MOZILA_PROFILE_DIR" ;;
+*) MOZILLA_PROFILE_DIR="$HOME/.mozilla/firefox/$MOZILLA_PROFILE_DIR" ;;
 esac
 # Path to the Firefox user themes
-MOZILA_PROFILE_CSS_DIR="$MOZILA_PROFILE_DIR"/chrome
-# Path to the Firefox extensions directory
-MOZILA_EXTENSIONS_DIR="$MOZILA_PROFILE_DIR"/extensions
+MOZILLA_PROFILE_CSS_DIR="$MOZILLA_PROFILE_DIR"/chrome
 
 case $1 in
 --update-repo)
@@ -81,9 +79,9 @@ case $1 in
     fi
 
     # Copy firefox settings
-    if test -n "$MOZILA_PROFILE_DIR"; then
-        test -f "$MOZILA_PROFILE_DIR"/user.js && cp -r "$MOZILA_PROFILE_DIR"/user.js "$DOTFILES"/firefox
-        test -f "$MOZILA_PROFILE_CSS_DIR"/userChrome.css && cp -r "$MOZILA_PROFILE_CSS_DIR"/userChrome.css "$DOTFILES"/firefox/css
+    if test -n "$MOZILLA_PROFILE_DIR"; then
+        test -f "$MOZILLA_PROFILE_DIR"/user.js && cp -r "$MOZILLA_PROFILE_DIR"/user.js "$DOTFILES"/firefox
+        test -f "$MOZILLA_PROFILE_CSS_DIR"/userChrome.css && cp -r "$MOZILLA_PROFILE_CSS_DIR"/userChrome.css "$DOTFILES"/firefox/css
     fi
 
     # Copy mail scripts and configuration
@@ -230,9 +228,11 @@ case $1 in
 
     # Copy firefox settings. A profile only exists once firefox has been
     # started, so on a fresh system this is skipped until the next run.
-    if test -n "$MOZILA_PROFILE_DIR"; then
-        cp -r "$DOTFILES"/firefox/user.js "$MOZILA_PROFILE_DIR"/
-        mkdir -p "$MOZILA_PROFILE_CSS_DIR"/ && cp -r "$DOTFILES"/firefox/css/*.css "$MOZILA_PROFILE_CSS_DIR"/
+    # Extensions are not installed here: firefox/extensions.pl asks about
+    # each one and opens it in firefox, so run it by hand when needed.
+    if test -n "$MOZILLA_PROFILE_DIR"; then
+        cp -r "$DOTFILES"/firefox/user.js "$MOZILLA_PROFILE_DIR"/
+        mkdir -p "$MOZILLA_PROFILE_CSS_DIR"/ && cp -r "$DOTFILES"/firefox/css/*.css "$MOZILLA_PROFILE_CSS_DIR"/
     else
         echo "No firefox profile found, skipping firefox settings"
     fi
