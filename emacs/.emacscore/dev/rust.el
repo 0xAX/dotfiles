@@ -30,6 +30,13 @@
 (unless (executable-find "rust-analyzer")
   (setq rustic-lsp-client nil))
 
+;; inlay hints (types, chained calls, parameter names), for rust only:
+;; the buffer-local value is in place before `lsp-deferred' starts lsp
+(add-hook 'rustic-mode-hook
+          (lambda () (setq-local lsp-inlay-hint-enable t)))
+(setq lsp-rust-analyzer-display-chaining-hints t
+      lsp-rust-analyzer-display-parameter-hints t)
+
 ;; flycheck's bare `rust' checker runs `rustc' directly without an --edition
 ;; flag, so it defaults to edition 2015 and falsely rejects edition-2024
 ;; features (e.g. let-chains). Disable it; `rust-cargo'/lsp read Cargo.toml.
