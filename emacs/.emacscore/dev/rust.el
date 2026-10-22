@@ -10,11 +10,6 @@
 (add-to-list 'exec-path "/home/alex/.cargo/bin")
 (setenv "PATH" (concat "/home/alex/.cargo/bin:" (getenv "PATH")))
 
-;; Rust style-guide recommends to use spaces:
-;; https://doc.rust-lang.org/1.0.0/style/style/whitespace.html
-(add-hook 'rust-mode-hook
-          (lambda () (setq indent-tabs-mode nil)))
-
 ;; format the code on save
 (setq rustic-format-on-save t)
 
