@@ -139,6 +139,11 @@
 (straight-use-package 'company)
 (straight-use-package 'company-c-headers)
 (straight-use-package 'counsel)
+;; dune-mode is one file inside the whole ocaml/dune repo; a full clone
+;; of its history is hundreds of MB, so fetch only the latest commit.
+(straight-use-package
+ '(dune :type git :host github :repo "ocaml/dune" :depth 1
+        :files ("editor-integration/emacs/*.el")))
 (straight-use-package 'ef-themes)
 (straight-use-package 'erlang)
 (straight-use-package 'elixir)
@@ -184,6 +189,7 @@
 (straight-use-package 'slime-company)
 (straight-use-package 'swiper)
 (straight-use-package 'tabbar)
+(straight-use-package 'tuareg)
 (straight-use-package 'typescript-mode)
 (straight-use-package 'vterm)
 (straight-use-package 'yaml-mode)
@@ -234,6 +240,7 @@
 (load "~/.emacscore/dev/python.el")
 (load "~/.emacscore/dev/rust.el")
 (load "~/.emacscore/dev/lean.el")
+(load "~/.emacscore/dev/ocaml.el")
 
 ;; Load miscellaneous things
 (load "~/.emacscore/snippets.el")
