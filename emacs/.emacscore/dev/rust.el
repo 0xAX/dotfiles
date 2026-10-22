@@ -37,6 +37,10 @@
 (setq lsp-rust-analyzer-display-chaining-hints t
       lsp-rust-analyzer-display-parameter-hints t)
 
+;; run clippy instead of `cargo check' on save, so its lints show up
+;; as lsp diagnostics
+(setq lsp-rust-analyzer-cargo-watch-command "clippy")
+
 ;; flycheck's bare `rust' checker runs `rustc' directly without an --edition
 ;; flag, so it defaults to edition 2015 and falsely rejects edition-2024
 ;; features (e.g. let-chains). Disable it; `rust-cargo'/lsp read Cargo.toml.
