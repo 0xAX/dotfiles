@@ -22,7 +22,6 @@
 ;; rust-mode keybindings
 (with-eval-after-load 'rustic
   (define-key rustic-mode-map (kbd "C-c b") 'rustic-cargo-bench)
-  (define-key rustic-mode-map (kbd "C-c c") 'rustic-compile)
   (define-key rustic-mode-map (kbd "C-c t") 'rustic-cargo-test-run))
 
 ;; rustic starts lsp itself (`rustic-setup-lsp' in `rustic-mode-hook'),
