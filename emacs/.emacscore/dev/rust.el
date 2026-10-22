@@ -32,11 +32,10 @@
   (define-key rustic-mode-map (kbd "C-c c") 'rustic-compile)
   (define-key rustic-mode-map (kbd "C-c t") 'rustic-cargo-test-run))
 
-;; enable LSP for rust if we have rust-analyzer
-;; cover both major modes: rust-mode buffers and rustic-mode buffers
-(when (executable-find "rust-analyzer")
-  (add-hook 'rust-mode-hook #'lsp)
-  (add-hook 'rustic-mode-hook #'lsp))
+;; rustic starts lsp itself (`rustic-setup-lsp' in `rustic-mode-hook'),
+;; only stop it from doing so if we don't have rust-analyzer
+(unless (executable-find "rust-analyzer")
+  (setq rustic-lsp-client nil))
 
 ;; flycheck's bare `rust' checker runs `rustc' directly without an --edition
 ;; flag, so it defaults to edition 2015 and falsely rejects edition-2024
