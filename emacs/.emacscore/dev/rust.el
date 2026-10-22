@@ -17,9 +17,7 @@
 (setq rustic-compile-command "cargo build")
 
 ;; prettify some symbols
-(add-hook 'rustic-mode-hook
-          (lambda ()
-            (prettify-symbols-mode)))
+(add-hook 'rustic-mode-hook #'prettify-symbols-mode)
 
 ;; rust-mode keybindings
 (with-eval-after-load 'rustic
