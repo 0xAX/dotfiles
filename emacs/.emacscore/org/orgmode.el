@@ -167,6 +167,8 @@ Asks for their passphrase once instead of once per encrypted file."
  org-src-fontify-natively t
  org-fontify-quote-and-verse-block t
  org-pretty-entities t
+ ;; keep x^{2} as typed: raising it hides the braces, also inside $$...$$
+ org-pretty-entities-include-sub-superscripts nil
  org-startup-with-inline-images t
  org-hide-emphasis-markers t
  org-src-tab-acts-natively t
