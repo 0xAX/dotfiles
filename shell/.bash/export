@@ -35,12 +35,6 @@ test -d "$HOME"/.elan/bin && export PATH="$PATH:$HOME"/.elan/bin
 test -e ${DEV_DISK}/zig/zig && export PATH=$PATH:${DEV_DISK}/zig
 test -e ${DEV_DISK}/zls/zls && export PATH=$PATH:${DEV_DISK}/zls
 
-# Linker options
-export LD_LIBRARY_PATH=""
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib"
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib/"
-export LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu
-
 # Kernel and C dev, systemd
 export PATH=$PATH:$KERNEL_DEV/tools/perf/
 export PATH=$PATH:/usr/lib/systemd/
