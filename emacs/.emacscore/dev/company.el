@@ -4,6 +4,8 @@
 
 ;; enable company mode
 (add-hook 'after-init-hook 'global-company-mode)
+;; but not in *scratch* (lisp-interaction-mode)
+(setq company-global-modes '(not lisp-interaction-mode))
 
 ;; disable delay before showing extensions
 (setq company-idle-delay 0)
