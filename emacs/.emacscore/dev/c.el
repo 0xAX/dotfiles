@@ -16,6 +16,14 @@
 (add-hook 'c-mode-hook #'my-c-disable-lsp-on-type-formatting -10)
 (add-hook 'c++-mode-hook #'my-c-disable-lsp-on-type-formatting -10)
 
+;; No ligatures in C: `enable-ligatures' fills `prettify-symbols-alist' in
+;; `prog-mode-hook', which runs before this one.  Emptying it leaves
+;; `global-prettify-symbols-mode' with nothing to display as ≤ ≥ ≠ →.
+(defun my-c-disable-ligatures ()
+  (setq-local prettify-symbols-alist nil)
+  (prettify-symbols-mode -1))
+(add-hook 'c-mode-hook #'my-c-disable-ligatures)
+
 (when (executable-find "clangd")
   (progn
     (add-hook 'c-mode-hook 'lsp)
